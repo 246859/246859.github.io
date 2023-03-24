@@ -2,4 +2,4 @@
 User-agent:*
 Disallow:
 
-Sitemap: https://246859.github.io/my-blog-giscus/my-blog-giscus/sitemap.xml
+Sitemap: https://246859.github.io/my-blog-giscus/sitemap.xml

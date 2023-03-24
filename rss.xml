@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xsl"?>
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://246859.github.io/my-blog-giscus/rss.xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <atom:link href="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://246859.github.io/my-blog-giscus/rss.xml" rel="self" type="application/rss+xml"/>
     <title>寒江蓑笠翁</title>
-    <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/</link>
+    <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 24 Mar 2023 13:40:19 GMT</pubDate>
-    <lastBuildDate>Fri, 24 Mar 2023 13:40:19 GMT</lastBuildDate>
+    <pubDate>Fri, 24 Mar 2023 13:55:08 GMT</pubDate>
+    <lastBuildDate>Fri, 24 Mar 2023 13:55:08 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>技术日志</category>
@@ -16,9 +16,9 @@
     <category>问题记录</category>
     <item>
       <title>AutoToolBox</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/code/autotoolbox.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/code/autotoolbox.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">AutoToolBox</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/autotoolbox.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/autotoolbox.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">AutoToolBox</source>
       <description>AutoToolBox 一个用Go编写的小工具 - Windows下ToolBox菜单自动生成器</description>
       <category>技术日志</category>
       <pubDate>Sun, 23 Oct 2022 00:00:00 GMT</pubDate>
@@ -56,9 +56,9 @@
     </item>
     <item>
       <title>Typora配合图床搭建教程</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/code/pic.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/code/pic.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">Typora配合图床搭建教程</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/pic.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/pic.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Typora配合图床搭建教程</source>
       <description>Typora配合图床搭建教程 Typora配合搭建完毕后的图床，可以有效的解决的md文件的图片引用问题。</description>
       <category>技术日志</category>
       <pubDate>Fri, 24 Mar 2023 00:00:00 GMT</pubDate>
@@ -124,9 +124,9 @@
     </item>
     <item>
       <title>VuePress博客教程</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/code/vuepresshope.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/code/vuepresshope.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">VuePress博客教程</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/vuepresshope.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/vuepresshope.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">VuePress博客教程</source>
       <description>VuePress博客教程 VuePress是一个vue驱动的静态网站生成器，非常适合来写静态文档，当然也可以拿来编写个人博客，配合第三方开发的主题可以做出非常精美的静态网站。</description>
       <category>技术日志</category>
       <pubDate>Tue, 12 Jul 2022 00:00:00 GMT</pubDate>
@@ -288,9 +288,9 @@
     </item>
     <item>
       <title>血源诅咒</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/bloodborn.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/bloodborn.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">血源诅咒</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">血源诅咒</source>
       <description>血源诅咒 心中永远的神作游戏，没有之一</description>
       <category>游戏杂谈</category>
       <pubDate>Sun, 01 Jan 2017 00:00:00 GMT</pubDate>
@@ -304,9 +304,9 @@
     </item>
     <item>
       <title>风来之国</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/eastward.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/eastward.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">风来之国</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">风来之国</source>
       <description>风来之国 它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</description>
       <category>游戏杂谈</category>
       <pubDate>Mon, 20 Sep 2021 00:00:00 GMT</pubDate>
@@ -320,9 +320,9 @@
     </item>
     <item>
       <title>烟火</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/firework.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/firework.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">烟火</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/firework.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/firework.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">烟火</source>
       <description>烟火 一款小体量的恐怖游戏，像一本短暂又令人回味的小说</description>
       <category>游戏杂谈</category>
       <pubDate>Mon, 15 Mar 2021 00:00:00 GMT</pubDate>
@@ -337,9 +337,9 @@
     </item>
     <item>
       <title>古剑奇谭三：梦付千秋星垂野</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/gujianqitan.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/gujianqitan.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">古剑奇谭三：梦付千秋星垂野</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">古剑奇谭三：梦付千秋星垂野</source>
       <description>古剑奇谭三：梦付千秋星垂野 高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</description>
       <category>游戏杂谈</category>
       <pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate>
@@ -353,9 +353,9 @@
     </item>
     <item>
       <title>我的世界</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/mc.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/mc.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">我的世界</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/mc.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/mc.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">我的世界</source>
       <description>我的世界 我大概是从小学开始就接触这款游戏了，走上码农这条路很大程度上也是因为它的影响。</description>
       <category>游戏杂谈</category>
       <pubDate>Sun, 20 Sep 2020 00:00:00 GMT</pubDate>
@@ -370,9 +370,9 @@
     </item>
     <item>
       <title>僵尸毁灭工程</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/pzb.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/game/pzb.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">僵尸毁灭工程</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">僵尸毁灭工程</source>
       <description>僵尸毁灭工程 很杀时间的一个僵尸沙盒生存游戏，上手之后会非常好玩。</description>
       <category>游戏杂谈</category>
       <pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate>
@@ -387,9 +387,9 @@
     </item>
     <item>
       <title>一次70KM短途骑行</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/life/bikeRiding20230227.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/life/bikeRiding20230227.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">一次70KM短途骑行</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/life/bikeRiding20230227.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/life/bikeRiding20230227.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">一次70KM短途骑行</source>
       <description>一次70KM短途骑行 从学校出发到江边，硬生生从山底爬到山顶，全程70KM。</description>
       <category>生活随笔</category>
       <pubDate>Mon, 27 Feb 2023 00:00:00 GMT</pubDate>
@@ -403,9 +403,9 @@
     </item>
     <item>
       <title>Mysql忘记数据库密码</title>
-      <link>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/problem/mysqlpassword.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/my-blog-giscus/posts/problem/mysqlpassword.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/my-blog-giscus/rss.xml">Mysql忘记数据库密码</source>
+      <link>https://246859.github.io/my-blog-giscus/posts/problem/mysqlpassword.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/problem/mysqlpassword.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Mysql忘记数据库密码</source>
       <description>Mysql忘记数据库密码 记录了Mysql忘记密码的几种解决方式</description>
       <category>问题记录</category>
       <pubDate>Sun, 12 Sep 2021 00:00:00 GMT</pubDate>
