@@ -6,7 +6,7 @@ import {searchProPlugin} from "vuepress-plugin-search-pro";
 // @ts-ignore
 // @ts-ignore
 export default defineUserConfig({
-    base: "/my-blog-giscus/",
+    base: "/",
     head: [
         [
             "link",
