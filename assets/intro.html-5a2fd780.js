@@ -1,0 +1,1 @@
+import{_ as t,W as a,X as o,Y as r,Z as e,$ as n}from"./framework-a4c02b8f.js";const c={},s=e("h1",{id:"我的路",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#我的路","aria-hidden":"true"},"#"),n(" 我的路")],-1),_=e("p",null,"路漫漫其修远兮，吾将上下而求索",-1);function d(i,l){return a(),o("div",null,[s,_,r(" more ")])}const m=t(c,[["render",d],["__file","intro.html.vue"]]);export{m as default};
