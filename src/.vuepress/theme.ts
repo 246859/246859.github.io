@@ -42,11 +42,12 @@ export default hopeTheme({
     plugins: {
         comment: {
             provider: "Giscus",
-            repo: "246859/my-blog-giscus",
-            repoId: "R_kgDOJNmiaA",
+            repo: "246859/246859.github.io",
+            repoId: "R_kgDOJNyo8g",
             category: "announcements",
-            categoryId: "DIC_kwDOJNmiaM4CVG2r",
+            categoryId: "DIC_kwDOJNyo8s4CVHe7",
             inputPosition: "top",
+            lazyLoading: true,
         },
         readingTime: {
             wordPerMinute: 150
