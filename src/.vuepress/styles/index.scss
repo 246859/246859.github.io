@@ -1,0 +1,18 @@
+// place your custom styles here
+// 文章摘要样式修改，确保文字永远在图片下面
+.article-excerpt {
+  p {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  img {
+    margin-bottom: 5px;
+    border-radius: 1%;
+  }
+}
+
+// 解决文章过少时个人信息卡片顶入导航栏的问题
+.page .blog-info-wrapper {
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,17 @@
+---
+date: 2023-02-27
+article: true
+category:
+  - 生活随笔
+tag: 
+  - 骑行
+  - 运动
+  - 风景
+---
+
+# 一次70KM短途骑行
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/2023227%E9%AA%91%E8%A1%8C.jpg)
+
+从学校出发到江边，硬生生从山底爬到山顶，全程70KM。
+<!-- more -->
+---
