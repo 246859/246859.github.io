@@ -10,7 +10,7 @@ export default defineUserConfig({
     head: [
         [
             "link",
-            {rel: "icon", href: "/my-blog-giscus/favicon.ico"},
+            {rel: "icon", href: "/favicon.ico"},
         ]
     ],
     locales: {
