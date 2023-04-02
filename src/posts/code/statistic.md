@@ -86,6 +86,6 @@ VuePress复制代码时不需要`<script>`标签
 
 也可以看到访问者的地域分布统计
 
-![](C:/Users/Stranger/AppData/Roaming/Typora/typora-user-images/image-20230402173021920.png)
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304022049101.png)
 
 对于我的小站来说，上述功能已经足够使用了，更多功能的话还请自己去慢慢发现。
