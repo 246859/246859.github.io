@@ -38,4 +38,8 @@ projects:
     name: Giscus
     desc: 由 GitHub Discussions 驱动的评论系统
     link: https://giscus.app/zh-CN
+  - icon: https://deep-learn.top/images/ava2.jpg
+    name: Octopus
+    desc: 树深不见鹿， 溪午不闻钟。
+    link: https://deep-learn.top/
 ---
