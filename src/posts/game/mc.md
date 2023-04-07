@@ -9,10 +9,9 @@ tag:
   - 沙盒
   - 建造
 ---
-# 我的世界
+# Minecraft
 ![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png)
 
-我大概是从小学开始就接触这款游戏了，走上码农这条路很大程度上也是因为它的影响。
+它几乎陪伴了我整个青春
 <!-- more -->
 ---
-正文
