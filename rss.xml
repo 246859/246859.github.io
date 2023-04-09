@@ -6,14 +6,97 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 07 Apr 2023 14:54:03 GMT</pubDate>
-    <lastBuildDate>Fri, 07 Apr 2023 14:54:03 GMT</lastBuildDate>
+    <pubDate>Sun, 09 Apr 2023 12:39:38 GMT</pubDate>
+    <lastBuildDate>Sun, 09 Apr 2023 12:39:38 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>问题记录</category>
     <category>技术日志</category>
     <category>游戏杂谈</category>
     <category>生活随笔</category>
-    <category>问题记录</category>
+    <item>
+      <title>64位Ubuntu上运行32位可执行文件</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/problem/linuxexe.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/problem/linuxexe.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">64位Ubuntu上运行32位可执行文件</source>
+      <description>64位Ubuntu上运行32位可执行文件 记录64位Ubuntu上运行32位可执行文件的问题</description>
+      <category>问题记录</category>
+      <pubDate>Sat, 08 Apr 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 64位Ubuntu上运行32位可执行文件</h1>
+<p>记录64位Ubuntu上运行32位可执行文件的问题</p>
+<!-- more -->
+<hr>
+<p>最近在捣鼓Steamcmd开游戏专用服务器，下载下来的tar包中，解压出来的steamcmd可执行文件是32位的，命令如下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>当时的使用系统uname如下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>64位系统是无法直接运行32位可执行文件的，最开始半天不知道怎么回事，一直报<code>No such file and directory</code>，发现问题后下载32位依赖运行库即可</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>下载完成后即可正常运行。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>在Linux搭建DST专用服务器</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/dst.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/dst.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Linux搭建DST专用服务器</source>
+      <description>在Linux搭建DST专用服务器 本文主要讲解了如何在Linux环境下搭建Dont Starve Together的专用服务器，以及一些坑。</description>
+      <category>技术日志</category>
+      <pubDate>Sun, 09 Apr 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 在Linux搭建DST专用服务器</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304091448764.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>本文主要讲解了如何在Linux环境下搭建Dont Starve Together的专用服务器，以及一些坑。</p>
+<!-- more -->
+<hr>
+<h2> 环境准备</h2>
+<p>在开始之前需要准备以下东西：</p>
+<ul>
+<li>一台装了Linux系统的云服务器，本文使用的是Ubuntu20LTS。</li>
+<li>SSH客户端，本文使用的XShell</li>
+<li>SFTP客户端，本文使用的是FillZilla</li>
+</ul>
+<p>云服务器安全组要放行10800到12000范围端口，饥荒服务端差不多都在这个范围内，协议使用UDP。</p>
+<h2> 创建用户</h2>
+<p>与服务器进行ssh连接过后，创建一个专门用于DST管理的用户，这样与系统隔离，方便后续管理。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后进入dst的ssh目录</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>生成ssh密钥对，将公钥注册到服务器中</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>把私钥保存下来这样后续就可以使用ssh私钥进行登录。</p>
+<h2> 依赖准备</h2>
+<p>首先首先要给软件管理工具加一个i386的架构，有warning忽略掉，然后看看加进去没有</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后再下载所需要的32位依赖</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>上述依赖是必须安装的，否则在运行可执行文件时会报错无法找到文件。</p>
+<h2> 安装SteamCMD</h2>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>如何在Linux上安装SteamCMD官方有非常详细的中文教程，<a href="https://developer.valvesoftware.com/wiki/SteamCMD:zh-cn" target="_blank" rel="noopener noreferrer">Steam 控制台客户端 - Valve Developer Community (valvesoftware.com)</a></p>
+</div>
+<p>先切换到dst用户</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后下载SteamCMD压缩包</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>将其解压到steam目录</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后进入steam目录执行steamcmd.sh脚本启动进行安装</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>或者也可以直接下载软件包，然后再启动steamcmd</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>等待安装完成后在steamcmd里面执行如下命令来设置安装目录</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>需要注意的是设置安装目录必须在登录之前操作，登陆后不能再修改该项</p>
+</div>
+<p>然后再登录steam，一般使用匿名登录。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>等待登录完成后下载饥荒服务端，343050是它的appid，这里大概要等个几分钟，下载完毕后先退出。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>进入到server目录下看看是不是安装到指定目录了，如下就说明安装成功了</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 开服</h2>
+<p>前往克雷官网，登录并注册申请服务器token</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304092018313.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>点击添加新的服务器</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304092018095.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>完成后点击下载设置，使用sftp将该文件夹传入<code>/home/dst/.klei/DoNotStarveTogether</code>目录下，这是默认的存档位置，没有这个文件夹就自行创建该文件夹。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304092020790.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>然后需要下载一个多终端管理工具screen</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后在<code>/home/dst</code>目录下创建<code>master.sh</code>和<code>caves.sh</code>，内容如下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最后运行脚本即可，如下</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304092026834.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>当两个maser终端和caves终端都输出sim paused时，说明开服成功，进入游戏在搜索你设置的服务器名称</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304092028986.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>能够搜索到并成功进入服务器，说明服务器搭建完毕。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304091448764.png" type="image/png"/>
+    </item>
     <item>
       <title>Unicode字符集及其编码实现</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/unicode.html</link>
