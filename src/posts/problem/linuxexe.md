@@ -19,6 +19,7 @@ tag:
 
 最近在捣鼓Steamcmd开游戏专用服务器，下载下来的tar包中，解压出来的steamcmd可执行文件是32位的，命令如下
 
+
 ```sh
 $ file steamcmd
 steamcmd: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.24, BuildID[sha1]=230b2c1359fbcc9d738427efc5a5c31a69a4d16b, not stripped
