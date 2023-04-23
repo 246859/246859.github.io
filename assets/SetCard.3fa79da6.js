@@ -1,1 +1,0 @@
-import{_ as o}from"./index.ab59efba.js";import{a0 as n,B as r,D as c,w as a}from"./vendor.fc320178.js";const t={};function s(_,f){const e=n("Icon");return r(),c("div",null,[a(e)])}var l=o(t,[["render",s]]);export{l as default};
