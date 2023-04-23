@@ -1,5 +1,0 @@
-
-User-agent:*
-Disallow:
-
-Sitemap: https://246859.github.io/my-blog-giscus/sitemap.xml
