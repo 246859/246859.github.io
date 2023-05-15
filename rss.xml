@@ -6,14 +6,72 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 23 Apr 2023 14:28:48 GMT</pubDate>
-    <lastBuildDate>Sun, 23 Apr 2023 14:28:48 GMT</lastBuildDate>
+    <pubDate>Mon, 15 May 2023 09:41:39 GMT</pubDate>
+    <lastBuildDate>Mon, 15 May 2023 09:41:39 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-    <category>问题记录</category>
     <category>技术日志</category>
+    <category>问题记录</category>
     <category>游戏杂谈</category>
     <category>生活随笔</category>
+    <item>
+      <title>Goland远程开发与远程调试</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/remotedev.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/remotedev.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Goland远程开发与远程调试</source>
+      <description>Goland远程开发与远程调试 本文讲解了如何使用Goland的远程开发和远程调试功能</description>
+      <category>技术日志</category>
+      <pubDate>Mon, 15 May 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Goland远程开发与远程调试</h1>
+<figure><img src="https://w.wallhaven.cc/full/j3/wallhaven-j35ev5.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>本文讲解了如何使用Goland的远程开发和远程调试功能</p>
+<!-- more -->
+<hr>
+<p>最近的一个项目是要部署在Linux上运行，但我习惯了在Windows上进行开发，许多开发工具都是在Windows上，所以远程开发和远程调试非常有必要，代码依旧在本地写，只是编译和部署放在Linux上。先说一下我的环境：</p>
+<p>本地环境：Windows10，go1.20.2 dlv1.20.2</p>
+<p>远程环境：ubuntu20LTS（虚拟机），go1.20.4，dlv1.20.2</p>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>虽然本文Linux用的是虚拟机，但是放在云服务器上一样使用。</p>
+</div>
+<h2> Go Build 配置</h2>
+<p>首先在Goland运行配置里新建一个Go Build配置，然后选择Run On SSH</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202305151710958.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>输入Host和要登录的用户名</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202305151711615.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>登录成功后Goland会尝试执行<code>which go</code>命令，也许会失败，不过这并不影响，后面自己指定就行。再然后才是远程开发的重要配置</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202305151714447.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<ul>
+<li><code>Project path on target</code>：该目录是后续操作的项目根目录，后续Goland自动上传的文件都会位于该目录下</li>
+<li><code>Go Executable</code>：go二进制文件，该二进制文件并不是自己项目的二进制文件，而是go源代码的二进制文件，通常位于<code>$GOROOT/bin/</code>目录下</li>
+<li><code>GOPATH</code>：不需要多做解释</li>
+<li><code>Project sources directory</code>：Goland在编译时会先将源码上传到远程服务器上，该目录就是源码的指定位置，如果不填的话就会在项目根目录下随机生成目录，看起来很烦。</li>
+<li><code>Compiled exectuables directory</code>：编译完成后二进制文件存放的文件夹。</li>
+</ul>
+<p>完成后如下</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202305151720594.png" alt="image-20230515172036551" tabindex="0" loading="lazy"><figcaption>image-20230515172036551</figcaption></figure>
+<p>然后再Go Build中记得勾选 <code>Build on remote target</code>，这样上面的配置才会生效</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202305151723033.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<h2> Go Remote配置</h2>
+<p>在运行配置中新建Go Remote</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202305151725871.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>然后填写你的调试服务器IP和端口</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202305151725949.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>调试服务器就是dlv，如果在远程服务器中已经安装好了go环境，直接执行以下命令即可安装dlv</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>使用dlv命令运行调试服务器</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>每一个参数是什么作用可以在github上了解，exec参数后跟二进制文件的路径</p>
+<h2> 开发流程</h2>
+<p>上述所有配置完毕后，开发流程就是：</p>
+<ol>
+<li>本地编写代码</li>
+<li>Goland更新远程服务器的源代码并编译</li>
+<li>运行dlv调试服务器</li>
+<li>本地运行Go Remote进行调试</li>
+</ol>
+<p>这样一来远程开发和远程调试的问题就都解决了，非常nice，远程调试起来也跟本地调试几乎没什么区别。</p>
+]]></content:encoded>
+      <enclosure url="https://w.wallhaven.cc/full/j3/wallhaven-j35ev5.jpg" type="image/jpeg"/>
+    </item>
     <item>
       <title>64位Ubuntu上运行32位可执行文件</title>
       <link>https://246859.github.io/my-blog-giscus/posts/problem/linuxexe.html</link>
