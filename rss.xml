@@ -6,14 +6,51 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 15 May 2023 09:41:39 GMT</pubDate>
-    <lastBuildDate>Mon, 15 May 2023 09:41:39 GMT</lastBuildDate>
+    <pubDate>Sat, 20 May 2023 04:58:02 GMT</pubDate>
+    <lastBuildDate>Sat, 20 May 2023 04:58:02 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>技术日志</category>
     <category>问题记录</category>
     <category>游戏杂谈</category>
     <category>生活随笔</category>
+    <item>
+      <title>Docker容器磁盘热扩容</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/expand.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/expand.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker容器磁盘热扩容</source>
+      <description>Docker容器磁盘热扩容 本文主要讲解Docker容器磁盘热扩容，不需要重启docker服务，也不需要重启容器</description>
+      <category>技术日志</category>
+      <pubDate>Sat, 20 May 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker容器磁盘热扩容</h1>
+<figure><img src="https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>本文主要讲解Docker容器磁盘热扩容，不需要重启docker服务，也不需要重启容器</p>
+<!-- more -->
+<hr>
+<p>最近项目里的需求需要实现Docker容器的热扩容，前一阵子给Docker驱动换到了<code>devicemapper</code>，对容器的资源限制可以更加精确和友好，刚好记录一下整个过程。</p>
+<h2> 环境准备</h2>
+<p>系统：ubuntu22.04LTS</p>
+<p>Docker：24.00</p>
+<p>Go版本：1.20.4</p>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>在开始之前你需要确保Docker驱动是<code>devicemapper</code>，并且宿主机和Docker的文件系统是<code>ext4</code></p>
+</div>
+<h2> 查看容器大小</h2>
+<p>这里拿一个nginx容器做实验，先进入容器查看一下大小，一般在创建容器时若不指定默认大小为10G。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到rootfs的size是11G，并且文件系统类型是<code>ext4</code>，这里需要将<code>/dev/mapper/docker-8:3-2097855-40ca4227a94fe9cd1dc00963961cc16c8fc0bd6d650e72cfc0c10bc34a9c08f6</code>记下来，后续操作会用到。</p>
+<h2> 准备扩容</h2>
+<p>这时回到宿主机，查看之前复制的文件系统名占用的磁盘扇区数</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到扇区数是从0到20971520，假设要扩容到20G，需要的扇区数就是<code>20*1024*1024*1024/512=41943040</code>，然后再修改表</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>重载一下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>再次查看扇区数</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到扇区已经变成了41943040，最后需要调整文件系统的大小</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 确认大小</h2>
+<p>再次进入容器查看</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到确实变成了20G。</p>
+]]></content:encoded>
+      <enclosure url="https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png" type="image/png"/>
+    </item>
     <item>
       <title>Goland远程开发与远程调试</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/remotedev.html</link>
