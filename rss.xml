@@ -6,14 +6,164 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 20 May 2023 04:58:02 GMT</pubDate>
-    <lastBuildDate>Sat, 20 May 2023 04:58:02 GMT</lastBuildDate>
+    <pubDate>Thu, 29 Jun 2023 13:09:49 GMT</pubDate>
+    <lastBuildDate>Thu, 29 Jun 2023 13:09:49 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>技术日志</category>
     <category>问题记录</category>
     <category>游戏杂谈</category>
     <category>生活随笔</category>
+    <item>
+      <title>docker安装mysql和redis</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/docker_mysql.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/docker_mysql.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">docker安装mysql和redis</source>
+      <description>docker安装mysql和redis</description>
+      <category>技术日志</category>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> docker安装mysql和redis</h1>
+<figure><img src="https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<h4> Mysql</h4>
+<p>首先拉取mysql的镜像，要确保major版本是8，例如8.0.33</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这里要创建mysql的挂载文件夹，以防数据丢失，这里放在<code>/root/mysql</code>路径下为例子</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>随后在<code>/root/mysql/confg/</code>目录下创建<code>my.cnf</code>文件，内容如下</p>
+<div class="language-ini line-numbers-mode" data-ext="ini"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后运行如下命令启动容器即可，下面分别创建了mysql日志，mysql数据库，mysql配置的挂载数据卷，这里的<code>MYSQL_ROOT_PASSWORD=123456</code>就是数据库的root密码，可以自己改成其他的，环境变量<code>MYSQL_DATABASE=dst</code>会自动创建一个名为dst的数据库，按需修改。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>创建完成后登录mysql看看成功没有</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>看到有dst数据库就说明mysql成功安装.</p>
+<p>到此安装成功，然后记录下数据库的密码，后面后端会用到。</p>
+<h4> Redis</h4>
+<p>首先拉取redis镜像，保证redis版本在6以上</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>创建redis的挂载目录</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>进入<code>~/redis/</code>目录，创建配置文件<code>redis.conf</code>，内容如下，密码自己定。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>然后运行容器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>redis默认不允许远程访问，所以需要额外配置，修改配置文件如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>redis各版本配置文件：<a href="https://redis.io/docs/management/config/" target="_blank" rel="noopener noreferrer">Redis configuration | Redis</a></p>
+]]></content:encoded>
+      <enclosure url="https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Docker安装nginx</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/docker_nginx.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/docker_nginx.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker安装nginx</source>
+      <description>Docker安装nginx docker安装nginx</description>
+      <category>技术日志</category>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker安装nginx</h1>
+<figure><img src="https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>docker安装nginx</p>
+<!-- more -->
+<hr>
+<p>Docker安装nginx时一般都是直接使用命令</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>但后来还是觉得直接把静态文件打包进镜像可能会更加方便些</p>
+<div class="language-docker line-numbers-mode" data-ext="docker"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>运行命令</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>目录下的html是打包好的静态文件，nginx是nginx配置文件夹。</p>
+]]></content:encoded>
+      <enclosure url="https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>ubuntu自定义系统服务</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/linuxservice.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/linuxservice.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">ubuntu自定义系统服务</source>
+      <description>ubuntu自定义系统服务</description>
+      <category>技术日志</category>
+      <pubDate>Sat, 28 Jan 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> ubuntu自定义系统服务</h1>
+<figure><img src="https://w.wallhaven.cc/full/kx/wallhaven-kx36mq.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>在开发项目时，对于一些后台应用，可以自定义成linux的service，这样能够更加方便的管理。</p>
+<p>首先在<code>/etc/systemd/system</code>下，创建一个<code>xxx.service</code>的文件，<code>xxx</code>是服务名。</p>
+<p>service文件有特殊的配置格式，下面是一个简单的例子</p>
+<div class="language-txt line-numbers-mode" data-ext="txt"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>其中<code>type</code>有以下几种取值</p>
+<ul>
+<li>
+<p>Type=simple：默认值，执行ExecStart指定的命令，启动主进程</p>
+</li>
+<li>
+<p>Type=forking：以 fork 方式从父进程创建子进程，创建后父进程会立即退出</p>
+</li>
+<li>
+<p>Type=oneshot：一次性进程，Systemd 会等当前服务退出，再继续往下执行</p>
+</li>
+<li>
+<p>Type=dbus：当前服务通过D-Bus启动</p>
+</li>
+<li>
+<p>Type=notify：当前服务启动完毕，会通知Systemd，再继续往下执行</p>
+</li>
+<li>
+<p>Type=idle：若有其他任务执行完毕，当前服务才会运行，即后台运行</p>
+</li>
+</ul>
+<p>Restart：定义了退出后，Systemd 的重启方式。可以设置的值如下：</p>
+<ul>
+<li>
+<p>no（默认值）：退出后不会重启；</p>
+</li>
+<li>
+<p>on-success：当进程正常退出时（退出状态码为0），才会重启；</p>
+</li>
+<li>
+<p>on-failure：当进程非正常退出时(退出状态码非0)，包括被信号终止和超时，才会重启；</p>
+</li>
+<li>
+<p>on-abnormal：当被信号终止和超时，才会重启；</p>
+</li>
+<li>
+<p>on-abort：当收到没有捕捉到的信号终止时，才会重启；</p>
+</li>
+<li>
+<p>on-watchdog：看门狗超时退出，才会重启；</p>
+</li>
+<li>
+<p>always：总是重启。</p>
+</li>
+</ul>
+<p>KillMode：定义 Systemd 如何停止服务，可以设置的值如下：</p>
+<ul>
+<li>
+<p>control-group（默认值）：当前控制组里面的所有子进程，都会被杀掉；</p>
+</li>
+<li>
+<p>process：只杀主进程；</p>
+</li>
+<li>
+<p>mixed：主进程将收到 SIGTERM 信号，子进程收到 SIGKILL 信号；</p>
+</li>
+<li>
+<p>none：没有进程会被杀掉。</p>
+</li>
+</ul>
+<p>创建完成后，执行命令重新加载服务文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>随后使用<code>service hello service </code> 即可开启</p>
+]]></content:encoded>
+      <enclosure url="https://w.wallhaven.cc/full/kx/wallhaven-kx36mq.png" type="image/png"/>
+    </item>
+    <item>
+      <title>docker内存显示异常的bug</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/problem/dockermem.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/problem/dockermem.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">docker内存显示异常的bug</source>
+      <description>docker内存显示异常的bug 源于项目开发过程中的一个发现</description>
+      <category>问题记录</category>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> docker内存显示异常的bug</h1>
+<p>源于项目开发过程中的一个发现</p>
+<!-- more -->
+<hr>
+<p>此前接了一个开发饥荒虚拟容器管理平台的项目，其中有一个功能就是实时显示容器的内存使用状况，后来奇怪的发现容器的内存趋势图在容器创建后的5分钟内达到了几乎100%</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202306292022189.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>初次遇到这个问题，百思不得其解，以为是自己程序的编写错误，后来在容器中<code>top</code>了一下发现真实占用可能就40%左右。后面去翻阅了docker cli计算内存占用的源代码，<a href="https://github.com/moby/moby/blob/eb131c5383db8cac633919f82abad86c99bffbe5/cli/command/container/stats_helpers.go#LL110C62-L110C62" target="_blank" rel="noopener noreferrer">Docker Cli 计算内存源代码地址</a>，逻辑基本上是一致，那么只剩一种可能，这的确就是docker的bug。</p>
+<p>在经过测试后，这个bug诱发的原因是饥荒容器在创建时会下载一个接近4个g的游戏服务端，在此过程中会消耗一定的资源，内存占用会逐渐攀升，但是等到下载完毕后增长的趋势依旧不停，从而造成了内存虚高。</p>
+<p>为此编写了一个测试，这在github的issue里有更详细的介绍，<a href="https://github.com/moby/moby/issues/45727" target="_blank" rel="noopener noreferrer">issue address</a></p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202306292022189.png" type="image/png"/>
+    </item>
     <item>
       <title>Docker容器磁盘热扩容</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/expand.html</link>
