@@ -6,14 +6,36 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 29 Jun 2023 13:09:49 GMT</pubDate>
-    <lastBuildDate>Thu, 29 Jun 2023 13:09:49 GMT</lastBuildDate>
+    <pubDate>Sat, 01 Jul 2023 09:17:35 GMT</pubDate>
+    <lastBuildDate>Sat, 01 Jul 2023 09:17:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-    <category>技术日志</category>
     <category>问题记录</category>
+    <category>技术日志</category>
     <category>游戏杂谈</category>
     <category>生活随笔</category>
+    <item>
+      <title>go后端日期时区的问题记录</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/problem/gotime.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/problem/gotime.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">go后端日期时区的问题记录</source>
+      <description>go后端日期时区的问题记录 记录一次go后端日期时区问题的记录</description>
+      <category>问题记录</category>
+      <pubDate>Sat, 01 Jul 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> go后端日期时区的问题记录</h1>
+<p>记录一次go后端日期时区问题的记录</p>
+<!-- more -->
+<hr>
+<p>在通常的前后端交互中，日期是一个经常很令人头痛的问题，需要统一格式，统一时区等等。</p>
+<p>在最近的一个项目中，前端根据<code>YYYY/MM/DD hh:mm:ss</code>格式传给后端，后端解析成<code>time.Time</code>类型，但是这犯了一个很严重的错误。</p>
+<p>在解析日期字符串时，如果没有按照格式传递时区偏移，例如<code>+0800 CST</code> 等格式，go将会默认解析为<code>+0000 UST</code>的时区，由于数据库设置为了同步设置了东八区，一看传过来的数据是UST时区的，就误认为需要修正时区，结果就是存储到数据库的数据会比实际时间多出八小时。</p>
+<p>解决办法1：</p>
+<p>前端在传递给后端日期时，前端自己带上时区信息，<code>+0800 CST</code>类似这种</p>
+<p>解决办法2：</p>
+<p>后端根据客户端请求头中的时区信息， 将传递过来的日期加上时区信息</p>
+<p>当添加上正确的时区信息过后，时间的读写才会是正常的。</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>docker安装mysql和redis</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/docker_mysql.html</link>
