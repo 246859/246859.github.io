@@ -6,14 +6,33 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 29 Jul 2023 04:45:49 GMT</pubDate>
-    <lastBuildDate>Sat, 29 Jul 2023 04:45:49 GMT</lastBuildDate>
+    <pubDate>Sun, 30 Jul 2023 14:10:59 GMT</pubDate>
+    <lastBuildDate>Sun, 30 Jul 2023 14:10:59 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-    <category>技术日志</category>
     <category>问题记录</category>
+    <category>技术日志</category>
     <category>游戏杂谈</category>
     <category>生活随笔</category>
+    <item>
+      <title></title>
+      <link>https://246859.github.io/my-blog-giscus/posts/problem/redisdataloss.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/problem/redisdataloss.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml"></source>
+      <description>记一次Redis线上数据突然丢失的问题</description>
+      <category>问题记录</category>
+      <pubDate>Sat, 22 Jul 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> </h1>
+<p>记一次Redis线上数据突然丢失的问题</p>
+<!-- more -->
+<hr>
+<p>之前的项目用到了redis来存放一些游戏的模组信息以及一些非结构化配置，突然有一次甲方告诉我系统出问题了，我一去看发现redis里面的数据全没了，由于redis没有开启日志，一时半会排查不出来是什么问题。就把redis aof备份粒度做的更细了一些，暂时想到的可能是RDB跟AOF覆盖掉了，但是这种情况应该非常小，事后还做好了日志方便下次排查，弄好之后这件事就这么过去了，</p>
+<p>直到两个星期后，又发生了这个问题，查看到系统日志是下午15:26:51发生的问题，对比redis日志，刚开始还是一些正常的备份信息，像下面这样</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>看到出问题的时间点的时候就发现不对劲了，</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>尤其是这一段<code>Connecting to MASTER 35.158.95.21:60107</code>，这个IP并不是甲方的IP，并且系统是单机应用，redis都是直接和后端部署在同一个物理机上的，并没有采用redis集群和主从复制。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>复制master数据后，我们的数据就没了，然后备份过后redis数据也没了。多半是redis密码太简单导致的问题，于是修改密码后再看后续的情况。</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>Flutter在windows桌面软件开发</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/fluttertry.html</link>
