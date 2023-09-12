@@ -6,14 +6,59 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 31 Jul 2023 05:26:27 GMT</pubDate>
-    <lastBuildDate>Mon, 31 Jul 2023 05:26:27 GMT</lastBuildDate>
+    <pubDate>Tue, 12 Sep 2023 07:38:06 GMT</pubDate>
+    <lastBuildDate>Tue, 12 Sep 2023 07:38:06 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>问题记录</category>
     <category>技术日志</category>
     <category>游戏杂谈</category>
     <category>生活随笔</category>
+    <item>
+      <title>记一次服务器被黑的解决过程</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/problem/hack.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/problem/hack.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">记一次服务器被黑的解决过程</source>
+      <description>记一次服务器被黑的解决过程 只能说离谱，以后还是要多注意这方面的东西。</description>
+      <category>问题记录</category>
+      <pubDate>Tue, 12 Sep 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 记一次服务器被黑的解决过程</h1>
+<p>只能说离谱，以后还是要多注意这方面的东西。</p>
+<!-- more -->
+<hr>
+<p>一大早起来，就看到腾讯云异常登录的通知，就大概明白是咋回事了，这是我在腾讯云上的一个轻量应用服务器，倒也算不上第一次被黑，上一次被黑的时候入侵者仅仅只是放了一个挖矿木马就没了，其它什么也没动。这一次不仅搞挖矿把服务器资源都跑满了，而且还把我root用户的ssh密钥都改了，一大早起来就得赶紧解决。这里放一张图，看看资源使用情况，基本上都已经爆满了。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309120816314.png" style="zoom: 80%;">
+<h2> 原因</h2>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309120919508.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>究其原因，是因为在前几天为了在服务器上搭建自用的gitea，创建了一个新用户<code>git</code>来跑服务，也就是此次异常登录的用户，当时给它添加到了sudo组，而且也忘记做远程登录限制，也没有ssh密钥，密码也是非常简单的<code>123456</code>，被暴力破解应该是轻而易举的，只是没想到睡一觉起来就G了，以后在这一块看来是一点都不能松懈。下面是截取的一部分登录尝试记录。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 解决</h2>
+<p>首先是之前的用户都登陆不上去了，这里只能用服务器默认用户在腾讯云后台重置密码，密码重置完后，登陆到服务器上，top看一下</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309120850327.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>可以看到第一行xrx这个东西已经把cpu跑满了，内存也没剩下多少并且还多了一个cheeki用户。然后来看看这个玩意的运行路径</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>再locate一下看看</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>其中这个<code>ini.sh</code>应该是被混淆过的，全是乱码，key文件和passwd可能是用来解码的。此时看下git用户的<code>.bash_history</code>都是我自己留下的记录，操作记录也是可以被隐藏的。目前root目录我是进不去的，直接把这个进程kill了也无济于事，一般来说会有定时任务来定时重启这些木马，查看系统定时任务，差不多就是特定的地方拉取脚本然后执行，并且在重启的时候还会后台运行这几个进程。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到该文件修改时间就是凌晨一点，差不多就是我在睡觉的时候。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>差不多在同一时间，<code>/etc/passwd</code>文件也被修改了。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>不幸的是，passwd命令也被掉包了，即便通过root权限，也无法直接修改用户的密码，而且我修改的密码可能会通过网络被上传到后台。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>把盗版的passwd先删掉，然后用apt重新安装一个</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>后面的任务是拿到root账号，这里通过腾讯云后台提供的重置密码功能，把root账号的密码给重置了，然后用默认账户登录上去再切换到root，可以看到密钥已经被改了，修改时间也是凌晨</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>并且还上锁了，无法删除</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>尝试解锁后成功了，庆幸没有对方修改chattr命令。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>把所有密钥都删除，然后再删除木马文件和定时任务，然后再重启看看，是否恢复正常。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>删除之后的话基本上服务器占用就变正常了，为了彻底解决，这里把ssh的配置设置的更加严格一些，禁止密码登录，禁止root登录，修改ssh默认端口号。差不多后续就不会出什么问题了，除非有什么其它软件漏洞。下面是修改后的占用图，就是正常状态了。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309121531013.png" style="zoom:80%;">
+<p>下面是一些用到的文章</p>
+<ul>
+<li>
+<p><a href="https://cloud.tencent.com/developer/article/1026521?areaId=106001" target="_blank" rel="noopener noreferrer">Linux系统是否被植入木马的排查流程梳理-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</li>
+<li>
+<p><a href="https://cloud.tencent.com/developer/article/1828412" target="_blank" rel="noopener noreferrer">Linux服务器被黑 排查思路(上)-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309120919508.png" type="image/png"/>
+    </item>
     <item>
       <title>记一次Redis线上数据突然丢失的问题</title>
       <link>https://246859.github.io/my-blog-giscus/posts/problem/redisdataloss.html</link>
