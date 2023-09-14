@@ -6,14 +6,48 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 12 Sep 2023 07:38:06 GMT</pubDate>
-    <lastBuildDate>Tue, 12 Sep 2023 07:38:06 GMT</lastBuildDate>
+    <pubDate>Thu, 14 Sep 2023 13:18:44 GMT</pubDate>
+    <lastBuildDate>Thu, 14 Sep 2023 13:18:44 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-    <category>问题记录</category>
     <category>技术日志</category>
+    <category>问题记录</category>
     <category>游戏杂谈</category>
     <category>生活随笔</category>
+    <item>
+      <title>在Linux上使用clash</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/clash_on_linux.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/clash_on_linux.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Linux上使用clash</source>
+      <description>在Linux上使用clash</description>
+      <category>技术日志</category>
+      <pubDate>Thu, 14 Sep 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 在Linux上使用clash</h1>
+<figure><img src="https://github.com/Dreamacro/clash/raw/master/docs/logo.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>最近在测试SteamAPI Client，不得不吐槽一下steam提供的web接口返回的响应结构真是<strong>多种多样</strong>，可以看的出来都是陈年老项目了。不过重点不是这个，虽然Steam的游戏服务在国内不需要梯子也可以访问，但是他们提供的接口如果不走代理的话，那基本上请求十次八次超时，为了解决这个问题只好在测试机上弄clash。</p>
+<p>clash是用go编写的，一大好处就是安装非常方便，因为除了一个二进制文件其它什么都不需要，并且还是开源跨平台的。</p>
+<h2> 安装</h2>
+<p>开源地址：<a href="https://github.com/Dreamacro/clash" target="_blank" rel="noopener noreferrer">Dreamacro/clash: A rule-based tunnel in Go. (github.com)</a></p>
+<p>从release中找到最新版，然后找到对应的版本。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309141836378.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>wget下载到本地</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>gzip解压</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>为了方便使用将其链接到bin目录下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>完事后查看版本，输出没问题就是安装成功了</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h2> 代理</h2>
+<p>导入配置文件，clash的配置文件相当复杂，一般你的代理服务商都会提供现有的配置以供导入，比如我使用的glados</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后启动clash，指定配置文件和路径，<code>-d</code>指的是配置目录，clash在刚开始时会尝试下载country.db如果不存在的话。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>有如下输出即可</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到http代理端口<code>7890</code>，由于socks不需要就不配置。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>在配置生效前来看看请求steamapi是什么效果，可以看到失败了。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>在开启clash后</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>clash日志这里也有输出，是走了代理的</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>如果有需求的话，可以做成系统服务，进行更加方便的管理。</p>
+]]></content:encoded>
+      <enclosure url="https://github.com/Dreamacro/clash/raw/master/docs/logo.png" type="image/png"/>
+    </item>
     <item>
       <title>记一次服务器被黑的解决过程</title>
       <link>https://246859.github.io/my-blog-giscus/posts/problem/hack.html</link>
