@@ -6,14 +6,394 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 22 Sep 2023 08:11:57 GMT</pubDate>
-    <lastBuildDate>Fri, 22 Sep 2023 08:11:57 GMT</lastBuildDate>
+    <pubDate>Mon, 09 Oct 2023 09:35:36 GMT</pubDate>
+    <lastBuildDate>Mon, 09 Oct 2023 09:35:36 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-    <category>问题记录</category>
+    <category>生活随笔</category>
     <category>技术日志</category>
     <category>游戏杂谈</category>
-    <category>生活随笔</category>
+    <category>问题记录</category>
+    <item>
+      <title>暑假骑行</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/life/2023_10_09.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/life/2023_10_09.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">暑假骑行</source>
+      <description>暑假骑行 暑假在江边骑行</description>
+      <category>生活随笔</category>
+      <pubDate>Sat, 22 Jul 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 暑假骑行</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091722442.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>暑假在江边骑行</p>
+<!-- more -->
+<hr>
+<p>早上异常的湿热，空气里全是水，站着不动都能汗湿，中午以后直接暴晒，顶着39度的太阳骑行，随行的学弟直接被晒的神志不清，回去以后小臂晒掉一层皮。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091725819.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091725849.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091722442.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>工具箱</title>
+      <link>https://246859.github.io/my-blog-giscus/tool.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/tool.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">工具箱</source>
+      <description>工具箱 网络工具 SMS-Activate，国外手机号接码平台 GLaDOS，一个网络代理商 IP.cn，ip查询 中国科学技术大学测速网站，中科大测速网站</description>
+      <pubDate>Mon, 09 Oct 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 工具箱</h1>
+<h3> 网络工具</h3>
+<ul>
+<li><a href="https://sms-activate.org/cn" target="_blank" rel="noopener noreferrer">SMS-Activate</a>，国外手机号接码平台</li>
+<li><a href="https://glados.rocks/console" target="_blank" rel="noopener noreferrer">GLaDOS</a>，一个网络代理商</li>
+<li><a href="https://ip.cn/ip/" target="_blank" rel="noopener noreferrer">IP.cn</a>，ip查询</li>
+<li><a href="https://test.ustc.edu.cn/" target="_blank" rel="noopener noreferrer">中国科学技术大学测速网站</a>，中科大测速网站</li>
+</ul>
+<h3> 查询工具</h3>
+<ul>
+<li><a href="https://emojixd.com/" target="_blank" rel="noopener noreferrer">Emoji表情大全</a></li>
+<li><a href="https://www.fuhaoku.net/blocks" target="_blank" rel="noopener noreferrer">Unicode符号表</a></li>
+<li><a href="https://www.asciim.cn/" target="_blank" rel="noopener noreferrer">ASCII符号表</a></li>
+<li><a href="https://www.qqxiuzi.cn/bianma/zifuji.php" target="_blank" rel="noopener noreferrer">汉字字符集</a></li>
+<li><a href="https://redis.io/docs/reference/" target="_blank" rel="noopener noreferrer">Redis reference</a></li>
+<li><a href="https://go.dev/ref/spec" target="_blank" rel="noopener noreferrer">golang reference</a></li>
+<li><a href="https://markdown.com.cn/cheat-sheet.html#%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95" target="_blank" rel="noopener noreferrer">Markdown 语法速查表</a></li>
+</ul>
+<h3> 图标网站</h3>
+<ul>
+<li><a href="https://devicon.dev/" target="_blank" rel="noopener noreferrer">DEVICON</a>，专门收集编程相关的图标</li>
+<li><a href="https://iconify.design/" target="_blank" rel="noopener noreferrer">Iconify Design</a>，开源的图标集合</li>
+<li><a href="https://www.iconfont.cn/" target="_blank" rel="noopener noreferrer">iconfont</a>，阿里妈妈做的图标站</li>
+<li><a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">flaticon</a>，国外的矢量图标网站</li>
+<li><a href="https://giphy.com/" target="_blank" rel="noopener noreferrer">GIPHY</a>，动图素材网站</li>
+</ul>
+<h3> 镜像工具</h3>
+<ul>
+<li>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener noreferrer">清华大学开源软件镜像站</a>，清华镜像站，我愿称之为唯一真神</p>
+</li>
+<li>
+<p><a href="https://mirrors.tencent.com/" target="_blank" rel="noopener noreferrer">腾讯软件源</a></p>
+</li>
+<li>
+<p><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener noreferrer">阿里巴巴开源镜像站</a></p>
+</li>
+<li>
+<p><a href="https://mirrors.huaweicloud.com/home" target="_blank" rel="noopener noreferrer">华为开源镜像站</a></p>
+</li>
+<li>
+<p><a href="https://mirrors.163.com/" target="_blank" rel="noopener noreferrer">网易开源镜像站</a></p>
+</li>
+<li>
+<p><a href="https://dockerproxy.com/" target="_blank" rel="noopener noreferrer">Docker Proxy</a>，docker代理</p>
+</li>
+<li>
+<p><a href="https://goproxy.cn/" target="_blank" rel="noopener noreferrer">Goproxy.cn</a>，七牛云的go pkg代理</p>
+</li>
+</ul>
+<h3> 转换工具</h3>
+<ul>
+<li><a href="https://www.ilovepdf.com/zh-cn" target="_blank" rel="noopener noreferrer">iLovePDF</a>，PDF文档转换工具</li>
+<li><a href="https://www.easeconvert.com/markdown-to-pdf/" target="_blank" rel="noopener noreferrer">EasyConvert</a>，Markdown转换工具</li>
+<li><a href="https://convertio.co/zh/" target="_blank" rel="noopener noreferrer">Convertio</a>，文件转换器</li>
+<li><a href="https://www.iloveimg.com/zh-cn" target="_blank" rel="noopener noreferrer">iLoveIMG</a>，图像编辑工具</li>
+<li><a href="https://docsmall.com/image-compress" target="_blank" rel="noopener noreferrer">docsmall/compress</a>，图片压缩工具</li>
+</ul>
+<h3> 开发工具</h3>
+<ul>
+<li><a href="https://godbolt.org/" target="_blank" rel="noopener noreferrer">Compiler Explorer</a>，可以在线把代码转换成汇编形式</li>
+<li><a href="http://www.network-science.de/ascii/" target="_blank" rel="noopener noreferrer">ASCII Generator</a>，Banner生成器</li>
+<li><a href="https://www.toptal.com/developers/javascript-minifier" target="_blank" rel="noopener noreferrer">Toptal</a>，js压缩工具</li>
+</ul>
+<h3> 翻译工具</h3>
+<ul>
+<li><a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">谷歌翻译</a>，翻译时能兼容代码</li>
+<li><a href="https://www.deepl.com/zh/translator" target="_blank" rel="noopener noreferrer">DeepL</a>，全世界最准确的翻译</li>
+<li><a href="https://cn.bing.com/translator" target="_blank" rel="noopener noreferrer">Bing Microsoft Translator</a></li>
+<li><a href="https://fanyi.baidu.com/" target="_blank" rel="noopener noreferrer">百度翻译</a></li>
+<li><a href="https://fanyi.youdao.com/indexLLM.html#/" target="_blank" rel="noopener noreferrer">有道翻译</a></li>
+<li><a href="https://fanyi.caiyunapp.com/#/" target="_blank" rel="noopener noreferrer">彩云小译</a></li>
+</ul>
+<h3> 开放平台</h3>
+<ul>
+<li><a href="https://platform.caiyunapp.com/login?redirect=/dashboard" target="_blank" rel="noopener noreferrer">彩云天气开放平台</a></li>
+<li><a href="https://lbs.amap.com/" target="_blank" rel="noopener noreferrer">高德开放平台</a></li>
+<li><a href="https://lbs.qq.com/map/" target="_blank" rel="noopener noreferrer">腾讯地图开放平台</a></li>
+<li><a href="https://docs.docker.com/engine/api/" target="_blank" rel="noopener noreferrer">Docker Engine API </a></li>
+<li><a href="https://dev.qweather.com/" target="_blank" rel="noopener noreferrer">和风天气开发服务</a></li>
+<li><a href="https://partner.steamgames.com/doc/" target="_blank" rel="noopener noreferrer">Steam开放平台</a></li>
+<li><a href="https://plugins.jetbrains.com/docs/intellij/welcome.html" target="_blank" rel="noopener noreferrer">IntelliJ Platform SDK</a></li>
+</ul>
+<h3> 稀奇玩意</h3>
+<ul>
+<li><a href="https://qwerty.kaiyi.cool/" target="_blank" rel="noopener noreferrer">Qwerty Learner</a>，英语学习打字练习网站</li>
+<li><a href="https://dazidazi.com/" target="_blank" rel="noopener noreferrer">dazidazi</a>，打字练习网站，真想把你教会</li>
+<li><a href="https://shields.io/" target="_blank" rel="noopener noreferrer">Shields.io</a>，标签生成器，github用的比较多</li>
+<li><a href="https://www.reg007.com/" target="_blank" rel="noopener noreferrer">REG007</a>，可以查出来你注册过哪些网站</li>
+<li><a href="http://www.breathingearth.net/" target="_blank" rel="noopener noreferrer">Breathingearth</a>，显示地球实时的出生死亡人数</li>
+<li><a href="https://win12.gitapp.cn/" target="_blank" rel="noopener noreferrer">Windows 12</a>，win12网页版模拟器</li>
+<li><a href="https://humanbenchmark.com/dashboard" target="_blank" rel="noopener noreferrer">Human Benchmark</a>，综合多个项目数据测试你是不是一个合格的人类</li>
+<li><a href="https://spaceengine.org/" target="_blank" rel="noopener noreferrer">Space Engine</a>，真实硬核的太空模拟器</li>
+<li><a href="https://www.yuantk.com/webtool/ffbe7502-a862-4adf-9ce9-afff010a1149.html" target="_blank" rel="noopener noreferrer">举牌小人生成器</a>，举牌小人生成器</li>
+<li><a href="https://www.hi2future.com/" target="_blank" rel="noopener noreferrer">时光邮局</a>，给未来几年的自己写信，也可以看别人公开的信</li>
+<li><a href="http://p.timepill.net/" target="_blank" rel="noopener noreferrer">时间胶囊</a>，时空漂流瓶</li>
+<li><a href="https://www.autopiano.cn/" target="_blank" rel="noopener noreferrer">自由钢琴</a>，在线弹钢琴</li>
+<li><a href="http://maiba.fun/" target="_blank" rel="noopener noreferrer">富豪模拟器</a>，花马云的钱买东西</li>
+<li><a href="https://pointerpointer.com/" target="_blank" rel="noopener noreferrer">Pointer Pointer</a>，生成一个指向你鼠标位置的人</li>
+<li><a href="https://www.how-to-waste-your-time.com/" target="_blank" rel="noopener noreferrer">Best Way To Waste Your Time</a>，来这里浪费时间</li>
+<li><a href="http://weavesilk.com/" target="_blank" rel="noopener noreferrer">Silk</a>，在线画画</li>
+<li><a href="https://fakeupdate.net/" target="_blank" rel="noopener noreferrer">FakeUpdat</a>，假装电脑在更新</li>
+<li><a href="https://cybermap.kaspersky.com/cn" target="_blank" rel="noopener noreferrer">网络威胁实时地图</a>，实时查看全球网络威胁地图</li>
+<li><a href="https://www.foldnfly.com/#/1-1-1-1-1-1-1-1-2" target="_blank" rel="noopener noreferrer">Fold 'N Fly</a>，教你怎么折纸飞机</li>
+<li><a href="https://www.lishiju.net/timeline.html" target="_blank" rel="noopener noreferrer">中国历史时间轴</a>，看看中国历史发展</li>
+<li><a href="http://www.secaibi.com/howbigisspace/" target="_blank" rel="noopener noreferrer">天空有多高</a>，从地表到太阳系</li>
+</ul>
+<h3> 游戏工具</h3>
+<ul>
+<li><a href="https://www.steamgriddb.com/" target="_blank" rel="noopener noreferrer">Home - SteamGridDB</a>， Steam游戏图片壁纸资源站</li>
+<li><a href="https://poki.com/zh" target="_blank" rel="noopener noreferrer">Poki</a>，国外的在线小游戏网站，有两万多个游戏。完全H5，Css3技术实现，没有借助flash，有点东西</li>
+<li><a href="https://steampp.net/" target="_blank" rel="noopener noreferrer">Watt Toolkit</a>，前身是steam++，多功能游戏工具箱</li>
+<li><a href="https://www.yikm.net/" target="_blank" rel="noopener noreferrer">yikm</a>，童年游戏集合，有小霸王，FC，SFC，GBA等</li>
+<li>[<a href="https://tools.bqrdh.com/rubiks-cube/" target="_blank" rel="noopener noreferrer">Rubik’s Cube Explorer</a>，在线拼魔方</li>
+<li><a href="http://www.minesweeper.cn/" target="_blank" rel="noopener noreferrer">Minesweeper</a>，在线扫雷</li>
+<li><a href="https://liferestart.syaro.io/public/index.html" target="_blank" rel="noopener noreferrer">Life Restart</a>，人生重开模拟器</li>
+<li></li>
+</ul>
+<h3> 工具集合</h3>
+<ul>
+<li><a href="https://utils.fun/" target="_blank" rel="noopener noreferrer">油条工具箱</a>，主要是开发相关的。</li>
+<li><a href="https://c.runoob.com/" target="_blank" rel="noopener noreferrer">菜鸟工具</a>，很多很全。</li>
+<li><a href="https://docsmall.com/" target="_blank" rel="noopener noreferrer">docsmall</a>，主要是压缩相关的。</li>
+<li><a href="https://www.butterpig.top/" target="_blank" rel="noopener noreferrer">吱吱工具箱</a>，有点年代感</li>
+<li><a href="https://www.toolhelper.cn/" target="_blank" rel="noopener noreferrer">toolhelper</a>，非常的简洁</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>在Linux上搭建K8s集群</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Linux上搭建K8s集群</source>
+      <description>在Linux上搭建K8s集群 最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</description>
+      <category>技术日志</category>
+      <pubDate>Mon, 25 Sep 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 在Linux上搭建K8s集群</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</p>
+<!-- more -->
+<hr>
+<figure><img src="https://d33wubrfki0l68.cloudfront.net/2475489eaf20163ec0f54ddc1d92aa8d4c87c96b/e7c81/images/docs/components-of-kubernetes.svg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最近在学习k8s，不得不说这玩意运行起来还是相当的麻烦，这里记录一下，以免后面忘了。事先准备好三台ubuntu22.04虚拟机，一台用作control plane，两台用作worker node。</p>
+<h2> 前置准备</h2>
+<p>在开始安装k8s之前，需要做一些前置的准备。</p>
+<h3> 关闭firewalld</h3>
+<p>k8s有着自己的网络策略配置功能，关闭friewalld是为了避免起冲突。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 禁用selinux</h3>
+<p>selinux是linux的一个安全子系统，很多服务器未为了避免麻烦都会把它关了，ubuntu在装机的时候不会自带这玩意，但如果你装了的话可以按照下面的步骤关闭。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 关闭swap</h3>
+<p>kubelet运行时明确不支持swap，也就是交换内存，一部分原因是想让程序在内存耗尽以后正常OOM而不是一直靠swap苟着从而造成不必要的损失。如果未关闭swap直接启动的话，kubelet在启动时会显示如下信息告诉你应该关闭swap，否则不让你启动。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先执行命令关闭交换分区</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后修改<code>fstab</code>文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>注释掉如下行</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行如下命令查看swap分区情况，如果关闭了的话就不会有任何显示</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 配置网络</h3>
+<p>转发 IPv4 并让 iptables 看到桥接流量</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>br_netfilter</code> 和 <code>overlay</code> 模块被加载：</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>net.bridge.bridge-nf-call-iptables</code>、<code>net.bridge.bridge-nf-call-ip6tables</code> 和 <code>net.ipv4.ip_forward</code> 系统变量在你的 <code>sysctl</code> 配置中被设置为 1</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> CRI</h2>
+<p>Container Runtime Interface（CRI），即容器运行时接口，要想使用K8s的话，需要系统提供CRI，目前实现了CRI的软件的有</p>
+<ul>
+<li>containerd，推荐用这个，比较轻量。</li>
+<li>docker engine，并没有实现CRI但是可以通过其它方法桥接，不过一般安装了docker engine的系统都会有containerd，因为containerd就是docker的一部分，所以还是建议用containerd。</li>
+<li>CRI-O</li>
+<li>MCR</li>
+</ul>
+<h3> containerd</h3>
+<p>下面会用containerd来做演示，其实containerd安装过程就是docker安装过程，先设置docker官方的apt仓库</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a href="http://xn--containerd-j05qpn034ff9b232ee69h.io" target="_blank" rel="noopener noreferrer">最后就只安装containerd.io</a>，不用安装dcoker-ce和docker-cli。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>或者你也可以直接下载containerd的二进制文件，它也是用go写的。在安装好后，需要配置systemd cgroup驱动，在containerd配置文件中</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改如下的配置项</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>使用如下命令可以重置containerd配置</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></div>
+<p>从软件包安装的话可能会默认禁用CRI，在配置文件中可能会看到这么一行，将其去掉就行。</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改完后重启containerd</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> 安装</h2>
+<p>配置下k8s的阿里云apt源</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>更新证书</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>再更新源</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最后安装<code>kubeadm</code>，<code>kubectl</code>，<code>kubelet</code>，这三个最好软件版本保持一致。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>完成后确认版本</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>确认版本一致后，看看k8s的镜像，后续必须pull这些镜像，因为这是k8s集群运行的必要组件。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>到目前为止，系统上会有下面这几个东西</p>
+<ul>
+<li><code>kebuadm</code>，用来快速启动和搭建k8s集群的工具，可以省去我们很多操作。</li>
+<li><code>kubelet</code>，k8s集群命令行管理工具</li>
+<li><code>kubelet</code>，代表着一个节点，是k8s集群的基本单位。</li>
+<li><code>crictl</code>，容器运行时管理工具，只不过它是为k8s工作的，正确使用的前提是系统上安装了支持CRI的软件并正确指定了endpoint。</li>
+<li><code>ctr</code>，ctr是containerd的命令管理工具，containerd实现了CRI。</li>
+</ul>
+<h3> cri endpoint</h3>
+<p>ctrctl虽然是容器运行时管理工具，但是它并没有具体的实现，只是定义了一组接口规范。要想正常工作还得依赖具体的实现了CRI的软件，之前已经安装好了containerd，所以运行前要先指定crictl的<code>runtime-endpoint</code>，也就是containerd的sock地址。</p>
+<p>通过查看配置文件<code>etc/containerd/config.toml</code>可以得知</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>那么endpoint就是</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>所以执行如下命令配置crictl</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 拉镜像</h3>
+<p>kubeadm支持通过命令预先拉取需要用到的组件镜像，也就是之前list出来的镜像，执行如下命令就可以预先拉取要用到的镜像。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>但是不出意外的话，意外就会发生了，上述的镜像仓库是<code>registry.k8s.io</code>，是由谷歌托管的，国内基本上没法访问，甚至于在线获取版本信息都不行</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>解决方法就是国内的镜像，阿里云有一个镜像仓库，地址如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>网上有很多教程直接在<code>kubeadm init</code>时直接指定了阿里云镜像仓库，这样会导致kubelet没法正常运行，会说找不到组件的镜像，因为kubelet运行的时候只认<code>registry.k8s.io</code>镜像，而通过阿里云镜像仓库拉下来的镜像的前缀是<code>registry.aliyuncs.com/google_containers</code>，所以kubelet自然就没法启动了。所以对应的，拉取完下面的镜像后，应该将其名字改回去。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>crictl并不能修改镜像名，这是ctr应该干的事情，为了能够查看到k8s的镜像，指定命名空间<code>k8s.io</code></p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>一个个改名太麻烦了，所以我写了一个脚本，来自动化完成这个过程。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>或者也可以</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 初始化</h3>
+<p>接下来使用kubeadm来初始化，这个操作只用在master节点进行。init时有很多参数，开始前可以看看命令帮助。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>接下来就开始初始化，如果上面的配置都做好了的话，是不会出现问题的。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" type="image/png"/>
+    </item>
+    <item>
+      <title>黑暗之魂I：重制版</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/darksoul1.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/darksoul1.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">黑暗之魂I：重制版</source>
+      <description>黑暗之魂I：重制版 开山之作，地图设计极其优秀，三部曲中氛围最好，也是最喜欢的。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 黑暗之魂I：重制版</h1>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091210402.jpg" style="zoom:150%;">
+<p>开山之作，地图设计极其优秀，三部曲中氛围最好，也是最喜欢的。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>黑暗之魂II：原罪学者</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/darksoul2.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/darksoul2.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">黑暗之魂II：原罪学者</source>
+      <description>黑暗之魂II：原罪学者 自身足够优秀，但是相比于它的前辈和后辈就有点黯然失色了。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 黑暗之魂II：原罪学者</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091200973.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>自身足够优秀，但是相比于它的前辈和后辈就有点黯然失色了。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091200973.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>黑暗之魂III：火之将熄</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/darksoul3.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/darksoul3.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">黑暗之魂III：火之将熄</source>
+      <description>黑暗之魂III：火之将熄 延续了一贯的风格，魂系列的佳作。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Tue, 08 Sep 2020 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 黑暗之魂III：火之将熄</h1>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091205455.jpg" style="zoom:150%;">
+<p>延续了一贯的风格，魂系列的佳作。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>艾尔登法环</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/elden_ring.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/elden_ring.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">艾尔登法环</source>
+      <description>艾尔登法环 魂系列集大成之作，唯一一个全成就的游戏，首发预购的含金量</description>
+      <category>游戏杂谈</category>
+      <pubDate>Fri, 25 Feb 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 艾尔登法环</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091102051.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>魂系列集大成之作，唯一一个全成就的游戏，首发预购的含金量</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091102051.png" type="image/png"/>
+    </item>
+    <item>
+      <title>激流快艇</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/gp.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/gp.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">激流快艇</source>
+      <description>激流快艇 初中在家里的智能电视上玩的激流快艇2，童年回忆之一，第三部是18年出的，人长大了但电视还是那个电视，现在还能玩不过卡跟ppt一样。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Mon, 09 Oct 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 激流快艇</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091035367.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>初中在家里的智能电视上玩的激流快艇2，童年回忆之一，第三部是18年出的，人长大了但电视还是那个电视，现在还能玩不过卡跟ppt一样。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091035367.png" type="image/png"/>
+    </item>
+    <item>
+      <title>天国拯救</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/kingdom_come.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/kingdom_come.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">天国拯救</source>
+      <description>天国拯救 一个铁匠儿子成长为剑术大师的故事，剧情挺好，战斗太难了，为了看剧情开修改器过的。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Sun, 05 Sep 2021 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 天国拯救</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091146687.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>一个铁匠儿子成长为剑术大师的故事，剧情挺好，战斗太难了，为了看剧情开修改器过的。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091146687.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>生化危机2 重制版</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/re2.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/re2.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">生化危机2 重制版</source>
+      <description>生化危机2 重制版 第一次玩的时候还有点吓人，后面逛警察局就跟回家一样，游戏质量很高。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Sat, 10 Jul 2021 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 生化危机2 重制版</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091115507.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>第一次玩的时候还有点吓人，后面逛警察局就跟回家一样，游戏质量很高。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091115507.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>只狼：影逝二度</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/sekrio.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/sekrio.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">只狼：影逝二度</source>
+      <description>只狼：影逝二度 老贼非常成功的创新，游戏内容不算特别多，但胜在短小精悍。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Sat, 07 Nov 2020 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 只狼：影逝二度</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091218744.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>老贼非常成功的创新，游戏内容不算特别多，但胜在短小精悍。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091218744.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>巫师三：狂猎</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/witcher.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/witcher.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">巫师三：狂猎</source>
+      <description>巫师三：狂猎 先看小说再玩游戏，我愿称之为开放世界天花板。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Thu, 17 Dec 2020 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 巫师三：狂猎</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091154859.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>先看小说再玩游戏，我愿称之为开放世界天花板。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091154859.jpg" type="image/jpeg"/>
+    </item>
     <item>
       <title>数据库被注入恶意信息</title>
       <link>https://246859.github.io/my-blog-giscus/posts/problem/mysqlinject.html</link>
@@ -147,7 +527,7 @@
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202307291114364.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
 <!-- more -->
 <hr>
-<p>最近打算试一试桌面软件的开发，听说过QT，苦于没有C++基础，并且go的GUI生态太拉跨了。后来在网上了解到Flutter，现在已经可以稳定开发windows桌面软件了，结合Dart进行开发，而且性能相当的可以，于是本文记录一下flutter的尝试。</p>
+<p>最近打算试一试桌面软件的开发，苦于没有QT基础，并且go的GUI生态太拉跨了。后来在网上了解到Flutter，现在已经可以稳定开发windows桌面软件了，结合Dart进行开发，而且性能相当的可以，于是本文记录一下flutter的尝试。</p>
 <p>Flutter官网：<a href="https://flutter.cn/" target="_blank" rel="noopener noreferrer">Flutter: 为所有屏幕创造精彩 - Flutter 中文开发者网站 - Flutter</a></p>
 <p>Flutter文档：<a href="https://flutter.cn/docs" target="_blank" rel="noopener noreferrer">Flutter 开发文档 - Flutter 中文文档 - Flutter 中文开发者网站 - Flutter</a></p>
 <p>Flutter安装：<a href="https://flutter.cn/docs/get-started/install" target="_blank" rel="noopener noreferrer">安装和环境配置 - Flutter 中文文档 - Flutter 中文开发者网站 - Flutter</a></p>
@@ -1296,13 +1676,12 @@
       <category>游戏杂谈</category>
       <pubDate>Mon, 15 Mar 2021 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 烟火</h1>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg" style="zoom:200%;">
 <p>一款小体量的恐怖游戏，像一本短暂又令人回味的小说</p>
 <!-- more -->
 <hr>
 <p>正文</p>
 ]]></content:encoded>
-      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg" type="image/jpeg"/>
     </item>
     <item>
       <title>古剑奇谭三：梦付千秋星垂野</title>
@@ -1325,12 +1704,12 @@
       <link>https://246859.github.io/my-blog-giscus/posts/game/mc.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/game/mc.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">Minecraft</source>
-      <description>Minecraft 它几乎陪伴了我整个青春</description>
+      <description>Minecraft 从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</description>
       <category>游戏杂谈</category>
       <pubDate>Sun, 20 Sep 2020 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> Minecraft</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>它几乎陪伴了我整个青春</p>
+<p>从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</p>
 <!-- more -->
 <hr>
 ]]></content:encoded>
