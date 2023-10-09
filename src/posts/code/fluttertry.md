@@ -14,7 +14,7 @@ tag:
 ![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202307291114364.png)
 <!-- more -->
 ---
-最近打算试一试桌面软件的开发，听说过QT，苦于没有C++基础，并且go的GUI生态太拉跨了。后来在网上了解到Flutter，现在已经可以稳定开发windows桌面软件了，结合Dart进行开发，而且性能相当的可以，于是本文记录一下flutter的尝试。
+最近打算试一试桌面软件的开发，苦于没有QT基础，并且go的GUI生态太拉跨了。后来在网上了解到Flutter，现在已经可以稳定开发windows桌面软件了，结合Dart进行开发，而且性能相当的可以，于是本文记录一下flutter的尝试。
 
 Flutter官网：[Flutter: 为所有屏幕创造精彩 - Flutter 中文开发者网站 - Flutter](https://flutter.cn/)
 
