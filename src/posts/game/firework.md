@@ -11,7 +11,7 @@ tag:
   - 2D游戏
 ---
 # 烟火
-![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg)
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg" style="zoom:200%;" />
 
 一款小体量的恐怖游戏，像一本短暂又令人回味的小说
 <!-- more -->

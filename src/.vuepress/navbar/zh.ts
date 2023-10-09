@@ -22,6 +22,11 @@ export const zhNavbar = navbar([
         link: "/category/生活随笔/",
     },
     {
+        text: "工具箱",
+        icon: "operate",
+        link: "/tool",
+    },
+    {
         text: "时间轴",
         icon: "time",
         link: "/timeline",
