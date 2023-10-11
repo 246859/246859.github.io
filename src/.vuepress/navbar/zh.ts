@@ -12,14 +12,30 @@ export const zhNavbar = navbar([
         link: "/category/问题记录/",
     },
     {
-        text: "游戏杂谈",
-        icon: "creative",
-        link: "/category/游戏杂谈/",
-    },
-    {
         text: "生活随笔",
         icon: "edit",
         link: "/category/生活随笔/",
+    },
+    {
+        text: "其它分类",
+        icon: "guide",
+        children: [
+            {
+                text: "数据库",
+                icon: "mysql",
+                link: "/category/数据库/"
+            },
+            {
+                text: "Linux",
+                icon: "linux",
+                link: "/category/Linux/"
+            },
+            {
+                text: "游戏杂谈",
+                icon: "creative",
+                link: "/category/游戏杂谈/",
+            },
+        ]
     },
     {
         text: "工具箱",
