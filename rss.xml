@@ -6,14 +6,141 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 09 Oct 2023 09:35:36 GMT</pubDate>
-    <lastBuildDate>Mon, 09 Oct 2023 09:35:36 GMT</lastBuildDate>
+    <pubDate>Wed, 11 Oct 2023 08:58:29 GMT</pubDate>
+    <lastBuildDate>Wed, 11 Oct 2023 08:58:29 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>数据库</category>
+    <category>Linux</category>
     <category>生活随笔</category>
     <category>技术日志</category>
     <category>游戏杂谈</category>
     <category>问题记录</category>
+    <item>
+      <title>Docker上安装PostgreSql</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/db/docker_install_postgres.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/db/docker_install_postgres.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装PostgreSql</source>
+      <description>Docker上安装PostgreSql</description>
+      <category>数据库</category>
+      <pubDate>Wed, 11 Oct 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker上安装PostgreSql</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111522417.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>官网：<a href="https://www.postgresql.org/" target="_blank" rel="noopener noreferrer">PostgreSQL: The world's most advanced open source database</a></p>
+<p>关系型数据库的话以前只学习过mysql一种，最近打算来捣鼓一下大名鼎鼎的postgresql，官网的标题就是<strong>世界上最先进的关系型数据库</strong>。为了方便学习，采用本地虚拟机+docker的方式进行安装。</p>
+<h3> 镜像</h3>
+<p>首先在dockerhub看看镜像<a href="https://hub.docker.com/_/postgres" target="_blank" rel="noopener noreferrer">postgres - Official Image | Docker Hub</a></p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111516192.png" alt="" style="zoom: 50%;">
+<p>一看postgresql的维护版本这么多，不知道选什么就选最稳的<code>11</code>。</p>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>16版本的话navicat还不太兼容</p>
+</div>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看下镜像</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 容器</h3>
+<p>运行如下命令创建容i去</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul>
+<li><code>POSTGRES_PASSWORD</code>，环境变量，设置超级用户默认密码</li>
+<li><code>LANG</code>，环境变量，设置字符集</li>
+</ul>
+<p>跑起来看看看日志</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>再看看ps</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 命令行</h3>
+<p>容器成功运行以后，到数据库命令行里面看看，默认的超级用户名为<code>postgres</code>。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>pg的命令行有独特的命令，不像<code>mysql</code>全是SQL语句，一般以下划线<code>\</code>开头，<code>\?</code>查看帮助命令。查看所有的数据库</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看所有用户</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看两个配置文件的地址</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>退出命令行</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 远程登录</h3>
+<p>pg默认是允许远程登录的，必须得修改其配置文件。修改<code>postgresql.conf</code>文件的中监听地址为如下。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后再修改<code>pg_hba.conf</code>，添加如下规则</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>修改完后把容器重启下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111643870.png" style="zoom: 80%;">
+<p>然后就可以连接成功了。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111522417.png" type="image/png"/>
+    </item>
+    <item>
+      <title>ubuntu自定义系统服务</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/linux/linuxservice.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/linux/linuxservice.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">ubuntu自定义系统服务</source>
+      <description>ubuntu自定义系统服务</description>
+      <category>Linux</category>
+      <pubDate>Sat, 28 Jan 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> ubuntu自定义系统服务</h1>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111508436.png" style="zoom: 150%;">
+<!-- more -->
+<hr>
+<p>在开发项目时，对于一些后台应用，可以自定义成linux的service，这样能够更加方便的管理。</p>
+<p>首先在<code>/etc/systemd/system</code>下，创建一个<code>xxx.service</code>的文件，<code>xxx</code>是服务名。</p>
+<p>service文件有特殊的配置格式，下面是一个简单的例子</p>
+<div class="language-txt line-numbers-mode" data-ext="txt"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>其中<code>type</code>有以下几种取值</p>
+<ul>
+<li>
+<p>Type=simple：默认值，执行ExecStart指定的命令，启动主进程</p>
+</li>
+<li>
+<p>Type=forking：以 fork 方式从父进程创建子进程，创建后父进程会立即退出</p>
+</li>
+<li>
+<p>Type=oneshot：一次性进程，Systemd 会等当前服务退出，再继续往下执行</p>
+</li>
+<li>
+<p>Type=dbus：当前服务通过D-Bus启动</p>
+</li>
+<li>
+<p>Type=notify：当前服务启动完毕，会通知Systemd，再继续往下执行</p>
+</li>
+<li>
+<p>Type=idle：若有其他任务执行完毕，当前服务才会运行，即后台运行</p>
+</li>
+</ul>
+<p>Restart：定义了退出后，Systemd 的重启方式。可以设置的值如下：</p>
+<ul>
+<li>
+<p>no（默认值）：退出后不会重启；</p>
+</li>
+<li>
+<p>on-success：当进程正常退出时（退出状态码为0），才会重启；</p>
+</li>
+<li>
+<p>on-failure：当进程非正常退出时(退出状态码非0)，包括被信号终止和超时，才会重启；</p>
+</li>
+<li>
+<p>on-abnormal：当被信号终止和超时，才会重启；</p>
+</li>
+<li>
+<p>on-abort：当收到没有捕捉到的信号终止时，才会重启；</p>
+</li>
+<li>
+<p>on-watchdog：看门狗超时退出，才会重启；</p>
+</li>
+<li>
+<p>always：总是重启。</p>
+</li>
+</ul>
+<p>KillMode：定义 Systemd 如何停止服务，可以设置的值如下：</p>
+<ul>
+<li>
+<p>control-group（默认值）：当前控制组里面的所有子进程，都会被杀掉；</p>
+</li>
+<li>
+<p>process：只杀主进程；</p>
+</li>
+<li>
+<p>mixed：主进程将收到 SIGTERM 信号，子进程收到 SIGKILL 信号；</p>
+</li>
+<li>
+<p>none：没有进程会被杀掉。</p>
+</li>
+</ul>
+<p>创建完成后，执行命令重新加载服务文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>随后使用<code>service hello service </code> 即可开启</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>暑假骑行</title>
       <link>https://246859.github.io/my-blog-giscus/posts/life/2023_10_09.html</link>
@@ -32,141 +159,6 @@
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091725849.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091722442.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>工具箱</title>
-      <link>https://246859.github.io/my-blog-giscus/tool.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/tool.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">工具箱</source>
-      <description>工具箱 网络工具 SMS-Activate，国外手机号接码平台 GLaDOS，一个网络代理商 IP.cn，ip查询 中国科学技术大学测速网站，中科大测速网站</description>
-      <pubDate>Mon, 09 Oct 2023 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 工具箱</h1>
-<h3> 网络工具</h3>
-<ul>
-<li><a href="https://sms-activate.org/cn" target="_blank" rel="noopener noreferrer">SMS-Activate</a>，国外手机号接码平台</li>
-<li><a href="https://glados.rocks/console" target="_blank" rel="noopener noreferrer">GLaDOS</a>，一个网络代理商</li>
-<li><a href="https://ip.cn/ip/" target="_blank" rel="noopener noreferrer">IP.cn</a>，ip查询</li>
-<li><a href="https://test.ustc.edu.cn/" target="_blank" rel="noopener noreferrer">中国科学技术大学测速网站</a>，中科大测速网站</li>
-</ul>
-<h3> 查询工具</h3>
-<ul>
-<li><a href="https://emojixd.com/" target="_blank" rel="noopener noreferrer">Emoji表情大全</a></li>
-<li><a href="https://www.fuhaoku.net/blocks" target="_blank" rel="noopener noreferrer">Unicode符号表</a></li>
-<li><a href="https://www.asciim.cn/" target="_blank" rel="noopener noreferrer">ASCII符号表</a></li>
-<li><a href="https://www.qqxiuzi.cn/bianma/zifuji.php" target="_blank" rel="noopener noreferrer">汉字字符集</a></li>
-<li><a href="https://redis.io/docs/reference/" target="_blank" rel="noopener noreferrer">Redis reference</a></li>
-<li><a href="https://go.dev/ref/spec" target="_blank" rel="noopener noreferrer">golang reference</a></li>
-<li><a href="https://markdown.com.cn/cheat-sheet.html#%E6%89%A9%E5%B1%95%E8%AF%AD%E6%B3%95" target="_blank" rel="noopener noreferrer">Markdown 语法速查表</a></li>
-</ul>
-<h3> 图标网站</h3>
-<ul>
-<li><a href="https://devicon.dev/" target="_blank" rel="noopener noreferrer">DEVICON</a>，专门收集编程相关的图标</li>
-<li><a href="https://iconify.design/" target="_blank" rel="noopener noreferrer">Iconify Design</a>，开源的图标集合</li>
-<li><a href="https://www.iconfont.cn/" target="_blank" rel="noopener noreferrer">iconfont</a>，阿里妈妈做的图标站</li>
-<li><a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">flaticon</a>，国外的矢量图标网站</li>
-<li><a href="https://giphy.com/" target="_blank" rel="noopener noreferrer">GIPHY</a>，动图素材网站</li>
-</ul>
-<h3> 镜像工具</h3>
-<ul>
-<li>
-<p><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener noreferrer">清华大学开源软件镜像站</a>，清华镜像站，我愿称之为唯一真神</p>
-</li>
-<li>
-<p><a href="https://mirrors.tencent.com/" target="_blank" rel="noopener noreferrer">腾讯软件源</a></p>
-</li>
-<li>
-<p><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener noreferrer">阿里巴巴开源镜像站</a></p>
-</li>
-<li>
-<p><a href="https://mirrors.huaweicloud.com/home" target="_blank" rel="noopener noreferrer">华为开源镜像站</a></p>
-</li>
-<li>
-<p><a href="https://mirrors.163.com/" target="_blank" rel="noopener noreferrer">网易开源镜像站</a></p>
-</li>
-<li>
-<p><a href="https://dockerproxy.com/" target="_blank" rel="noopener noreferrer">Docker Proxy</a>，docker代理</p>
-</li>
-<li>
-<p><a href="https://goproxy.cn/" target="_blank" rel="noopener noreferrer">Goproxy.cn</a>，七牛云的go pkg代理</p>
-</li>
-</ul>
-<h3> 转换工具</h3>
-<ul>
-<li><a href="https://www.ilovepdf.com/zh-cn" target="_blank" rel="noopener noreferrer">iLovePDF</a>，PDF文档转换工具</li>
-<li><a href="https://www.easeconvert.com/markdown-to-pdf/" target="_blank" rel="noopener noreferrer">EasyConvert</a>，Markdown转换工具</li>
-<li><a href="https://convertio.co/zh/" target="_blank" rel="noopener noreferrer">Convertio</a>，文件转换器</li>
-<li><a href="https://www.iloveimg.com/zh-cn" target="_blank" rel="noopener noreferrer">iLoveIMG</a>，图像编辑工具</li>
-<li><a href="https://docsmall.com/image-compress" target="_blank" rel="noopener noreferrer">docsmall/compress</a>，图片压缩工具</li>
-</ul>
-<h3> 开发工具</h3>
-<ul>
-<li><a href="https://godbolt.org/" target="_blank" rel="noopener noreferrer">Compiler Explorer</a>，可以在线把代码转换成汇编形式</li>
-<li><a href="http://www.network-science.de/ascii/" target="_blank" rel="noopener noreferrer">ASCII Generator</a>，Banner生成器</li>
-<li><a href="https://www.toptal.com/developers/javascript-minifier" target="_blank" rel="noopener noreferrer">Toptal</a>，js压缩工具</li>
-</ul>
-<h3> 翻译工具</h3>
-<ul>
-<li><a href="https://translate.google.com/" target="_blank" rel="noopener noreferrer">谷歌翻译</a>，翻译时能兼容代码</li>
-<li><a href="https://www.deepl.com/zh/translator" target="_blank" rel="noopener noreferrer">DeepL</a>，全世界最准确的翻译</li>
-<li><a href="https://cn.bing.com/translator" target="_blank" rel="noopener noreferrer">Bing Microsoft Translator</a></li>
-<li><a href="https://fanyi.baidu.com/" target="_blank" rel="noopener noreferrer">百度翻译</a></li>
-<li><a href="https://fanyi.youdao.com/indexLLM.html#/" target="_blank" rel="noopener noreferrer">有道翻译</a></li>
-<li><a href="https://fanyi.caiyunapp.com/#/" target="_blank" rel="noopener noreferrer">彩云小译</a></li>
-</ul>
-<h3> 开放平台</h3>
-<ul>
-<li><a href="https://platform.caiyunapp.com/login?redirect=/dashboard" target="_blank" rel="noopener noreferrer">彩云天气开放平台</a></li>
-<li><a href="https://lbs.amap.com/" target="_blank" rel="noopener noreferrer">高德开放平台</a></li>
-<li><a href="https://lbs.qq.com/map/" target="_blank" rel="noopener noreferrer">腾讯地图开放平台</a></li>
-<li><a href="https://docs.docker.com/engine/api/" target="_blank" rel="noopener noreferrer">Docker Engine API </a></li>
-<li><a href="https://dev.qweather.com/" target="_blank" rel="noopener noreferrer">和风天气开发服务</a></li>
-<li><a href="https://partner.steamgames.com/doc/" target="_blank" rel="noopener noreferrer">Steam开放平台</a></li>
-<li><a href="https://plugins.jetbrains.com/docs/intellij/welcome.html" target="_blank" rel="noopener noreferrer">IntelliJ Platform SDK</a></li>
-</ul>
-<h3> 稀奇玩意</h3>
-<ul>
-<li><a href="https://qwerty.kaiyi.cool/" target="_blank" rel="noopener noreferrer">Qwerty Learner</a>，英语学习打字练习网站</li>
-<li><a href="https://dazidazi.com/" target="_blank" rel="noopener noreferrer">dazidazi</a>，打字练习网站，真想把你教会</li>
-<li><a href="https://shields.io/" target="_blank" rel="noopener noreferrer">Shields.io</a>，标签生成器，github用的比较多</li>
-<li><a href="https://www.reg007.com/" target="_blank" rel="noopener noreferrer">REG007</a>，可以查出来你注册过哪些网站</li>
-<li><a href="http://www.breathingearth.net/" target="_blank" rel="noopener noreferrer">Breathingearth</a>，显示地球实时的出生死亡人数</li>
-<li><a href="https://win12.gitapp.cn/" target="_blank" rel="noopener noreferrer">Windows 12</a>，win12网页版模拟器</li>
-<li><a href="https://humanbenchmark.com/dashboard" target="_blank" rel="noopener noreferrer">Human Benchmark</a>，综合多个项目数据测试你是不是一个合格的人类</li>
-<li><a href="https://spaceengine.org/" target="_blank" rel="noopener noreferrer">Space Engine</a>，真实硬核的太空模拟器</li>
-<li><a href="https://www.yuantk.com/webtool/ffbe7502-a862-4adf-9ce9-afff010a1149.html" target="_blank" rel="noopener noreferrer">举牌小人生成器</a>，举牌小人生成器</li>
-<li><a href="https://www.hi2future.com/" target="_blank" rel="noopener noreferrer">时光邮局</a>，给未来几年的自己写信，也可以看别人公开的信</li>
-<li><a href="http://p.timepill.net/" target="_blank" rel="noopener noreferrer">时间胶囊</a>，时空漂流瓶</li>
-<li><a href="https://www.autopiano.cn/" target="_blank" rel="noopener noreferrer">自由钢琴</a>，在线弹钢琴</li>
-<li><a href="http://maiba.fun/" target="_blank" rel="noopener noreferrer">富豪模拟器</a>，花马云的钱买东西</li>
-<li><a href="https://pointerpointer.com/" target="_blank" rel="noopener noreferrer">Pointer Pointer</a>，生成一个指向你鼠标位置的人</li>
-<li><a href="https://www.how-to-waste-your-time.com/" target="_blank" rel="noopener noreferrer">Best Way To Waste Your Time</a>，来这里浪费时间</li>
-<li><a href="http://weavesilk.com/" target="_blank" rel="noopener noreferrer">Silk</a>，在线画画</li>
-<li><a href="https://fakeupdate.net/" target="_blank" rel="noopener noreferrer">FakeUpdat</a>，假装电脑在更新</li>
-<li><a href="https://cybermap.kaspersky.com/cn" target="_blank" rel="noopener noreferrer">网络威胁实时地图</a>，实时查看全球网络威胁地图</li>
-<li><a href="https://www.foldnfly.com/#/1-1-1-1-1-1-1-1-2" target="_blank" rel="noopener noreferrer">Fold 'N Fly</a>，教你怎么折纸飞机</li>
-<li><a href="https://www.lishiju.net/timeline.html" target="_blank" rel="noopener noreferrer">中国历史时间轴</a>，看看中国历史发展</li>
-<li><a href="http://www.secaibi.com/howbigisspace/" target="_blank" rel="noopener noreferrer">天空有多高</a>，从地表到太阳系</li>
-</ul>
-<h3> 游戏工具</h3>
-<ul>
-<li><a href="https://www.steamgriddb.com/" target="_blank" rel="noopener noreferrer">Home - SteamGridDB</a>， Steam游戏图片壁纸资源站</li>
-<li><a href="https://poki.com/zh" target="_blank" rel="noopener noreferrer">Poki</a>，国外的在线小游戏网站，有两万多个游戏。完全H5，Css3技术实现，没有借助flash，有点东西</li>
-<li><a href="https://steampp.net/" target="_blank" rel="noopener noreferrer">Watt Toolkit</a>，前身是steam++，多功能游戏工具箱</li>
-<li><a href="https://www.yikm.net/" target="_blank" rel="noopener noreferrer">yikm</a>，童年游戏集合，有小霸王，FC，SFC，GBA等</li>
-<li>[<a href="https://tools.bqrdh.com/rubiks-cube/" target="_blank" rel="noopener noreferrer">Rubik’s Cube Explorer</a>，在线拼魔方</li>
-<li><a href="http://www.minesweeper.cn/" target="_blank" rel="noopener noreferrer">Minesweeper</a>，在线扫雷</li>
-<li><a href="https://liferestart.syaro.io/public/index.html" target="_blank" rel="noopener noreferrer">Life Restart</a>，人生重开模拟器</li>
-<li></li>
-</ul>
-<h3> 工具集合</h3>
-<ul>
-<li><a href="https://utils.fun/" target="_blank" rel="noopener noreferrer">油条工具箱</a>，主要是开发相关的。</li>
-<li><a href="https://c.runoob.com/" target="_blank" rel="noopener noreferrer">菜鸟工具</a>，很多很全。</li>
-<li><a href="https://docsmall.com/" target="_blank" rel="noopener noreferrer">docsmall</a>，主要是压缩相关的。</li>
-<li><a href="https://www.butterpig.top/" target="_blank" rel="noopener noreferrer">吱吱工具箱</a>，有点年代感</li>
-<li><a href="https://www.toolhelper.cn/" target="_blank" rel="noopener noreferrer">toolhelper</a>，非常的简洁</li>
-</ul>
-]]></content:encoded>
     </item>
     <item>
       <title>在Linux上搭建K8s集群</title>
@@ -701,86 +693,6 @@
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>目录下的html是打包好的静态文件，nginx是nginx配置文件夹。</p>
 ]]></content:encoded>
       <enclosure url="https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>ubuntu自定义系统服务</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/code/linuxservice.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/code/linuxservice.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">ubuntu自定义系统服务</source>
-      <description>ubuntu自定义系统服务</description>
-      <category>技术日志</category>
-      <pubDate>Sat, 28 Jan 2023 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> ubuntu自定义系统服务</h1>
-<figure><img src="https://w.wallhaven.cc/full/kx/wallhaven-kx36mq.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<!-- more -->
-<hr>
-<p>在开发项目时，对于一些后台应用，可以自定义成linux的service，这样能够更加方便的管理。</p>
-<p>首先在<code>/etc/systemd/system</code>下，创建一个<code>xxx.service</code>的文件，<code>xxx</code>是服务名。</p>
-<p>service文件有特殊的配置格式，下面是一个简单的例子</p>
-<div class="language-txt line-numbers-mode" data-ext="txt"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>其中<code>type</code>有以下几种取值</p>
-<ul>
-<li>
-<p>Type=simple：默认值，执行ExecStart指定的命令，启动主进程</p>
-</li>
-<li>
-<p>Type=forking：以 fork 方式从父进程创建子进程，创建后父进程会立即退出</p>
-</li>
-<li>
-<p>Type=oneshot：一次性进程，Systemd 会等当前服务退出，再继续往下执行</p>
-</li>
-<li>
-<p>Type=dbus：当前服务通过D-Bus启动</p>
-</li>
-<li>
-<p>Type=notify：当前服务启动完毕，会通知Systemd，再继续往下执行</p>
-</li>
-<li>
-<p>Type=idle：若有其他任务执行完毕，当前服务才会运行，即后台运行</p>
-</li>
-</ul>
-<p>Restart：定义了退出后，Systemd 的重启方式。可以设置的值如下：</p>
-<ul>
-<li>
-<p>no（默认值）：退出后不会重启；</p>
-</li>
-<li>
-<p>on-success：当进程正常退出时（退出状态码为0），才会重启；</p>
-</li>
-<li>
-<p>on-failure：当进程非正常退出时(退出状态码非0)，包括被信号终止和超时，才会重启；</p>
-</li>
-<li>
-<p>on-abnormal：当被信号终止和超时，才会重启；</p>
-</li>
-<li>
-<p>on-abort：当收到没有捕捉到的信号终止时，才会重启；</p>
-</li>
-<li>
-<p>on-watchdog：看门狗超时退出，才会重启；</p>
-</li>
-<li>
-<p>always：总是重启。</p>
-</li>
-</ul>
-<p>KillMode：定义 Systemd 如何停止服务，可以设置的值如下：</p>
-<ul>
-<li>
-<p>control-group（默认值）：当前控制组里面的所有子进程，都会被杀掉；</p>
-</li>
-<li>
-<p>process：只杀主进程；</p>
-</li>
-<li>
-<p>mixed：主进程将收到 SIGTERM 信号，子进程收到 SIGKILL 信号；</p>
-</li>
-<li>
-<p>none：没有进程会被杀掉。</p>
-</li>
-</ul>
-<p>创建完成后，执行命令重新加载服务文件</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>随后使用<code>service hello service </code> 即可开启</p>
-]]></content:encoded>
-      <enclosure url="https://w.wallhaven.cc/full/kx/wallhaven-kx36mq.png" type="image/png"/>
     </item>
     <item>
       <title>docker内存显示异常的bug</title>
