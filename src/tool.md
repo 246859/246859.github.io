@@ -1,5 +1,6 @@
 ---
-date: 2023-10-09
+date: 2023-02-07
+article: false
 ---
 
 # 工具箱
@@ -142,4 +143,5 @@ date: 2023-10-09
 - [docsmall](https://docsmall.com/)，主要是压缩相关的。
 - [吱吱工具箱](https://www.butterpig.top/)，有点年代感
 - [toolhelper](https://www.toolhelper.cn/)，非常的简洁
+- [BEJSON](https://www.bejson.com/) 始于2011
 
