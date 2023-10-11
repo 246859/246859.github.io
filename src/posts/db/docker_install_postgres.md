@@ -1,14 +1,14 @@
 ---
-date: 2023-10-11
+date: 2023-09-30
 article: true
 star: false
 sticky: false
 category:
   - 数据库
 tag:
-  - postgresql
+  - PostgreSQL
   - SQL
-  - 数据库
+  - 关系数据库
 ---
 
 # Docker上安装PostgreSql
