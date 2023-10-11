@@ -3,17 +3,15 @@ date: 2023-01-28
 article: true
 star: false
 sticky: false
-category:
-  - 技术日志
+category: Linux
 tag:
   - linux
   - service
-  -
 ---
 
 # ubuntu自定义系统服务
 
-![](https://w.wallhaven.cc/full/kx/wallhaven-kx36mq.png)
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111508436.png" style="zoom: 150%;" />
 
 
 <!-- more -->

@@ -8,7 +8,6 @@ category:
 tag:
   - k8s
   - containerd
-  - 
 ---
 
 #  在Linux上搭建K8s集群
