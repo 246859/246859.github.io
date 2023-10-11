@@ -6,16 +6,197 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 11 Oct 2023 08:58:29 GMT</pubDate>
-    <lastBuildDate>Wed, 11 Oct 2023 08:58:29 GMT</lastBuildDate>
+    <pubDate>Wed, 11 Oct 2023 15:26:51 GMT</pubDate>
+    <lastBuildDate>Wed, 11 Oct 2023 15:26:51 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>生活随笔</category>
     <category>数据库</category>
     <category>Linux</category>
-    <category>生活随笔</category>
     <category>技术日志</category>
     <category>游戏杂谈</category>
     <category>问题记录</category>
+    <item>
+      <title>海边的一段代码</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/life/2023_01_22.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/life/2023_01_22.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">海边的一段代码</source>
+      <description>海边的一段代码 过年的时候在厦门的海滩上，别人都在写和谁谁相爱一辈子，而我写了一段代码。</description>
+      <category>生活随笔</category>
+      <pubDate>Sun, 22 Jan 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 海边的一段代码</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111956319.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>过年的时候在厦门的海滩上，别人都在写和谁谁相爱一辈子，而我写了一段代码。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111956319.png" type="image/png"/>
+    </item>
+    <item>
+      <title>一次70KM短途骑行</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/life/2023_02_27.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/life/2023_02_27.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">一次70KM短途骑行</source>
+      <description>一次70KM短途骑行 从学校出发到江边，硬生生从山底爬到山顶，全程70KM。</description>
+      <category>生活随笔</category>
+      <pubDate>Mon, 27 Feb 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 一次70KM短途骑行</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/2023227骑行.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>从学校出发到江边，硬生生从山底爬到山顶，全程70KM。</p>
+<!-- more -->
+<hr>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310112002883.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310112002088.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/2023227%E9%AA%91%E8%A1%8C.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>Docker上安装MariaDB</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/db/docker_install_mariadb.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/db/docker_install_mariadb.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装MariaDB</source>
+      <description>Docker上安装MariaDB</description>
+      <category>数据库</category>
+      <pubDate>Fri, 06 Oct 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker上安装MariaDB</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111859077.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>官网：<a href="https://mariadb.org/" target="_blank" rel="noopener noreferrer">MariaDB</a></p>
+<p>开源地址：<a href="https://github.com/MariaDB/server" target="_blank" rel="noopener noreferrer">https://github.com/MariaDB/server</a></p>
+<p>在Mysql被Oracle收购以后，MySql之父觉得此时的Mysql不再是一个纯粹的开源数据库了。于是没多久便出走了，随后他便从Mysql社区fork出来一个新的分支：MariaDB，到目前为止已经是一个完全的新项目了。该数据库以他女儿的名字来命名的，相比于Mysql而言它是一个完全开源的数据库，在协议和表定义方面完全兼容。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111859077.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Docker上安装MongoDB</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/db/docker_install_mongo.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/db/docker_install_mongo.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装MongoDB</source>
+      <description>Docker上安装MongoDB</description>
+      <category>数据库</category>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker上安装MongoDB</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111838486.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>官网：<a href="https://www.mongodb.com/zh-cn" target="_blank" rel="noopener noreferrer">MongoDB</a></p>
+<p>mongodb是一个高性能的非关系型数据库，或者说文档数据库因为它的基本单位就是文档，在我的一个开源项目中主要拿它来存游戏信息，比较灵活，存在mysql纯纯是找罪受。mongodb说实话第一次看到的时候，SQL写起来真的反人类，弄成了json的样子，如果语句长了点嵌套多了点，可读性骤然下降。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>尤其是花括号看的真的眼花，这玩意在命令行里面敲起来是真滴折磨。</p>
+<h3> 镜像</h3>
+<p>镜像地址：<a href="https://hub.docker.com/_/mongo" target="_blank" rel="noopener noreferrer">mongo - Official Image | Docker Hub</a></p>
+<p>这里我就直接用mongo6</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>镜像拉下来以后看看</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>681MB说实话挺大了</p>
+<h3> 配置</h3>
+<p>创建要挂载的数据目录</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>创建默认的配置文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>写入如下配置</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>创建默认的日志文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 容器</h3>
+<p>运行如下命令创建容器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>其中的参数</p>
+<ul>
+<li>环境变量<code>LANG</code>是为了设置数据库字符编码</li>
+<li><code>-f /etc/mongo/mongod.conf</code>指定具体的配置文件地址</li>
+</ul>
+<p>容器创建完毕后，查看一下是否正常运行。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后进入数据库命令行操作</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>由于初始时是没有默认的用户和密码，所以进来就是test用户，接下来创建一个管理员账号，先写sql</p>
+<div class="language-json line-numbers-mode" data-ext="json"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>主要有以下权限可以用</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>切换倒admin数据库后再创建</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看用户列表</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>完成后，退出然后修改mongo的配置文件添加</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>重启容器之后再重新登录</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 连接</h3>
+<p>navicat也支持mongodb数据库，如果上面操作正确的话，连接应该是不会有问题的。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310112316660.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111838486.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Docker上安装Mysql</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/db/docker_install_mysql.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/db/docker_install_mysql.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装Mysql</source>
+      <description>Docker上安装Mysql</description>
+      <category>数据库</category>
+      <pubDate>Mon, 07 Nov 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker上安装Mysql</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111830040.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>官网：<a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener noreferrer">MySQL :: MySQL Documentation</a></p>
+<p>mysql是很经典的一个数据库了，刚接触到这个数据库的时候还是刚刚大一下那会，那会在windows上安装把密码给整忘了捣鼓了老半天才整回来。日后在学习的时候，捣鼓中间件都是在本地的Linux虚拟机上+docker捣鼓，再也不会把这些玩意安装在windows上了。</p>
+<h3> 镜像</h3>
+<p>镜像地址：<a href="https://hub.docker.com/_/mysql" target="_blank" rel="noopener noreferrer">mysql - Official Image | Docker Hub</a></p>
+<p>Mysql常用的版本只有8和5，最常用的应该是5.7，不过我在写代码的时候用的都是mysql8。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看下镜像</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 准备</h3>
+<p>创建本地用于挂载数据的文件夹</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>创建mysql配置文件<code>~/db/mysql/conf/my.cnf</code></p>
+<div class="language-ini line-numbers-mode" data-ext="ini"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 容器</h3>
+<p>运行如下命令，创建容器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul>
+<li><code>MYSQL_ROOT_PASSWORD</code>，root用户的默认密码，不指定的话会在输出中显示默认密码</li>
+<li><code>MYSQL_DATABASE</code>，默认创建的数据库名</li>
+</ul>
+<p>看看mysql容器有没有成功运行。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>使用mysql命令访问数据库</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看有哪些数据库，可以看到hello数据库被成功创建了</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看hello数据库中的表，可以看到空空如也</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 连接</h3>
+<p>切换到<code>mysql</code>数据库，然后查看<code>user</code>表</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到root账户默认是允许远程登录的，一般建议创建一个新的账号来用，然后再禁用root远程登录，如果只是自己学习的话那无所谓了，修改完以后记得刷新下。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后再用navicat连接</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111949722.png" style="zoom:50%;">
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111830040.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Docker上安装Redis</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/db/docker_install_redis.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/db/docker_install_redis.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装Redis</source>
+      <description>Docker上安装Redis</description>
+      <category>数据库</category>
+      <pubDate>Mon, 17 Jan 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker上安装Redis</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111832973.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>官网：<a href="https://redis.io/" target="_blank" rel="noopener noreferrer">Redis</a></p>
+<p>Redis是我接触的第一个NoSQL数据库，一般是拿来做缓存用，不支持windows。刚开始用的windows版，一看版本redis2，几年没维护了，后面只能在虚拟机上捣鼓了，算是我接触虚拟机和Linux系统的一个契机。</p>
+<h3> 镜像</h3>
+<p>镜像地址：<a href="https://hub.docker.com/_/redis" target="_blank" rel="noopener noreferrer">redis - Official Image | Docker Hub</a></p>
+<p>redis现在的维护版本有6和7，两个的区别就是RESP协议的区别，一个是RESP2，一个是RESP3，理论上来说RESP3应该是兼容RESP2的，不过Redis社区声称以后不会兼容RESP2。这里用的是版本7。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看下镜像</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 配置</h3>
+<p>配置文件地址：<a href="https://redis.io/docs/management/config/" target="_blank" rel="noopener noreferrer">https://redis.io/docs/management/config/</a></p>
+<p>redis默认是不允许远程连接，而且没有密码，这些需要在配置文件中指定，对应指定版本的redis需要去官网下载配置文件。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310112029549.png" style="zoom: 67%;">
+<p>这里选择的是7.0版本的配置文件，首先创建容器的数据挂载文件夹</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后下载配置文件，因为是外网可能不太好下载</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后将里面的如下四个配置修改如下值，然后保存退出。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>配置文件的路径位于<code>~/db/redis/redis.conf</code>，然后还要记得把日志文件自己创建下。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h3> 容器</h3>
+<p>运行如下命令</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>创建后查看下有没有正常运行</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>进入容器测试下命令行</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 连接</h3>
+<p>redis客户端软件的话推荐两个，虽然navicat也支持redis连接，但还是那种行列方式看起来相当膈应。</p>
+<ul>
+<li><a href="https://github.com/RedisInsight/RedisDesktopManager" target="_blank" rel="noopener noreferrer">Redis Manager</a>，开源，c++项目，性能应该要好很多</li>
+<li><a href="https://github.com/qishibo/AnotherRedisDesktopManager" target="_blank" rel="noopener noreferrer">Another Redis Manager</a>，开源，nodejs项目，目测应该是electron之类构建的，性能没测试过。</li>
+</ul>
+<p>上面两个都是开源的，且都支持中文，我都有在用，前者毕竟c++写的项目，nodejs性能跟它没法比，但后者界面更加人性化，功能要多很多。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310112123845.png" style="zoom: 67%;">
+<p>如果前面的配置正常来搞的话这里连接是不会出问题的。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310112125867.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>可以看到关于redis的很多统计信息。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111832973.png" type="image/png"/>
+    </item>
     <item>
       <title>Docker上安装PostgreSql</title>
       <link>https://246859.github.io/my-blog-giscus/posts/db/docker_install_postgres.html</link>
@@ -23,7 +204,7 @@
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装PostgreSql</source>
       <description>Docker上安装PostgreSql</description>
       <category>数据库</category>
-      <pubDate>Wed, 11 Oct 2023 00:00:00 GMT</pubDate>
+      <pubDate>Sat, 30 Sep 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> Docker上安装PostgreSql</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111522417.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
 <!-- more -->
@@ -1658,22 +1839,6 @@
 <p>同样的题材也有很多优秀的游戏，即便僵毁画面很复古，但是僵尸毁灭工程满足了我一切对于末世的幻想，非常对我的胃口，在我心目中就是最好的丧尸题材游戏，美中不足的是游戏中人类NPC和动物几乎没有出现，互动也很少，不过这些可以通过加入第三方MOD来添加更多有趣的玩法。</p>
 ]]></content:encoded>
       <enclosure url="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" type="image/"/>
-    </item>
-    <item>
-      <title>一次70KM短途骑行</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/life/bikeRiding20230227.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/life/bikeRiding20230227.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">一次70KM短途骑行</source>
-      <description>一次70KM短途骑行 从学校出发到江边，硬生生从山底爬到山顶，全程70KM。</description>
-      <category>生活随笔</category>
-      <pubDate>Mon, 27 Feb 2023 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 一次70KM短途骑行</h1>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/2023227骑行.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>从学校出发到江边，硬生生从山底爬到山顶，全程70KM。</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/2023227%E9%AA%91%E8%A1%8C.jpg" type="image/jpeg"/>
     </item>
     <item>
       <title>Mysql忘记数据库密码</title>
