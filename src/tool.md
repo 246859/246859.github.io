@@ -34,7 +34,16 @@ article: false
 - [Iconify Design](https://iconify.design/)，开源的图标集合
 - [iconfont](https://www.iconfont.cn/)，阿里妈妈做的图标站
 - [flaticon](https://www.flaticon.com/)，国外的矢量图标网站
+
+
+
+### 图片素材
+
 - [GIPHY](https://giphy.com/)，动图素材网站
+- [Awesome Wallpapers](https://wallhaven.cc/)，国外很出名的一个壁纸网站
+- [Pixabay](https://pixabay.com/)
+- [Beautiful Free Images & Pictures | Unsplash](https://unsplash.com/)
+- [Free high resolution photography - Life of Pix - Home](https://www.lifeofpix.com/)
 
 
 
@@ -42,9 +51,7 @@ article: false
 ### 镜像工具
 
 - [清华大学开源软件镜像站](https://mirrors.tuna.tsinghua.edu.cn/)，清华镜像站，我愿称之为唯一真神
-
 - [腾讯软件源](https://mirrors.tencent.com/)
-
 - [阿里巴巴开源镜像站](https://developer.aliyun.com/mirror/)
 - [华为开源镜像站](https://mirrors.huaweicloud.com/home)
 - [网易开源镜像站](https://mirrors.163.com/)
@@ -95,13 +102,14 @@ article: false
 
 
 
-
 ### 稀奇玩意
 
+- [有趣网址之家](https://youquhome.com/)，专门收藏各种有趣网站的集合网站
 - [Qwerty Learner](https://qwerty.kaiyi.cool/)，英语学习打字练习网站
 - [dazidazi](https://dazidazi.com/)，打字练习网站，真想把你教会
 - [Shields.io](https://shields.io/)，标签生成器，github用的比较多
 - [REG007](https://www.reg007.com/)，可以查出来你注册过哪些网站
+- [houxu](https://houxu.app/)，专门记录热点新闻的后续事件，互联网还是有记忆的
 - [Breathingearth](http://www.breathingearth.net/)，显示地球实时的出生死亡人数
 - [Windows 12](https://win12.gitapp.cn/)，win12网页版模拟器
 - [Human Benchmark](https://humanbenchmark.com/dashboard)，综合多个项目数据测试你是不是一个合格的人类
@@ -113,25 +121,29 @@ article: false
 - [富豪模拟器](http://maiba.fun/)，花马云的钱买东西
 - [Pointer Pointer](https://pointerpointer.com/)，生成一个指向你鼠标位置的人
 - [Best Way To Waste Your Time](https://www.how-to-waste-your-time.com/)，来这里浪费时间
-- [Silk](http://weavesilk.com/)，在线画画
+- [Silk](http://weavesilk.com/)，在线涂鸦画画，很唯美
 - [FakeUpdat](https://fakeupdate.net/)，假装电脑在更新
 - [网络威胁实时地图](https://cybermap.kaspersky.com/cn)，实时查看全球网络威胁地图
 - [Fold 'N Fly](https://www.foldnfly.com/#/1-1-1-1-1-1-1-1-2)，教你怎么折纸飞机
 - [中国历史时间轴](https://www.lishiju.net/timeline.html)，看看中国历史发展
-- [天空有多高](http://www.secaibi.com/howbigisspace/)，从地表到太阳系
+- [天空有多高](http://www.secaibi.com/howbigisspace/)，从地表到太阳系的一个科普网站
+- [公司死亡记录](https://www.itjuzi.com/deathCompany)，在这里你可以看最新的公司死亡数据，倒闭原因，时间等等
+- [versus](https://versus.com/cn)，万物皆可比较
+- [张大妈计算器](https://hizdm.cn/)，计算你的工资奖金个税。
 
 
 
 ### 游戏工具
 
 - [Home - SteamGridDB](https://www.steamgriddb.com/)， Steam游戏图片壁纸资源站
+- [Nexus mods and community](https://www.nexusmods.com/search/)，国外的游戏模组集合网站
 - [Poki](https://poki.com/zh)，国外的在线小游戏网站，有两万多个游戏。完全H5，Css3技术实现，没有借助flash，有点东西
 - [Watt Toolkit](https://steampp.net/)，前身是steam++，多功能游戏工具箱
 - [yikm](https://www.yikm.net/)，童年游戏集合，有小霸王，FC，SFC，GBA等
 - [[Rubik’s Cube Explorer](https://tools.bqrdh.com/rubiks-cube/)，在线拼魔方
 - [Minesweeper](http://www.minesweeper.cn/)，在线扫雷
 - [Life Restart](https://liferestart.syaro.io/public/index.html)，人生重开模拟器
-- 
+- [x-type](https://phoboslab.org/xtype/)，h5实现的web版雷霆战机
 
 
 
