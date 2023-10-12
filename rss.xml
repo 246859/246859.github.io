@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 11 Oct 2023 15:26:51 GMT</pubDate>
-    <lastBuildDate>Wed, 11 Oct 2023 15:26:51 GMT</lastBuildDate>
+    <pubDate>Thu, 12 Oct 2023 03:29:38 GMT</pubDate>
+    <lastBuildDate>Thu, 12 Oct 2023 03:29:38 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>生活随笔</category>
@@ -64,7 +64,23 @@
 <hr>
 <p>官网：<a href="https://mariadb.org/" target="_blank" rel="noopener noreferrer">MariaDB</a></p>
 <p>开源地址：<a href="https://github.com/MariaDB/server" target="_blank" rel="noopener noreferrer">https://github.com/MariaDB/server</a></p>
-<p>在Mysql被Oracle收购以后，MySql之父觉得此时的Mysql不再是一个纯粹的开源数据库了。于是没多久便出走了，随后他便从Mysql社区fork出来一个新的分支：MariaDB，到目前为止已经是一个完全的新项目了。该数据库以他女儿的名字来命名的，相比于Mysql而言它是一个完全开源的数据库，在协议和表定义方面完全兼容。</p>
+<p>在Mysql被Oracle收购以后，MySql之父觉得此时的Mysql不再是一个纯粹的开源数据库了。于是没多久便出走了，随后他便从Mysql社区fork出来一个新的分支：MariaDB，到目前为止已经是一的独立的项目了。该数据库以作者女儿的名字来命名的，相比于Mysql而言它是一个完全开源的数据库，在协议和表定义方面也兼容，相比于mysql社区版支持更多的存储引擎和功能。</p>
+<h3> 镜像</h3>
+<p>镜像地址：<a href="https://hub.docker.com/_/mariadb" target="_blank" rel="noopener noreferrer">mariadb - Official Image | Docker Hub</a></p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310121029029.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>目前的维护版本有11和10，因为是开源社区维护的，所以版本迭代要比mysql快很多，这里选择相对稳定的10</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 准备</h3>
+<p>准备好要挂载数据的文件夹</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>maridadb在这些方面都与mysql兼容，所以基本类似，创建配置文件<code>~/db/mariadb/conf/my.cnf</code></p>
+<div class="language-ini line-numbers-mode" data-ext="ini"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 容器</h3>
+<p>运行如下命令创建容器，mariadb使用的配置目录跟mysql完全一致</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>创建起容器后看看是否正常运行</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>进入容器里面看看数据库命令行，这里使用<code>mysql</code>命令也可以登录。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>看看数据库，可以看到默认的hello数据库成功创建</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 连接</h3>
+<p>我用的navicat15，已经支持mariadb，正常来说它的协议应该跟mysql完全兼容。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310121055491.png" style="zoom: 80%;">
+<p>就目前而言感受不到太大的区别，以后用的深了一点再来评价吧。</p>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111859077.png" type="image/png"/>
     </item>
@@ -220,7 +236,7 @@
 <p>16版本的话navicat还不太兼容</p>
 </div>
 <div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看下镜像</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 容器</h3>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 容器</h3>
 <p>运行如下命令创建容i去</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul>
 <li><code>POSTGRES_PASSWORD</code>，环境变量，设置超级用户默认密码</li>
@@ -228,14 +244,14 @@
 </ul>
 <p>跑起来看看看日志</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>再看看ps</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 命令行</h3>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 命令行</h3>
 <p>容器成功运行以后，到数据库命令行里面看看，默认的超级用户名为<code>postgres</code>。</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>pg的命令行有独特的命令，不像<code>mysql</code>全是SQL语句，一般以下划线<code>\</code>开头，<code>\?</code>查看帮助命令。查看所有的数据库</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看所有用户</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看两个配置文件的地址</p>
 <div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>退出命令行</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 远程登录</h3>
-<p>pg默认是允许远程登录的，必须得修改其配置文件。修改<code>postgresql.conf</code>文件的中监听地址为如下。</p>
+<p>pg默认是不允许远程登录的，必须得修改其配置文件。修改<code>postgresql.conf</code>文件的中监听地址为如下。</p>
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后再修改<code>pg_hba.conf</code>，添加如下规则</p>
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>修改完后把容器重启下</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111643870.png" style="zoom: 80%;">
