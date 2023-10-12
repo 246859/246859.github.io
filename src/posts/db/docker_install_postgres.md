@@ -60,10 +60,6 @@ docker.io/library/postgres:11-alpine
 root@k8s-n1:/home/wyh/db/postgres# docker images
 REPOSITORY   TAG         IMAGE ID       CREATED        SIZE
 postgres     11-alpine   a05886c0c182   6 days ago     228MB
-postgres     latest      2d74f8a2591c   3 weeks ago    417MB
-redis        latest      e0ce02f88e58   2 months ago   130MB
-mysql        latest      7c5ae0d3388c   2 months ago   577MB
-mongo        latest      fb5fba25b25a   2 months ago   654MB
 ```
 
 
@@ -112,8 +108,6 @@ PostgreSQL Database directory appears to contain a database; Skipping initializa
 root@k8s-n1:/home/wyh/db/postgres# docker ps
 CONTAINER ID   IMAGE             COMMAND                   CREATED          STATUS             PORTS                                                  NAMES
 cab7fbfe1ba4   postgres:latest   "docker-entrypoint.s…"   54 seconds ago   Up 54 seconds      0.0.0.0:5432->5432/tcp, :::5432->5432/tcp              postg16
-34482c8bb94a   redis             "docker-entrypoint.s…"   2 months ago     Up About an hour   0.0.0.0:6379->6379/tcp, :::6379->6379/tcp              redis7
-f169975e256c   mysql             "docker-entrypoint.s…"   2 months ago     Up About an hour   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql8
 ```
 
 
@@ -177,7 +171,7 @@ postgres-# \q
 
 ### 远程登录
 
-pg默认是允许远程登录的，必须得修改其配置文件。修改`postgresql.conf`文件的中监听地址为如下。
+pg默认是不允许远程登录的，必须得修改其配置文件。修改`postgresql.conf`文件的中监听地址为如下。
 
 ```
 listen_addresses = '*'
