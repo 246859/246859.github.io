@@ -28,6 +28,7 @@ article: false
 
 
 
+
 ### 图标网站
 
 - [DEVICON](https://devicon.dev/)，专门收集编程相关的图标
@@ -68,6 +69,8 @@ article: false
 - [Convertio](https://convertio.co/zh/)，文件转换器
 - [iLoveIMG](https://www.iloveimg.com/zh-cn)，图像编辑工具
 - [docsmall/compress](https://docsmall.com/image-compress)，图片压缩工具
+- [日期计算](https://time.org.cn/riqi/) 日期计算器
+- [进制转换](http://www.usey.cn/hex) 进制转换器
 
 
 
@@ -75,6 +78,7 @@ article: false
 
 - [Compiler Explorer](https://godbolt.org/)，可以在线把代码转换成汇编形式
 - [ASCII Generator](http://www.network-science.de/ascii/)，Banner生成器
+- [ASCII gen](http://glassgiant.com/ascii/), img2asci
 - [Toptal](https://www.toptal.com/developers/javascript-minifier)，js压缩工具
 
 
@@ -99,6 +103,8 @@ article: false
 - [和风天气开发服务](https://dev.qweather.com/)
 - [Steam开放平台](https://partner.steamgames.com/doc/)
 - [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html)
+- [Open weixin](https://open.weixin.qq.com/)，微信开放平台
+- [qq](https://q.qq.com/#/)，腾讯开放平台
 
 
 
@@ -144,6 +150,7 @@ article: false
 - [Minesweeper](http://www.minesweeper.cn/)，在线扫雷
 - [Life Restart](https://liferestart.syaro.io/public/index.html)，人生重开模拟器
 - [x-type](https://phoboslab.org/xtype/)，h5实现的web版雷霆战机
+- [js13kGames](https://js13kgames.com/entries/2023). 收录了只有13kb大小的H5游戏，他们每年在github上都会举办比赛
 
 
 
