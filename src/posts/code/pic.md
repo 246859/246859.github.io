@@ -48,7 +48,7 @@ PicGo下载：[Molunerfinn/PicGo: A simple & beautiful tool for pictures uploadi
 
 
 
-但此时PicGo还未配置成功，点击验证图片上床肯定是会失败的，接下来有两个选择。
+但此时PicGo还未配置成功，点击验证图片上传肯定是会失败的，接下来有两个选择。
 
 
 
