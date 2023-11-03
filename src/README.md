@@ -42,4 +42,8 @@ projects:
     name: Octopus
     desc: 树深不见鹿， 溪午不闻钟。
     link: https://deep-learn.top/
+  - icon: https://github.com/dstgo/wendy/raw/main/public/wendy.png
+    name: Wendy Panel
+    desc: 分布式饥荒管理面板
+    link: https://github.com/dstgo/wendy
 ---
