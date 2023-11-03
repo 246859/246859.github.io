@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 18 Oct 2023 02:15:56 GMT</pubDate>
-    <lastBuildDate>Wed, 18 Oct 2023 02:15:56 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Nov 2023 06:24:05 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Nov 2023 06:24:05 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>生活随笔</category>
@@ -1540,7 +1540,7 @@
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/image-20230324201612971.png" alt="image-20230324201612971" tabindex="0" loading="lazy"><figcaption>image-20230324201612971</figcaption></figure>
 <p>这个是最简陋的版本，一个个手动上传肯定是很累的，这里打开Typora的设置（如果是其他Markdown编辑器应该也是同理）</p>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/image-20230324201808929.png" alt="image-20230324201808929" tabindex="0" loading="lazy"><figcaption>image-20230324201808929</figcaption></figure>
-<p>但此时PicGo还未配置成功，点击验证图片上床肯定是会失败的，接下来有两个选择。</p>
+<p>但此时PicGo还未配置成功，点击验证图片上传肯定是会失败的，接下来有两个选择。</p>
 <h2> GItee</h2>
 <p>这里之所以使用Gitee而不使用Github，主要是Github国内的访问速度太感人了，想要达到正常速度必须自行搭建CDN，所以这里利用一下免费的GItee。不过Gitee前不久已经加了防盗链，如果是在网站上引用图床肯定是会失效的，但如果只是在本地Markdown文件引用依旧可以成功。</p>
 <h3> 创建仓库</h3>
