@@ -1,8 +1,6 @@
 ---
 date: 2022-10-23
 article: true
-star: true
-sticky: true
 category:
   - 技术日志
 tag:
