@@ -21,6 +21,11 @@ export const zhNavbar = navbar([
         icon: "guide",
         children: [
             {
+                text: "Git",
+                icon: "git",
+                link: "/category/Git/"
+            },
+            {
                 text: "数据库",
                 icon: "mysql",
                 link: "/category/数据库/"
@@ -31,10 +36,26 @@ export const zhNavbar = navbar([
                 link: "/category/Linux/"
             },
             {
+                text: "Docker",
+                icon: "box",
+                link: "/category/Docker/"
+            },
+            {
+                text: "设计模式",
+                icon: "box",
+                link: "/category/设计模式/"
+            },
+            {
+                text: "算法&数据结构",
+                icon: "box",
+                link: "/category/算法/"
+            },
+            {
                 text: "游戏杂谈",
                 icon: "creative",
                 link: "/category/游戏杂谈/",
             },
+
         ]
     },
     {

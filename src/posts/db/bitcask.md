@@ -1,7 +1,7 @@
 ---
 date: 2023-11-10
 article: true
-star: false
+star: true
 sticky: false
 category:
   - 数据库
@@ -11,15 +11,15 @@ tag:
   - 存储模型
 ---
 
-# KV存储模型 --- Bitcask
+# 存储模型 --- Bitcask
 
-![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202311101433828.png)
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312021440442.png)
 <!-- more -->
 ---
 
 ## 简介
 
-在面向磁盘的Key/value数据库设计中，常见存储模型的有B+Tree，LSM，前者读性能优秀，后者写性能优秀，它们两个已经有了非常多的实践案例，比如基于B+Tree的`BoltDB`，基于LSM的`LevelDB`。不过今天的主角讲的并不是它们两个，而是另一个存储模型Bitcask，它最早是由一个日本分布式存储公司Riak提出的理论，与LSM类似，它是一种日志结构的快速KV哈希表，不过它实现起来要比LSM简单的多。
+在面向磁盘的Key/value数据库设计中，常见存储模型的有B+Tree，LSM，前者读性能优秀，后者写性能优秀，它们两个已经有了非常多的实践案例，比如基于B+Tree的`BoltDB`，基于LSM的`LevelDB`。不过今天的主角讲的并不是它们两个，而是另一个存储模型Bitcask，它最早是由一个日本分布式存储公司Riak提出的理论，与LSM类似，它也是日志结构，不过实现起来要比LSM简单的多。
 
 Bitcask文档：[riak-bitcask](https://riak.com/assets/bitcask-intro.pdf)
 

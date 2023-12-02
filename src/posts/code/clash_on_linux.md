@@ -13,7 +13,8 @@ tag:
 
 # 在Linux上使用clash
 
-![](https://github.com/Dreamacro/clash/raw/master/docs/logo.png)
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312021437923.png"  />
+
 <!-- more -->
 ---
 最近在测试SteamAPI Client，不得不吐槽一下steam提供的web接口返回的响应结构真是**多种多样**，可以看的出来都是陈年老项目了。不过重点不是这个，虽然Steam的游戏服务在国内不需要梯子也可以访问，但是他们提供的接口如果不走代理的话，那基本上请求十次八次超时，为了解决这个问题只好在测试机上弄clash。

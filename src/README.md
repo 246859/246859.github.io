@@ -29,10 +29,10 @@ projects:
     desc: Vue 驱动的静态网站生成器
     link: https://vuepress.vuejs.org/zh/
 
-  - icon: /vuepress.svg
-    name: VuePressHope
-    desc: 一个具有强大功能的vuepress主题
-    link: https://theme-hope.vuejs.press/zh/
+  - icon: https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312021506973.png
+    name: RiverDB
+    desc: 基于Bitcask的轻量KV数据库
+    link: https://github.com/246859/river
 
   - icon: /giscus.png
     name: Giscus
