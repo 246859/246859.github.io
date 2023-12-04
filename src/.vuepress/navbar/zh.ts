@@ -42,12 +42,12 @@ export const zhNavbar = navbar([
             },
             {
                 text: "设计模式",
-                icon: "box",
+                icon: "mesh",
                 link: "/category/设计模式/"
             },
             {
                 text: "算法&数据结构",
-                icon: "box",
+                icon: "study",
                 link: "/category/算法/"
             },
             {
