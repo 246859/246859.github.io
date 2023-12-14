@@ -5,6 +5,7 @@ star: false
 sticky: false
 category:
   - 技术日志
+  - 每日发现
 tag:
   - flutter
   - dart

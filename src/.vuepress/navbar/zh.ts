@@ -46,6 +46,11 @@ export const zhNavbar = navbar([
                 link: "/category/设计模式/"
             },
             {
+                text: "Rust",
+                icon: "process",
+                link: "/category/rust/"
+            },
+            {
                 text: "算法&数据结构",
                 icon: "study",
                 link: "/category/算法/"

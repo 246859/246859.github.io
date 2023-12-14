@@ -5,6 +5,7 @@ star: true
 sticky: false
 category:
   - 技术日志
+  - 每日发现
 tag:
   - 字符集
   - 编码
