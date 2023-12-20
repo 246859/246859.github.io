@@ -104,5 +104,7 @@ tag:
 | 出队     | O(n)     | O(1)     |
 | 随机访问 | O(1)     | O(n)     |
 
-对于动态数组实现，它的均摊时间复杂度可以达到O(1)，适合读多写少的场景，而对于双向链表来说，比较时候读少写多的场景。有关双端队列的实现代码位于[github.com/246859/containers/queues/dequeue.go](https://github.com/246859/containers/blob/main/queues/dequeue.go)。
+对于动态数组实现，它的均摊时间复杂度可以达到O(1)，适合读多写少的场景，而对于双向链表来说，比较时候读少写多的场景。
+
+双端队列的实现代码位于[github.com/246859/containers/queues/dequeue.go](https://github.com/246859/containers/blob/main/queues/dequeue.go)。
 
