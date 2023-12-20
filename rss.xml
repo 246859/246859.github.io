@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 20 Dec 2023 13:45:38 GMT</pubDate>
-    <lastBuildDate>Wed, 20 Dec 2023 13:45:38 GMT</lastBuildDate>
+    <pubDate>Wed, 20 Dec 2023 13:48:49 GMT</pubDate>
+    <lastBuildDate>Wed, 20 Dec 2023 13:48:49 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>算法</category>
@@ -102,7 +102,8 @@
 </tr>
 </tbody>
 </table>
-<p>对于动态数组实现，它的均摊时间复杂度可以达到O(1)，适合读多写少的场景，而对于双向链表来说，比较时候读少写多的场景。有关双端队列的实现代码位于<a href="https://github.com/246859/containers/blob/main/queues/dequeue.go" target="_blank" rel="noopener noreferrer">github.com/246859/containers/queues/dequeue.go</a>。</p>
+<p>对于动态数组实现，它的均摊时间复杂度可以达到O(1)，适合读多写少的场景，而对于双向链表来说，比较时候读少写多的场景。</p>
+<p>双端队列的实现代码位于<a href="https://github.com/246859/containers/blob/main/queues/dequeue.go" target="_blank" rel="noopener noreferrer">github.com/246859/containers/queues/dequeue.go</a>。</p>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312201504787.png" type="image/png"/>
     </item>
