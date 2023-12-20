@@ -192,3 +192,9 @@ func (heap *BinaryHeap[T]) Push(es ...T) {
 | 合并       | O(n)       |
 
 二项堆是所有实现中最简单的一个，总体来说难度不大，性能尚可，足够满足基本使用。
+
+::: tip
+
+有关二项堆的具体实现，可以前往[containers/heaps/binary_heap.go](https://github.com/246859/containers/blob/main/heaps/binary_heap.go)进行了解，这是我自己写的常用数据结构的库，支持泛型。
+
+:::
