@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 21 Jan 2024 08:35:28 GMT</pubDate>
-    <lastBuildDate>Sun, 21 Jan 2024 08:35:28 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Jan 2024 07:28:34 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Jan 2024 07:28:34 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>Linux</category>
@@ -436,7 +436,20 @@
 <p><strong>优化点2</strong></p>
 <p>对于小数组而言，没有必要再用快排继续进行分区递归了，可以使用其它更为简单排序算法来代替，例如C++STL中的排序会在长度小于16时采用插入排序，因为插入排序对于小规模数据比冒泡和选择都更快，并且实现也很简单，转换的临界点也一般在5-16之间。</p>
 <p><strong>优化点3</strong></p>
-<p>如果含有大量的重复元素，</p>
+<p>如果含有大量的重复元素，时间复杂度仍然可能会恶化成平方级别。优化方法是使用三路快排，其思想是在单趟排序时将数组划分为三个部分，左边是小于基准值的部分，中间是等于基准值的部分，右边是大于基准值的部分，在后续的排序中，我们只需要处理小于和大于的部分，中间的可以完全不用管，三路快排对于处理有大量重复元素的数组很有效。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code>[l, lt-1]</code>表示小于基准值的范围，<code>[gt, r]</code>表示大于基准值的范围，<code>[lt, i]</code>就是等于基准值的范围。举一个例子，如下图</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261511519.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>我们的任务是将小于基准值的移动到数组左边，大于基准值的移动到右边，所以<code>i</code>不断遍历数组。当<code>i</code>指向的元素小于基准值时，右移<code>lt</code>一位</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261516880.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>此时<code>i</code>指向元素2，等于基准值于是跳过</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261517300.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>现在<code>i</code>指向的值是3，大于基准值，<code>gt</code>指针左移并和<code>i</code>所指的元素进行交换。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261519972.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>但交换后的值仍然大于基准值于是继续移动<code>gt</code>指针然后再交换。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261521618.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>此时的<code>i</code>指向了2，与基准值相同则继续移动，直到等于<code>gt</code>。最后再将基准值归位，即<code>lt</code>与<code>pivot</code>交换位置。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261524093.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>至此，区间的划分已经完毕，接下来在进行递归时我们只需要关注左右两个区间即可，中间的就可以忽略掉，这样就起到了优化大量重复元素d</p>
 <h2> 计数排序</h2>
 <p>计数排序是一种线性时间的排序算法，并且是非比较排序，虽然它可以达到线性时间复杂度，但对使用的数据有一定的要求：数据之间的差值不能有太大，并且会使用额外的辅助空间。它的实现思路如下，首先统计数据中的最小最大值，然后使用一个长度为<code>max-min+1</code>的数组来记录每一个数据的个数，对于计数数组，下标i就等于数据的值，这样一来通过计数数组，天然的就能将其排序，然后反向遍历计数数组根据数量填充原数组。由于数据的限制，该排序方法不太好通过泛型来实现。</p>
 <div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n+k)</strong></p>
