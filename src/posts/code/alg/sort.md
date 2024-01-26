@@ -1154,7 +1154,75 @@ func threeMid[T any](s []T, l, r int, less func(a, b T) bool) int {
 
 **优化点3**
 
-如果含有大量的重复元素，
+如果含有大量的重复元素，时间复杂度仍然可能会恶化成平方级别。优化方法是使用三路快排，其思想是在单趟排序时将数组划分为三个部分，左边是小于基准值的部分，中间是等于基准值的部分，右边是大于基准值的部分，在后续的排序中，我们只需要处理小于和大于的部分，中间的可以完全不用管，三路快排对于处理有大量重复元素的数组很有效。
+
+```go
+func sortArray(nums []int) []int {
+	partition(nums, 0, len(nums)-1)
+	return nums
+}
+
+func partition(nums []int, l, r int) {
+	if l >= r {
+		return
+	}
+
+	// 随机挑选基准值
+	n := rand.Intn(r-l+1) + l
+	nums[l], nums[n] = nums[n], nums[l]
+
+	pivot := nums[l]
+	lt := l
+	gt := r + 1
+	// [lt+1..i] == v
+	i := l + 1
+
+	for i < gt {
+		if nums[i] < pivot {
+			nums[i], nums[lt+1] = nums[lt+1], nums[i]
+			i++
+			lt++
+		} else if nums[i] > pivot {
+			// 交换后的数字不一定就小于基准值，所以不移动i，需要下个循环再次判断
+			nums[i], nums[gt-1] = nums[gt-1], nums[i]
+			gt--
+		} else {
+			i++
+		}
+	}
+	// lt是等于基准值数组的左边界，此时再和基准值进行交换
+	nums[lt], nums[l] = nums[l], nums[lt]
+	// 继续不断分支排序
+	partition(nums, l, lt-1)
+	partition(nums, gt, r)
+}
+```
+
+`[l, lt-1]`表示小于基准值的范围，`[gt, r]`表示大于基准值的范围，`[lt, i]`就是等于基准值的范围。举一个例子，如下图
+
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261511519.png)
+
+我们的任务是将小于基准值的移动到数组左边，大于基准值的移动到右边，所以`i`不断遍历数组。当`i`指向的元素小于基准值时，右移`lt`一位
+
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261516880.png)
+
+此时`i`指向元素2，等于基准值于是跳过
+
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261517300.png)
+
+现在`i`指向的值是3，大于基准值，`gt`指针左移并和`i`所指的元素进行交换。
+
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261519972.png)
+
+但交换后的值仍然大于基准值于是继续移动`gt`指针然后再交换。
+
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261521618.png)
+
+此时的`i`指向了2，与基准值相同则继续移动，直到等于`gt`。最后再将基准值归位，即`lt`与`pivot`交换位置。
+
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261524093.png)
+
+至此，区间的划分已经完毕，接下来在进行递归时我们只需要关注左右两个区间即可，中间的就可以忽略掉，这样就起到了优化大量重复元素d
 
 
 
