@@ -6,10 +6,11 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Jan 2024 07:28:34 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Jan 2024 07:28:34 GMT</lastBuildDate>
+    <pubDate>Thu, 01 Feb 2024 05:33:33 GMT</pubDate>
+    <lastBuildDate>Thu, 01 Feb 2024 05:33:33 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>二叉树</category>
     <category>Linux</category>
     <category>技术日志</category>
     <category>算法</category>
@@ -22,6 +23,37 @@
     <category>问题记录</category>
     <category>生活随笔</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>二叉树的遍历</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/alg/binary_tree.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/alg/binary_tree.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">二叉树的遍历</source>
+      <description>二叉树的遍历</description>
+      <category>二叉树</category>
+      <pubDate>Thu, 01 Feb 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 二叉树的遍历</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202402011303985.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>二叉树的遍历分三种</p>
+<ul>
+<li>前序遍历，中-左-右</li>
+<li>中序遍历，左-中-右</li>
+<li>后序遍历，左-右-中</li>
+</ul>
+<p>遍历又分递归和迭代版，对于迭代而言就是手动创建栈来模拟递归的调用栈，整体来说都比较简单，只有迭代版的后序遍历需要稍微注意下。</p>
+<h2> 前序遍历</h2>
+<p>递归版本</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>迭代版本</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 中序遍历</h2>
+<p>递归版本</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>迭代版本</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 后序遍历</h2>
+<p>递归版本</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>迭代版本</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202402011303985.png" type="image/png"/>
+    </item>
     <item>
       <title>Vmware虚拟机Nat模式网络不通</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/linux/nat_loss.html</link>
