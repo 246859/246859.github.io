@@ -6,10 +6,11 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 01 Feb 2024 05:33:33 GMT</pubDate>
-    <lastBuildDate>Thu, 01 Feb 2024 05:33:33 GMT</lastBuildDate>
+    <pubDate>Fri, 01 Mar 2024 10:22:45 GMT</pubDate>
+    <lastBuildDate>Fri, 01 Mar 2024 10:22:45 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>生活随笔</category>
     <category>二叉树</category>
     <category>Linux</category>
     <category>技术日志</category>
@@ -21,8 +22,28 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>问题记录</category>
-    <category>生活随笔</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>大理旅行</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/life/2024_02_27.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/life/2024_02_27.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">大理旅行</source>
+      <description>大理旅行 在大理旅行了三天，治愈了我的精神世界</description>
+      <category>生活随笔</category>
+      <pubDate>Fri, 01 Mar 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 大理旅行</h1>
+<p>在大理旅行了三天，治愈了我的精神世界</p>
+<!-- more -->
+<hr>
+<p>初次到大理的时候机场真的很小，下关风非常大，人都有点站不稳。住的地方是大理古城旁边的一家民宿，离洱海两三公里，骑着小电驴就可以到处逛，不得不吐槽下全国的古城都是只有小吃街，好在洱海的风景非常好看。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202403011814039.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202403011817994.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202403011817964.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202403011817104.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202403011819606.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202403011814039.jpg" type="image/jpeg"/>
+    </item>
     <item>
       <title>二叉树的遍历</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/alg/binary_tree.html</link>
