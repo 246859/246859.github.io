@@ -97,7 +97,7 @@ func ReadDisk(path string) (*Disk, error) {
 
 ## 解决
 
-由于我在开发是在windows上进行的，不可能去迁移到linux上，所以只能更换一个新的限流库，这里找到了`go-kratos`开源的一个bbr限流库。
+由于我的开发工作是在windows上进行的，不可能去迁移到linux上，所以只能更换一个新的限流库，这里找到了`go-kratos`开源的一个bbr限流库。
 
 ```
 https://github.com/go-kratos/aegis/blob/main/ratelimit/
@@ -124,4 +124,4 @@ func limiterHandler() app.HandlerFunc {
 }
 ```
 
-go-kratos`所使用的系统信息库是`gopsutil`，后者是一个专门兼容各个操作系统的系统信息库，对外屏蔽了复杂的系统调用，兼容要更高。
+`go-kratos`所使用的系统信息库是`gopsutil`，后者是一个专门兼容各个操作系统的系统信息库，对外屏蔽了复杂的系统调用，兼容性要更高。
