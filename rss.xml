@@ -6,12 +6,12 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 12 Apr 2024 09:18:29 GMT</pubDate>
-    <lastBuildDate>Fri, 12 Apr 2024 09:18:29 GMT</lastBuildDate>
+    <pubDate>Sun, 14 Apr 2024 06:40:16 GMT</pubDate>
+    <lastBuildDate>Sun, 14 Apr 2024 06:40:16 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-    <category>技术日志</category>
     <category>问题记录</category>
+    <category>技术日志</category>
     <category>生活随笔</category>
     <category>二叉树</category>
     <category>Linux</category>
@@ -23,6 +23,27 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>记一次因日志而引发的OOM问题</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/problem/oom_pprof.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/problem/oom_pprof.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">记一次因日志而引发的OOM问题</source>
+      <description>记一次因日志而引发的OOM问题</description>
+      <category>问题记录</category>
+      <pubDate>Sun, 14 Apr 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 记一次因日志而引发的OOM问题</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202404141415851.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<h2> 问题</h2>
+<p>在最近的项目中，后端隔三岔五就会因为内存爆满而崩溃，这种情况差不多两三天就会发生一次。由于在项目中在向Steam请求模组信息时会开启多个协程并发请求，因此猜测可能是因为协程未能正常退出而导致的内存泄露问题，于是便通过pprof来对应用进行性能分析。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>通过对pprof的可视化分析，发现与猜测的结果并不一致，在分析的过程中，发现获取服务端状态的这个接口在调用时内存占用会猛增，该接口主要用于判断游戏服务端是否启动，判断的逻辑就是去读取游戏服务端的日志文件，而有些用户的游戏服务端会一直开着，导致其文件大小可能会非常大，目前最大的发现有800MB，由于在读日志的时候是将其全量加载到内存中，那么这样一来就会导致内存占用升高。</p>
+<p>所以根本原因就是，判断读取日志的逻辑有问题</p>
+<h2> 解决</h2>
+<p>由于日志文件过大，所以不应该将其全量加载到内存中，在进行逐个部分读取过后，内存占用了有了较为明显的下降。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202404141415851.png" type="image/png"/>
+    </item>
     <item>
       <title>免费SSL证书申请</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/ssl_cert_collect.html</link>
