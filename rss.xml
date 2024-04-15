@@ -6,12 +6,12 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 14 Apr 2024 09:19:26 GMT</pubDate>
-    <lastBuildDate>Sun, 14 Apr 2024 09:19:26 GMT</lastBuildDate>
+    <pubDate>Mon, 15 Apr 2024 13:17:57 GMT</pubDate>
+    <lastBuildDate>Mon, 15 Apr 2024 13:17:57 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-    <category>问题记录</category>
     <category>技术日志</category>
+    <category>问题记录</category>
     <category>生活随笔</category>
     <category>二叉树</category>
     <category>Linux</category>
@@ -23,6 +23,35 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>Go语言实现按照行数逆序读取文件 - 模拟tail命令</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/go_tail_read_file.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/go_tail_read_file.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Go语言实现按照行数逆序读取文件 - 模拟tail命令</source>
+      <description>Go语言实现按照行数逆序读取文件 - 模拟tail命令</description>
+      <category>技术日志</category>
+      <pubDate>Mon, 15 Apr 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Go语言实现按照行数逆序读取文件 - 模拟tail命令</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202404152051856.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<h2> 编写</h2>
+<p>Linux中的tail命令很多人应该都用过，我们经常用它来看日志</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>如果在用go语言实现这一个功能，也是非常的简单，要点就是利用<code>Seek</code>这一函数</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>它的第一个参数是偏移量，第二个参数总共有三个值</p>
+<ul>
+<li><code>0</code>，相对于文件头</li>
+<li><code>1</code>，相对于当前的偏移量</li>
+<li><code>2</code>，相对于文件末尾</li>
+</ul>
+<p>一个需要注意的点就是换行符问题，在linux上换行符是CR<code>\n</code>，而在windows上则是CRLF<code>\r\n</code>，在计算偏移量的时候这个问题不能忽视掉，在逆序读取的时候就一个字节一个字节的读，当遇到<code>\n</code>时就停止，然后再根据不同系统来更新偏移量。最后还需要注意的是逆序读取的偏移量不能小于文件大小的负数，否则就越过文件的起始位置了，在思路明确了以后，编码就比较轻松了，代码整体如下所示。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 测试</h2>
+<p>文件<code>test.txt</code></p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>一个简单的测试代码</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>输出</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202404152051856.png" type="image/png"/>
+    </item>
     <item>
       <title>记一次因日志而引发的OOM问题</title>
       <link>https://246859.github.io/my-blog-giscus/posts/problem/oom_pprof.html</link>
