@@ -44,68 +44,69 @@ Seek(offset int64, whence int) (ret int64, err error)
 一个需要注意的点就是换行符问题，在linux上换行符是CR`\n`，而在windows上则是CRLF`\r\n`，在计算偏移量的时候这个问题不能忽视掉，在逆序读取的时候就一个字节一个字节的读，当遇到`\n`时就停止，然后再根据不同系统来更新偏移量。最后还需要注意的是逆序读取的偏移量不能小于文件大小的负数，否则就越过文件的起始位置了，在思路明确了以后，编码就比较轻松了，代码整体如下所示。
 
 ```go
-func Tail(filename string, n int) ([][]byte, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-    // 得到文件的大小
+func TailAt(file *os.File, n int, offset int64) ([]byte, int64, error) {
 	stat, err := file.Stat()
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	size := stat.Size()
 
-	// 起始偏移量-1
-	var offset int64 = -1
-	lines := make([][]byte, 0, n)
+	if offset == 0 {
+		offset = -1
+	}
+	content := make([]byte, 0, n)
 	char := make([]byte, 1)
 
 	for n > 0 {
-		// 行缓存
-		buf := make([]byte, 0, 16)
-
-		// 一个字节一个字节的逆序读取
+		// read byte one by one
 		for offset >= -size {
 			_, err := file.Seek(offset, io.SeekEnd)
 			if err != nil {
-				return nil, err
+				return nil, 0, err
 			}
 
 			_, err = file.Read(char)
 			if err != nil {
-				return nil, err
+				return nil, 0, err
 			}
 			if char[0] == '\n' {
 				break
 			}
-			buf = append(buf, char[0])
+			content = append(content, char[0])
 			offset--
 		}
-		
-        // 由于是逆序读取，需要将行反转
-		slices.Reverse(buf)
-		lines = append(lines, buf)
+
+		offset--
+
+		if offset >= -size {
+			if _, err := file.Seek(offset, io.SeekEnd); err != nil {
+				return nil, 0, err
+			}
+			// consider CRLF
+			_, err := file.Read(char)
+			if err != nil {
+				return nil, 0, err
+			}
+			if char[0] == '\r' {
+				offset--
+			}
+		}
+
+		if offset >= -size {
+			content = append(content, '\n')
+		}
 		n--
 
-        
-		offset--
-        // 如果是windows系统，则需要额外移动偏移量
-		if runtime.GOOS == "windows" { // CRLF
-			offset--
-		}
-
-		// 防止seek指针移动到起始位置之外
+		// prevent pointer overflow the head of file
 		if offset < -size {
+			offset = 0
 			break
 		}
 	}
 
-    // 最后再整体反转
-	slices.Reverse(lines)
-	return lines, err
+	// reverse entire contents
+	slices.Reverse(content)
+	return content, offset, err
 }
 ```
 
@@ -130,13 +131,11 @@ z\nzcda
 
 ```go
 func main() {
-	tails, err := Tail("test.txt", 2)
+	tails, _, err := Tail("test.txt", 2, -1)
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, tail := range tails {
-		fmt.Println(string(tail))
-	}
+	fmt.Println(string(tail))
 }
 ```
 
