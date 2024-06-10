@@ -6,10 +6,11 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 06 Jun 2024 07:19:46 GMT</pubDate>
-    <lastBuildDate>Thu, 06 Jun 2024 07:19:46 GMT</lastBuildDate>
+    <pubDate>Mon, 10 Jun 2024 10:44:59 GMT</pubDate>
+    <lastBuildDate>Mon, 10 Jun 2024 10:44:59 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>python</category>
     <category>生活随笔</category>
     <category>技术日志</category>
     <category>问题记录</category>
@@ -23,6 +24,47 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>在Pypi上发布自己的项目</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/python/pypi_upload.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/python/pypi_upload.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Pypi上发布自己的项目</source>
+      <description>在Pypi上发布自己的项目</description>
+      <category>python</category>
+      <pubDate>Mon, 10 Jun 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 在Pypi上发布自己的项目</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202406101805061.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>最近在用到一个python库的时候，发现了一个bug，看了看原仓库上次更新都是2022年了，估计我提了PR也不会被合并，于是我打算自己修复发布成一个新的包，此前没有了解过这些方面的知识，于是顺便写了这篇文章做一个记录。</p>
+<p>官方教程：<a href="https://packaging.python.org/en/latest/tutorials/packaging-projects/" target="_blank" rel="noopener noreferrer">Packaging Python Projects - Python Packaging User Guide</a></p>
+<h2> PyPI</h2>
+<p>官网：<a href="https://pypi.org/" target="_blank" rel="noopener noreferrer">PyPI · The Python Package Index</a></p>
+<p>第一步是在PyPI上注册一个自己的账号，然后申请一个API Token，这个Token就是专门用来上传软件包的。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202406101815258.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>你可以在<code>username/Account settings/API tokens</code>位置找到有关Token的内容，现在的话申请Token必须要2FA认证，可以用自己喜欢的2FA应用来完成认证，在成功创建后，Token只会显示一次，为了后续方便使用，建议将其保存到本地的文件中，保存位置为<code>user/.pypirc</code>文件中。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>后续在用到的时候就会自动读取，不需要手动认证。</p>
+<h2> 规范</h2>
+<p>对于一个规范的项目而言，应该有如下几样东西</p>
+<ul>
+<li>LICENSE，开源证书</li>
+<li>README，基本的文档</li>
+<li><code>setup.py</code>，打包用的清单文件</li>
+</ul>
+<p>其它都还好，主要来讲讲这个<code>setup.py</code>，由于它稍微有点复杂，可以通过<code>pyproject.toml</code>配置文件来替代，不过其灵活性不如前者，比如下面是一个TOML的例子</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过配置文件可以很直观的了解到这些信息，不过稍微旧一点的项目都是使用<code>setup.py</code>来管理的，下面看一个<code>setup.py</code>的例子，该例子由知名开源作者<code>kennethreitz</code>提供</p>
+<div class="language-python line-numbers-mode" data-ext="py"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>该文件中主要是通过<code>setup</code>函数来进行管理，除了这个函数之外其它都是锦上添花的东西，根据你的需求去填写关键字参数即可。</p>
+<h2> 打包</h2>
+<p>首先安装打包工具</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后在项目根目录下执行，会在dist目录下生成tar.gz压缩文件</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后安装上传工具<code>twine</code></p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>使用时只需要指定目录和项目名即可</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>由于前面在<code>.pypirc</code>文件中配置了token，这里会自动读取，不需要输入。</p>
+<h2> 测试</h2>
+<p>如果要测试的话，最好不要使用pip镜像，因为它们同步不及时，建议指定<code>-i https://pypi.org/simple/</code>官方源。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202406101805061.png" type="image/png"/>
+    </item>
     <item>
       <title>生病了</title>
       <link>https://246859.github.io/my-blog-giscus/posts/life/2024_06_03.html</link>
