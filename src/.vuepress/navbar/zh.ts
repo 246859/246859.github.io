@@ -22,48 +22,43 @@ export const zhNavbar = navbar([
         children: [
             {
                 text: "Git",
-                icon: "git",
                 link: "/category/Git/"
             },
             {
-                text: "数据库",
-                icon: "mysql",
-                link: "/category/数据库/"
-            },
-            {
                 text: "Linux",
-                icon: "linux",
                 link: "/category/Linux/"
             },
             {
                 text: "Docker",
-                icon: "box",
                 link: "/category/Docker/"
             },
             {
-                text: "设计模式",
-                icon: "mesh",
-                link: "/category/设计模式/"
-            },
-            {
                 text: "Rust",
-                icon: "process",
                 link: "/category/rust/"
             },
             {
                 text: "Python",
-                icon: "python",
                 link: "/category/python/"
             },
             {
-                text: "算法&数据结构",
-                icon: "study",
+                text: "数据库",
+                link: "/category/数据库/"
+            },
+            {
+                text: "设计模式",
+                link: "/category/设计模式/"
+            },
+            {
+                text: "数据结构与算法",
                 link: "/category/算法/"
             },
             {
                 text: "游戏杂谈",
-                icon: "creative",
                 link: "/category/游戏杂谈/",
+            },
+            {
+                text: "电脑装机",
+                link: "/category/电脑装机/"
             },
 
         ]
