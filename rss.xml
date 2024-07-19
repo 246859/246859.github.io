@@ -6,10 +6,11 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 10 Jun 2024 10:44:59 GMT</pubDate>
-    <lastBuildDate>Mon, 10 Jun 2024 10:44:59 GMT</lastBuildDate>
+    <pubDate>Fri, 19 Jul 2024 08:38:41 GMT</pubDate>
+    <lastBuildDate>Fri, 19 Jul 2024 08:38:41 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>电脑装机</category>
     <category>python</category>
     <category>生活随笔</category>
     <category>技术日志</category>
@@ -24,6 +25,36 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>Win10重置电脑-找不到恢复环境，需要重装介质</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/computer/win10_reset.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/computer/win10_reset.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Win10重置电脑-找不到恢复环境，需要重装介质</source>
+      <description>Win10重置电脑-找不到恢复环境，需要重装介质</description>
+      <category>电脑装机</category>
+      <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Win10重置电脑-找不到恢复环境，需要重装介质</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>我的电脑一直以来都是用的win10，因为觉得win11华而不实，除了UI界面好看点外没什么用。最近因为软件和文件安装多了看着心烦，想要把win10重置以后重新分配空间，这样来的的清净些，当我把备份做好后，准备重置时就出现了下面的提示。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536373.png" style="zoom: 80%;">
+<p>因为我以前重置过一次，所以记得自带的重置功能是不需要外部介质（U盘之类）的，不过我也是第一次遇到这种情况，于是写下本文当作一个记录。</p>
+<h2> 问题</h2>
+<p>在网上查找了一下后，发现是因为<code>C:\\Recovery\\WindowsRE</code>文件缺失了，通过<code>reagentc</code>命令来查看重置软件的启用情况，如下所示。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在上面可以看到<code>Windows RE 位置</code>是空的，以及<code>reagentc /enable</code>启用失败，说明WindowsRE文件确实是缺失了。</p>
+<h2> 解决</h2>
+<p>我们需要下载win10的ISO镜像，并从中获取<code>Winre.wim</code>文件，然后复制到电脑的对应位置，这里推荐用系统库下载<a href="https://www.xitongku.com/index.html" target="_blank" rel="noopener noreferrer">MSDN系统库－致力于原版windows生态服务 (xitongku.com)</a>，微软目前不再提供ISO镜像下载了。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191617009.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>将镜像文件解压，目标文件在如下目录中</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>得到文件后将其放入本机的<code>C:\\Recovery\\WindowsRE\\</code>目录下，然后通过命令行设置文件位置。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后再通过<code>reagentc /enable</code>命令启用即可。</p>
+<h3> bitlocker</h3>
+<p>有时可能会出现这种情况</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p><code>BitLocker</code>是驱动器加密的一种技术，在win10<code>设置 &gt; 更新和安全 &gt; 设备加密</code>中关闭即可。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png" type="image/png"/>
+    </item>
     <item>
       <title>在Pypi上发布自己的项目</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/python/pypi_upload.html</link>
