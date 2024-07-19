@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 19 Jul 2024 08:38:41 GMT</pubDate>
-    <lastBuildDate>Fri, 19 Jul 2024 08:38:41 GMT</lastBuildDate>
+    <pubDate>Fri, 19 Jul 2024 10:36:00 GMT</pubDate>
+    <lastBuildDate>Fri, 19 Jul 2024 10:36:00 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>电脑装机</category>
@@ -46,12 +46,30 @@
 <h2> 解决</h2>
 <p>我们需要下载win10的ISO镜像，并从中获取<code>Winre.wim</code>文件，然后复制到电脑的对应位置，这里推荐用系统库下载<a href="https://www.xitongku.com/index.html" target="_blank" rel="noopener noreferrer">MSDN系统库－致力于原版windows生态服务 (xitongku.com)</a>，微软目前不再提供ISO镜像下载了。</p>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191617009.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>将镜像文件解压，目标文件在如下目录中</p>
+<p>提取ISO中的目标文件</p>
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>得到文件后将其放入本机的<code>C:\\Recovery\\WindowsRE\\</code>目录下，然后通过命令行设置文件位置。</p>
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后再通过<code>reagentc /enable</code>命令启用即可。</p>
 <h3> bitlocker</h3>
 <p>有时可能会出现这种情况</p>
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p><code>BitLocker</code>是驱动器加密的一种技术，在win10<code>设置 &gt; 更新和安全 &gt; 设备加密</code>中关闭即可。</p>
+<h3> 无恢复分区</h3>
+<p>有一种情况是，电脑没有恢复分区时，重启后的蓝屏界面将不会有重置电脑的选项，如下图。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191734992.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>首先需要确保电脑是否有恢复分区，下图中是我电脑上的分区情况，如果没有的话就需要手动创建，否则无法正常进行重置操作。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191734024.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>恢复分区最好是和C盘在一个磁盘中，且在C盘前后，空间大小要求400MB左右，我这里给足空间直接设置了2GB（或许以后会有更新，所以预留足够的空间），NTFS，并且不需要卷标，其它全部默认设置。待分区创建完毕后就需要将其进行配置。</p>
+<p>首先禁用恢复设置，这里必须先禁用否则后续的设置不会生效</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>通过<code>reagentc</code>命令重新指定WindowsRE文件位置，记得将<code>Winre.wim</code>文件移动新分区中的对应位置。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后再重新启用</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>设置完毕后，通过<code>diskpart</code>对恢复分区进行配置，首先通过<code>list disk</code>命令列出所有的磁盘</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后执行命令<code>sel disk</code>选中恢复分区所在磁盘，这里我只有一个所以就选中磁盘0，</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后用<code>list part</code>列出该磁盘中所有的分区</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后选择该分区</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>分区5的大小是2047MB也就是恢复分区，接下来通过修改分区ID来将其标记为恢复分区，windows下恢复分区的ID是</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行如下命令设置ID即可</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后设置属性</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最后一定要退出，不然不会生效。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时重新打开磁盘管理工具就会显示恢复分区了。</p>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png" type="image/png"/>
     </item>
