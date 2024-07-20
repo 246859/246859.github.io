@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 19 Jul 2024 10:36:00 GMT</pubDate>
-    <lastBuildDate>Fri, 19 Jul 2024 10:36:00 GMT</lastBuildDate>
+    <pubDate>Sat, 20 Jul 2024 08:56:32 GMT</pubDate>
+    <lastBuildDate>Sat, 20 Jul 2024 08:56:32 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>电脑装机</category>
@@ -70,7 +70,9 @@
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后设置属性</p>
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最后一定要退出，不然不会生效。</p>
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时重新打开磁盘管理工具就会显示恢复分区了。</p>
-]]></content:encoded>
+<p>重新创建后的恢复分区会在资源管理中可见，如果想临时隐藏可以通过如下命令来临时删掉盘符</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>倘若要永久隐藏的话可以修改其属性即可</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png" type="image/png"/>
     </item>
     <item>
