@@ -38,12 +38,14 @@ projects:
     name: Giscus
     desc: 由 GitHub Discussions 驱动的评论系统
     link: https://giscus.app/zh-CN
+    
   - icon: https://deep-learn.top/images/ava2.jpg
     name: Octopus
     desc: 树深不见鹿， 溪午不闻钟。
     link: https://deep-learn.top/
-  - icon: https://github.com/dstgo/wendy/raw/main/public/wendy.png
+    
+  - icon: /wendy.png
     name: Wendy Panel
     desc: 分布式饥荒管理面板
-    link: https://github.com/dstgo/wendy
+    link: https://github.com/dstgo/panel
 ---
