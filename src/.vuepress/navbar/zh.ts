@@ -33,6 +33,10 @@ export const zhNavbar = navbar([
                 link: "/category/Docker/"
             },
             {
+                text: "Golang",
+                link: "/category/go/"
+            },
+            {
                 text: "Rust",
                 link: "/category/rust/"
             },

@@ -5,6 +5,7 @@ star: true
 sticky: false
 category:
   - 技术日志
+  - go
 tag:
   - ToolBox
   - JetBrain
