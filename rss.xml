@@ -6,26 +6,306 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 20 Jul 2024 16:41:01 GMT</pubDate>
-    <lastBuildDate>Sat, 20 Jul 2024 16:41:01 GMT</lastBuildDate>
+    <pubDate>Mon, 22 Jul 2024 11:02:28 GMT</pubDate>
+    <lastBuildDate>Mon, 22 Jul 2024 11:02:28 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>linux</category>
+    <category>docker</category>
+    <category>windows</category>
     <category>技术日志</category>
     <category>go</category>
-    <category>电脑装机</category>
     <category>python</category>
     <category>生活随笔</category>
     <category>问题记录</category>
     <category>二叉树</category>
-    <category>Linux</category>
     <category>算法</category>
     <category>每日发现</category>
-    <category>数据库</category>
-    <category>docker</category>
-    <category>Git</category>
+    <category>db</category>
+    <category>git</category>
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>Debian12 安装教程</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/linux/debian12_install.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/linux/debian12_install.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Debian12 安装教程</source>
+      <description>Debian12 安装教程 以前在个人电脑上一直使用的是Ubuntu，Debian仅作为服务器使用，作为前者的上游分支，Debian是一个完全开源稳定的操作系统，这次打算将其安装到本地的vmware，于是写下本文记录。</description>
+      <category>linux</category>
+      <pubDate>Mon, 22 Jul 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Debian12 安装教程</h1>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221436679.png" style="zoom:200%;">
+<p>以前在个人电脑上一直使用的是Ubuntu，Debian仅作为服务器使用，作为前者的上游分支，Debian是一个完全开源稳定的操作系统，这次打算将其安装到本地的vmware，于是写下本文记录。</p>
+<!-- more -->
+<hr>
+<h2> 准备</h2>
+<p>Debian在国内有中文论坛，有什么问题可以去论坛搜索：<a href="https://forums.debiancn.org/" target="_blank" rel="noopener noreferrer">Debian中文论坛 - (debiancn.org)</a></p>
+<p>官方网站完全支持中文：<a href="https://www.debian.org/" target="_blank" rel="noopener noreferrer">Debian -- 通用操作系统</a></p>
+<p>中文安装手册：<a href="https://www.debian.org/releases/stable/amd64/" target="_blank" rel="noopener noreferrer">Debian GNU/Linux 安装手册</a></p>
+<p>Vmware官网：<a href="https://www.vmware.com/content/vmware/vmware-published-sites/cn/products/workstation-pro/workstation-pro-evaluation.html.html.html" target="_blank" rel="noopener noreferrer">下载 VMware Workstation Pro | CN</a></p>
+<p>你需要有：</p>
+<ul>
+<li>基本的Linux使用能力</li>
+<li>了解vmware的基本使用</li>
+<li>一台足以支持Vmware12+运行的电脑</li>
+<li>内存建议2GB以上</li>
+<li>磁盘空间建议有20GB以上的剩余</li>
+</ul>
+<h2> 安装</h2>
+<p>截至本文写下的时候，我的电脑系统是win10，Debian发行版已经来到了12.6，下面将讲述Debian12在Vmware16中的安装过程作为参考，最终目标即为系统可以与宿主机建立SSH连接，且能正常联网安装软件。</p>
+<h3> 镜像</h3>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221459871.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>普通用户安装的时候镜像一般会用以下两种</p>
+<ul>
+<li>网络版（netinst）：只包含操作系统运行所需要的最基本工具，其他软件需要在安装时联网下载，大小600MB左右。</li>
+<li>DVD版（dvd）：内置了大部分系统工具和软件，支持离线安装，大小为3.5GB左右。</li>
+</ul>
+<p>网络版在安装过程中的软件下载阶段默认使用的是官方的安全源，对于国内用户而言会极其缓慢，除非临时修改<code>sources.list</code>为国内源，而且只能手敲，关于这个问题你可以在网络上找到很多类似的回答，足以见得有多麻烦。</p>
+<p>所以我的建议是使用DVD版，因为它支持离线安装，可以将操作系统完全安装成功后再去修改国内源，这种做法较为方便。</p>
+<p><strong>下载</strong></p>
+<p>中科大镜像站提供的国内下载链接</p>
+<p>网络版：<a href="https://iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-cd/debian-12.6.0-amd64-netinst.iso" target="_blank" rel="noopener noreferrer">https://iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-cd/debian-12.6.0-amd64-netinst.iso</a></p>
+<p>DVD版：<a href="https://iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/debian-12.6.0-amd64-DVD-1.iso" target="_blank" rel="noopener noreferrer">iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/debian-12.6.0-amd64-DVD-1.iso</a></p>
+<p>后续安装过程我会使用DVD版来进行讲解。</p>
+<h3> 创建</h3>
+<p>选择创建新的虚拟机，使用自定义创建</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221520993.png" style="zoom: 67%;">
+<p>硬件兼容性看个人喜好，版本越低兼容性越好，如果你的电脑比较老的话建议选12</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221523400.png" style="zoom:67%;">
+<p>选择稍后安装操作系统</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221524047.png" style="zoom:67%;">
+<p>在客户机操作系统这一步选择Linux和Debian10.x 64位，列表中最高版本也只有10.x，不过这并不会有什么影响。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221525396.png" style="zoom:67%;">
+<p>指定安装位置，建议放在除C盘以外的其他盘，因为虚拟机大小基本上20G起步，比较占空间。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221527410.png" style="zoom:67%;">
+<p>CPU，内存，磁盘空间根据自己电脑的配置来选择，我的电脑有16核40G内存，所以这里选择的配置稍微高了一些，一般情况下默认就足够了。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221528163.png" style="zoom:67%;">
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221529720.png" style="zoom:67%;">
+<p>网络类型看个人需要，关于三种网络模式的详解请看：<a href="https://www.cnblogs.com/linjiaxin/p/6476480.html" target="_blank" rel="noopener noreferrer">Vmware虚拟机三种网络模式</a>，我一般使用桥接模式。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221538790.png" style="zoom:67%;">
+<p>IO控制器和磁盘类型都建议默认选项</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221539872.png" style="zoom:67%;">
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221540143.png" style="zoom:67%;">
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221540493.png" style="zoom:67%;">
+<p>磁盘容量建议设置20G以上，虚拟磁盘的存储类型根据个人需要来进行设置，建议选择存储为单个文件。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221540005.png" style="zoom:67%;">
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221542662.png" style="zoom: 67%;">
+<p>到最后一步，选择自定义硬件</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221542031.png" style="zoom:67%;">
+<p>然后在CD/DVD中设置之前下载好的系统镜像</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221543273.png" style="zoom: 50%;">
+<p>到此虚拟机创建完毕，接下来是操作系统的引导过程。</p>
+<h3> 引导</h3>
+<p>启动虚拟机，会有下面这样一个界面，第一个是图形化安装，第二个是命令行安装，下面会以图形化安装的方式进行。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221552944.png" style="zoom:67%;">
+<p>选系统语言和输入法</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221555755.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221555285.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221555031.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>随后Debian会自动设置必要的安装组件以及配置网络，主机名随便取，域名建议留空</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221557516.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221557323.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>然后设置root用户和登录用户的账号密码</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221558015.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221559859.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221600786.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>磁盘分区根据个人喜好来选择，第一种最省事</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221601879.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221601586.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221601544.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>磁盘分区设置好后Debian就会进行系统的基本配置，然后接下来配置软件包管理器就是重点了。选择否不扫描其他安装介质，因为我们并没有用驱动器进行安装。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221603856.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最重要的是镜像站点的选择这一步，如果你对自己的网速没有自信的话（不然下载三小时起步）建议选择否，即便你的网速很快我也建议不要使用镜像站点，因为系统安装好后有的是时间去配置镜像站点。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221605768.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>是否参与调查看自己</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221608484.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>软件选择这块除了最下面三个，其他全是桌面环境，如果你不喜欢桌面环境也可以不要，不过记得勾选SSH Server。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221650391.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221612558.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>安装GRUB引导器，虚拟机不需要在乎这个，一般是电脑装有双系统的时候才需要注意。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221613449.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>选择<code>/dev/sda</code>分区，之前配置了全部文件都放在一个分区里面</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221615757.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>然后Debian会结束安装进程</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221615564.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221616619.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<h3> 配置</h3>
+<p>重启后登录用户</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221654698.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>完成输入法语言账号之类的初始配置即可使用</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221655893.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>debian12的登陆用户默认不会拥有sudoer的权限，所以我们要手动添加，文件位于<code>/etc/sudoers</code>，在<code>%sudo ALL=(ALL:ALL) ALL</code>的下面添加下面这一行，然后保存。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221807337.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>然后在Vmware中选择安装Vmware Tools，默认存放在<code>/media/cdrom0</code>文件夹中。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221702020.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>将其解压，建议解压到其他地方，我这里解压到了<code>/var/lib</code>下</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221716772.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>然后运行<code>vmware-install.pl</code>脚本，</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>过程中全部默认选项，完成后虚拟机就能以正常的分辨率显示了。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221720013.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>ping一下网络确实可以访问</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221722385.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>但此时apt是用不了的，因为我们是离线安装，需要去修改<code>/etc/apt/sources.list</code>里面的内容，这里使用的是中科大源。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>使用nano编辑（因为此时vim还没有安装）</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221731813.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>执行命令更新源</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221733972.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>安装vim测试一下</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221734043.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>目前基本上已经安装完毕，但还差最后一步，就是ssh，安装<code>net-tools</code>后执行<code>sudo ifconfig</code>命令查看虚拟机IP。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221737788.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>然后宿主机尝试下是否能ping通，可以看到并没有问题</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221738575.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>修改ssh配置文件<code>/etc/ssh/sshd_config</code>，设置端口22。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221743971.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>重启ssh服务</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221745258.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>此时虚拟IP地址为<code>192.168.43.168:22</code>，最后能进行ssh连接即可，我这里用的是xshell，用的密码登录。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221751405.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221752221.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221752242.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>到此debian12的安装已经完成。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221459871.png" type="image/png"/>
+    </item>
+    <item>
+      <title>docker安装mysql和redis</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/docker/docker_mysql.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/docker/docker_mysql.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">docker安装mysql和redis</source>
+      <description>docker安装mysql和redis</description>
+      <category>docker</category>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> docker安装mysql和redis</h1>
+<figure><img src="https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<h4> Mysql</h4>
+<p>首先拉取mysql的镜像，要确保major版本是8，例如8.0.33</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这里要创建mysql的挂载文件夹，以防数据丢失，这里放在<code>/root/mysql</code>路径下为例子</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>随后在<code>/root/mysql/confg/</code>目录下创建<code>my.cnf</code>文件，内容如下</p>
+<div class="language-ini line-numbers-mode" data-ext="ini"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后运行如下命令启动容器即可，下面分别创建了mysql日志，mysql数据库，mysql配置的挂载数据卷，这里的<code>MYSQL_ROOT_PASSWORD=123456</code>就是数据库的root密码，可以自己改成其他的，环境变量<code>MYSQL_DATABASE=dst</code>会自动创建一个名为dst的数据库，按需修改。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>创建完成后登录mysql看看成功没有</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>看到有dst数据库就说明mysql成功安装.</p>
+<p>到此安装成功，然后记录下数据库的密码，后面后端会用到。</p>
+<h4> Redis</h4>
+<p>首先拉取redis镜像，保证redis版本在6以上</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>创建redis的挂载目录</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>进入<code>~/redis/</code>目录，创建配置文件<code>redis.conf</code>，内容如下，密码自己定。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>然后运行容器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>redis默认不允许远程访问，所以需要额外配置，修改配置文件如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>redis各版本配置文件：<a href="https://redis.io/docs/management/config/" target="_blank" rel="noopener noreferrer">Redis configuration | Redis</a></p>
+]]></content:encoded>
+      <enclosure url="https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Docker安装nginx</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/docker/docker_nginx.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/docker/docker_nginx.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker安装nginx</source>
+      <description>Docker安装nginx docker安装nginx</description>
+      <category>docker</category>
+      <pubDate>Thu, 29 Jun 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker安装nginx</h1>
+<figure><img src="https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>docker安装nginx</p>
+<!-- more -->
+<hr>
+<p>Docker安装nginx时一般都是直接使用命令</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>但后来还是觉得直接把静态文件打包进镜像可能会更加方便些</p>
+<div class="language-docker line-numbers-mode" data-ext="docker"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>运行命令</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>目录下的html是打包好的静态文件，nginx是nginx配置文件夹。</p>
+]]></content:encoded>
+      <enclosure url="https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>Docker容器磁盘热扩容</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/docker/expand.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/docker/expand.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker容器磁盘热扩容</source>
+      <description>Docker容器磁盘热扩容 本文主要讲解Docker容器磁盘热扩容，不需要重启docker服务，也不需要重启容器</description>
+      <category>docker</category>
+      <pubDate>Sat, 20 May 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker容器磁盘热扩容</h1>
+<figure><img src="https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>本文主要讲解Docker容器磁盘热扩容，不需要重启docker服务，也不需要重启容器</p>
+<!-- more -->
+<hr>
+<p>最近项目里的需求需要实现Docker容器的热扩容，前一阵子给Docker驱动换到了<code>devicemapper</code>，对容器的资源限制可以更加精确和友好，刚好记录一下整个过程。</p>
+<h2> 环境准备</h2>
+<p>系统：ubuntu22.04LTS</p>
+<p>Docker：24.00</p>
+<p>Go版本：1.20.4</p>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>在开始之前你需要确保Docker驱动是<code>devicemapper</code>，并且宿主机和Docker的文件系统是<code>ext4</code></p>
+</div>
+<h2> 查看容器大小</h2>
+<p>这里拿一个nginx容器做实验，先进入容器查看一下大小，一般在创建容器时若不指定默认大小为10G。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到rootfs的size是11G，并且文件系统类型是<code>ext4</code>，这里需要将<code>/dev/mapper/docker-8:3-2097855-40ca4227a94fe9cd1dc00963961cc16c8fc0bd6d650e72cfc0c10bc34a9c08f6</code>记下来，后续操作会用到。</p>
+<h2> 准备扩容</h2>
+<p>这时回到宿主机，查看之前复制的文件系统名占用的磁盘扇区数</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到扇区数是从0到20971520，假设要扩容到20G，需要的扇区数就是<code>20*1024*1024*1024/512=41943040</code>，然后再修改表</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>重载一下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>再次查看扇区数</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到扇区已经变成了41943040，最后需要调整文件系统的大小</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 确认大小</h2>
+<p>再次进入容器查看</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到确实变成了20G。</p>
+]]></content:encoded>
+      <enclosure url="https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Win10重置电脑</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/windows/win10_reset.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/windows/win10_reset.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Win10重置电脑</source>
+      <description>Win10重置电脑</description>
+      <category>windows</category>
+      <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Win10重置电脑</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<p>我的电脑一直以来都是用的win10，因为觉得win11华而不实，除了UI界面好看点外没什么用。最近因为软件和文件安装多了看着心烦，想要把win10重置以后重新分配空间，这样来的的清净些，当我把备份做好后，准备重置时就出现了下面的提示。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536373.png" style="zoom: 80%;">
+<p>因为我以前重置过一次，所以记得自带的重置功能是不需要外部介质（U盘之类）的，不过我也是第一次遇到这种情况，于是写下本文当作一个记录。</p>
+<h2> 问题</h2>
+<p>在网上查找了一下后，发现是因为<code>C:\\Recovery\\WindowsRE</code>文件缺失了，通过<code>reagentc</code>命令来查看重置软件的启用情况，如下所示。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在上面可以看到<code>Windows RE 位置</code>是空的，以及<code>reagentc /enable</code>启用失败，说明WindowsRE文件确实是缺失了。</p>
+<h2> 解决</h2>
+<p>我们需要下载win10的ISO镜像，并从中获取<code>Winre.wim</code>文件，然后复制到电脑的对应位置，这里推荐用系统库下载<a href="https://www.xitongku.com/index.html" target="_blank" rel="noopener noreferrer">MSDN系统库－致力于原版windows生态服务 (xitongku.com)</a>，微软目前不再提供ISO镜像下载了。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191617009.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>提取ISO中的目标文件</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>得到文件后将其放入本机的<code>C:\\Recovery\\WindowsRE\\</code>目录下，然后通过命令行设置文件位置。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后再通过<code>reagentc /enable</code>命令启用即可。</p>
+<h3> bitlocker</h3>
+<p>有时可能会出现这种情况</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p><code>BitLocker</code>是驱动器加密的一种技术，在win10<code>设置 &gt; 更新和安全 &gt; 设备加密</code>中关闭即可。</p>
+<h3> 无恢复分区</h3>
+<p>有一种情况是，电脑没有恢复分区时，重启后的蓝屏界面将不会有重置电脑的选项，如下图。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191734992.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>首先需要确保电脑是否有恢复分区，下图中是我电脑上的分区情况，如果没有的话就需要手动创建，否则无法正常进行重置操作。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191734024.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>恢复分区最好是和C盘在一个磁盘中，且在C盘前后，空间大小要求400MB左右，我这里给足空间直接设置了2GB（或许以后会有更新，所以预留足够的空间），NTFS，并且不需要卷标，其它全部默认设置。待分区创建完毕后就需要将其进行配置。</p>
+<p>首先禁用恢复设置，这里必须先禁用否则后续的设置不会生效</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>通过<code>reagentc</code>命令重新指定WindowsRE文件位置，记得将<code>Winre.wim</code>文件移动新分区中的对应位置。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后再重新启用</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>设置完毕后，通过<code>diskpart</code>对恢复分区进行配置，首先通过<code>list disk</code>命令列出所有的磁盘</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后执行命令<code>sel disk</code>选中恢复分区所在磁盘，这里我只有一个所以就选中磁盘0，</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后用<code>list part</code>列出该磁盘中所有的分区</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后选择该分区</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>分区5的大小是2047MB也就是恢复分区，接下来通过修改分区ID来将其标记为恢复分区，windows下恢复分区的ID是</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行如下命令设置ID即可</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后设置属性</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最后一定要退出，不然不会生效。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时重新打开磁盘管理工具就会显示恢复分区了。</p>
+<p>重新创建后的恢复分区会在资源管理中可见，如果想临时隐藏可以通过如下命令来临时删掉盘符</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>倘若要永久隐藏的话可以修改其属性即可</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png" type="image/png"/>
+    </item>
     <item>
       <title>AutoToolBox</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/go/autotoolbox.html</link>
@@ -287,56 +567,6 @@
       <enclosure url="https://w.wallhaven.cc/full/j3/wallhaven-j35ev5.jpg" type="image/jpeg"/>
     </item>
     <item>
-      <title>Win10重置电脑-找不到恢复环境，需要重装介质</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/code/computer/win10_reset.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/code/computer/win10_reset.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Win10重置电脑-找不到恢复环境，需要重装介质</source>
-      <description>Win10重置电脑-找不到恢复环境，需要重装介质</description>
-      <category>电脑装机</category>
-      <pubDate>Fri, 19 Jul 2024 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> Win10重置电脑-找不到恢复环境，需要重装介质</h1>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<!-- more -->
-<hr>
-<p>我的电脑一直以来都是用的win10，因为觉得win11华而不实，除了UI界面好看点外没什么用。最近因为软件和文件安装多了看着心烦，想要把win10重置以后重新分配空间，这样来的的清净些，当我把备份做好后，准备重置时就出现了下面的提示。</p>
-<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536373.png" style="zoom: 80%;">
-<p>因为我以前重置过一次，所以记得自带的重置功能是不需要外部介质（U盘之类）的，不过我也是第一次遇到这种情况，于是写下本文当作一个记录。</p>
-<h2> 问题</h2>
-<p>在网上查找了一下后，发现是因为<code>C:\\Recovery\\WindowsRE</code>文件缺失了，通过<code>reagentc</code>命令来查看重置软件的启用情况，如下所示。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在上面可以看到<code>Windows RE 位置</code>是空的，以及<code>reagentc /enable</code>启用失败，说明WindowsRE文件确实是缺失了。</p>
-<h2> 解决</h2>
-<p>我们需要下载win10的ISO镜像，并从中获取<code>Winre.wim</code>文件，然后复制到电脑的对应位置，这里推荐用系统库下载<a href="https://www.xitongku.com/index.html" target="_blank" rel="noopener noreferrer">MSDN系统库－致力于原版windows生态服务 (xitongku.com)</a>，微软目前不再提供ISO镜像下载了。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191617009.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>提取ISO中的目标文件</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>得到文件后将其放入本机的<code>C:\\Recovery\\WindowsRE\\</code>目录下，然后通过命令行设置文件位置。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后再通过<code>reagentc /enable</code>命令启用即可。</p>
-<h3> bitlocker</h3>
-<p>有时可能会出现这种情况</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p><code>BitLocker</code>是驱动器加密的一种技术，在win10<code>设置 &gt; 更新和安全 &gt; 设备加密</code>中关闭即可。</p>
-<h3> 无恢复分区</h3>
-<p>有一种情况是，电脑没有恢复分区时，重启后的蓝屏界面将不会有重置电脑的选项，如下图。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191734992.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>首先需要确保电脑是否有恢复分区，下图中是我电脑上的分区情况，如果没有的话就需要手动创建，否则无法正常进行重置操作。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191734024.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>恢复分区最好是和C盘在一个磁盘中，且在C盘前后，空间大小要求400MB左右，我这里给足空间直接设置了2GB（或许以后会有更新，所以预留足够的空间），NTFS，并且不需要卷标，其它全部默认设置。待分区创建完毕后就需要将其进行配置。</p>
-<p>首先禁用恢复设置，这里必须先禁用否则后续的设置不会生效</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>通过<code>reagentc</code>命令重新指定WindowsRE文件位置，记得将<code>Winre.wim</code>文件移动新分区中的对应位置。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后再重新启用</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>设置完毕后，通过<code>diskpart</code>对恢复分区进行配置，首先通过<code>list disk</code>命令列出所有的磁盘</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后执行命令<code>sel disk</code>选中恢复分区所在磁盘，这里我只有一个所以就选中磁盘0，</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后用<code>list part</code>列出该磁盘中所有的分区</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后选择该分区</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>分区5的大小是2047MB也就是恢复分区，接下来通过修改分区ID来将其标记为恢复分区，windows下恢复分区的ID是</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行如下命令设置ID即可</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后设置属性</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最后一定要退出，不然不会生效。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时重新打开磁盘管理工具就会显示恢复分区了。</p>
-<p>重新创建后的恢复分区会在资源管理中可见，如果想临时隐藏可以通过如下命令来临时删掉盘符</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>倘若要永久隐藏的话可以修改其属性即可</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div>]]></content:encoded>
-      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png" type="image/png"/>
-    </item>
-    <item>
       <title>在Pypi上发布自己的项目</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/python/pypi_upload.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/code/python/pypi_upload.html</guid>
@@ -549,7 +779,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/linux/nat_loss.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">Vmware虚拟机Nat模式网络不通</source>
       <description>Vmware虚拟机Nat模式网络不通</description>
-      <category>Linux</category>
+      <category>linux</category>
       <pubDate>Mon, 21 Aug 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> Vmware虚拟机Nat模式网络不通</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401211617744.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -575,7 +805,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/linux/clash_on_linux.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Linux上使用clash</source>
       <description>在Linux上使用clash</description>
-      <category>Linux</category>
+      <category>linux</category>
       <pubDate>Thu, 14 Sep 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 在Linux上使用clash</h1>
 <img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312021437923.png">
@@ -1504,7 +1734,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/bitcask.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">存储模型 --- Bitcask</source>
       <description>存储模型 --- Bitcask</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Fri, 10 Nov 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 存储模型 --- Bitcask</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312021440442.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -1577,7 +1807,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/docker_install_mariadb.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装MariaDB</source>
       <description>Docker上安装MariaDB</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Fri, 06 Oct 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> Docker上安装MariaDB</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111859077.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -1611,7 +1841,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/docker_install_mongo.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装MongoDB</source>
       <description>Docker上安装MongoDB</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Mon, 24 Jul 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> Docker上安装MongoDB</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111838486.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -1657,7 +1887,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/docker_install_mysql.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装Mysql</source>
       <description>Docker上安装Mysql</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Mon, 07 Nov 2022 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> Docker上安装Mysql</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111830040.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -1696,7 +1926,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/docker_install_postgres.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装PostgreSql</source>
       <description>Docker上安装PostgreSql</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Sat, 30 Sep 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> Docker上安装PostgreSql</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111522417.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -1742,7 +1972,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/docker_install_redis.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker上安装Redis</source>
       <description>Docker上安装Redis</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Mon, 17 Jan 2022 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> Docker上安装Redis</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111832973.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -1786,7 +2016,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/index_length_exceed.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">MsSQL索引字节数超出最大值</source>
       <description>MsSQL索引字节数超出最大值</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Wed, 20 Sep 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> MsSQL索引字节数超出最大值</h1>
 <!-- more -->
@@ -1814,7 +2044,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/river_db.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">RiverDB</source>
       <description>RiverDB</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Sat, 02 Dec 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> RiverDB</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312031440217.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -1975,7 +2205,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/wal_in_leveldb.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">WAL——预写日志</source>
       <description>WAL——预写日志</description>
-      <category>数据库</category>
+      <category>db</category>
       <pubDate>Fri, 17 Nov 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> WAL——预写日志</h1>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202311292055936.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -2055,7 +2285,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/git/0.introduction.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">简介</source>
       <description>简介 代码管理对于软件开发而言永远是一个绕不过去的坎。笔者初学编程时对软件的版本没有任何概念，出了问题就改一改，把现在的代码复制保存一份留着以后用，这种方式无疑是是非常混乱的，这也是为什么VCS（Version Control System）会诞生的原因。这类软件的发展史还是蛮长的，笔者曾经短暂的在一个临时参与的项目中使用过SVN，现在应该不太常见了，几乎大部分项目都是在用git进行项目管理。大多数情况下，笔者都只是在拉代码和推代码，其他的命令几乎很少用到，不过这也侧面印证了git的稳定性。写下这些内容是为了对自己git相关知识的进行一个总结，更加熟悉之后，处理一些疑难杂症时会更加得心应手。</description>
-      <category>Git</category>
+      <category>git</category>
       <pubDate>Wed, 23 Nov 2022 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 简介</h1>
 <figure><img src="https://gitforwindows.org/img/git_logo.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
@@ -2104,7 +2334,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/git/1.repo.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">仓库</source>
       <description>仓库 本文将讲解git一些基础操作，所有内容都是围绕着本地仓库进行讲解的，比如提交修改，撤销修改，查看仓库状态，查看历史提交等基本操作，学习完这些操作，基本上就可以上手使用git了。 创建仓库 git的所有操作都是围绕着git仓库进行的，一个仓库就是一个文件夹，它可以包含一个项目代码，也可以包含很多个项目代码，或者其他奇奇怪怪的东西，到底要如何使用取决于你自己。创建仓库首先要创建一个文件夹，执行命令创建一个example文件夹。 $ mkdir example</description>
-      <category>Git</category>
+      <category>git</category>
       <pubDate>Sat, 26 Nov 2022 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 仓库</h1>
 <p>本文将讲解git一些基础操作，所有内容都是围绕着本地仓库进行讲解的，比如提交修改，撤销修改，查看仓库状态，查看历史提交等基本操作，学习完这些操作，基本上就可以上手使用git了。</p>
@@ -2407,7 +2637,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/git/2.branch.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">分支</source>
       <description>分支 如果说有什么特性能让git从其它vcs中脱颖而出，那唯一的答案就是git的分支管理，因为它很快，快到分支切换无感，即便是一个非常大的仓库。一般仓库都会有一个主分支用于存放核心代码，当你想要做出一些修改时，不必修改主分支，可以新建一个新分支，在新分支中提交然后将修改合并到主分支，这样的工作流程在大型项目中尤其适用。在git中每一次提交都会包含一个指针，它指向的是该次提交的内容快照，同时也会指向上一次提交。</description>
-      <category>Git</category>
+      <category>git</category>
       <pubDate>Tue, 29 Nov 2022 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 分支</h1>
 <p>如果说有什么特性能让git从其它vcs中脱颖而出，那唯一的答案就是git的分支管理，因为它很快，快到分支切换无感，即便是一个非常大的仓库。一般仓库都会有一个主分支用于存放核心代码，当你想要做出一些修改时，不必修改主分支，可以新建一个新分支，在新分支中提交然后将修改合并到主分支，这样的工作流程在大型项目中尤其适用。在git中每一次提交都会包含一个指针，它指向的是该次提交的内容快照，同时也会指向上一次提交。</p>
@@ -2536,7 +2766,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/git/3.remote.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">远程仓库</source>
       <description>远程仓库 之前的所有演示都基于本地仓库的，git同样也支持远程仓库，如果想要与他人进行协作开发，可以将项目保存在一个中央服务器上，每一个人将本地仓库的修改推送到远程仓库上，其他人拉取远程仓库的修改，这样一来就可以同步他人的修改。对于远程仓库而言，对于公司而言，都会有自己的内网代码托管服务器，对于个人开发者而言，可以选择自己搭建一个代码托管服务器，又或者是选择第三方托管商。如果你有精力折腾的话可以自己搭，不过我推荐选择第三方的托管商，这样可以将更多精力专注于项目开发上，而且能让更多人发现你的优秀项目。</description>
-      <category>Git</category>
+      <category>git</category>
       <pubDate>Sat, 03 Dec 2022 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 远程仓库</h1>
 <p>之前的所有演示都基于本地仓库的，git同样也支持远程仓库，如果想要与他人进行协作开发，可以将项目保存在一个中央服务器上，每一个人将本地仓库的修改推送到远程仓库上，其他人拉取远程仓库的修改，这样一来就可以同步他人的修改。对于远程仓库而言，对于公司而言，都会有自己的内网代码托管服务器，对于个人开发者而言，可以选择自己搭建一个代码托管服务器，又或者是选择第三方托管商。如果你有精力折腾的话可以自己搭，不过我推荐选择第三方的托管商，这样可以将更多精力专注于项目开发上，而且能让更多人发现你的优秀项目。</p>
@@ -2634,7 +2864,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/git/4.gitserver.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">托管服务器</source>
       <description>托管服务器 在远程仓库中，有许多优秀的第三方代码托管商可以使用，这对于开源项目而言可能足够使用，但是对于公司或者企业内部，就不能使用第三方的代码托管了，为此我们需要自行搭建代码托管服务器，好在市面上有许多开源的自建解决方案，比如bitbucket，gitlab等。 Gitlab gitlab是一个采用Ruby开发的开源代码管理平台，支持web管理界面，下面会演示如何自己搭建一个GitLab服务器，演示的操作系统为Ubuntu。 关于gitlab更详细的文档可以前往GitLab Docs | GitLab，本文只是一个简单的介绍与基本使用。</description>
-      <category>Git</category>
+      <category>git</category>
       <pubDate>Mon, 05 Dec 2022 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 托管服务器</h1>
 <p>在远程仓库中，有许多优秀的第三方代码托管商可以使用，这对于开源项目而言可能足够使用，但是对于公司或者企业内部，就不能使用第三方的代码托管了，为此我们需要自行搭建代码托管服务器，好在市面上有许多开源的自建解决方案，比如bitbucket，gitlab等。</p>
@@ -2771,7 +3001,7 @@
       <guid>https://246859.github.io/my-blog-giscus/posts/code/linux/linuxservice.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">ubuntu自定义系统服务</source>
       <description>ubuntu自定义系统服务</description>
-      <category>Linux</category>
+      <category>linux</category>
       <pubDate>Sat, 28 Jan 2023 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> ubuntu自定义系统服务</h1>
 <img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310111508436.png" style="zoom: 150%;">
@@ -3729,56 +3959,6 @@
 ]]></content:encoded>
     </item>
     <item>
-      <title>docker安装mysql和redis</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/code/docker_mysql.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/code/docker_mysql.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">docker安装mysql和redis</source>
-      <description>docker安装mysql和redis</description>
-      <category>技术日志</category>
-      <pubDate>Thu, 29 Jun 2023 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> docker安装mysql和redis</h1>
-<figure><img src="https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<!-- more -->
-<hr>
-<h4> Mysql</h4>
-<p>首先拉取mysql的镜像，要确保major版本是8，例如8.0.33</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这里要创建mysql的挂载文件夹，以防数据丢失，这里放在<code>/root/mysql</code>路径下为例子</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>随后在<code>/root/mysql/confg/</code>目录下创建<code>my.cnf</code>文件，内容如下</p>
-<div class="language-ini line-numbers-mode" data-ext="ini"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后运行如下命令启动容器即可，下面分别创建了mysql日志，mysql数据库，mysql配置的挂载数据卷，这里的<code>MYSQL_ROOT_PASSWORD=123456</code>就是数据库的root密码，可以自己改成其他的，环境变量<code>MYSQL_DATABASE=dst</code>会自动创建一个名为dst的数据库，按需修改。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>创建完成后登录mysql看看成功没有</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>看到有dst数据库就说明mysql成功安装.</p>
-<p>到此安装成功，然后记录下数据库的密码，后面后端会用到。</p>
-<h4> Redis</h4>
-<p>首先拉取redis镜像，保证redis版本在6以上</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>创建redis的挂载目录</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>进入<code>~/redis/</code>目录，创建配置文件<code>redis.conf</code>，内容如下，密码自己定。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>然后运行容器</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>redis默认不允许远程访问，所以需要额外配置，修改配置文件如下</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>redis各版本配置文件：<a href="https://redis.io/docs/management/config/" target="_blank" rel="noopener noreferrer">Redis configuration | Redis</a></p>
-]]></content:encoded>
-      <enclosure url="https://w.wallhaven.cc/full/ex/wallhaven-ex9gwo.png" type="image/png"/>
-    </item>
-    <item>
-      <title>Docker安装nginx</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/code/docker_nginx.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/code/docker_nginx.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker安装nginx</source>
-      <description>Docker安装nginx docker安装nginx</description>
-      <category>技术日志</category>
-      <pubDate>Thu, 29 Jun 2023 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> Docker安装nginx</h1>
-<figure><img src="https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>docker安装nginx</p>
-<!-- more -->
-<hr>
-<p>Docker安装nginx时一般都是直接使用命令</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>但后来还是觉得直接把静态文件打包进镜像可能会更加方便些</p>
-<div class="language-docker line-numbers-mode" data-ext="docker"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>运行命令</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>目录下的html是打包好的静态文件，nginx是nginx配置文件夹。</p>
-]]></content:encoded>
-      <enclosure url="https://w.wallhaven.cc/full/zy/wallhaven-zyxvqy.jpg" type="image/jpeg"/>
-    </item>
-    <item>
       <title>docker内存显示异常的bug</title>
       <link>https://246859.github.io/my-blog-giscus/posts/problem/dockermem.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/problem/dockermem.html</guid>
@@ -3797,43 +3977,6 @@
 <p>为此编写了一个测试，这在github的issue里有更详细的介绍，<a href="https://github.com/moby/moby/issues/45727" target="_blank" rel="noopener noreferrer">issue address</a></p>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202306292022189.png" type="image/png"/>
-    </item>
-    <item>
-      <title>Docker容器磁盘热扩容</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/code/expand.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/code/expand.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker容器磁盘热扩容</source>
-      <description>Docker容器磁盘热扩容 本文主要讲解Docker容器磁盘热扩容，不需要重启docker服务，也不需要重启容器</description>
-      <category>技术日志</category>
-      <pubDate>Sat, 20 May 2023 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> Docker容器磁盘热扩容</h1>
-<figure><img src="https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>本文主要讲解Docker容器磁盘热扩容，不需要重启docker服务，也不需要重启容器</p>
-<!-- more -->
-<hr>
-<p>最近项目里的需求需要实现Docker容器的热扩容，前一阵子给Docker驱动换到了<code>devicemapper</code>，对容器的资源限制可以更加精确和友好，刚好记录一下整个过程。</p>
-<h2> 环境准备</h2>
-<p>系统：ubuntu22.04LTS</p>
-<p>Docker：24.00</p>
-<p>Go版本：1.20.4</p>
-<div class="hint-container tip">
-<p class="hint-container-title">提示</p>
-<p>在开始之前你需要确保Docker驱动是<code>devicemapper</code>，并且宿主机和Docker的文件系统是<code>ext4</code></p>
-</div>
-<h2> 查看容器大小</h2>
-<p>这里拿一个nginx容器做实验，先进入容器查看一下大小，一般在创建容器时若不指定默认大小为10G。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到rootfs的size是11G，并且文件系统类型是<code>ext4</code>，这里需要将<code>/dev/mapper/docker-8:3-2097855-40ca4227a94fe9cd1dc00963961cc16c8fc0bd6d650e72cfc0c10bc34a9c08f6</code>记下来，后续操作会用到。</p>
-<h2> 准备扩容</h2>
-<p>这时回到宿主机，查看之前复制的文件系统名占用的磁盘扇区数</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到扇区数是从0到20971520，假设要扩容到20G，需要的扇区数就是<code>20*1024*1024*1024/512=41943040</code>，然后再修改表</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>重载一下</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>再次查看扇区数</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到扇区已经变成了41943040，最后需要调整文件系统的大小</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 确认大小</h2>
-<p>再次进入容器查看</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到确实变成了20G。</p>
-]]></content:encoded>
-      <enclosure url="https://w.wallhaven.cc/full/9m/wallhaven-9mjoy1.png" type="image/png"/>
     </item>
     <item>
       <title>64位Ubuntu上运行32位可执行文件</title>
