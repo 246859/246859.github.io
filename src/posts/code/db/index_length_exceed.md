@@ -4,7 +4,7 @@ article: true
 star: false
 sticky: false
 category:
-  - 数据库
+  - db
 tag:
   - MySQL
   - 索引

@@ -4,7 +4,7 @@ article: true
 star: false
 sticky: false
 category:
-  - 技术日志
+  - docker
 tag:
   - docker
   - nginx

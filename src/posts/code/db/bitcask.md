@@ -4,7 +4,7 @@ article: true
 star: true
 sticky: false
 category:
-  - 数据库
+  - db
 tag:
   - bitcask
   - kv

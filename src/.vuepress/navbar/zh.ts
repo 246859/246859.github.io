@@ -21,50 +21,74 @@ export const zhNavbar = navbar([
         icon: "guide",
         children: [
             {
-                text: "Git",
-                link: "/category/Git/"
+                text: "编程语言",
+                children: [
+                    {
+                        text: "Golang",
+                        link: "/category/go/"
+                    },
+                    {
+                        text: "Rust",
+                        link: "/category/rust/"
+                    },
+                    {
+                        text: "Python",
+                        link: "/category/python/"
+                    },
+                ]
             },
             {
-                text: "Linux",
-                link: "/category/Linux/"
+                text: "操作系统",
+                children: [
+                    {
+                        text: "Linux",
+                        link: "/category/linux/"
+                    },
+                    {
+                        text: "Windows",
+                        link: "/category/windows/"
+                    },
+                ]
             },
             {
-                text: "Docker",
-                link: "/category/Docker/"
+                text: "开发工具",
+                children: [
+                    {
+                        text: "Git",
+                        link: "/category/git/"
+                    },
+                    {
+                        text: "Docker",
+                        link: "/category/docker/"
+                    },
+                    {
+                        text: "数据库",
+                        link: "/category/数据库/"
+                    },
+                ]
             },
             {
-                text: "Golang",
-                link: "/category/go/"
+                text: "基础知识",
+                children: [
+                    {
+                        text: "设计模式",
+                        link: "/category/设计模式/"
+                    },
+                    {
+                        text: "算法",
+                        link: "/category/算法/"
+                    },
+                ]
             },
             {
-                text: "Rust",
-                link: "/category/rust/"
-            },
-            {
-                text: "Python",
-                link: "/category/python/"
-            },
-            {
-                text: "数据库",
-                link: "/category/数据库/"
-            },
-            {
-                text: "设计模式",
-                link: "/category/设计模式/"
-            },
-            {
-                text: "数据结构与算法",
-                link: "/category/算法/"
-            },
-            {
-                text: "游戏杂谈",
-                link: "/category/游戏杂谈/",
-            },
-            {
-                text: "电脑装机",
-                link: "/category/电脑装机/"
-            },
-
+                text: "闲话水文",
+                children: [
+                    {
+                        text: "游戏杂谈",
+                        link: "/category/游戏杂谈/",
+                    },
+                ]
+            }
         ]
     },
     {

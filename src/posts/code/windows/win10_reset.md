@@ -4,7 +4,7 @@ article: true
 star: false
 sticky: false
 category:
-  - Windows
+  - windows
 tag:
   - win10
   - reagentc

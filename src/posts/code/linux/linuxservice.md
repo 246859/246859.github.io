@@ -3,7 +3,7 @@ date: 2023-01-28
 article: true
 star: false
 sticky: false
-category: Linux
+category: linux
 tag:
   - linux
   - service

@@ -4,7 +4,7 @@ article: true
 star: false
 sticky: false
 category:
-  - Linux
+  - linux
 tag:
   - clash
   - ubuntu
