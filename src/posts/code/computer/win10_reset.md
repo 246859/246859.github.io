@@ -4,12 +4,12 @@ article: true
 star: false
 sticky: false
 category:
-  - 电脑装机
+  - Windows
 tag:
   - win10
   - reagentc
 ---
-# Win10重置电脑-找不到恢复环境，需要重装介质
+# Win10重置电脑
 
 ![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202407191536182.png)
 
