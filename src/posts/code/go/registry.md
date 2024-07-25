@@ -29,7 +29,7 @@ tag:
 很显然，使用官方编写的库效率是最高的，不过它并没有加入标准库，需要我们单独下载。
 
 ```bash
-$ go get golang.org/x/sys/windows/registry
+$ go get golang.org/x/sys@latest
 ```
 
 
@@ -51,16 +51,30 @@ const (
 )
 ```
 
-大部分注册表操作都是基于这些windows预定义好的键，库中以常量的方式定义了这些键，可以直接使用，下面演示一个创建GoLand右键菜单项的例子。
+大部分注册表操作都是基于这些windows预定义好的键，库中以常量的方式定义了这些键，可以直接使用。操作一个注册表项的API跟操作文件没什么太大的区别，使用完后一样要关闭。
+
+
+
+### 新建
+
+下面演示一个创建GoLand右键菜单项的例子。
 
 ```go
 func CreateKey(k Key, path string, access uint32) (newk Key, openedExisting bool, err error)
 ```
 
-首先如果要修改右键菜单的话，就需要基于`CLASSES_ROOT`键，路径为`Directory\Background\shell\`，这里要加一个goland菜单，就是`Directory\Background\shell\goland`，还有一个值是`access`，就类似于访问文件的`perm`一样，关于这个的详细释义可以看[注册表项安全和访问权限 - Win32 apps | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows/win32/sysinfo/registry-key-security-and-access-rights?redirectedfrom=MSDN)，那么代码如下
+首先如果要修改右键菜单的话，就需要基于`CLASSES_ROOT`键，rootKey作为第一个参数，子路径作为第二个参数传递
+
+```
+// 在文件夹背景生效
+Directory\Background\shell\goland
+```
+
+第三个参数是`access`，就类似于访问文件的`perm`一样，关于这个的详细释义可以看[注册表项安全和访问权限 - Win32 apps | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows/win32/sysinfo/registry-key-security-and-access-rights?redirectedfrom=MSDN)，那么代码如下
 
 ```go
-golandkey, exist, err := registry.CreateKey(registry.CLASSES_ROOT, `Directory\Background\shell\goland`, registry.WRITE|registry.READ)
+golandkey, exist, err := registry.CreateKey(registry.CLASSES_ROOT, 
+                                            `Directory\Background\shell\goland`,registry.WRITE|registry.READ)
 ```
 
 然后给它设置两个字符串值，类型为`REG_EXPAND_SZ`或`REG_MULTI_SZ`都行，键为空就表示默认值，内容会展示到菜单上，`Icon`即图标。
@@ -71,10 +85,11 @@ golandkey.SetStringValue("", "Open Goland Here")
 golandkey.SetExpandStringValue("Icon", bin)
 ```
 
-然后再创建一个子项`command`，表示动作，路径为`Directory\Background\shell\goland\command`
+然后再创建一个子项`command`，表示动作
 
 ```go
-golandCmdKey, exist, err := registry.CreateKey(registry.CLASSES_ROOT, `Directory\Background\shell\goland\command`, registry.WRITE|registry.READ)
+golandCmdKey, exist, err := registry.CreateKey(registry.CLASSES_ROOT, 
+                                               `Directory\Background\shell\goland\command`, registry.WRITE|registry.READ)
 ```
 
 它的默认值就是goland程序的地址
@@ -128,4 +143,54 @@ func main() {
 
 ![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407241536810.png)
 
-以上就是一个Go操作注册表的简单示例，实际上整个库函数加起来也才不到6个左右，使用起来也很简单。
+### 删除
+
+如果要删除一个注册表项，那么它必须没有子项才能成功删除，否则会返回错误
+
+```
+Access is denied
+```
+
+所以必须要先递归删除它的所有子项才行，我们可以编写下面一个简单的函数
+
+```go
+func deleteKey(key registry.Key, path string) error {
+	// 访问当前项，查看是否存在，不存在直接返回
+	parentKey, err := registry.OpenKey(key, path, registry.READ)
+	if errors.Is(err, registry.ErrNotExist) {
+		return nil
+	} else if err != nil {
+		return err
+	}
+	defer parentKey.Close()
+
+	// 拼接路径
+	if len(path) > 0 && path[len(path)-1] != '\\' {
+		path = path + `\`
+	}
+
+	// 访问它的所有子项
+	subKeyNames, err := parentKey.ReadSubKeyNames(-1)
+	if err != nil {
+		return err
+	}
+
+	// 继续递归
+	for _, name := range subKeyNames {
+		subKeyPath := path + name
+		err := deleteKey(key, subKeyPath)
+		if err != nil {
+			return err
+		}
+	}
+
+	// 最后才删除当前注册表项
+	return registry.DeleteKey(key, path)
+}
+```
+
+
+
+## 总结
+
+总的来说使用官方的API是最简单的，库函数加起来也没几个，非常易于使用。
