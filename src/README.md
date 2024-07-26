@@ -7,7 +7,7 @@ heroImage: /logo.png
 heroText: 寒江蓑笠翁
 bgImage: /snow.png
 heroFullScreen: true
-tagline: 孤舟蓑笠，独钓寒江雪
+tagline: 孤舟蓑笠翁，独钓寒江雪
 projects:
   - icon: /toolbox.png
     name: AutoToolBox
