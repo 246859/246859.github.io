@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 25 Jul 2024 17:21:52 GMT</pubDate>
-    <lastBuildDate>Thu, 25 Jul 2024 17:21:52 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Jul 2024 16:04:22 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Jul 2024 16:04:22 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>go</category>
@@ -26,6 +26,91 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>使用Makefile来构建Go程序</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/go/makefile.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/go/makefile.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">使用Makefile来构建Go程序</source>
+      <description>使用Makefile来构建Go程序</description>
+      <category>go</category>
+      <pubDate>Fri, 26 Jul 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 使用Makefile来构建Go程序</h1>
+<figure><img src="https://cdn.golangdocs.com/wp-content/uploads/2021/02/go_makefile.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<h2> 简介</h2>
+<p>Make起源于1977年的贝尔实验室中，目的就是为了能更好的构建大型程序，贝尔实验室的大型程序自然就是Unix操作系统。在后来诞生了它的许多变种，比较知名是下面两个。</p>
+<ul>
+<li>GNU Make</li>
+<li>BSD Make</li>
+</ul>
+<p>GNU Make应该是现在用的最多的一个，Linux和MacOS都是用的GNU Make，本文在讲解的时候也会使用这一个。Makefile在C/C++项目中用的比较多，但它并不限制于特定的语言，Go同样也可以使用Makefile来构建程序，不过由于Go是一个比较现代化的语言，在编译时它已经将大部分事情都做好了，不需要我们去处理依赖，链接等，所以也就很少会用到makefile中那些复杂的规则，用的最多的也就是<code>.PHONY</code>伪目标来执行特定的命令。</p>
+<h2> 语法</h2>
+<p>本文这里只是简单介绍下makefile中的语法，如果你想进行细致的学习的可以前往<a href="https://www.gnu.org/software/make/manual/make.html" target="_blank" rel="noopener noreferrer">Document | GNU make</a>进行了解。</p>
+<h3> 伪目标</h3>
+<p>makefile是由一个个目标（target）组成的，在makefile中目标表示的文件，Go中不需要对文件单独处理，所以我们会使用伪目标，表示它只执行命令，我们会用<code>.PHONY</code>来表示它是一个伪目标，如下。</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在目标中执行的命令必须要用tab进行缩进，如果你觉得一行命令太长可以用<code>\</code>来换行，记得换行符后面不要有任何字符。</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>执行看看效果</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>会发现它将要执行的命令打印出来了，如果你不想这么做可以加上<code>-s</code>标志</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>或者在<code>echo</code>命令前加上<code>@</code></p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>两种方法都可以阻止make打印命令。</p>
+<h3> 变量</h3>
+<p>makefile中的变量用<code>=</code>来进行赋值，比如</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>变量没有类型，全都是字符串，没有被赋值的变量就是一个空字符串，赋值时必须要用空格相隔，不需要双引号也可以表示字符串</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>如果只是输出的话他们并没有什么区别，但实际上两者并不相等</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>输出的结果会是不相等</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>在使用的时候就需要稍微注意一下。</p>
+<p>变量取值的时候可以用<code>$(var)</code>或者<code>${var}</code>两种方法获取变量的值，比如</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>用<code>=</code>定义的变量默认是懒加载的，在使用到的时候才会展开，而用<code>:=</code>定义的变量会立即展开，如下</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在这里例子中变量<code>two</code>是被<code>:=</code>定义的，在它展开时变量<code>three</code>还未被定义，所以它就是一个空字符串。</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过<code>shell</code>函数，可以将执行命令的返回值赋值给变量</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>也可以不理会返回值，仅执行命令。</p>
+<h3> 条件</h3>
+<p>makefile中条件判断有下面几种</p>
+<ul>
+<li>
+<p><code>ifeq</code>，判断是否相等</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li>
+<li>
+<p><code>ifneq</code>，判断不相等</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li>
+<li>
+<p><code>ifdef</code>，判断变量是否定义</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li>
+<li>
+<p><code>ifndef</code>，判断变量是否未定义</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></li>
+</ul>
+<h3> 循环</h3>
+<p>makefile中的循环实际上是一个函数，格式如下</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>它最终会将处理后的元素返回成一个新数组，如果你只是用作循环也可以完全不管这个返回值。在makefile中，由空格作为分隔符的字符串可以看作是数组，如下</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>迭代这个数组，然后将名字拼接成新字符串，然后返回一个新数组</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最终输出</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>也可以是多重循环</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>输出</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h3> 递归</h3>
+<p>对于一个目标而言，我们可以在目标中使用<code>$(make)</code>来进行递归，比如下面这一个例子</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这个例子中会无限递归执行目标<code>hello</code>。你也可以用这种方法执行其他目标</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>输出</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>递归的原本目的是为了解析子文件夹下的makefile，所以它会显示<code>Entering directory</code>表示进入某个文件夹，如果你不想看到这些输出加上<code>-s</code>标志执行就行了。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 替换</h3>
+<p>字符串替换使用<code>$(patsubst)</code>来完成，它有下面几个参数</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>通常我们会使用它的简写方式，通配符<code>%</code>表示匹配的部分</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>比如</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>那么它最后会是</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 注释</h3>
+<p>makefile中的注释由<code>#</code>来表示</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>值得一提的是，在执行目标的时候，如果没有设置静默输出的话，注释也会一并打印出来。</p>
+<h2> 构建</h2>
+<p>在简单地解了上面的几种语法后，对于构建Go程序而言已经完全足够使用了，你可以通过编写如下的makefile来编译一个go程序。</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>但如果只是这么简单的使用，实在是没有必要使用makefile，集成开发环境就能满足了，所以我们要写点复杂的。</p>
+<p>比如可以在编译前进行代码检查</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>或者进行交叉编译时，设置环境变量</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>不过这些还是太简单了，其实通过makefile更轻松的给程序注入元信息，进行其他的一些处理，比如下面是我自己经常用的一个makefile模板，做的处理就非常多了。</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这个模板基本上满足大部分Go项目的需求了，假如说要多平台编译的话，还可以再加上下面这段</p>
+<div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过双循环执行目标<code>build</code>，这样一来就可以将所有预定平台的二进制文件全部自动编译出来。</p>
+]]></content:encoded>
+      <enclosure url="https://cdn.golangdocs.com/wp-content/uploads/2021/02/go_makefile.png" type="image/png"/>
+    </item>
     <item>
       <title>go语言操作windows注册表</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/go/registry.html</link>
@@ -3598,6 +3683,90 @@
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091722442.jpg" type="image/jpeg"/>
     </item>
     <item>
+      <title>在Linux上搭建K8s集群</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Linux上搭建K8s集群</source>
+      <description>在Linux上搭建K8s集群 最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</description>
+      <category>技术日志</category>
+      <pubDate>Mon, 25 Sep 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 在Linux上搭建K8s集群</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</p>
+<!-- more -->
+<hr>
+<figure><img src="https://d33wubrfki0l68.cloudfront.net/2475489eaf20163ec0f54ddc1d92aa8d4c87c96b/e7c81/images/docs/components-of-kubernetes.svg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最近在学习k8s，不得不说这玩意运行起来还是相当的麻烦，这里记录一下，以免后面忘了。事先准备好三台ubuntu22.04虚拟机，一台用作control plane，两台用作worker node。</p>
+<h2> 前置准备</h2>
+<p>在开始安装k8s之前，需要做一些前置的准备。</p>
+<h3> 关闭firewalld</h3>
+<p>k8s有着自己的网络策略配置功能，关闭friewalld是为了避免起冲突。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 禁用selinux</h3>
+<p>selinux是linux的一个安全子系统，很多服务器未为了避免麻烦都会把它关了，ubuntu在装机的时候不会自带这玩意，但如果你装了的话可以按照下面的步骤关闭。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 关闭swap</h3>
+<p>kubelet运行时明确不支持swap，也就是交换内存，一部分原因是想让程序在内存耗尽以后正常OOM而不是一直靠swap苟着从而造成不必要的损失。如果未关闭swap直接启动的话，kubelet在启动时会显示如下信息告诉你应该关闭swap，否则不让你启动。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先执行命令关闭交换分区</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后修改<code>fstab</code>文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>注释掉如下行</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行如下命令查看swap分区情况，如果关闭了的话就不会有任何显示</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 配置网络</h3>
+<p>转发 IPv4 并让 iptables 看到桥接流量</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>br_netfilter</code> 和 <code>overlay</code> 模块被加载：</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>net.bridge.bridge-nf-call-iptables</code>、<code>net.bridge.bridge-nf-call-ip6tables</code> 和 <code>net.ipv4.ip_forward</code> 系统变量在你的 <code>sysctl</code> 配置中被设置为 1</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> CRI</h2>
+<p>Container Runtime Interface（CRI），即容器运行时接口，要想使用K8s的话，需要系统提供CRI，目前实现了CRI的软件的有</p>
+<ul>
+<li>containerd，推荐用这个，比较轻量。</li>
+<li>docker engine，并没有实现CRI但是可以通过其它方法桥接，不过一般安装了docker engine的系统都会有containerd，因为containerd就是docker的一部分，所以还是建议用containerd。</li>
+<li>CRI-O</li>
+<li>MCR</li>
+</ul>
+<h3> containerd</h3>
+<p>下面会用containerd来做演示，其实containerd安装过程就是docker安装过程，先设置docker官方的apt仓库</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a href="http://xn--containerd-j05qpn034ff9b232ee69h.io" target="_blank" rel="noopener noreferrer">最后就只安装containerd.io</a>，不用安装dcoker-ce和docker-cli。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>或者你也可以直接下载containerd的二进制文件，它也是用go写的。在安装好后，需要配置systemd cgroup驱动，在containerd配置文件中</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改如下的配置项</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>使用如下命令可以重置containerd配置</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></div>
+<p>从软件包安装的话可能会默认禁用CRI，在配置文件中可能会看到这么一行，将其去掉就行。</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改完后重启containerd</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> 安装</h2>
+<p>配置下k8s的阿里云apt源</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>更新证书</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>再更新源</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最后安装<code>kubeadm</code>，<code>kubectl</code>，<code>kubelet</code>，这三个最好软件版本保持一致。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>完成后确认版本</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>确认版本一致后，看看k8s的镜像，后续必须pull这些镜像，因为这是k8s集群运行的必要组件。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>到目前为止，系统上会有下面这几个东西</p>
+<ul>
+<li><code>kebuadm</code>，用来快速启动和搭建k8s集群的工具，可以省去我们很多操作。</li>
+<li><code>kubelet</code>，k8s集群命令行管理工具</li>
+<li><code>kubelet</code>，代表着一个节点，是k8s集群的基本单位。</li>
+<li><code>crictl</code>，容器运行时管理工具，只不过它是为k8s工作的，正确使用的前提是系统上安装了支持CRI的软件并正确指定了endpoint。</li>
+<li><code>ctr</code>，ctr是containerd的命令管理工具，containerd实现了CRI。</li>
+</ul>
+<h3> cri endpoint</h3>
+<p>ctrctl虽然是容器运行时管理工具，但是它并没有具体的实现，只是定义了一组接口规范。要想正常工作还得依赖具体的实现了CRI的软件，之前已经安装好了containerd，所以运行前要先指定crictl的<code>runtime-endpoint</code>，也就是containerd的sock地址。</p>
+<p>通过查看配置文件<code>etc/containerd/config.toml</code>可以得知</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>那么endpoint就是</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>所以执行如下命令配置crictl</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 拉镜像</h3>
+<p>kubeadm支持通过命令预先拉取需要用到的组件镜像，也就是之前list出来的镜像，执行如下命令就可以预先拉取要用到的镜像。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>但是不出意外的话，意外就会发生了，上述的镜像仓库是<code>registry.k8s.io</code>，是由谷歌托管的，国内基本上没法访问，甚至于在线获取版本信息都不行</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>解决方法就是国内的镜像，阿里云有一个镜像仓库，地址如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>网上有很多教程直接在<code>kubeadm init</code>时直接指定了阿里云镜像仓库，这样会导致kubelet没法正常运行，会说找不到组件的镜像，因为kubelet运行的时候只认<code>registry.k8s.io</code>镜像，而通过阿里云镜像仓库拉下来的镜像的前缀是<code>registry.aliyuncs.com/google_containers</code>，所以kubelet自然就没法启动了。所以对应的，拉取完下面的镜像后，应该将其名字改回去。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>crictl并不能修改镜像名，这是ctr应该干的事情，为了能够查看到k8s的镜像，指定命名空间<code>k8s.io</code></p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>一个个改名太麻烦了，所以我写了一个脚本，来自动化完成这个过程。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>或者也可以</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 初始化</h3>
+<p>接下来使用kubeadm来初始化，这个操作只用在master节点进行。init时有很多参数，开始前可以看看命令帮助。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>接下来就开始初始化，如果上面的配置都做好了的话，是不会出现问题的。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" type="image/png"/>
+    </item>
+    <item>
       <title>黑暗之魂I：重制版</title>
       <link>https://246859.github.io/my-blog-giscus/posts/game/darksoul1.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/game/darksoul1.html</guid>
@@ -3738,90 +3907,6 @@
 <hr>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091154859.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>在Linux上搭建K8s集群</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Linux上搭建K8s集群</source>
-      <description>在Linux上搭建K8s集群 最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</description>
-      <category>技术日志</category>
-      <pubDate>Mon, 25 Sep 2023 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 在Linux上搭建K8s集群</h1>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</p>
-<!-- more -->
-<hr>
-<figure><img src="https://d33wubrfki0l68.cloudfront.net/2475489eaf20163ec0f54ddc1d92aa8d4c87c96b/e7c81/images/docs/components-of-kubernetes.svg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>最近在学习k8s，不得不说这玩意运行起来还是相当的麻烦，这里记录一下，以免后面忘了。事先准备好三台ubuntu22.04虚拟机，一台用作control plane，两台用作worker node。</p>
-<h2> 前置准备</h2>
-<p>在开始安装k8s之前，需要做一些前置的准备。</p>
-<h3> 关闭firewalld</h3>
-<p>k8s有着自己的网络策略配置功能，关闭friewalld是为了避免起冲突。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 禁用selinux</h3>
-<p>selinux是linux的一个安全子系统，很多服务器未为了避免麻烦都会把它关了，ubuntu在装机的时候不会自带这玩意，但如果你装了的话可以按照下面的步骤关闭。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 关闭swap</h3>
-<p>kubelet运行时明确不支持swap，也就是交换内存，一部分原因是想让程序在内存耗尽以后正常OOM而不是一直靠swap苟着从而造成不必要的损失。如果未关闭swap直接启动的话，kubelet在启动时会显示如下信息告诉你应该关闭swap，否则不让你启动。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先执行命令关闭交换分区</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后修改<code>fstab</code>文件</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>注释掉如下行</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行如下命令查看swap分区情况，如果关闭了的话就不会有任何显示</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 配置网络</h3>
-<p>转发 IPv4 并让 iptables 看到桥接流量</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>br_netfilter</code> 和 <code>overlay</code> 模块被加载：</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>net.bridge.bridge-nf-call-iptables</code>、<code>net.bridge.bridge-nf-call-ip6tables</code> 和 <code>net.ipv4.ip_forward</code> 系统变量在你的 <code>sysctl</code> 配置中被设置为 1</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> CRI</h2>
-<p>Container Runtime Interface（CRI），即容器运行时接口，要想使用K8s的话，需要系统提供CRI，目前实现了CRI的软件的有</p>
-<ul>
-<li>containerd，推荐用这个，比较轻量。</li>
-<li>docker engine，并没有实现CRI但是可以通过其它方法桥接，不过一般安装了docker engine的系统都会有containerd，因为containerd就是docker的一部分，所以还是建议用containerd。</li>
-<li>CRI-O</li>
-<li>MCR</li>
-</ul>
-<h3> containerd</h3>
-<p>下面会用containerd来做演示，其实containerd安装过程就是docker安装过程，先设置docker官方的apt仓库</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a href="http://xn--containerd-j05qpn034ff9b232ee69h.io" target="_blank" rel="noopener noreferrer">最后就只安装containerd.io</a>，不用安装dcoker-ce和docker-cli。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>或者你也可以直接下载containerd的二进制文件，它也是用go写的。在安装好后，需要配置systemd cgroup驱动，在containerd配置文件中</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改如下的配置项</p>
-<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="hint-container tip">
-<p class="hint-container-title">提示</p>
-<p>使用如下命令可以重置containerd配置</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></div>
-<p>从软件包安装的话可能会默认禁用CRI，在配置文件中可能会看到这么一行，将其去掉就行。</p>
-<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改完后重启containerd</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> 安装</h2>
-<p>配置下k8s的阿里云apt源</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>更新证书</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>再更新源</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最后安装<code>kubeadm</code>，<code>kubectl</code>，<code>kubelet</code>，这三个最好软件版本保持一致。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>完成后确认版本</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>确认版本一致后，看看k8s的镜像，后续必须pull这些镜像，因为这是k8s集群运行的必要组件。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>到目前为止，系统上会有下面这几个东西</p>
-<ul>
-<li><code>kebuadm</code>，用来快速启动和搭建k8s集群的工具，可以省去我们很多操作。</li>
-<li><code>kubelet</code>，k8s集群命令行管理工具</li>
-<li><code>kubelet</code>，代表着一个节点，是k8s集群的基本单位。</li>
-<li><code>crictl</code>，容器运行时管理工具，只不过它是为k8s工作的，正确使用的前提是系统上安装了支持CRI的软件并正确指定了endpoint。</li>
-<li><code>ctr</code>，ctr是containerd的命令管理工具，containerd实现了CRI。</li>
-</ul>
-<h3> cri endpoint</h3>
-<p>ctrctl虽然是容器运行时管理工具，但是它并没有具体的实现，只是定义了一组接口规范。要想正常工作还得依赖具体的实现了CRI的软件，之前已经安装好了containerd，所以运行前要先指定crictl的<code>runtime-endpoint</code>，也就是containerd的sock地址。</p>
-<p>通过查看配置文件<code>etc/containerd/config.toml</code>可以得知</p>
-<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>那么endpoint就是</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>所以执行如下命令配置crictl</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 拉镜像</h3>
-<p>kubeadm支持通过命令预先拉取需要用到的组件镜像，也就是之前list出来的镜像，执行如下命令就可以预先拉取要用到的镜像。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>但是不出意外的话，意外就会发生了，上述的镜像仓库是<code>registry.k8s.io</code>，是由谷歌托管的，国内基本上没法访问，甚至于在线获取版本信息都不行</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>解决方法就是国内的镜像，阿里云有一个镜像仓库，地址如下</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>网上有很多教程直接在<code>kubeadm init</code>时直接指定了阿里云镜像仓库，这样会导致kubelet没法正常运行，会说找不到组件的镜像，因为kubelet运行的时候只认<code>registry.k8s.io</code>镜像，而通过阿里云镜像仓库拉下来的镜像的前缀是<code>registry.aliyuncs.com/google_containers</code>，所以kubelet自然就没法启动了。所以对应的，拉取完下面的镜像后，应该将其名字改回去。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>crictl并不能修改镜像名，这是ctr应该干的事情，为了能够查看到k8s的镜像，指定命名空间<code>k8s.io</code></p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>一个个改名太麻烦了，所以我写了一个脚本，来自动化完成这个过程。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>或者也可以</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 初始化</h3>
-<p>接下来使用kubeadm来初始化，这个操作只用在master节点进行。init时有很多参数，开始前可以看看命令帮助。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>接下来就开始初始化，如果上面的配置都做好了的话，是不会出现问题的。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
-      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" type="image/png"/>
     </item>
     <item>
       <title>数据库被注入恶意信息</title>
@@ -4182,118 +4267,6 @@
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304021221784.jpg" type="image/jpeg"/>
     </item>
     <item>
-      <title>血源诅咒</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">血源诅咒</source>
-      <description>血源诅咒 心中永远的神作游戏，没有之一</description>
-      <category>游戏杂谈</category>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 血源诅咒</h1>
-<figure><img src="https://img.3dmgame.com/uploads/allimg/170717/316-1FGGG244.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>心中永远的神作游戏，没有之一</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://img.3dmgame.com/uploads/allimg/170717/316-1FGGG244.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>风来之国</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">风来之国</source>
-      <description>风来之国 它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</description>
-      <category>游戏杂谈</category>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 风来之国</h1>
-<figure><img src="https://blob.keylol.com/forum/202104/26/235332fwzmvhyw2brmbwcj.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://blob.keylol.com/forum/202104/26/235332fwzmvhyw2brmbwcj.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>烟火</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/firework.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/firework.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">烟火</source>
-      <description>烟火 一款小体量的恐怖游戏，像一本短暂又令人回味的小说</description>
-      <category>游戏杂谈</category>
-      <pubDate>Mon, 15 Mar 2021 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 烟火</h1>
-<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg" style="zoom:200%;">
-<p>一款小体量的恐怖游戏，像一本短暂又令人回味的小说</p>
-<!-- more -->
-<hr>
-<p>正文</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>古剑奇谭三：梦付千秋星垂野</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">古剑奇谭三：梦付千秋星垂野</source>
-      <description>古剑奇谭三：梦付千秋星垂野 高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</description>
-      <category>游戏杂谈</category>
-      <pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 古剑奇谭三：梦付千秋星垂野</h1>
-<figure><img src="https://th.bing.com/th/id/R.cd979e8c62da7290fde16c6080042814?rik=rxs41US0GuFXCQ&amp;riu=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F0837aafae38223909e07185b86185f6da5c75663.jpg&amp;ehk=LU2HP%2BnwwYcKlAGYQikcmnN3p8edyK67hv%2FRW%2Fo6EIg%3D&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://th.bing.com/th/id/R.cd979e8c62da7290fde16c6080042814?rik=rxs41US0GuFXCQ&amp;riu=http%3a%2f%2fi2.hdslb.com%2fbfs%2farchive%2f0837aafae38223909e07185b86185f6da5c75663.jpg&amp;ehk=LU2HP%2bnwwYcKlAGYQikcmnN3p8edyK67hv%2fRW%2fo6EIg%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" type="image/"/>
-    </item>
-    <item>
-      <title>Minecraft</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/mc.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/mc.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Minecraft</source>
-      <description>Minecraft 从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</description>
-      <category>游戏杂谈</category>
-      <pubDate>Sun, 20 Sep 2020 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> Minecraft</h1>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" type="image/png"/>
-    </item>
-    <item>
-      <title>僵尸毁灭工程</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">僵尸毁灭工程</source>
-      <description>僵尸毁灭工程 一款十分真实的丧尸沙盒生存游戏，心中同题材下最好的游戏。</description>
-      <category>游戏杂谈</category>
-      <pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 僵尸毁灭工程</h1>
-<figure><img src="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>一款十分真实的丧尸沙盒生存游戏，心中同题材下最好的游戏。</p>
-<!-- more -->
-<hr>
-<p>有那么一段时间我比较沉迷于丧尸这个题材，不论是小说还是电影或者是游戏，在尝试了非常多的这类题材作品过后，最后发现了代入感最强的还是这一款名为《僵尸毁灭工程》的沙盒生存游戏。不过在稍微了解了这个游戏的历史后，发现它居然有好几年的制作历史了，并且一直在持续更新中，在创意工坊中有着大量的玩家自制的MOD可供使用，生态也算是非常的好了。</p>
-<h2> 真实感</h2>
-<figure><img src="https://pic4.zhimg.com/v2-aaa96d369f69d684eed906f8dddfe6b7_r.jpg" alt="僵毁中的医学人体图" tabindex="0" loading="lazy"><figcaption>僵毁中的医学人体图</figcaption></figure>
-<p>虽然游戏本身的画面并不是特别出色，甚至角色还是多边形人，但是丝毫不会减少游戏的魅力--真实。游戏在很多地方都力求还原现实，比如角色遇到丧尸会害怕，当处于恐惧状态时，会跑的更快，但是攻击伤害会更低。当翻窗进废弃房屋搜寻物资时，需要注意窗户上是否有碎玻璃，否则会划伤身体，而清理玻璃必须要戴手套或者使用工具，否则徒手清理也会受伤。当玩家受伤时，需要进行及时的包扎和消毒，如果不及时照顾伤口可能会导致伤口感染，感染后就可能会增加恶化的几率，伤口过深可能会引起破伤风，这时候需要更加专业的医疗工具来进行治疗。当角色遇到的负面事情过多时，就会陷入抑郁状态，而过度抑郁会导致角色状态大幅度下降等等，上述所描述的这些也只是游戏中众多细节中的其中几种，正是这些看起来十分繁琐的细节促成了很强的沉浸感和代入感，玩家可以很直观的体会到一个普通人在面对丧尸危机大爆发的无力感和绝望感。</p>
-<h2> 背景</h2>
-<p>游戏在初代其实是想走线性流程这个方向，那时候是有固定的剧情，但是到了后续更新变成了开放世界沙盒模式，剧情也删减了很多，就现在而言几乎没有什么剧情，但是有一个基本的背景设定（顺便提一下游戏早期只有四个人开发，一路走来可以说是十分的励志）。僵尸毁灭工程的故事发生在上个世界90年代的美国肯塔基州，病毒爆发地点位于路易斯维尔市，也就是地图上右上角的那个大城市，在军方的生化实验室病毒泄露后，短短几天事情便发展到了不可控的地步，直到最后蔓延到了全球。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304021913341.png" alt="肯塔基架空地图" tabindex="0" loading="lazy"><figcaption>肯塔基架空地图</figcaption></figure>
-<p>而作为主角的玩家，只是一个平平无奇的普通人，唯一的目标就是搜寻资源并在这个末世活下去，除此之外游戏开始之后便不会再有任何的剧情。</p>
-<h2> 流程</h2>
-<p>游戏机制算得上十分复杂，玩家需要注意的东西挺多的，第一次玩可能会摸不着头脑，需要考虑到季节，天气，温度，时间，饥饿，口渴，疲劳，忧郁，无聊，受伤，负重等等。在正常的流程中，一般是7月9号夏天开局，你的职业可以是一个普通的上班族，也可以是警察或者是建筑工人，或者是退伍军人，在刚开始的几天仍然会正常播放电视节目和广播节目，彻底沦陷后整个世界只剩一片寂静。门外可能已经聚集了不少丧尸，这时手无寸铁的你需要利用手上一切可以使用的工具，溜出房子去寻找一个安全的庇护所。第一件要做的事就是武装自己，可以是平底锅，棒球棒，撬棍，或者是钢管，切记千万不要随便开枪，枪声会引来一大群丧尸，这反而会成为丧尸们的开饭铃。在找到武器后玩家需要将自己身体的重要部位保护起来，一旦被丧尸造成伤口后果是不堪设想的，你需要穿一些厚实的衣服，但注意别太暖和了，否则运动一小会你就会中暑。</p>
-<p>当有了基本的自我保护能力后，你需要搜集食物和水源，因为不久后城市里就会断水断电，在超市和便利店里可能还会有一些其他幸存者没有搜刮完的食物，这些地方往往危机四伏，冰箱里的食物记得尽早食用，食物腐烂后会导致食物中毒，在医疗崩溃的条件下生病基本等同于死亡，这也是为什么即便再渴也不要随便引用来历不明的水。看见医疗物资一定要记得带上，末世下医疗物资十分珍贵，即便是感冒都可能要人命。居住的庇护所至少要有两层，因为在一楼沦陷的情况下还可以从二楼逃跑，切记时刻给自己留退路，在睡觉的时候一定要记得关门，没有人知道夜里会发生什么事情，在丧尸入侵庇护所后，如果尸体过多不清理掉，很有可能会导致你感染。在完全的断水断电后，对于水源你可以接雨水或者到河边取水后煮沸了再饮用，对于食物你可以不断的出去搜寻物资，或者将找到的种子耕种成农作物自给自足。在基本的稳定下来后，你可以短暂的放松一下了，长时间神经的紧绷会让你十分敏感，这可能会导致抑郁，尝试看录像带或者看漫画来缓解和放松心情。在外出搜寻的过程中，你可能会偶尔听到直升机的声音，在看到直升机后千万不要像个傻子一样大声呼救，马上躲到建筑物内不要让它发现。新闻直升机在发现你后并不会实施救援，而一直盘旋在你头顶拍摄新闻素材，尤其喜欢拍摄幸存者被丧尸撕咬的画面，螺旋桨所发出的巨大噪声会把几乎半个城市的丧尸全部吸引过来，这时候你基本上就是死路一条。</p>
-<p>在解决了温饱过后，如果你运气好在废弃房子的仓库里搜到发电机，那么你可以去所剩无几的加油站的油箱中加油，这样一来你的房子就可以使用冰箱和厨具了，切记发电机产生的气体是有毒的，你需要将它放在室外。如果能找到一辆还能开的车就更完美了，开车的时候注意不要开太快，否则出了车祸后果将不堪设想，不要开车去撞丧尸，因为车的损耗承受不起，在开车回家时不要发出太大的噪声，否则你只会把丧尸引到庇护所去。大城市里面虽然物资丰富，但几乎遍地丧尸，小镇虽然物资少，但是更加安全，切记物资再珍贵也没有命贵。有些丧尸生前是运动员，奔跑的速度非常快，遇到这类丧尸一定要避开。在探索建筑物时，每一道门后面都可能藏有危险，切记不要拿脸开门。有时候野外并不一定就比城市更加安全，夜晚的树林同样危机四伏。如果在深山老林中碰巧发现了军事基地，拿到强大的武器后，你就拥有了与尸潮一战的能力。丧尸们总是会有规律的活动，在一个月的某几天，它们的数量会达到顶峰，这是最危险的时候，丧尸会如潮水般向你的庇护所袭来，你需要奋战到最后一刻来保护你的基地。如果失守了，也不要忘了留得青山在，不怕没柴烧。</p>
-<figure><img src="https://ts1.cn.mm.bing.net/th/id/R-C.c02ad2d0d95f4872067737420690445c?rik=HqY%2B09mKPj3gkA&amp;riu=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F52b46f10c9537dee758573433c55ab3794d26ab9.jpg&amp;ehk=vmotHDavUbFII%2BqgBVfvhlRMoWRkkcKj8FGGAOm%2FiEk%3D&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>最后，你在这艰难的末世中顽强的存活了下来，此时病毒已经蔓延到了世界各地，整个世界一片寂静，就算你每天开着收音机也不会有任何回应。对于这绝望的世界，你可以开枪了解自己来结束这痛苦的一生，或者是带着一整车物资外出寻找新的希望，也可以带着武器前往大型商场享受屠杀丧尸的最后狂欢，不论选择哪一种，末世都始终会持续下去，当你死后，会有新的幸存者会继承你的意志并继续活下去。</p>
-<h2> 结语</h2>
-<p>同样的题材也有很多优秀的游戏，即便僵毁画面很复古，但是僵尸毁灭工程满足了我一切对于末世的幻想，非常对我的胃口，在我心目中就是最好的丧尸题材游戏，美中不足的是游戏中人类NPC和动物几乎没有出现，互动也很少，不过这些可以通过加入第三方MOD来添加更多有趣的玩法。</p>
-]]></content:encoded>
-      <enclosure url="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" type="image/"/>
-    </item>
-    <item>
       <title>Typora配合图床搭建教程</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/pic.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/code/pic.html</guid>
@@ -4524,6 +4497,118 @@
 </div>
 ]]></content:encoded>
       <enclosure url="https://vuepress.vuejs.org/hero.png" type="image/png"/>
+    </item>
+    <item>
+      <title>血源诅咒</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">血源诅咒</source>
+      <description>血源诅咒 心中永远的神作游戏，没有之一</description>
+      <category>游戏杂谈</category>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 血源诅咒</h1>
+<figure><img src="https://img.3dmgame.com/uploads/allimg/170717/316-1FGGG244.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>心中永远的神作游戏，没有之一</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://img.3dmgame.com/uploads/allimg/170717/316-1FGGG244.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>风来之国</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">风来之国</source>
+      <description>风来之国 它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</description>
+      <category>游戏杂谈</category>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 风来之国</h1>
+<figure><img src="https://blob.keylol.com/forum/202104/26/235332fwzmvhyw2brmbwcj.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://blob.keylol.com/forum/202104/26/235332fwzmvhyw2brmbwcj.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>烟火</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/firework.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/firework.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">烟火</source>
+      <description>烟火 一款小体量的恐怖游戏，像一本短暂又令人回味的小说</description>
+      <category>游戏杂谈</category>
+      <pubDate>Mon, 15 Mar 2021 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 烟火</h1>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg" style="zoom:200%;">
+<p>一款小体量的恐怖游戏，像一本短暂又令人回味的小说</p>
+<!-- more -->
+<hr>
+<p>正文</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>古剑奇谭三：梦付千秋星垂野</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">古剑奇谭三：梦付千秋星垂野</source>
+      <description>古剑奇谭三：梦付千秋星垂野 高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</description>
+      <category>游戏杂谈</category>
+      <pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 古剑奇谭三：梦付千秋星垂野</h1>
+<figure><img src="https://th.bing.com/th/id/R.cd979e8c62da7290fde16c6080042814?rik=rxs41US0GuFXCQ&amp;riu=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F0837aafae38223909e07185b86185f6da5c75663.jpg&amp;ehk=LU2HP%2BnwwYcKlAGYQikcmnN3p8edyK67hv%2FRW%2Fo6EIg%3D&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://th.bing.com/th/id/R.cd979e8c62da7290fde16c6080042814?rik=rxs41US0GuFXCQ&amp;riu=http%3a%2f%2fi2.hdslb.com%2fbfs%2farchive%2f0837aafae38223909e07185b86185f6da5c75663.jpg&amp;ehk=LU2HP%2bnwwYcKlAGYQikcmnN3p8edyK67hv%2fRW%2fo6EIg%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" type="image/"/>
+    </item>
+    <item>
+      <title>Minecraft</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/mc.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/mc.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Minecraft</source>
+      <description>Minecraft 从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Minecraft</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" type="image/png"/>
+    </item>
+    <item>
+      <title>僵尸毁灭工程</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">僵尸毁灭工程</source>
+      <description>僵尸毁灭工程 一款十分真实的丧尸沙盒生存游戏，心中同题材下最好的游戏。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 僵尸毁灭工程</h1>
+<figure><img src="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>一款十分真实的丧尸沙盒生存游戏，心中同题材下最好的游戏。</p>
+<!-- more -->
+<hr>
+<p>有那么一段时间我比较沉迷于丧尸这个题材，不论是小说还是电影或者是游戏，在尝试了非常多的这类题材作品过后，最后发现了代入感最强的还是这一款名为《僵尸毁灭工程》的沙盒生存游戏。不过在稍微了解了这个游戏的历史后，发现它居然有好几年的制作历史了，并且一直在持续更新中，在创意工坊中有着大量的玩家自制的MOD可供使用，生态也算是非常的好了。</p>
+<h2> 真实感</h2>
+<figure><img src="https://pic4.zhimg.com/v2-aaa96d369f69d684eed906f8dddfe6b7_r.jpg" alt="僵毁中的医学人体图" tabindex="0" loading="lazy"><figcaption>僵毁中的医学人体图</figcaption></figure>
+<p>虽然游戏本身的画面并不是特别出色，甚至角色还是多边形人，但是丝毫不会减少游戏的魅力--真实。游戏在很多地方都力求还原现实，比如角色遇到丧尸会害怕，当处于恐惧状态时，会跑的更快，但是攻击伤害会更低。当翻窗进废弃房屋搜寻物资时，需要注意窗户上是否有碎玻璃，否则会划伤身体，而清理玻璃必须要戴手套或者使用工具，否则徒手清理也会受伤。当玩家受伤时，需要进行及时的包扎和消毒，如果不及时照顾伤口可能会导致伤口感染，感染后就可能会增加恶化的几率，伤口过深可能会引起破伤风，这时候需要更加专业的医疗工具来进行治疗。当角色遇到的负面事情过多时，就会陷入抑郁状态，而过度抑郁会导致角色状态大幅度下降等等，上述所描述的这些也只是游戏中众多细节中的其中几种，正是这些看起来十分繁琐的细节促成了很强的沉浸感和代入感，玩家可以很直观的体会到一个普通人在面对丧尸危机大爆发的无力感和绝望感。</p>
+<h2> 背景</h2>
+<p>游戏在初代其实是想走线性流程这个方向，那时候是有固定的剧情，但是到了后续更新变成了开放世界沙盒模式，剧情也删减了很多，就现在而言几乎没有什么剧情，但是有一个基本的背景设定（顺便提一下游戏早期只有四个人开发，一路走来可以说是十分的励志）。僵尸毁灭工程的故事发生在上个世界90年代的美国肯塔基州，病毒爆发地点位于路易斯维尔市，也就是地图上右上角的那个大城市，在军方的生化实验室病毒泄露后，短短几天事情便发展到了不可控的地步，直到最后蔓延到了全球。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304021913341.png" alt="肯塔基架空地图" tabindex="0" loading="lazy"><figcaption>肯塔基架空地图</figcaption></figure>
+<p>而作为主角的玩家，只是一个平平无奇的普通人，唯一的目标就是搜寻资源并在这个末世活下去，除此之外游戏开始之后便不会再有任何的剧情。</p>
+<h2> 流程</h2>
+<p>游戏机制算得上十分复杂，玩家需要注意的东西挺多的，第一次玩可能会摸不着头脑，需要考虑到季节，天气，温度，时间，饥饿，口渴，疲劳，忧郁，无聊，受伤，负重等等。在正常的流程中，一般是7月9号夏天开局，你的职业可以是一个普通的上班族，也可以是警察或者是建筑工人，或者是退伍军人，在刚开始的几天仍然会正常播放电视节目和广播节目，彻底沦陷后整个世界只剩一片寂静。门外可能已经聚集了不少丧尸，这时手无寸铁的你需要利用手上一切可以使用的工具，溜出房子去寻找一个安全的庇护所。第一件要做的事就是武装自己，可以是平底锅，棒球棒，撬棍，或者是钢管，切记千万不要随便开枪，枪声会引来一大群丧尸，这反而会成为丧尸们的开饭铃。在找到武器后玩家需要将自己身体的重要部位保护起来，一旦被丧尸造成伤口后果是不堪设想的，你需要穿一些厚实的衣服，但注意别太暖和了，否则运动一小会你就会中暑。</p>
+<p>当有了基本的自我保护能力后，你需要搜集食物和水源，因为不久后城市里就会断水断电，在超市和便利店里可能还会有一些其他幸存者没有搜刮完的食物，这些地方往往危机四伏，冰箱里的食物记得尽早食用，食物腐烂后会导致食物中毒，在医疗崩溃的条件下生病基本等同于死亡，这也是为什么即便再渴也不要随便引用来历不明的水。看见医疗物资一定要记得带上，末世下医疗物资十分珍贵，即便是感冒都可能要人命。居住的庇护所至少要有两层，因为在一楼沦陷的情况下还可以从二楼逃跑，切记时刻给自己留退路，在睡觉的时候一定要记得关门，没有人知道夜里会发生什么事情，在丧尸入侵庇护所后，如果尸体过多不清理掉，很有可能会导致你感染。在完全的断水断电后，对于水源你可以接雨水或者到河边取水后煮沸了再饮用，对于食物你可以不断的出去搜寻物资，或者将找到的种子耕种成农作物自给自足。在基本的稳定下来后，你可以短暂的放松一下了，长时间神经的紧绷会让你十分敏感，这可能会导致抑郁，尝试看录像带或者看漫画来缓解和放松心情。在外出搜寻的过程中，你可能会偶尔听到直升机的声音，在看到直升机后千万不要像个傻子一样大声呼救，马上躲到建筑物内不要让它发现。新闻直升机在发现你后并不会实施救援，而一直盘旋在你头顶拍摄新闻素材，尤其喜欢拍摄幸存者被丧尸撕咬的画面，螺旋桨所发出的巨大噪声会把几乎半个城市的丧尸全部吸引过来，这时候你基本上就是死路一条。</p>
+<p>在解决了温饱过后，如果你运气好在废弃房子的仓库里搜到发电机，那么你可以去所剩无几的加油站的油箱中加油，这样一来你的房子就可以使用冰箱和厨具了，切记发电机产生的气体是有毒的，你需要将它放在室外。如果能找到一辆还能开的车就更完美了，开车的时候注意不要开太快，否则出了车祸后果将不堪设想，不要开车去撞丧尸，因为车的损耗承受不起，在开车回家时不要发出太大的噪声，否则你只会把丧尸引到庇护所去。大城市里面虽然物资丰富，但几乎遍地丧尸，小镇虽然物资少，但是更加安全，切记物资再珍贵也没有命贵。有些丧尸生前是运动员，奔跑的速度非常快，遇到这类丧尸一定要避开。在探索建筑物时，每一道门后面都可能藏有危险，切记不要拿脸开门。有时候野外并不一定就比城市更加安全，夜晚的树林同样危机四伏。如果在深山老林中碰巧发现了军事基地，拿到强大的武器后，你就拥有了与尸潮一战的能力。丧尸们总是会有规律的活动，在一个月的某几天，它们的数量会达到顶峰，这是最危险的时候，丧尸会如潮水般向你的庇护所袭来，你需要奋战到最后一刻来保护你的基地。如果失守了，也不要忘了留得青山在，不怕没柴烧。</p>
+<figure><img src="https://ts1.cn.mm.bing.net/th/id/R-C.c02ad2d0d95f4872067737420690445c?rik=HqY%2B09mKPj3gkA&amp;riu=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F52b46f10c9537dee758573433c55ab3794d26ab9.jpg&amp;ehk=vmotHDavUbFII%2BqgBVfvhlRMoWRkkcKj8FGGAOm%2FiEk%3D&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最后，你在这艰难的末世中顽强的存活了下来，此时病毒已经蔓延到了世界各地，整个世界一片寂静，就算你每天开着收音机也不会有任何回应。对于这绝望的世界，你可以开枪了解自己来结束这痛苦的一生，或者是带着一整车物资外出寻找新的希望，也可以带着武器前往大型商场享受屠杀丧尸的最后狂欢，不论选择哪一种，末世都始终会持续下去，当你死后，会有新的幸存者会继承你的意志并继续活下去。</p>
+<h2> 结语</h2>
+<p>同样的题材也有很多优秀的游戏，即便僵毁画面很复古，但是僵尸毁灭工程满足了我一切对于末世的幻想，非常对我的胃口，在我心目中就是最好的丧尸题材游戏，美中不足的是游戏中人类NPC和动物几乎没有出现，互动也很少，不过这些可以通过加入第三方MOD来添加更多有趣的玩法。</p>
+]]></content:encoded>
+      <enclosure url="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" type="image/"/>
     </item>
     <item>
       <title>Mysql忘记数据库密码</title>
