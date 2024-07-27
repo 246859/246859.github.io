@@ -472,4 +472,4 @@ build_all:
 			$(shell $(MAKE) build os=$(os_i) arch=$(arch_j) mode=$(mode))))
 ```
 
-通过双循环执行目标`build`，这样一来就可以将所有预定平台的二进制文件全部自动编译出来。
+通过双循环执行目标`build`，这样一来就可以将所有预定平台的二进制文件全部自动编译出来，完整版在这里[makefile | Github Gist](https://gist.github.com/246859/1a36cc805b96fb3cc164c70a1df9bee6)。
