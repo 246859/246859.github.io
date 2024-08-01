@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 27 Jul 2024 05:05:30 GMT</pubDate>
-    <lastBuildDate>Sat, 27 Jul 2024 05:05:30 GMT</lastBuildDate>
+    <pubDate>Thu, 01 Aug 2024 08:16:55 GMT</pubDate>
+    <lastBuildDate>Thu, 01 Aug 2024 08:16:55 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>go</category>
@@ -26,6 +26,169 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>如何向Go贡献代码</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/go/contribute2go.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/go/contribute2go.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">如何向Go贡献代码</source>
+      <description>如何向Go贡献代码</description>
+      <category>go</category>
+      <pubDate>Wed, 31 Jul 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 如何向Go贡献代码</h1>
+<figure><img src="https://spf13.com/presentation/how-to-contribute-to-go/front.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<h2> 前言</h2>
+<p>有一天我突发奇想，想自己编写一个契合我个人使用习惯的go版本管理命令行工具，方便随时切换不同的go版本。作为一个版本管理工具，首要的一个功能就是可以随时获取到最新的go版本，以及所有可用的版本列表，go官方有一个API可以查询所有可用的版本列表，如下：</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在通过该接口得到数据后，我尝试用go在1.21新加的一个库<code>go/version</code>来进行排序，可排序后得到的结果让人非常的诧异，示例代码如下所示</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>它的输出是</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>排第一的版本是<code>go1.9.2rc2</code>，而不是最老的版本<code>go1</code>，发现这个问题后我去研究了下<code>go/verison</code>的源代码，发现了下面这一段</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>大致意思就是说，补丁的预发布版本很少会使用到，且可能会产生歧义就将其视为非法的版本，而非法的版本总是会小于合法的版本，这就是为什么<code>go.1.9.2rc2</code>是最小的版本，编写这个标准库的正是go团队的主要领头人Russ cox。</p>
+<p>虽然官方是这样说，但我并不认为这样就是正确的，目前我发现的拥有预发布版本的补丁版本总共有三个：</p>
+<ul>
+<li>1.8.5rc5</li>
+<li>1.8.5rc4</li>
+<li>1.9.2rc2</li>
+</ul>
+<p>尤其是<code>1.9.2rc2</code>，它既然可以在官方接口中可以被查询到，那就说明它是一个可用的版本，但很遗憾的是下面这段代码的结果是false。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>将一个对外可用的版本视为非法的版本，这很明显就是错误的，于是我便想着自己修改，给Go语言提了一个issue：<a href="https://github.com/golang/go/issues/68634" target="_blank" rel="noopener noreferrer">Issue #68634 · golang/go</a>，并且后续向go发起了一个Pull Request来修复这一错误，由于我是第一次向go仓库贡献代码，中间做了许多额外的准备，所以便写下本文做一个记录。</p>
+<h2> 准备</h2>
+<p>在真正开始写代码之前，你需要做一些准备来符合PR的规范，否则官方不会受理你的代码。官方文档详细地描述了如何正确地向Go提交代码<a href="https://go.dev/doc/contribute#commit_messages" target="_blank" rel="noopener noreferrer">Contribution Guide - The Go Programming Language</a>。</p>
+<h3> CLA</h3>
+<p>CLA（Contributor License Agreement），中文名为开源贡献者协议，一般有两种，</p>
+<ul>
+<li>DCO：由linux基金会提出，社区属性比较强，每次提交的时候都要签署</li>
+<li>CLA：由公司法务指定，具有一定法律性质，一次性签署，社区属性弱</li>
+</ul>
+<p>go是谷歌公司的产品， 向其贡献代码前就必须要签署<a href="https://cla.developers.google.com/about" target="_blank" rel="noopener noreferrer">Google CLA</a>，如下图所示</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408010102024.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>有个人版和企业版，对于个人版而言仅需要提供你的名字和邮件联系方式即可，如果你未签署CLA就直接提交PR，github上会有机器人来提醒你签署CLA，在此之前你的PR不会被受理。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408010105232.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<h3> Geerit</h3>
+<p>Gerrit是谷歌开源的一个代码评审平台，可以企业自托管。go的代码审查也是用的gerrit，地址在<a href="https://go-review.googlesource.com/dashboard/self" target="_blank" rel="noopener noreferrer">Go |Gerrit Code Review</a>，界面大致如下图。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408010115925.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>你需要在这里注册一个账号，因为所有的PR都会被机器人转发到gerrit，负责代码审查的人员会在这里对你的代码提出规范和建议，所以不要在GitHub的PR页面做出任何回复和评论，机器人会告诉你到哪里去查看。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408010116746.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>如果你后续需要修改代码，只需要提交到Github上即可，代码审查的工作在Gerrit上进行。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>建议在本地安装go官方的一个review命令行工具，下面是一些简单的用法</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 冻结期</h3>
+<p>每年的5-7月，11-1月是go语言的冻结期，这段时间一般是为了发布新的次级版本而做准备，在这段时间内代码审查的工作会放缓，只有一小部分比较重要的更改会被合并，在此期间只接受修复已有的bug和文档更新类的修改，如果你是在这个时间点内提交其他类型的PR，可能会要等一段时间才会有回应，直到冻结期结束。</p>
+<h2> 编码</h2>
+<p>当你做好上述准备工作以后，就可以开始着手准备写代码了。</p>
+<h3> 仓库结构</h3>
+<p>go语言有很多仓库，它们无一例外全都托管谷歌仓库中，你可以在<a href="https://go.googlesource.com/" target="_blank" rel="noopener noreferrer">Git repositories on go | Google</a>查看到所有和go有关的项目，你也可以在<a href="https://github.com/golang" target="_blank" rel="noopener noreferrer">github.com/golang</a>组织下看到这些项目的镜像，不过并不是所有项目都保持活跃，有些可能被遗弃了，在提交代码的时候记得注意这一点。下面简单介绍下最主要的几个，你需要弄清楚自己做出的修改要提交到哪里去才行。</p>
+<p><strong>主仓库</strong></p>
+<p>地址：<a href="http://go.googlesource.com/go" target="_blank" rel="noopener noreferrer">go.googlesource.com/go</a></p>
+<p>镜像：<a href="http://github.com/golang/go" target="_blank" rel="noopener noreferrer">github.com/golang/go</a></p>
+<p>主仓库存放了go语言绝大部分代码，大部分修改都在这里进行，比如语法，运行时，gc，和一些标准库之类的。</p>
+<p><strong>proposal</strong></p>
+<p>地址：<a href="http://go.googlesource.com/proposal" target="_blank" rel="noopener noreferrer">go.googlesource.com/proposal</a></p>
+<p>镜像：<a href="http://github.com/golang/proposal" target="_blank" rel="noopener noreferrer">github.com/golang/proposal</a></p>
+<p>go语言提案库，所有涉及到go语言特性的重大变更都必须先在这里发起一个提案</p>
+<p><strong>tools</strong></p>
+<p>地址：<a href="http://go.googlesource.com/tools" target="_blank" rel="noopener noreferrer">go.googlesource.com/tools</a></p>
+<p>镜像：<a href="http://github.com/golang/tools" target="_blank" rel="noopener noreferrer">github.com/golang/tools</a></p>
+<p>对应<code>golang.org/x/tools</code>，tools仓库存放着一些官方编写的工具，比如goimports，stringer，gopls之类</p>
+<p><strong>net</strong></p>
+<p>地址：<a href="http://go.googlesource.com/net" target="_blank" rel="noopener noreferrer">go.googlesource.com/net</a></p>
+<p>镜像：<a href="http://github.com/golang/net" target="_blank" rel="noopener noreferrer">github.com/golang/net</a></p>
+<p>对应<code>golang.org/x/net</code>，net库是官方对net标准库的一个补充</p>
+<p><strong>crypot</strong></p>
+<p>地址：<a href="http://go.googlesource.com/crypto" target="_blank" rel="noopener noreferrer">go.googlesource.com/crypto</a></p>
+<p>镜像：<a href="http://github.com/golang/crypto" target="_blank" rel="noopener noreferrer">github.com/golang/crypto</a></p>
+<p>对应<code>golang.org/x/crypto</code>，是对crypto标准库的一个补充</p>
+<p><strong>gofrontend</strong></p>
+<p>地址：<a href="http://go.googlesource.com/gofrontend" target="_blank" rel="noopener noreferrer">go.googlesource.com/gofrontend</a></p>
+<p>镜像：<a href="http://github.com/golang/gofrontend" target="_blank" rel="noopener noreferrer">github.com/golang/gofrontend</a></p>
+<p>gccgo，go编译器前端</p>
+<p><strong>vscode-go</strong></p>
+<p>地址：<a href="http://go.googlesource.com/vscode-go" target="_blank" rel="noopener noreferrer">go.googlesource.com/vscode-go</a></p>
+<p>镜像：<a href="http://github.com/golang/vscode-go" target="_blank" rel="noopener noreferrer">github.com/golang/vscode-go</a></p>
+<p>go语言的vscode插件</p>
+<p>里面还有很多项目，这里就不一一列出了，可以前往谷歌仓库自行查阅。</p>
+<h3> 安全漏洞</h3>
+<p>这篇文章详细说明了如何报告安全漏洞：<a href="https://go.dev/doc/security/policy" target="_blank" rel="noopener noreferrer">Go Security Policy - The Go Programming Language</a></p>
+<p>如果你发现了安全漏洞，不要在github上提issue或PR，go有一个专门处理安全问题的团队，将你遇到的问题详细描述（用英文）然后发邮件给这个地址：security@golang.org，团队成功会尽快在7天内做出回复，为了避免被当成垃圾邮件，请确保邮件里面包含了<strong>vulnerability</strong>这个单词，意思就是漏洞，或者也可以去这里<a href="https://bughunters.google.com/report" target="_blank" rel="noopener noreferrer">Report Overview | Google Bug Hunters - Google Bug Hunters</a>反馈安全漏洞。</p>
+<h3> 本地编译</h3>
+<p>在决定好向哪一个仓库贡献代码后，用git将其克隆到本地，比如我这里是主仓库，使用Github地址与谷歌的地址是等效的，单纯是因为我更习惯Github上的操作。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在将代码拉下来后，首先要做的第一件事就是先编译go项目，编译器用的是本地go自带的gc，进入src目录（必须在src目录执行），执行make脚本，如果你是windows平台，就执行<code>make.bat</code>，其他平台就执行<code>make.bash</code>，在编译完成后，二进制文件会存放在go/bin目录下，工具链会存放在go/pkg目录下。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>go仓库光是go代码就有250w+行，还不包含其他的一些文件，不过整体编译时间并不需要很久，测了下平均耗时在一分半左右。</p>
+<p>官方准备了三种类型的脚本，它们的作用如下</p>
+<ul>
+<li>make.bash，仅编译</li>
+<li>run.bash，不编译，运行所有的测试用例</li>
+<li>all.bash，先编译，然后再运行所有的测试用例</li>
+</ul>
+<p>可以看自己的需要来使用哪一个。</p>
+<h3> 代码规范</h3>
+<p>在开始写代码之前，你首先需要创建一个新的分支，然后在新分支上做出修改，分支名称并没有严格规范，像github平时那样就好</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>你每新建一个go文件，就需要在文件头部加上如下的注释，其中的年份是你提交修改的年份，注释中不要提及任何人的姓名</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>如果你新建了一个包，就需要在包级注释中说明这个包是干什么用的，就像标准库<code>bytes</code></p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后就是提交规范，这是官方给的一个示例</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>格式如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>第一行需要标注出影响范围和对本次提交的简短总结，必须以冒号分隔，如果有多个影响范围可以用逗号隔开，总结必须小写字母开头且尽量精简到76个字母以内，示例如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后是主要内容，不能使用markdown，html，latex等任何标记语言，这一部分需要描述的尽可能详细，需要说明起因和结果，并且附上尽可能详细的数据，比如修改的代码涉及到性能，可以附上基准测试的数据。下面是一个示例，该提交涉及到了内存逃逸方面。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最后就是需要引用相关的issue，最好每一个PR都与一个issue相关联，方便溯源。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 本地测试</h3>
+<p>在完成所有的编码工作后，你需要编写相应的单元测试，这一点是必须要做的。然后在src目录下（必须在src目录下执行）执行<code>all.bash/bat</code>脚本，该脚本会编译go代码并执行所有的测试</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>由于需要将go代码中所有的测试都执行完，耗时可能会比较久，大概在10分钟左右，所有测试通过后会显示下面一行内容</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>如果你只是对某一个标准库做了修改，你也可以不用执行全部的测试，你可以使用编译好后的go指定执行某一个标准库的测试用例，比如</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>不过我还是建议执行所有的测试用例，因为单独执行测试用例我基本上就没怎么成功过。</p>
+<h3> Pull Request</h3>
+<p>在完成所有的修改后，将其推送到Github，然后向go仓库发起Pull Request，如下图</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408011203739.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>过一会儿会有机器人来告诉你PR已经被转发到Gerrit</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408011205270.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>之后的代码审查工作就是在gerrit进行，gerrit的评论也会同步到Github，不过不要在这里做出任何回复。</p>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>如果你使用<code>git codereview mail</code>来将这些修改推送到gerrit，可能会有如下错误，因为Gerrit不接受来自中国IP的任何提交</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>并不是因为Go团队有地域歧视，原因看这个<a href="https://github.com/golang/go/issues/20065" target="_blank" rel="noopener noreferrer">access to Gerrit denied because of location · Issue #20065 · golang/go (github.com)</a>。如果你不想换IP的话，可以在Github上发PR让机器人帮你推送到Gerrit上，这样是最简单的方式</p>
+</div>
+<h2> 代码审查</h2>
+<p>代码审查的流程是最长的，如果你是社区贡献人员（谷歌员工的PR合并会快很多），并且改动比较大的话，那么通常需要好几轮审查才能确认将代码合并到主线当中，这一过程可能会耗时一两个星期甚至一个月。</p>
+<p>大多数第一次提交代码的人会犯一些比较典型的错误</p>
+<ul>
+<li>提交信息不符合规范</li>
+<li>缺少对Github Issue的引用</li>
+<li>在冻结期提交修改</li>
+</ul>
+<p>第一点是最重要的，因为你的提交会被合并到主线当中，所以必须要符合规范。第二点的话如果你只是改了个注释或者什么其他微不足道的修改，也不需要引用issue。第三点其实也没那么重要，时间一过自然会发邮件通知审查你的代码的，无非只是等的时间长了点。</p>
+<h3> 审查人员</h3>
+<p>审查人员大多都是go团队的成员或者是谷歌公司的员工，以及部分社区人员组成，PR被转发到Gerrit后，如果你是第一次向Go贡献代码的话，为了避免这是垃圾邮件可能要过一段时间才会来审查的你的代码。如果有需要的话，你也可以直接指定谁来审查你的代码</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408011510744.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>你可以在Change Info部分中指定审查人员和CC</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408011511213.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>或者你也可以用命令行的方式</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>通常来说对于第一次贡献代码的人来说，如果你不知道指定谁，可以先发个issue看看，有哪些人会回答你的问题，如果他刚好是维护者的话就可以指定他来审查。如果你没有指定，那么系统也会自动为你分配审查人员的。</p>
+<h3> Trybots</h3>
+<p>当一个审查人员初步浏览了你的代码后，会启动Trybots，来进行自动化测试，就跟之前在本地测试的一样，不同的是trybots会在各个不同的环境进行测试，就跟Github Actions差不多类似。如果运行失败了，就需要查明哪里出了问题，然后修改代码重新提交。</p>
+<h3> 投票</h3>
+<p>审查人员和其他无关的第三方人员都可以给你的PR投票，第三方人员可以投一个<code>+1</code>，表示这个代码写的还不错，但还需要审查人员来进行评审，只有在获得审查人员的<code>+2</code>投票后，代码才能被合并，如果审查人员给你投了一个<code>+1</code>的话表示代码整体可以，但还需要做一些小的修改。</p>
+<p>总的来说，如果你的PR想要被合并，就必须要两名审查人员的参与，至少一个<code>+1</code>和<code>+2</code>投票才能继续流程。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408011536498.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>对于一个PR而言，通常决定能否提交的指标下面这几个</p>
+<ul>
+<li>CR（code-review）：表示codereview是否完成</li>
+<li>NUC（non-unresolved-comment）：，没有未处理的审查</li>
+<li>RE（Review-enforcement）：执行了codereview</li>
+<li>TP（trybots-passes）：trybots测试通过</li>
+</ul>
+<p>如果你是其他类型的修改可能会需要完成更多的CI测试，比如KCP（kokoro-CI-Passes），LP（LUCI-Passes），LTP（legacy-trybos-passes）等等，如果对应的CI测试通过了就会加分，相应的如果失败了就会扣分。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408011541602.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<h3> 修改</h3>
+<p>一般来说很少会有一次性通过的代码，审查人员会检查你代码中的逻辑错误，即便是一些注释问题也会指出来，这时候他们会留下评论，如下图所示</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408011548843.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>如果你是通过Github机器人来与Gerrit交互的，那么你只需要将你本地的代码推送Github上就行了，机器人会自动更新修改，完成一个评论后点击Done按钮来告诉审查人员已解决。</p>
+<h3> 合并</h3>
+<p>当所有的工作都完成且通过，没有任何异议的时候，代码就会被合并，如下图所示。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408011543561.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>想要被顺利合并通常要花费不少时间，不要着急就对了。</p>
+<h2> 总结</h2>
+<p>给Go贡献代码并不只是简单的写代码做修改就完事了，要注意的流程和规范非常多，这样严格管理的好处是不容易出问题，能够保证代码质量。这一套codereview流程，对于刚接触的人来说会觉得很繁琐和麻烦，不过熟悉了过后就没什么了，了解这一套codereview流程也便于养成好的编程习惯，毕竟谷歌是由数万人组成的大型公司，良好的规范可以让屎山堆的更慢一些。</p>
+]]></content:encoded>
+      <enclosure url="https://spf13.com/presentation/how-to-contribute-to-go/front.jpg" type="image/jpeg"/>
+    </item>
     <item>
       <title>使用Makefile来构建Go程序</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/go/makefile.html</link>
@@ -746,16 +909,17 @@
 <!-- more -->
 <hr>
 <p>在5月末的时候，背部的左下方靠腰的地方长了几个红色的小痘痘，刚开始没怎么在意，只是觉得有点痒，直到6月2号骑完车回来洗澡的时候仔细看了下，发现背后已经长了一大片红斑，大概有成年人一个手掌那么大，而且还在往腰部的方向逐渐蔓延，摸起来有颗粒感，晚上睡觉的时候又痒又痛，这种痛感是那种刺骨的感觉，整的我难以入睡，当晚就觉得不对劲，第二天起来一早就直接去学校最近的一个诊所查看情况。</p>
-<p>给我看病的是一个头发半白的老头，他只是看了我后背一眼就得出了结论：<strong>带状疱疹</strong>。这玩意跟水痘差不多，都是由水痘病毒引起的，只是传染性没那么强，在宿主免疫力下降的时候会发病，越早治疗越容易痊愈，图就不放出来了，网上一大把，很容易引起不适。</p>
+<p>给我看病的是一个头发半白的老头，他只是看了我后背一眼就得出了结论：<strong>带状疱疹</strong>。这玩意跟水痘差不多，都是由水痘病毒引起的，只是传染性没那么强，在宿主免疫力下降的时候会发病，越早治疗越容易痊愈，网上有很多类似的图片，很容易引起生理不适。</p>
 <p>不到几分钟，老医生很快就给出了治疗方法</p>
 <ol>
 <li>扎火针放血，扎破痘泡使其快速结疤</li>
 <li>在患病部位涂抹阿韦昔洛凝胶，防止其继续蔓延</li>
 <li>输液打点滴，补充各种维生素营养液，提升免疫力</li>
-<li>吃一些缓解神经痛</li>
+<li>吃一些缓解神经痛的药</li>
 </ol>
-<p>其中的扎火针疗法不是必须的，但是很有效，同时也非常的折磨人，本来就挺疼的，还要用针扎，前后总共扎了两次，扎完过后涂抹药膏用射线灯照射将其烤干，相当折磨人，护士小姐姐给我扎针时还问我难道不觉得疼吗，疼当然是疼，只是早已麻木了。折磨半天后开始输液了，终于可以静下来了，于是我开始反思最近生活作息确实有点反人类了，经常熬夜，总是吃油腻外卖，运动量过低，个人卫生问题，这些可能都是导致免疫力下降的因素，这次得病也算是身体给我发出的一个警告。</p>
-<p>老医生跟我说这病没有十天半个月好不了，相当顽固，必须根除，否则很容易再重新长出来，后遗症也很折磨人，好消息是治好后基本上很难复发。实习的事情大概率也黄了，先安心治病吧，顺便也调整下生活作息，这篇文章就简单记录下我得病的过程，希望以后不要再犯了，能有一个健康的身体比什么都重要。</p>
+<p>其中的扎火针疗法不是必须的，但是很有效，同时也非常的折磨人，本来就挺疼的，还要用针扎，前后总共扎了两次，扎完过后涂抹药膏用射线灯照射将其烤干，相当折磨人，护士小姐姐给我扎针时还问我难道不觉得疼吗，疼当然是疼，只是早已麻木了。折磨半天后开始输液了，才终于可以静下来，然后我开始反思最近生活作息确实有点反人类了，经常熬夜，总是吃油腻外卖，运动量过低，个人卫生问题，这些可能都是导致免疫力下降的因素，这次生病也算是身体给我发出的一个警告。</p>
+<p>老医生跟我说这病没有一个月好不了，相当顽固，必须根除，否则很容易再重新长出来，后遗症也很折磨人，好消息是治好后基本上很难复发。</p>
+<p><strong>最难受的事情就是实习大概率黄了</strong>，先安心治病吧，顺便也调整下生活作息，这篇文章就简单记录下我得病的过程，希望以后不要再犯了，能有一个健康的身体比什么都重要。</p>
 ]]></content:encoded>
     </item>
     <item>
@@ -3683,90 +3847,6 @@
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091722442.jpg" type="image/jpeg"/>
     </item>
     <item>
-      <title>在Linux上搭建K8s集群</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Linux上搭建K8s集群</source>
-      <description>在Linux上搭建K8s集群 最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</description>
-      <category>技术日志</category>
-      <pubDate>Mon, 25 Sep 2023 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 在Linux上搭建K8s集群</h1>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</p>
-<!-- more -->
-<hr>
-<figure><img src="https://d33wubrfki0l68.cloudfront.net/2475489eaf20163ec0f54ddc1d92aa8d4c87c96b/e7c81/images/docs/components-of-kubernetes.svg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>最近在学习k8s，不得不说这玩意运行起来还是相当的麻烦，这里记录一下，以免后面忘了。事先准备好三台ubuntu22.04虚拟机，一台用作control plane，两台用作worker node。</p>
-<h2> 前置准备</h2>
-<p>在开始安装k8s之前，需要做一些前置的准备。</p>
-<h3> 关闭firewalld</h3>
-<p>k8s有着自己的网络策略配置功能，关闭friewalld是为了避免起冲突。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 禁用selinux</h3>
-<p>selinux是linux的一个安全子系统，很多服务器未为了避免麻烦都会把它关了，ubuntu在装机的时候不会自带这玩意，但如果你装了的话可以按照下面的步骤关闭。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 关闭swap</h3>
-<p>kubelet运行时明确不支持swap，也就是交换内存，一部分原因是想让程序在内存耗尽以后正常OOM而不是一直靠swap苟着从而造成不必要的损失。如果未关闭swap直接启动的话，kubelet在启动时会显示如下信息告诉你应该关闭swap，否则不让你启动。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先执行命令关闭交换分区</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后修改<code>fstab</code>文件</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>注释掉如下行</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行如下命令查看swap分区情况，如果关闭了的话就不会有任何显示</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 配置网络</h3>
-<p>转发 IPv4 并让 iptables 看到桥接流量</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>br_netfilter</code> 和 <code>overlay</code> 模块被加载：</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>net.bridge.bridge-nf-call-iptables</code>、<code>net.bridge.bridge-nf-call-ip6tables</code> 和 <code>net.ipv4.ip_forward</code> 系统变量在你的 <code>sysctl</code> 配置中被设置为 1</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> CRI</h2>
-<p>Container Runtime Interface（CRI），即容器运行时接口，要想使用K8s的话，需要系统提供CRI，目前实现了CRI的软件的有</p>
-<ul>
-<li>containerd，推荐用这个，比较轻量。</li>
-<li>docker engine，并没有实现CRI但是可以通过其它方法桥接，不过一般安装了docker engine的系统都会有containerd，因为containerd就是docker的一部分，所以还是建议用containerd。</li>
-<li>CRI-O</li>
-<li>MCR</li>
-</ul>
-<h3> containerd</h3>
-<p>下面会用containerd来做演示，其实containerd安装过程就是docker安装过程，先设置docker官方的apt仓库</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a href="http://xn--containerd-j05qpn034ff9b232ee69h.io" target="_blank" rel="noopener noreferrer">最后就只安装containerd.io</a>，不用安装dcoker-ce和docker-cli。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>或者你也可以直接下载containerd的二进制文件，它也是用go写的。在安装好后，需要配置systemd cgroup驱动，在containerd配置文件中</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改如下的配置项</p>
-<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="hint-container tip">
-<p class="hint-container-title">提示</p>
-<p>使用如下命令可以重置containerd配置</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></div>
-<p>从软件包安装的话可能会默认禁用CRI，在配置文件中可能会看到这么一行，将其去掉就行。</p>
-<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改完后重启containerd</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> 安装</h2>
-<p>配置下k8s的阿里云apt源</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>更新证书</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>再更新源</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最后安装<code>kubeadm</code>，<code>kubectl</code>，<code>kubelet</code>，这三个最好软件版本保持一致。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>完成后确认版本</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>确认版本一致后，看看k8s的镜像，后续必须pull这些镜像，因为这是k8s集群运行的必要组件。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>到目前为止，系统上会有下面这几个东西</p>
-<ul>
-<li><code>kebuadm</code>，用来快速启动和搭建k8s集群的工具，可以省去我们很多操作。</li>
-<li><code>kubelet</code>，k8s集群命令行管理工具</li>
-<li><code>kubelet</code>，代表着一个节点，是k8s集群的基本单位。</li>
-<li><code>crictl</code>，容器运行时管理工具，只不过它是为k8s工作的，正确使用的前提是系统上安装了支持CRI的软件并正确指定了endpoint。</li>
-<li><code>ctr</code>，ctr是containerd的命令管理工具，containerd实现了CRI。</li>
-</ul>
-<h3> cri endpoint</h3>
-<p>ctrctl虽然是容器运行时管理工具，但是它并没有具体的实现，只是定义了一组接口规范。要想正常工作还得依赖具体的实现了CRI的软件，之前已经安装好了containerd，所以运行前要先指定crictl的<code>runtime-endpoint</code>，也就是containerd的sock地址。</p>
-<p>通过查看配置文件<code>etc/containerd/config.toml</code>可以得知</p>
-<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>那么endpoint就是</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>所以执行如下命令配置crictl</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 拉镜像</h3>
-<p>kubeadm支持通过命令预先拉取需要用到的组件镜像，也就是之前list出来的镜像，执行如下命令就可以预先拉取要用到的镜像。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>但是不出意外的话，意外就会发生了，上述的镜像仓库是<code>registry.k8s.io</code>，是由谷歌托管的，国内基本上没法访问，甚至于在线获取版本信息都不行</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>解决方法就是国内的镜像，阿里云有一个镜像仓库，地址如下</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>网上有很多教程直接在<code>kubeadm init</code>时直接指定了阿里云镜像仓库，这样会导致kubelet没法正常运行，会说找不到组件的镜像，因为kubelet运行的时候只认<code>registry.k8s.io</code>镜像，而通过阿里云镜像仓库拉下来的镜像的前缀是<code>registry.aliyuncs.com/google_containers</code>，所以kubelet自然就没法启动了。所以对应的，拉取完下面的镜像后，应该将其名字改回去。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>crictl并不能修改镜像名，这是ctr应该干的事情，为了能够查看到k8s的镜像，指定命名空间<code>k8s.io</code></p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>一个个改名太麻烦了，所以我写了一个脚本，来自动化完成这个过程。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>或者也可以</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 初始化</h3>
-<p>接下来使用kubeadm来初始化，这个操作只用在master节点进行。init时有很多参数，开始前可以看看命令帮助。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>接下来就开始初始化，如果上面的配置都做好了的话，是不会出现问题的。</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
-      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" type="image/png"/>
-    </item>
-    <item>
       <title>黑暗之魂I：重制版</title>
       <link>https://246859.github.io/my-blog-giscus/posts/game/darksoul1.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/game/darksoul1.html</guid>
@@ -3907,6 +3987,90 @@
 <hr>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202310091154859.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>在Linux上搭建K8s集群</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/k8s_install.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">在Linux上搭建K8s集群</source>
+      <description>在Linux上搭建K8s集群 最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</description>
+      <category>技术日志</category>
+      <pubDate>Mon, 25 Sep 2023 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 在Linux上搭建K8s集群</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最近捣鼓了下用虚拟机搭建k8s集群，坑还是挺多的。</p>
+<!-- more -->
+<hr>
+<figure><img src="https://d33wubrfki0l68.cloudfront.net/2475489eaf20163ec0f54ddc1d92aa8d4c87c96b/e7c81/images/docs/components-of-kubernetes.svg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最近在学习k8s，不得不说这玩意运行起来还是相当的麻烦，这里记录一下，以免后面忘了。事先准备好三台ubuntu22.04虚拟机，一台用作control plane，两台用作worker node。</p>
+<h2> 前置准备</h2>
+<p>在开始安装k8s之前，需要做一些前置的准备。</p>
+<h3> 关闭firewalld</h3>
+<p>k8s有着自己的网络策略配置功能，关闭friewalld是为了避免起冲突。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 禁用selinux</h3>
+<p>selinux是linux的一个安全子系统，很多服务器未为了避免麻烦都会把它关了，ubuntu在装机的时候不会自带这玩意，但如果你装了的话可以按照下面的步骤关闭。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 关闭swap</h3>
+<p>kubelet运行时明确不支持swap，也就是交换内存，一部分原因是想让程序在内存耗尽以后正常OOM而不是一直靠swap苟着从而造成不必要的损失。如果未关闭swap直接启动的话，kubelet在启动时会显示如下信息告诉你应该关闭swap，否则不让你启动。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先执行命令关闭交换分区</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后修改<code>fstab</code>文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>注释掉如下行</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行如下命令查看swap分区情况，如果关闭了的话就不会有任何显示</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 配置网络</h3>
+<p>转发 IPv4 并让 iptables 看到桥接流量</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>br_netfilter</code> 和 <code>overlay</code> 模块被加载：</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>通过运行以下指令确认 <code>net.bridge.bridge-nf-call-iptables</code>、<code>net.bridge.bridge-nf-call-ip6tables</code> 和 <code>net.ipv4.ip_forward</code> 系统变量在你的 <code>sysctl</code> 配置中被设置为 1</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> CRI</h2>
+<p>Container Runtime Interface（CRI），即容器运行时接口，要想使用K8s的话，需要系统提供CRI，目前实现了CRI的软件的有</p>
+<ul>
+<li>containerd，推荐用这个，比较轻量。</li>
+<li>docker engine，并没有实现CRI但是可以通过其它方法桥接，不过一般安装了docker engine的系统都会有containerd，因为containerd就是docker的一部分，所以还是建议用containerd。</li>
+<li>CRI-O</li>
+<li>MCR</li>
+</ul>
+<h3> containerd</h3>
+<p>下面会用containerd来做演示，其实containerd安装过程就是docker安装过程，先设置docker官方的apt仓库</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a href="http://xn--containerd-j05qpn034ff9b232ee69h.io" target="_blank" rel="noopener noreferrer">最后就只安装containerd.io</a>，不用安装dcoker-ce和docker-cli。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>或者你也可以直接下载containerd的二进制文件，它也是用go写的。在安装好后，需要配置systemd cgroup驱动，在containerd配置文件中</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改如下的配置项</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>使用如下命令可以重置containerd配置</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></div>
+<p>从软件包安装的话可能会默认禁用CRI，在配置文件中可能会看到这么一行，将其去掉就行。</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>修改完后重启containerd</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2> 安装</h2>
+<p>配置下k8s的阿里云apt源</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>更新证书</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>再更新源</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最后安装<code>kubeadm</code>，<code>kubectl</code>，<code>kubelet</code>，这三个最好软件版本保持一致。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>完成后确认版本</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>确认版本一致后，看看k8s的镜像，后续必须pull这些镜像，因为这是k8s集群运行的必要组件。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>到目前为止，系统上会有下面这几个东西</p>
+<ul>
+<li><code>kebuadm</code>，用来快速启动和搭建k8s集群的工具，可以省去我们很多操作。</li>
+<li><code>kubelet</code>，k8s集群命令行管理工具</li>
+<li><code>kubelet</code>，代表着一个节点，是k8s集群的基本单位。</li>
+<li><code>crictl</code>，容器运行时管理工具，只不过它是为k8s工作的，正确使用的前提是系统上安装了支持CRI的软件并正确指定了endpoint。</li>
+<li><code>ctr</code>，ctr是containerd的命令管理工具，containerd实现了CRI。</li>
+</ul>
+<h3> cri endpoint</h3>
+<p>ctrctl虽然是容器运行时管理工具，但是它并没有具体的实现，只是定义了一组接口规范。要想正常工作还得依赖具体的实现了CRI的软件，之前已经安装好了containerd，所以运行前要先指定crictl的<code>runtime-endpoint</code>，也就是containerd的sock地址。</p>
+<p>通过查看配置文件<code>etc/containerd/config.toml</code>可以得知</p>
+<div class="language-toml line-numbers-mode" data-ext="toml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>那么endpoint就是</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>所以执行如下命令配置crictl</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 拉镜像</h3>
+<p>kubeadm支持通过命令预先拉取需要用到的组件镜像，也就是之前list出来的镜像，执行如下命令就可以预先拉取要用到的镜像。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>但是不出意外的话，意外就会发生了，上述的镜像仓库是<code>registry.k8s.io</code>，是由谷歌托管的，国内基本上没法访问，甚至于在线获取版本信息都不行</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>解决方法就是国内的镜像，阿里云有一个镜像仓库，地址如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>网上有很多教程直接在<code>kubeadm init</code>时直接指定了阿里云镜像仓库，这样会导致kubelet没法正常运行，会说找不到组件的镜像，因为kubelet运行的时候只认<code>registry.k8s.io</code>镜像，而通过阿里云镜像仓库拉下来的镜像的前缀是<code>registry.aliyuncs.com/google_containers</code>，所以kubelet自然就没法启动了。所以对应的，拉取完下面的镜像后，应该将其名字改回去。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>crictl并不能修改镜像名，这是ctr应该干的事情，为了能够查看到k8s的镜像，指定命名空间<code>k8s.io</code></p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>一个个改名太麻烦了，所以我写了一个脚本，来自动化完成这个过程。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>或者也可以</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3> 初始化</h3>
+<p>接下来使用kubeadm来初始化，这个操作只用在master节点进行。init时有很多参数，开始前可以看看命令帮助。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>接下来就开始初始化，如果上面的配置都做好了的话，是不会出现问题的。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202309251850239.png" type="image/png"/>
     </item>
     <item>
       <title>数据库被注入恶意信息</title>
@@ -4267,6 +4431,118 @@
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304021221784.jpg" type="image/jpeg"/>
     </item>
     <item>
+      <title>血源诅咒</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">血源诅咒</source>
+      <description>血源诅咒 心中永远的神作游戏，没有之一</description>
+      <category>游戏杂谈</category>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 血源诅咒</h1>
+<figure><img src="https://img.3dmgame.com/uploads/allimg/170717/316-1FGGG244.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>心中永远的神作游戏，没有之一</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://img.3dmgame.com/uploads/allimg/170717/316-1FGGG244.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>风来之国</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">风来之国</source>
+      <description>风来之国 它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</description>
+      <category>游戏杂谈</category>
+      <pubDate>Mon, 20 Sep 2021 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 风来之国</h1>
+<figure><img src="https://blob.keylol.com/forum/202104/26/235332fwzmvhyw2brmbwcj.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://blob.keylol.com/forum/202104/26/235332fwzmvhyw2brmbwcj.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>烟火</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/firework.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/firework.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">烟火</source>
+      <description>烟火 一款小体量的恐怖游戏，像一本短暂又令人回味的小说</description>
+      <category>游戏杂谈</category>
+      <pubDate>Mon, 15 Mar 2021 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 烟火</h1>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg" style="zoom:200%;">
+<p>一款小体量的恐怖游戏，像一本短暂又令人回味的小说</p>
+<!-- more -->
+<hr>
+<p>正文</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>古剑奇谭三：梦付千秋星垂野</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">古剑奇谭三：梦付千秋星垂野</source>
+      <description>古剑奇谭三：梦付千秋星垂野 高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</description>
+      <category>游戏杂谈</category>
+      <pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 古剑奇谭三：梦付千秋星垂野</h1>
+<figure><img src="https://th.bing.com/th/id/R.cd979e8c62da7290fde16c6080042814?rik=rxs41US0GuFXCQ&amp;riu=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F0837aafae38223909e07185b86185f6da5c75663.jpg&amp;ehk=LU2HP%2BnwwYcKlAGYQikcmnN3p8edyK67hv%2FRW%2Fo6EIg%3D&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://th.bing.com/th/id/R.cd979e8c62da7290fde16c6080042814?rik=rxs41US0GuFXCQ&amp;riu=http%3a%2f%2fi2.hdslb.com%2fbfs%2farchive%2f0837aafae38223909e07185b86185f6da5c75663.jpg&amp;ehk=LU2HP%2bnwwYcKlAGYQikcmnN3p8edyK67hv%2fRW%2fo6EIg%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" type="image/"/>
+    </item>
+    <item>
+      <title>Minecraft</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/mc.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/mc.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Minecraft</source>
+      <description>Minecraft 从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Sun, 20 Sep 2020 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Minecraft</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" type="image/png"/>
+    </item>
+    <item>
+      <title>僵尸毁灭工程</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">僵尸毁灭工程</source>
+      <description>僵尸毁灭工程 一款十分真实的丧尸沙盒生存游戏，心中同题材下最好的游戏。</description>
+      <category>游戏杂谈</category>
+      <pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 僵尸毁灭工程</h1>
+<figure><img src="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>一款十分真实的丧尸沙盒生存游戏，心中同题材下最好的游戏。</p>
+<!-- more -->
+<hr>
+<p>有那么一段时间我比较沉迷于丧尸这个题材，不论是小说还是电影或者是游戏，在尝试了非常多的这类题材作品过后，最后发现了代入感最强的还是这一款名为《僵尸毁灭工程》的沙盒生存游戏。不过在稍微了解了这个游戏的历史后，发现它居然有好几年的制作历史了，并且一直在持续更新中，在创意工坊中有着大量的玩家自制的MOD可供使用，生态也算是非常的好了。</p>
+<h2> 真实感</h2>
+<figure><img src="https://pic4.zhimg.com/v2-aaa96d369f69d684eed906f8dddfe6b7_r.jpg" alt="僵毁中的医学人体图" tabindex="0" loading="lazy"><figcaption>僵毁中的医学人体图</figcaption></figure>
+<p>虽然游戏本身的画面并不是特别出色，甚至角色还是多边形人，但是丝毫不会减少游戏的魅力--真实。游戏在很多地方都力求还原现实，比如角色遇到丧尸会害怕，当处于恐惧状态时，会跑的更快，但是攻击伤害会更低。当翻窗进废弃房屋搜寻物资时，需要注意窗户上是否有碎玻璃，否则会划伤身体，而清理玻璃必须要戴手套或者使用工具，否则徒手清理也会受伤。当玩家受伤时，需要进行及时的包扎和消毒，如果不及时照顾伤口可能会导致伤口感染，感染后就可能会增加恶化的几率，伤口过深可能会引起破伤风，这时候需要更加专业的医疗工具来进行治疗。当角色遇到的负面事情过多时，就会陷入抑郁状态，而过度抑郁会导致角色状态大幅度下降等等，上述所描述的这些也只是游戏中众多细节中的其中几种，正是这些看起来十分繁琐的细节促成了很强的沉浸感和代入感，玩家可以很直观的体会到一个普通人在面对丧尸危机大爆发的无力感和绝望感。</p>
+<h2> 背景</h2>
+<p>游戏在初代其实是想走线性流程这个方向，那时候是有固定的剧情，但是到了后续更新变成了开放世界沙盒模式，剧情也删减了很多，就现在而言几乎没有什么剧情，但是有一个基本的背景设定（顺便提一下游戏早期只有四个人开发，一路走来可以说是十分的励志）。僵尸毁灭工程的故事发生在上个世界90年代的美国肯塔基州，病毒爆发地点位于路易斯维尔市，也就是地图上右上角的那个大城市，在军方的生化实验室病毒泄露后，短短几天事情便发展到了不可控的地步，直到最后蔓延到了全球。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304021913341.png" alt="肯塔基架空地图" tabindex="0" loading="lazy"><figcaption>肯塔基架空地图</figcaption></figure>
+<p>而作为主角的玩家，只是一个平平无奇的普通人，唯一的目标就是搜寻资源并在这个末世活下去，除此之外游戏开始之后便不会再有任何的剧情。</p>
+<h2> 流程</h2>
+<p>游戏机制算得上十分复杂，玩家需要注意的东西挺多的，第一次玩可能会摸不着头脑，需要考虑到季节，天气，温度，时间，饥饿，口渴，疲劳，忧郁，无聊，受伤，负重等等。在正常的流程中，一般是7月9号夏天开局，你的职业可以是一个普通的上班族，也可以是警察或者是建筑工人，或者是退伍军人，在刚开始的几天仍然会正常播放电视节目和广播节目，彻底沦陷后整个世界只剩一片寂静。门外可能已经聚集了不少丧尸，这时手无寸铁的你需要利用手上一切可以使用的工具，溜出房子去寻找一个安全的庇护所。第一件要做的事就是武装自己，可以是平底锅，棒球棒，撬棍，或者是钢管，切记千万不要随便开枪，枪声会引来一大群丧尸，这反而会成为丧尸们的开饭铃。在找到武器后玩家需要将自己身体的重要部位保护起来，一旦被丧尸造成伤口后果是不堪设想的，你需要穿一些厚实的衣服，但注意别太暖和了，否则运动一小会你就会中暑。</p>
+<p>当有了基本的自我保护能力后，你需要搜集食物和水源，因为不久后城市里就会断水断电，在超市和便利店里可能还会有一些其他幸存者没有搜刮完的食物，这些地方往往危机四伏，冰箱里的食物记得尽早食用，食物腐烂后会导致食物中毒，在医疗崩溃的条件下生病基本等同于死亡，这也是为什么即便再渴也不要随便引用来历不明的水。看见医疗物资一定要记得带上，末世下医疗物资十分珍贵，即便是感冒都可能要人命。居住的庇护所至少要有两层，因为在一楼沦陷的情况下还可以从二楼逃跑，切记时刻给自己留退路，在睡觉的时候一定要记得关门，没有人知道夜里会发生什么事情，在丧尸入侵庇护所后，如果尸体过多不清理掉，很有可能会导致你感染。在完全的断水断电后，对于水源你可以接雨水或者到河边取水后煮沸了再饮用，对于食物你可以不断的出去搜寻物资，或者将找到的种子耕种成农作物自给自足。在基本的稳定下来后，你可以短暂的放松一下了，长时间神经的紧绷会让你十分敏感，这可能会导致抑郁，尝试看录像带或者看漫画来缓解和放松心情。在外出搜寻的过程中，你可能会偶尔听到直升机的声音，在看到直升机后千万不要像个傻子一样大声呼救，马上躲到建筑物内不要让它发现。新闻直升机在发现你后并不会实施救援，而一直盘旋在你头顶拍摄新闻素材，尤其喜欢拍摄幸存者被丧尸撕咬的画面，螺旋桨所发出的巨大噪声会把几乎半个城市的丧尸全部吸引过来，这时候你基本上就是死路一条。</p>
+<p>在解决了温饱过后，如果你运气好在废弃房子的仓库里搜到发电机，那么你可以去所剩无几的加油站的油箱中加油，这样一来你的房子就可以使用冰箱和厨具了，切记发电机产生的气体是有毒的，你需要将它放在室外。如果能找到一辆还能开的车就更完美了，开车的时候注意不要开太快，否则出了车祸后果将不堪设想，不要开车去撞丧尸，因为车的损耗承受不起，在开车回家时不要发出太大的噪声，否则你只会把丧尸引到庇护所去。大城市里面虽然物资丰富，但几乎遍地丧尸，小镇虽然物资少，但是更加安全，切记物资再珍贵也没有命贵。有些丧尸生前是运动员，奔跑的速度非常快，遇到这类丧尸一定要避开。在探索建筑物时，每一道门后面都可能藏有危险，切记不要拿脸开门。有时候野外并不一定就比城市更加安全，夜晚的树林同样危机四伏。如果在深山老林中碰巧发现了军事基地，拿到强大的武器后，你就拥有了与尸潮一战的能力。丧尸们总是会有规律的活动，在一个月的某几天，它们的数量会达到顶峰，这是最危险的时候，丧尸会如潮水般向你的庇护所袭来，你需要奋战到最后一刻来保护你的基地。如果失守了，也不要忘了留得青山在，不怕没柴烧。</p>
+<figure><img src="https://ts1.cn.mm.bing.net/th/id/R-C.c02ad2d0d95f4872067737420690445c?rik=HqY%2B09mKPj3gkA&amp;riu=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F52b46f10c9537dee758573433c55ab3794d26ab9.jpg&amp;ehk=vmotHDavUbFII%2BqgBVfvhlRMoWRkkcKj8FGGAOm%2FiEk%3D&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>最后，你在这艰难的末世中顽强的存活了下来，此时病毒已经蔓延到了世界各地，整个世界一片寂静，就算你每天开着收音机也不会有任何回应。对于这绝望的世界，你可以开枪了解自己来结束这痛苦的一生，或者是带着一整车物资外出寻找新的希望，也可以带着武器前往大型商场享受屠杀丧尸的最后狂欢，不论选择哪一种，末世都始终会持续下去，当你死后，会有新的幸存者会继承你的意志并继续活下去。</p>
+<h2> 结语</h2>
+<p>同样的题材也有很多优秀的游戏，即便僵毁画面很复古，但是僵尸毁灭工程满足了我一切对于末世的幻想，非常对我的胃口，在我心目中就是最好的丧尸题材游戏，美中不足的是游戏中人类NPC和动物几乎没有出现，互动也很少，不过这些可以通过加入第三方MOD来添加更多有趣的玩法。</p>
+]]></content:encoded>
+      <enclosure url="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" type="image/"/>
+    </item>
+    <item>
       <title>Typora配合图床搭建教程</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/pic.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/code/pic.html</guid>
@@ -4497,118 +4773,6 @@
 </div>
 ]]></content:encoded>
       <enclosure url="https://vuepress.vuejs.org/hero.png" type="image/png"/>
-    </item>
-    <item>
-      <title>血源诅咒</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/bloodborn.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">血源诅咒</source>
-      <description>血源诅咒 心中永远的神作游戏，没有之一</description>
-      <category>游戏杂谈</category>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 血源诅咒</h1>
-<figure><img src="https://img.3dmgame.com/uploads/allimg/170717/316-1FGGG244.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>心中永远的神作游戏，没有之一</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://img.3dmgame.com/uploads/allimg/170717/316-1FGGG244.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>风来之国</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/eastward.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">风来之国</source>
-      <description>风来之国 它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</description>
-      <category>游戏杂谈</category>
-      <pubDate>Mon, 20 Sep 2021 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 风来之国</h1>
-<figure><img src="https://blob.keylol.com/forum/202104/26/235332fwzmvhyw2brmbwcj.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>它让我想起了小时候躲在被窝里在捧着老式诺基亚玩的一款塞班像素游戏</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://blob.keylol.com/forum/202104/26/235332fwzmvhyw2brmbwcj.jpg" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>烟火</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/firework.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/firework.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">烟火</source>
-      <description>烟火 一款小体量的恐怖游戏，像一本短暂又令人回味的小说</description>
-      <category>游戏杂谈</category>
-      <pubDate>Mon, 15 Mar 2021 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 烟火</h1>
-<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/firework.jpg" style="zoom:200%;">
-<p>一款小体量的恐怖游戏，像一本短暂又令人回味的小说</p>
-<!-- more -->
-<hr>
-<p>正文</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>古剑奇谭三：梦付千秋星垂野</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/gujianqitan.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">古剑奇谭三：梦付千秋星垂野</source>
-      <description>古剑奇谭三：梦付千秋星垂野 高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</description>
-      <category>游戏杂谈</category>
-      <pubDate>Wed, 02 Jan 2019 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 古剑奇谭三：梦付千秋星垂野</h1>
-<figure><img src="https://th.bing.com/th/id/R.cd979e8c62da7290fde16c6080042814?rik=rxs41US0GuFXCQ&amp;riu=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F0837aafae38223909e07185b86185f6da5c75663.jpg&amp;ehk=LU2HP%2BnwwYcKlAGYQikcmnN3p8edyK67hv%2FRW%2Fo6EIg%3D&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>高中时在WebGame上掏钱买的一款国产游戏，应该是那段时间国产游戏行业的一道光</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://th.bing.com/th/id/R.cd979e8c62da7290fde16c6080042814?rik=rxs41US0GuFXCQ&amp;riu=http%3a%2f%2fi2.hdslb.com%2fbfs%2farchive%2f0837aafae38223909e07185b86185f6da5c75663.jpg&amp;ehk=LU2HP%2bnwwYcKlAGYQikcmnN3p8edyK67hv%2fRW%2fo6EIg%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" type="image/"/>
-    </item>
-    <item>
-      <title>Minecraft</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/mc.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/mc.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Minecraft</source>
-      <description>Minecraft 从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</description>
-      <category>游戏杂谈</category>
-      <pubDate>Sun, 20 Sep 2020 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> Minecraft</h1>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>从小学就开始玩了，从啥都不会到自己搭建游戏服务器，再到自己编写游戏插件，踏上编程之路也全是因为它。</p>
-<!-- more -->
-<hr>
-]]></content:encoded>
-      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/mc.png" type="image/png"/>
-    </item>
-    <item>
-      <title>僵尸毁灭工程</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/game/pzb.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">僵尸毁灭工程</source>
-      <description>僵尸毁灭工程 一款十分真实的丧尸沙盒生存游戏，心中同题材下最好的游戏。</description>
-      <category>游戏杂谈</category>
-      <pubDate>Thu, 01 Dec 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 僵尸毁灭工程</h1>
-<figure><img src="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>一款十分真实的丧尸沙盒生存游戏，心中同题材下最好的游戏。</p>
-<!-- more -->
-<hr>
-<p>有那么一段时间我比较沉迷于丧尸这个题材，不论是小说还是电影或者是游戏，在尝试了非常多的这类题材作品过后，最后发现了代入感最强的还是这一款名为《僵尸毁灭工程》的沙盒生存游戏。不过在稍微了解了这个游戏的历史后，发现它居然有好几年的制作历史了，并且一直在持续更新中，在创意工坊中有着大量的玩家自制的MOD可供使用，生态也算是非常的好了。</p>
-<h2> 真实感</h2>
-<figure><img src="https://pic4.zhimg.com/v2-aaa96d369f69d684eed906f8dddfe6b7_r.jpg" alt="僵毁中的医学人体图" tabindex="0" loading="lazy"><figcaption>僵毁中的医学人体图</figcaption></figure>
-<p>虽然游戏本身的画面并不是特别出色，甚至角色还是多边形人，但是丝毫不会减少游戏的魅力--真实。游戏在很多地方都力求还原现实，比如角色遇到丧尸会害怕，当处于恐惧状态时，会跑的更快，但是攻击伤害会更低。当翻窗进废弃房屋搜寻物资时，需要注意窗户上是否有碎玻璃，否则会划伤身体，而清理玻璃必须要戴手套或者使用工具，否则徒手清理也会受伤。当玩家受伤时，需要进行及时的包扎和消毒，如果不及时照顾伤口可能会导致伤口感染，感染后就可能会增加恶化的几率，伤口过深可能会引起破伤风，这时候需要更加专业的医疗工具来进行治疗。当角色遇到的负面事情过多时，就会陷入抑郁状态，而过度抑郁会导致角色状态大幅度下降等等，上述所描述的这些也只是游戏中众多细节中的其中几种，正是这些看起来十分繁琐的细节促成了很强的沉浸感和代入感，玩家可以很直观的体会到一个普通人在面对丧尸危机大爆发的无力感和绝望感。</p>
-<h2> 背景</h2>
-<p>游戏在初代其实是想走线性流程这个方向，那时候是有固定的剧情，但是到了后续更新变成了开放世界沙盒模式，剧情也删减了很多，就现在而言几乎没有什么剧情，但是有一个基本的背景设定（顺便提一下游戏早期只有四个人开发，一路走来可以说是十分的励志）。僵尸毁灭工程的故事发生在上个世界90年代的美国肯塔基州，病毒爆发地点位于路易斯维尔市，也就是地图上右上角的那个大城市，在军方的生化实验室病毒泄露后，短短几天事情便发展到了不可控的地步，直到最后蔓延到了全球。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304021913341.png" alt="肯塔基架空地图" tabindex="0" loading="lazy"><figcaption>肯塔基架空地图</figcaption></figure>
-<p>而作为主角的玩家，只是一个平平无奇的普通人，唯一的目标就是搜寻资源并在这个末世活下去，除此之外游戏开始之后便不会再有任何的剧情。</p>
-<h2> 流程</h2>
-<p>游戏机制算得上十分复杂，玩家需要注意的东西挺多的，第一次玩可能会摸不着头脑，需要考虑到季节，天气，温度，时间，饥饿，口渴，疲劳，忧郁，无聊，受伤，负重等等。在正常的流程中，一般是7月9号夏天开局，你的职业可以是一个普通的上班族，也可以是警察或者是建筑工人，或者是退伍军人，在刚开始的几天仍然会正常播放电视节目和广播节目，彻底沦陷后整个世界只剩一片寂静。门外可能已经聚集了不少丧尸，这时手无寸铁的你需要利用手上一切可以使用的工具，溜出房子去寻找一个安全的庇护所。第一件要做的事就是武装自己，可以是平底锅，棒球棒，撬棍，或者是钢管，切记千万不要随便开枪，枪声会引来一大群丧尸，这反而会成为丧尸们的开饭铃。在找到武器后玩家需要将自己身体的重要部位保护起来，一旦被丧尸造成伤口后果是不堪设想的，你需要穿一些厚实的衣服，但注意别太暖和了，否则运动一小会你就会中暑。</p>
-<p>当有了基本的自我保护能力后，你需要搜集食物和水源，因为不久后城市里就会断水断电，在超市和便利店里可能还会有一些其他幸存者没有搜刮完的食物，这些地方往往危机四伏，冰箱里的食物记得尽早食用，食物腐烂后会导致食物中毒，在医疗崩溃的条件下生病基本等同于死亡，这也是为什么即便再渴也不要随便引用来历不明的水。看见医疗物资一定要记得带上，末世下医疗物资十分珍贵，即便是感冒都可能要人命。居住的庇护所至少要有两层，因为在一楼沦陷的情况下还可以从二楼逃跑，切记时刻给自己留退路，在睡觉的时候一定要记得关门，没有人知道夜里会发生什么事情，在丧尸入侵庇护所后，如果尸体过多不清理掉，很有可能会导致你感染。在完全的断水断电后，对于水源你可以接雨水或者到河边取水后煮沸了再饮用，对于食物你可以不断的出去搜寻物资，或者将找到的种子耕种成农作物自给自足。在基本的稳定下来后，你可以短暂的放松一下了，长时间神经的紧绷会让你十分敏感，这可能会导致抑郁，尝试看录像带或者看漫画来缓解和放松心情。在外出搜寻的过程中，你可能会偶尔听到直升机的声音，在看到直升机后千万不要像个傻子一样大声呼救，马上躲到建筑物内不要让它发现。新闻直升机在发现你后并不会实施救援，而一直盘旋在你头顶拍摄新闻素材，尤其喜欢拍摄幸存者被丧尸撕咬的画面，螺旋桨所发出的巨大噪声会把几乎半个城市的丧尸全部吸引过来，这时候你基本上就是死路一条。</p>
-<p>在解决了温饱过后，如果你运气好在废弃房子的仓库里搜到发电机，那么你可以去所剩无几的加油站的油箱中加油，这样一来你的房子就可以使用冰箱和厨具了，切记发电机产生的气体是有毒的，你需要将它放在室外。如果能找到一辆还能开的车就更完美了，开车的时候注意不要开太快，否则出了车祸后果将不堪设想，不要开车去撞丧尸，因为车的损耗承受不起，在开车回家时不要发出太大的噪声，否则你只会把丧尸引到庇护所去。大城市里面虽然物资丰富，但几乎遍地丧尸，小镇虽然物资少，但是更加安全，切记物资再珍贵也没有命贵。有些丧尸生前是运动员，奔跑的速度非常快，遇到这类丧尸一定要避开。在探索建筑物时，每一道门后面都可能藏有危险，切记不要拿脸开门。有时候野外并不一定就比城市更加安全，夜晚的树林同样危机四伏。如果在深山老林中碰巧发现了军事基地，拿到强大的武器后，你就拥有了与尸潮一战的能力。丧尸们总是会有规律的活动，在一个月的某几天，它们的数量会达到顶峰，这是最危险的时候，丧尸会如潮水般向你的庇护所袭来，你需要奋战到最后一刻来保护你的基地。如果失守了，也不要忘了留得青山在，不怕没柴烧。</p>
-<figure><img src="https://ts1.cn.mm.bing.net/th/id/R-C.c02ad2d0d95f4872067737420690445c?rik=HqY%2B09mKPj3gkA&amp;riu=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F52b46f10c9537dee758573433c55ab3794d26ab9.jpg&amp;ehk=vmotHDavUbFII%2BqgBVfvhlRMoWRkkcKj8FGGAOm%2FiEk%3D&amp;risl=&amp;pid=ImgRaw&amp;r=0" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>最后，你在这艰难的末世中顽强的存活了下来，此时病毒已经蔓延到了世界各地，整个世界一片寂静，就算你每天开着收音机也不会有任何回应。对于这绝望的世界，你可以开枪了解自己来结束这痛苦的一生，或者是带着一整车物资外出寻找新的希望，也可以带着武器前往大型商场享受屠杀丧尸的最后狂欢，不论选择哪一种，末世都始终会持续下去，当你死后，会有新的幸存者会继承你的意志并继续活下去。</p>
-<h2> 结语</h2>
-<p>同样的题材也有很多优秀的游戏，即便僵毁画面很复古，但是僵尸毁灭工程满足了我一切对于末世的幻想，非常对我的胃口，在我心目中就是最好的丧尸题材游戏，美中不足的是游戏中人类NPC和动物几乎没有出现，互动也很少，不过这些可以通过加入第三方MOD来添加更多有趣的玩法。</p>
-]]></content:encoded>
-      <enclosure url="https://p.qpic.cn/mwegame/0/35174daa0ac19eea6357e12924a107ca/" type="image/"/>
     </item>
     <item>
       <title>Mysql忘记数据库密码</title>
