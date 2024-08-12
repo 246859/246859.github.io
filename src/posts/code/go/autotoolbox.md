@@ -63,7 +63,7 @@ $HOME/AppData/Local/Jetbrains/Toolbox/
 
 请确保设置中的**生成Shell脚本**处于打开状态，否则工具无法正常工具。
 
-<img alt="shellpath" src="image/shellpath.png" width=500 height=200/>
+<img alt="shellpath" src="https://github.com/246859/AutoToolBox/raw/main/image/shellpath.png" width=500 height=200/>
 
 ### 迁移
 如果你是旧版工具的使用者，且想要升级到新版，可以使用旧版生成的`toolboxRemove.reg`将旧版注册表删除，然后再按照下面的方法使用新版即可。
