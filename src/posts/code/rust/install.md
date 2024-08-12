@@ -122,6 +122,22 @@ rust项目可以通过cargo工具来进行创建，rust项目分为两种类型
 
 默认情况下采用debug模式。
 
+<br/>
+
+一个初始的rust项目结构如下
+
+```
+|-- Cargo.lock
+|-- Cargo.toml
+|-- src/
+|   `-- main.rs
+`-- target/
+    |-- debug/
+    |-- release/
+```
+
+`cargo.lock`和`cargo.toml`是用于管理依赖的，跟nodejs一样，项目的入口文件是`src/main.rs`，编译出来的文件会在`target`目录，以`debug`和`release`进行区分。
+
 
 
 ## Hello World
