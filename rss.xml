@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 12 Aug 2024 09:18:02 GMT</pubDate>
-    <lastBuildDate>Mon, 12 Aug 2024 09:18:02 GMT</lastBuildDate>
+    <pubDate>Tue, 27 Aug 2024 02:28:04 GMT</pubDate>
+    <lastBuildDate>Tue, 27 Aug 2024 02:28:04 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>go</category>
@@ -198,7 +198,7 @@
       <category>go</category>
       <pubDate>Fri, 26 Jul 2024 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 使用Makefile来构建Go程序</h1>
-<figure><img src="https://cdn.golangdocs.com/wp-content/uploads/2021/02/go_makefile.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408271022015.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
 <!-- more -->
 <h2> 简介</h2>
 <p>Make起源于1977年的贝尔实验室中，目的就是为了能更好的构建大型程序，贝尔实验室的大型程序自然就是Unix操作系统。在后来诞生了它的许多变种，比较知名是下面两个。</p>
@@ -272,7 +272,7 @@
 <div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这个模板基本上满足大部分Go项目的需求了，假如说要多平台编译的话，还可以再加上下面这段</p>
 <div class="language-makefile line-numbers-mode" data-ext="makefile"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过双循环执行目标<code>build</code>，这样一来就可以将所有预定平台的二进制文件全部自动编译出来，完整版在这里<a href="https://gist.github.com/246859/1a36cc805b96fb3cc164c70a1df9bee6" target="_blank" rel="noopener noreferrer">makefile | Github Gist</a>。</p>
 ]]></content:encoded>
-      <enclosure url="https://cdn.golangdocs.com/wp-content/uploads/2021/02/go_makefile.png" type="image/png"/>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408271022015.png" type="image/png"/>
     </item>
     <item>
       <title>go语言操作windows注册表</title>
@@ -3818,7 +3818,8 @@
 <li>rustfmt：代码格式化工具</li>
 <li>rust-std：标准库</li>
 </ul>
-<h2> 项目</h2>
+<h2> 术语&amp;介绍</h2>
+<p><strong>项目类型</strong></p>
 <p>rust项目可以通过cargo工具来进行创建，rust项目分为两种类型</p>
 <ul>
 <li>bin：表示项目会被编译为二进制文件</li>
@@ -3826,6 +3827,7 @@
 </ul>
 <p>默认创建bin类型的项目。</p>
 <br>
+<p><strong>编译模式</strong></p>
 <p>在开发本地项目时，cargo编译模式分两种</p>
 <ul>
 <li>debug：编译优化少，速度快，生成的二进制文件运行性能低下，就是开发模式</li>
@@ -3833,15 +3835,37 @@
 </ul>
 <p>默认情况下采用debug模式。</p>
 <br>
+<p><strong>项目结构</strong></p>
 <p>一个初始的rust项目结构如下</p>
 <div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code>cargo.lock</code>和<code>cargo.toml</code>是用于管理依赖的，跟nodejs一样，项目的入口文件是<code>src/main.rs</code>，编译出来的文件会在<code>target</code>目录，以<code>debug</code>和<code>release</code>进行区分。</p>
-<h2> Hello World</h2>
-<p>使用cargo创建一个新项目</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>编写hello world代码</p>
-<div class="language-rust line-numbers-mode" data-ext="rs"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>编译并以debug模式运行</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>以release模式运行</p>
-<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 评价</h2>
-<p>Rust的难度并没有像Go一样简单到可以看几个例子就学会语法，个人感觉有些地方设计的非常好，比如错误处理，泛型，枚举，并且依赖管理这方面做的也比Go好很多。它也确实能让人感觉到是一个现代化的语言，自带语言版本管理工具，完善的依赖管理，丰富的文档，跨平台支持良好，就目前带给我的体验而言，感觉没有什么可以抱怨的点。</p>
+<p><strong>一些术语</strong></p>
+<ul>
+<li>crate：crate 是一个二进制项或者库（这个东西该怎么翻译都不知道）</li>
+<li>package：提供一系列功能的一个或者多个 crate</li>
+</ul>
+<h2> cargo</h2>
+<p>cargo的特性如果要细扣的话有很多，对于新手来说其实只需要记住几个使用的命令就够了</p>
+<p>创建项目</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>运行项目</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>编译</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>检查代码</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>生成离线文档，生成的路径位于<code>target/doc</code></p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>它还会为将你项目所有依赖的文档整合到一起，如下图</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408121925112.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<h2> 案例</h2>
+<p>这是官方的一个入门案例，是一个简单的猜数字游戏。</p>
+<div class="language-rust line-numbers-mode" data-ext="rs"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>短短30行代码，里面的内容涉及到了</p>
+<ul>
+<li>所有权与借用</li>
+<li>match语句</li>
+<li>输入输出</li>
+<li>关联函数</li>
+<li>循环语句</li>
+<li>错误处理</li>
+<li>外部crate</li>
+</ul>
+<h2> 个人评价</h2>
+<p>Rust的难度并没有简单到像Go一样可以看几个例子就学会语法，它的学习成本并不低，如果熟练掌握了应该会成为一个很强大的工具。个人感觉有些地方设计的非常好，比如错误处理，泛型，枚举，并且依赖管理这方面做的也比Go好很多。它也确实能让人感觉到是一个现代化的语言，自带语言版本管理工具，完善的依赖管理，丰富的文档，跨平台支持良好，就目前带给我的体验而言，感觉没有什么可以抱怨的点。</p>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312061513880.png" type="image/png"/>
     </item>
