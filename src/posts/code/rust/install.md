@@ -104,7 +104,9 @@ rust安装后会下载一系列工具链，简单介绍以下
 
 
 
-## 项目
+## 术语&介绍
+
+**项目类型**
 
 rust项目可以通过cargo工具来进行创建，rust项目分为两种类型
 
@@ -115,6 +117,8 @@ rust项目可以通过cargo工具来进行创建，rust项目分为两种类型
 
 <br/>
 
+**编译模式**
+
 在开发本地项目时，cargo编译模式分两种
 
 - debug：编译优化少，速度快，生成的二进制文件运行性能低下，就是开发模式
@@ -123,6 +127,8 @@ rust项目可以通过cargo工具来进行创建，rust项目分为两种类型
 默认情况下采用debug模式。
 
 <br/>
+
+**项目结构**
 
 一个初始的rust项目结构如下
 
@@ -138,48 +144,103 @@ rust项目可以通过cargo工具来进行创建，rust项目分为两种类型
 
 `cargo.lock`和`cargo.toml`是用于管理依赖的，跟nodejs一样，项目的入口文件是`src/main.rs`，编译出来的文件会在`target`目录，以`debug`和`release`进行区分。
 
+**一些术语**
+
+- crate：crate 是一个二进制项或者库（这个东西该怎么翻译都不知道）
+- package：提供一系列功能的一个或者多个 crate
 
 
-## Hello World
 
-使用cargo创建一个新项目
+## cargo
+
+cargo的特性如果要细扣的话有很多，对于新手来说其实只需要记住几个使用的命令就够了
+
+创建项目
 
 ```bash
-$ cargo new rustlearn
+$ cargo new my_project
 ```
 
-编写hello world代码
-
-```rust
-fn main() {
-    println!("hello world!")
-}
-```
-
-编译并以debug模式运行
+运行项目
 
 ```bash
 $ cargo run
-   Compiling rustlearn v0.1.0 (D:\work\code\learn\rustlearn)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.04s
-     Running `target\debug\rustlearn.exe`
-hello world!
-
 ```
 
-以release模式运行
+编译
 
 ```bash
-$ cargo run --release
-   Compiling rustlearn v0.1.0 (D:\work\code\learn\rustlearn)
-    Finished `release` profile [optimized] target(s) in 0.15s                               
-     Running `target\release\rustlearn.exe`
-hello world!
+$ cargo build
 ```
 
+检查代码
+
+```bash
+$ cargo check
+```
+
+生成离线文档，生成的路径位于`target/doc`
+
+```bash
+$ cargo doc --open
+```
+
+它还会为将你项目所有依赖的文档整合到一起，如下图
+
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408121925112.png)
 
 
-## 评价
 
-Rust的难度并没有像Go一样简单到可以看几个例子就学会语法，个人感觉有些地方设计的非常好，比如错误处理，泛型，枚举，并且依赖管理这方面做的也比Go好很多。它也确实能让人感觉到是一个现代化的语言，自带语言版本管理工具，完善的依赖管理，丰富的文档，跨平台支持良好，就目前带给我的体验而言，感觉没有什么可以抱怨的点。
+## 案例
+
+这是官方的一个入门案例，是一个简单的猜数字游戏。
+
+```rust
+use std::cmp::Ordering;
+use std::io;
+use rand::Rng;
+
+fn main() {
+    println!("guess the number between 1 and 100, input your guess:");
+    let rand_number = rand::thread_rng().gen_range(1..=100);
+
+    loop {
+        let mut guess = String::new();
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("failed to read line");
+        println!("You guessed: {}", guess);
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        match guess.cmp(&rand_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too large!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
+    }
+}
+```
+
+短短30行代码，里面的内容涉及到了
+
+- 所有权与借用
+- match语句
+- 输入输出
+- 关联函数
+- 循环语句
+- 错误处理
+- 外部crate
+
+
+
+## 个人评价
+
+Rust的难度并没有简单到像Go一样可以看几个例子就学会语法，它的学习成本并不低，如果熟练掌握了应该会成为一个很强大的工具。个人感觉有些地方设计的非常好，比如错误处理，泛型，枚举，并且依赖管理这方面做的也比Go好很多。它也确实能让人感觉到是一个现代化的语言，自带语言版本管理工具，完善的依赖管理，丰富的文档，跨平台支持良好，就目前带给我的体验而言，感觉没有什么可以抱怨的点。
 
