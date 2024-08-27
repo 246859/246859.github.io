@@ -13,7 +13,7 @@ tag:
 
 # 使用Makefile来构建Go程序
 
-![](https://cdn.golangdocs.com/wp-content/uploads/2021/02/go_makefile.png)
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202408271022015.png)
 
 <!-- more -->
 
