@@ -74,13 +74,13 @@ mongo        6.0         427729062675   8 days ago     681MB
 创建要挂载的数据目录
 
 ```sh
-mkdir -p ~/db/mongo/data
+mkdir -p /var/db/mongo/data
 ```
 
 创建默认的配置文件
 
 ```sh
-touch ~/db/mongo/mongod.conf
+touch /var/db/mongo/mongod.conf
 ```
 
 写入如下配置
@@ -98,10 +98,20 @@ systemLog:
 创建默认的日志文件
 
 ```sh
-touch ~/db/mongo/mongod.log
+touch /var/db/mongo/mongod.logs
 ```
 
+**记得要给日志文件足够的权限**
 
+```sh
+chmod 766 /var/db/mongo/mongod.logs
+```
+
+不然容器启动时，mongod会报错无法打开日志文件
+
+```json
+{"error":{"code":38,"codeName":"FileNotOpen","errmsg":"Can't initialize rotatable log file :: caused by :: Failed to open /etc/mongo/mongod.log"}}
+```
 
 
 
@@ -111,11 +121,12 @@ touch ~/db/mongo/mongod.log
 
 ```sh
 $ docker run --restart=always --name mongo6 \
-	-v ~/db/mongo/mongod.conf:/etc/mongo/mongod.conf \
-	-v ~/db/mongo/mongod.log:/etc/mongo/mongod.log \
-	-v ~/db/mongo/data/:/data/db \
+	-v /var/db/mongo/mongod.conf:/etc/mongo/mongod.conf \
+	-v /var/db/mongo/mongod.log:/etc/mongo/mongod.log \
+	-v /var/db/mongo/data/:/data/db \
 	-p 27017:27017 \
 	-e LANG=C.UTF-8 \
+	--privileged=true \
 	-d mongo:6.0 \
 	mongod -f /etc/mongo/mongod.conf
 ```
@@ -198,7 +209,7 @@ dbAdminAnyDatabase：只在admin数据库中可用，赋予用户所有数据库
 root：只在admin数据库中可用。超级账号，超级权限
 ```
 
-切换倒admin数据库后再创建
+我们需要切换倒admin数据库后再创建
 
 ```sh
 admin> use admin
@@ -246,7 +257,7 @@ admin> db.system.users.find()
 ]
 ```
 
-完成后，退出然后修改mongo的配置文件添加
+完成后，退出然后修改mongo的配置文件添加，这样后续登陆的时候就需要认证了
 
 ```yaml
 security:
