@@ -115,4 +115,64 @@ clash日志这里也有输出，是走了代理的
 NFO[0036] [TCP] 127.0.0.1:32822 --> api.steampowered.com:443 match DomainSuffix(steampowered.com) using GLaDOS-D1-01
 ```
 
-如果有需求的话，可以做成系统服务，进行更加方便的管理。
+
+
+## 服务
+
+把clash安装成系统服务会更方便些，编写如下的service文件
+
+```
+[Unit]
+Description=Clash daemon, A rule-based proxy in Go.
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+# 这里clash的位置自己改
+ExecStart=/usr/local/bin/clash -d /etc/clash
+
+[Install]
+WantedBy=multi-user.target
+```
+
+将service文件存放在如下路径
+
+```
+/etc/systemd/system/clash.service
+```
+
+然后重新加载daemon
+
+```sh
+$ systemctl daemon-reload
+```
+
+启用clash
+
+```bash
+$ systemctl enable clash
+```
+
+启动
+
+```sh
+$ systemctl start clash
+```
+
+查看状态，正常的话就成功了
+
+```bash
+$ systemctl status clash
+● clash.service - Clash daemon, A rule-based proxy in Go.
+     Loaded: loaded (/etc/systemd/system/clash.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2024-08-28 13:29:11 CST; 1h 20min ago
+   Main PID: 3009 (clash)
+      Tasks: 13 (limit: 4581)
+     Memory: 30.9M
+        CPU: 7.663s
+     CGroup: /system.slice/clash.service
+             └─3009 /var/lib/clash/clash -d /etc/clash
+```
+
+这样每次clash每次都会开机自启，交由systemd来管理，无需我们手动操作。
