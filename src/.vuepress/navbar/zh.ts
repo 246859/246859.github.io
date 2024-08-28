@@ -63,7 +63,7 @@ export const zhNavbar = navbar([
                     },
                     {
                         text: "数据库",
-                        link: "/category/数据库/"
+                        link: "/category/db/"
                     },
                 ]
             },
