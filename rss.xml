@@ -6,13 +6,13 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 28 Aug 2024 06:53:05 GMT</pubDate>
-    <lastBuildDate>Wed, 28 Aug 2024 06:53:05 GMT</lastBuildDate>
+    <pubDate>Sat, 14 Sep 2024 10:28:42 GMT</pubDate>
+    <lastBuildDate>Sat, 14 Sep 2024 10:28:42 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>docker</category>
     <category>go</category>
     <category>linux</category>
-    <category>docker</category>
     <category>windows</category>
     <category>技术日志</category>
     <category>python</category>
@@ -26,6 +26,249 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>Docker部署Elastic Stack8.x实践</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/docker/docker_install_elk.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/docker/docker_install_elk.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Docker部署Elastic Stack8.x实践</source>
+      <description>Docker部署Elastic Stack8.x实践</description>
+      <category>docker</category>
+      <pubDate>Fri, 06 Sep 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Docker部署Elastic Stack8.x实践</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409062109276.webp" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<h2> 介绍</h2>
+<p>大家常说的Elastic Stack通常指的是就是ELK，它一般由几个组件组成</p>
+<ul>
+<li><a href="https://github.com/elastic/elasticsearch" target="_blank" rel="noopener noreferrer">Elasticsearch</a> - 开源分布式搜索引擎，核心组件</li>
+<li><a href="https://github.com/elastic/logstash" target="_blank" rel="noopener noreferrer">Logstash</a> - 开源数据流处理管道，负责把数据流输送给elasticsearch</li>
+<li><a href="https://github.com/elastic/kibana" target="_blank" rel="noopener noreferrer">Kibana</a> - elasticsearch的web UI界面</li>
+<li><a href="https://www.elastic.co/cn/beats" target="_blank" rel="noopener noreferrer">Beats</a> - 数据采集器，位于客户端侧，负责将收集到的数据发送到管道中（非必需）</li>
+</ul>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409111607921.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>beats的种类有很多，下面这些是官方开发的：</p>
+<ul>
+<li>Filebeat，采集日志文件</li>
+<li>Metricbeat，采集监控指标</li>
+<li>Packetbeat，采集网络数据</li>
+<li>Winlogbeat，采集windows事件日志</li>
+<li>Auditbeat，采集审计数据</li>
+<li>Hertbeat，运行状态采集</li>
+</ul>
+<p>还有很多社区开发的beats，支持更多数据源，你可以前往<a href="https://www.elastic.co/guide/en/beats/libbeat/current/community-beats.html" target="_blank" rel="noopener noreferrer">Community Beats</a>查看更多信息。</p>
+<p>ELK通常的用途是用于构建一个强大的日志分析系统，一般为了容错率还会在传输链中额外加一个消息队列组件，数据的流向如下所示。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在这类场景中，对消息队列的稳定性和一致性要求不高，只要能够堆积大量数据且足够快，所以Kafka成了最佳之选，不过这并不代表其他消息队列就不能用，像RabbitMQ，RocktMQ，以至于Redis Stream也都是支持的。</p>
+<p>除此之外，ELK还可以配合数据同步组件，将其他负责存储的数据库（例如MySQL）中的数据增量/全量同步到Elasticsearch中，这样就能借由ElasticSearch来实现关系数据库所做不到的高速全文检索。</p>
+<p>总之ELK是一套很强大的组合，它的功能应用很广泛，本文接下来会演示如何安装ELK这三个组件，并介绍基础使用，环境如下：</p>
+<ul>
+<li>OS：Debian12</li>
+<li>Elastic Stack版本<code>8.15.0</code></li>
+<li>Docker版本：<code>27.2.0</code></li>
+</ul>
+<p>文章内容仅作学习参考，组件具体配置需要根据实际环境为准。</p>
+<h2> Docker安装</h2>
+<p>我先演示如何用Docker逐个安装ELK组件，熟悉一下流程，这样后面在用Docker-Compose过程中出了什么问题也好定位。首先你需要创建一个目录用于存放四个组件的数据</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>ELK这几个组件建议版本一致，且以Elasticsearch为准，否则可能会因为组件间API不匹配而导致无法正常工作。</p>
+</div>
+<h3> 拉取镜像</h3>
+<p>先去DockerHub看看版本，然后再决定统一使用哪一个，十分不推荐使用<code>latest</code>版本（官方也不建议），原因上面已经说过了。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409062116576.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>这里选择的Tag是<code>8.15.0</code>，相应的，后续logstash和kibana两个组件的版本也必须是<code>8.15.0</code>，如下所示</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看本地镜像列表</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> Elasticsearch</h3>
+<p>先试运行elasticsearch容器（节点模式必须要指定，不然boots-check无法通过），总共就两种模式</p>
+<ul>
+<li>multi-node 多节点，生产用，该模式下必须指定host地址，不能使用回环地址，否则无法通过启动检查</li>
+<li>single-node 单节点，一般测试用的</li>
+</ul>
+<p>你可以在<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.15/bootstrap-checks.html#dev-vs-prod-mode" target="_blank" rel="noopener noreferrer">ElasticSearch Discovery</a>浏览有关启动检查的介绍。运行如下的命令创建容器，这只是试运行，用于生成配置文件和密钥。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>elasticsearch的最低运行内存建议是256M（Java写的东西都挺吃内存），这里我们直接设置为1G（通过<code>-m</code> 可以直接限制容器内存，这样就无需指定JVM内存），启动完毕后，会输出一大段JSON日志，注意看下有没有报错，不过可读性不是很高，如果最后成功了，会有如下的输出，它会显示生成的密码和Enrollment Token，如图。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409111432223.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>密码</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>CA指纹</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>Kibana Token（有效期30分钟）</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>集群Token</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这些密码和Token只会在首次启动时输出在控制台，这也是为什么要以<code>it</code>模式运行容器，如果你没有记住的话可以通过如下命令来重新生成</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>然后通过下面的命令将配置文件和数据复制到宿主机，这样有需要可以自行修改配置文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>配置文件内容如下，这些都是自动生成的本地SSL配置</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>赋予文件读写权限（我这是在本地虚拟机上测试才这样授权，一般情况下只给创建容器的用户读写权限就好了）</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>删除该容器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>接下来创建正式的elasticsearch容器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>启动完成后看看情况</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>再通过<code>docker logs elastic</code>看看日志，有下面这种输出<code>shards started</code>就说明成功了。</p>
+<div class="language-json line-numbers-mode" data-ext="json"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>将密码配置到环境变量中，你也可以将其配置到<code>bash_profile</code>来永久生效。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>测试连通性</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>若有如下输出则说明成功</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> Kibana</h3>
+<p>kibana就只是一个Elasticsearch的Web可视化界面，用如下命令启动容器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>由于是<code>-d</code>模式启动的容器，我们需要通过<code>docker logs kibana</code>来查看其输出，日志会提示我们该访问哪一个URL</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>kibana告诉我们要去<code>http://0.0.0.0:5601/?code=396495</code>访问管理界面，如下图，将之前得到的Token填入其中，过期了需要按照之前的方法重置。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409091553925.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>正在加载</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409141135615.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>再然后就需要登陆，用户密码就是之前Elastic生成的。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409091557951.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>进入主界面如下，代表着启动成功。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409091603245.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>复制配置文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>修改配置文件<code>/usr/elk/kibana/config/kibana.yml</code>，这里就只加了一个中文语言，其他的没改（这里不要修改host为容器名，否则自动生成的SSL证书会校验失败）</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>给一下读写权限</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>将容器删除</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>使用如下命令创建新容器，挂载之前的目录</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>启动完成后，通过<code>docker logs kibana</code>查看日志，有如下输出表示启动成功</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>再次访问页面，看看能否登陆，能正常登陆就行，界面也变成了中文。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409111055900.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<div class="hint-container warning">
+<p class="hint-container-title">注意</p>
+<p>处于容器内的Elasticserach服务，在生成的默认证书中，其SAN（Subjetc Alternative Names）不会包括容器名（或许是安全考虑），一个例子如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>如果你创建了自定义网络，且希望将容器名作为host来进行网络访问，例如下面这种HTTP请求，</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>大概率不会成功，报错会如下显示</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>解决方案有下面几种：</p>
+<ol>
+<li>使用容器IP（Bridge模式下IP不固定，除非你手动固定）</li>
+<li>使用容器ID</li>
+<li>重新生成证书，修改SAN，将容器名加入其中（挺麻烦的，我基本上没成功过，就算配好了也会出现一堆问题）</li>
+<li>直接用host网络模式，用localhost访问，这样最简单</li>
+</ol>
+<p>个人测试用第四种最方便，实际环境可以用第二种或第三种</p>
+</div>
+<h3> Logstash</h3>
+<p>Logstash的流程也基本上都一样，先创建容器生成配置文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>复制配置文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>除此之外我们还需要复制Elastisearch的证书</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>赋予读写和执行权限</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>logstash默认以用户<code>logstash</code>身份运行，你可以在<code>config/startup.options</code>文件中看到相关信息，如果没有足够权限的话，它将无法访问TLS证书文件，启动时就会有如下报错</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>相关的问题你也可以在<a href="https://discuss.elastic.co/t/regarding-the-logstash-cacerts-issue/355961" target="_blank" rel="noopener noreferrer">Discuss Elastic Issue #355961</a>看到。</p>
+</div>
+<p>修改配置文件<code>/usr/elk/logstash/config/logstash.yml</code></p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>修改<code>/usr/elk/logstash/pipeline/logstash.conf</code>管道文件，它由输入，过滤器，输出三个部分构成构成，如果不会可以看看<a href="https://www.elastic.co/guide/en/logstash/current/config-examples.html" target="_blank" rel="noopener noreferrer">官方logstash文档</a>。我们用的是ELK组合，输出就是ElasticSearch，这里输入默认是beats协议的端口，暂时不配置过滤器。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在logstash中，你也可以配置多个管道，每一个管道都需要一个单独的文件夹来存放配置和数据，默认的管道ID为<code>main</code>，你可以在<code>config/pipelines.yml</code>中看到相关信息</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>删除容器，重新创建</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>启动后通过<code>docker logs logstash</code>查看日志</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>我们可以看到运行的管道有两个，服务器也启动成功，至此Logstash也安装成功了。</p>
+<p>如果你安装成功了，此时在Kibana中查看的集群状态就应该如下所示</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409112200949.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<h3> Filebeat</h3>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>通常来说，filebeat的工作场景应该是位于客户端侧，这里的客户端指的是生产日志的一方，也就是Web服务，本文仅仅是为了方便所以才单机部署。</p>
+</div>
+<p>Filebeat是最简单的一种，它是用来采集日志文件数据的，这里就用它来进行演示。先创建容器，以host网络模式启动，它只是负责日志文件采集，不需要对外暴露端口。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>再复制文件</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后修改配置文件</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>给一下权限</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>重新创建新容器，<code>usr/server/logs</code>文件夹是你应用程序的日志路径</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>创建日志文件夹，记得要给读权限，不然没法正常工作。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>此时再通过<code>docker logs filebeat</code>查看日志，filebeat每30秒输出一次运行时状态，有下面的输出就表示正常。</p>
+<div class="language-json line-numbers-mode" data-ext="json"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>至此，filebeat也部署成功</p>
+<h3> 测试</h3>
+<p>我们可以自己写一个程序来测试下这一套工具链是否正常工作，最经典的使用场景就是HTTP日志，如下</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>编译</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>运行</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>通过curl测试下接口</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>可以看到它输出的JSON风格日志</p>
+<div class="language-json line-numbers-mode" data-ext="json"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>此时打开Kibana，访问<code>http://127.0.0.1:5601/app/management/data/index_management/indices</code>，可以看到之前在<code>logstash</code>中<code>output</code>配置的索引，显示有17个文档</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409112111678.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>先创建一个ApiKey，在本地通过CURL查询到数据</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>配置临时环境变量</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>请求接口，仅查询前两个文档</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>输出如下</p>
+<div class="language-json line-numbers-mode" data-ext="json"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>能够正常的搜索到，说明这一套ELK+Filebeat的工具链工作正常。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> Docker Compose安装</h2>
+<p>Docker Compose也就是上面手动安装方法的自动化版，虽然只需编写一个YAML文件就行了，但从之前的步骤中可以看出，其中最大的麻烦就是配置文件，尤其是Elasticsearch，所以我们仍然需要在<code>up</code>之前就把这些配置文件准备好，为了便于测试，后续的网络模式统一采用<code>host</code>。</p>
+<h3> 初始化</h3>
+<p>首先创建文件夹存放配置和数据</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>编写如下YAML文件，命名为<code>/usr/elk/elk-test.yml</code>，这份YAML文件只是为了生成后续需要的配置文件，所以不会挂载任何目录。</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>执行命令<code>docker compose up</code>，创建project</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看project，看看是否成功启动</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><br>
+<p>接下来复制文件，把<code>data</code>，<code>plugins</code>，<code>logs</code>这些目录一并复制过来主要是为了省的我们手动去创建目录结构，以及部分组件对文件权限要求很严格（比如filebeat），直接复制过来可以省一些麻烦。首先是Elasticsearch，配置文件我们只需要两个，一个是服务器配置文件<code>elasticsearch.yml</code>，另一个是插件配置文件<code>elasticsearch-plugins.yml</code>，其他的就不用复制了。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>再然后就是Kibana</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>Logstash</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>Filebeat</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后记得要给文件权限</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后把<code>elk-test</code>项目删除</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 创建项目</h3>
+<p>接下来编写用于正式创建的YAML文件<code>elk.yml</code>，相比于之前的版本，主要是多了数据挂载信息。</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>创建新的project</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 生成凭证</h3>
+<p>由于是<code>-d</code>模式启动，我们需要用Elasticsearch手动生成下面这些凭证，然后才能配置其他组件</p>
+<br>
+<p>生成密码</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>生成集群Token</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>生成Kibana Token</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>生成Kibana service token（你可以前往<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/service-tokens-command.html" target="_blank" rel="noopener noreferrer">Elastic | service tokens</a>了解更多信息)</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>生成CA指纹</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><h3> 生成证书（可选）</h3>
+<p>elastic7和以前的版本中，SSL证书都是要手动生成的，到版本8.x以后默认会自动生成一个开箱即用的证书，这个证书的SAN是不会包括容器名的，所以下面这个请求也就无法通过SSL验证</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>由于我们采用的是Host模式，通过<code>localhost</code>访问即可。如果想要自己生成证书，可以按照下面的步骤试试，反正我在<code>bridge</code>模式下生成的证书基本上没生效过，一会服务端证书出问题了，一会客户端证书出问题了，官网相关的解答也很少。</p>
+<p>由于过程比较繁琐，我们需要进入容器内部进行操作，然后进入<code>/usr/share/elasticsearch/bin</code>目录，里面有生成工具</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>先生成CA文件，整个过程都是互动式的，它会让你指定文件名和密码，这里都选择默认，然后在<code>/usr/share/elasticsearch</code>目录下就会生成CA文件<code>elastic-stack-ca.p12</code>。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>生成凭证和私钥，它会基于之前的CA生成一个zip压缩文件<code>elastic-certificates.p12</code>，里面包含了凭证，私钥，以及CA凭证。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>如果你设置了密码，需要将其添加到keystore和trusstore中</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>将<code>elastic-certificates.p12</code>复制出来，它是集群内节点通信的凭证。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><br>
+<p>最后生成SSL证书，这个过程比较长，第一步询问是否生成CSR，默认不生成即可，这个是给第三方认证用的，CA证书在我们手里就不需要。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>指定已有的CA文件，有密码就输密码，没密码就跳过</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>设置证书过期时间，默认5年，使用默认即可</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>是否为每一个节点都生成一个证书和私钥，如果你是多节点集群部署可能会需要（多节点集群也可以只使用一个证书），但我们这里是单机部署就不需要</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>重点来了，指定HostNames，这些字段会被添加SAN中，也正是我们生成证书的目的，这里加入<code>elasitc</code>，<code>localhost</code>两个就够了。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可访问的IP地址，加入<code>127.0.0.1</code>，<code>172.18.0.2</code></p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>剩下的配置默认即可</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>指定文件路径，没有特别需要的话默认就行，完事后就会生成文件<code>/usr/share/elasticsearch/elasticsearch-ssl-http.zip</code></p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>如果你为SSL证书设置了密码，需要将其添加到keystore中</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这个压缩包就是我们最终需要的东西，将其复制到容器外面</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>解压，然后复制到elasticsearch的证书目录下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>目前为止我们有了下面几个文件</p>
+<ul>
+<li><code>transport.p12</code>，集群中节点加密通信凭证</li>
+<li><code>http.p12</code>，证书文件，包含了证书和私钥，服务端用</li>
+<li><code>ca.pem</code>，包含了证书的公钥，客户端用 ，如Kibana，Logstash</li>
+</ul>
+<p>然后将它们放入到<code>config/certs</code>目录下，修改对应的配置。</p>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>如果你更换了证书，那么所有的凭证都需要重新生成。</p>
+</div>
+<h3> 修改配置</h3>
+<p>由于许多东西都是我们手动生成的，相比与之前的安装方式，要改的地方有点多。</p>
+<br>
+<p>Elasticsearch配置，路径为<code>/usr/elk/elastic/config/elasticsearch.yml</code>，证书文件名大都与之前一样，几乎不用变。</p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>复制证书到Kibana目录下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后再修改Kibana配置文件内容，路径为<code>/usr/elk/kibana/config/kibana.yml</code></p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>配置Logstash，复制证书</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>再修改配置文件，路径为<code>/usr/elk/logstash/config/logstash.yml</code></p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后是main管道配置文件<code>/usr/elk/logstash/pipeline/logstash.conf</code></p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>还有Filebeat的配置<code>/usr/elk/filebeat/filebeat.yml</code></p>
+<div class="language-yaml line-numbers-mode" data-ext="yml"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>修改完成后，给一下权限</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>然后重启项目</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>稍微等一会儿，再查看容器状态，都在运行说明配置成功了</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 测试</h3>
+<p>测试一下Elasticsearch HTTP API是否正常工作，有如下输出说明正常</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>启动测试服务器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>然后通过curl发送请求，重复若干次</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>访问<code>http://localhost:5601/login</code>，登陆Kibana，输入用户名密码</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409141807623.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>然后我们就可以看到日志对应的文档</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409141809889.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>说明测试服务器的数据已经输出到了Elasticsearch中，至此部署成功。</p>
+<h2> 小结</h2>
+<p>ELK配合容器可以很简单的部署，分布式拓展也很方便，它能干的事情也远远不止日志分析，总之它是一个很强大的技术栈，甚至有些公司会专门聘请Elastic专家，不过我目前仅仅只是才入门而已，写下本文算是为了记录一下学习的过程。</p>
+<h3> 引用</h3>
+<ol>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html" target="_blank" rel="noopener noreferrer">Install Elasticsearch with Docker</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.2/security-basic-setup.html" target="_blank" rel="noopener noreferrer">Security basic setup</a></li>
+<li><a href="https://www.elastic.co/cn/beats" target="_blank" rel="noopener noreferrer">Elastic Beats</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html" target="_blank" rel="noopener noreferrer">certutil</a></li>
+</ol>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409062109276.webp" type="image/webp"/>
+    </item>
     <item>
       <title>如何向Go贡献代码</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/go/contribute2go.html</link>
