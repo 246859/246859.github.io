@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 20 Sep 2024 08:06:03 GMT</pubDate>
-    <lastBuildDate>Fri, 20 Sep 2024 08:06:03 GMT</lastBuildDate>
+    <pubDate>Fri, 20 Sep 2024 08:11:34 GMT</pubDate>
+    <lastBuildDate>Fri, 20 Sep 2024 08:11:34 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>db</category>
@@ -88,6 +88,7 @@
 <p>折腾了这么多你可能会问，为什么不直接在业务中将数据同时存到数据库和Elasticsearch中，这样不是更方便？这么做主要有几个原因，下面简单说一说。</p>
 <p>如果你是同步存的话，因为Mysql本身的操作时间也不低，那么性能势必会降低不少。假如说是异步存的话，你可能会将其放到消息队列中，然后再定时消费，但你需要自己维护一套逻辑，如果是系统设计之初就决定要这么做了，那也不失为一个可行的方案。</p>
 <p>但软件工程从来都不是尽善尽美的，没有人能考虑到所有的情况，如果是在项目后期业务增长遇到了数据库瓶颈才加入的Elasticsearch，前面这两种方式都需要对原有的代码进行改动，这会增加不少工作量。而通过Maxwell这类工具，直接从数据库层面就可以观测到数据的变化并汇总一个数据流，然后推送给Elasticsearch，这一套工具在外部就可以工作，不需要对原来的业务代码做过多的更改，这便是它最大的优点，除此之外maxwell还具有开箱即用，简单方便的优点。</p>
+<p>如果你想了解更多有关CDC（Change Data Capture 数据捕获）工具，可以前往<a href="https://github.com/wushujames/mysql-cdc-projects/wiki" target="_blank" rel="noopener noreferrer">wushujames/mysql-cdc-projects Wiki (github.com)</a>。</p>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409192038996.png" type="image/png"/>
     </item>
