@@ -245,11 +245,19 @@ input {
   }
 }
 
+filter {
+  grok {
+    # 过滤类型，我们只需要update和insert
+    match => {
+       "type" => "(?<type>update|insert)"
+    }
+  }
+}
+
 output {
   elasticsearch {
     hosts => ["https://localhost:9200"]
-    # 索引由数据库名和表名构成
-    index => "maxwell-%{database}-%{table}"
+    index => "%{database}-%{table}"
     user => "elastic"
     password => "TETJ8IY+ifbt8SLc+RRQ"
     ssl_enabled => true
