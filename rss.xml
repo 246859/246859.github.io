@@ -6,10 +6,11 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 14 Sep 2024 10:28:42 GMT</pubDate>
-    <lastBuildDate>Sat, 14 Sep 2024 10:28:42 GMT</lastBuildDate>
+    <pubDate>Fri, 20 Sep 2024 08:06:03 GMT</pubDate>
+    <lastBuildDate>Fri, 20 Sep 2024 08:06:03 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>db</category>
     <category>docker</category>
     <category>go</category>
     <category>linux</category>
@@ -21,11 +22,75 @@
     <category>二叉树</category>
     <category>算法</category>
     <category>每日发现</category>
-    <category>db</category>
     <category>git</category>
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>Maxwell同步MySQL数据到ELK</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/db/maxwell_elk.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/db/maxwell_elk.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Maxwell同步MySQL数据到ELK</source>
+      <description>Maxwell同步MySQL数据到ELK</description>
+      <category>db</category>
+      <pubDate>Sun, 15 Sep 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Maxwell同步MySQL数据到ELK</h1>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409201602228.png" style="zoom:150%;">
+<!-- more -->
+<hr>
+<h2> 简介</h2>
+<p>Maxwell是一个Zendesk开源的MySQL数据库实时捕获和同步的工具，它基于MySQL binlog，并输出JSON格式的数据流，类似的工具还有阿里开源的canal，debezium等，不过后者支持的数据类型更丰富，通过将数据推送到Elasticsearch中，就可以实现MySQL所做不到的大数据量级的全文检索，不过一般很少会直接推送的Elasticsearch，中间会经过一个消息队列，它的好处在于可以堆积消息，因为消息是持久化的，即便突然宕机，堆积的消息在机器重启后依然可以被消费而不至于丢失，在这种情况下，数据的流向如下所示</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>本文会讲解如何通过Maxwell将Mysql数据中的变化增量输出到Logstash，再通过logstash输出到Elasticsearch中，采用的MQ为Redis List，实际环境中的话建议使用kafka。</p>
+<h2> 准备环境</h2>
+<p>首先准备一台虚拟机，安装了MySQL和Redis，环境为Debian12，IP：192.168.153.130（具体地址请根据实际情况来），记得将MySQL的binlog模式修改为<code>binlog_format=row</code>。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>首先要创建一个名为<code>maxwell</code>的数据库</p>
+<div class="language-sql line-numbers-mode" data-ext="sql"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后创建一个<code>maxwell</code>用户，赋予对应权限</p>
+<div class="language-sql line-numbers-mode" data-ext="sql"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>第二台虚拟机，安装了ELK组件，环境为Debian12，IP：192.168.153.132，（访问<a href="https://246859.github.io/posts/code/docker/docker_install_elk.html" target="_blank" rel="noopener noreferrer">Docker部署Elastic Stack8.x实践</a>以了解如何安装ELK）</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>环境准备好后才进行下面的工作。</p>
+<h2> 安装maxwell</h2>
+<p>我们将maxwell与mysql安装在同一台虚拟机，先在Dockerhub查看最新版本的tag</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409192038996.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>将对应的镜像拉下来</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>编写配置文件，我们可以在maxwell官网看到maxwell支持的producer类型，访问<a href="https://maxwells-daemon.io/config/#redis-producer" target="_blank" rel="noopener noreferrer">Reference - Maxwell's Daemon (maxwells-daemon.io)</a>，大概有下面这些</p>
+<ul>
+<li>file</li>
+<li>kafka</li>
+<li>kinesis</li>
+<li>sqs</li>
+<li>sns</li>
+<li>nats</li>
+<li>pubsub</li>
+<li>bigquery</li>
+<li>rabbitmq</li>
+<li>redis</li>
+</ul>
+<p>其中redis支持pubsub，stream，list三种类型，本文使用lpush类型（严格来说stream才算是像样的消息队列，不过logstash的input不支持），编写如下配置文件</p>
+<div class="language-properties line-numbers-mode" data-ext="properties"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>保存至<code>/usr/db/maxwell/config.properties</code>文件中，然后运行容器</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>完事后看看情况，可以看到正常连接到MySQL了</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>查看maxwell数据库，能看到元数据表，就说明可以了</p>
+<div class="language-sql line-numbers-mode" data-ext="sql"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 测试Redis</h2>
+<p>在连接到ELK之前，我们先测试下maxwell是否能正常将MySQL中的数据推送到Redis Stream中，测试服务器是<a href="https://github.com/dstgo/lobby" target="_blank" rel="noopener noreferrer">dstgo/lobby: Query Http Api for don't strave togehter lobby servers (github.com)</a>，启动<code>lobby</code>服务器，它会定时向<code>lobby.servers</code>数据库写入最新的在线服务器数据。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过结果我们可以看到在本轮任务中收集到了<code>23512</code>条数据，并成功插入到数据库中，此时我们看看Redis中的情况</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>我们可以看到JSON格式的消息大概如下所示</p>
+<div class="language-json line-numbers-mode" data-ext="json"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>目前为止Maxwell和Redis一切工作正常，接下来将需要将Redis中的消息推送到ELK中</p>
+<h2> 推送到ELK</h2>
+<p>接下来我们需要配置Logstash的输入源，管道配置文件如下所示，关于Redis Input的相关信息可以在<a href="https://www.elastic.co/guide/en/logstash/8.15/plugins-inputs-redis.html" target="_blank" rel="noopener noreferrer">Plugins Inputs Redis</a>中了解更多。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>重启logstash</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>登陆Kibana，查看索引情况，可以看到四张表的数据都被同步过来了。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409201520656.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>查看servers索引中的其中一个文档，里面的<code>data</code>字段就是mysql中的一行数据，<code>type</code>表示的是操作类型</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409201522955.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>至此就完成了。</p>
+<h2> 全量同步</h2>
+<p>之前的方式都是增量同步，如果你想全量同步的话，maxwell也提供了工具<code>maxwell-bootstrap</code>，它还支持where来过滤数据，它的参数如下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>使用示例如下，你需要手动指定所有配置</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 小结</h2>
+<p>折腾了这么多你可能会问，为什么不直接在业务中将数据同时存到数据库和Elasticsearch中，这样不是更方便？这么做主要有几个原因，下面简单说一说。</p>
+<p>如果你是同步存的话，因为Mysql本身的操作时间也不低，那么性能势必会降低不少。假如说是异步存的话，你可能会将其放到消息队列中，然后再定时消费，但你需要自己维护一套逻辑，如果是系统设计之初就决定要这么做了，那也不失为一个可行的方案。</p>
+<p>但软件工程从来都不是尽善尽美的，没有人能考虑到所有的情况，如果是在项目后期业务增长遇到了数据库瓶颈才加入的Elasticsearch，前面这两种方式都需要对原有的代码进行改动，这会增加不少工作量。而通过Maxwell这类工具，直接从数据库层面就可以观测到数据的变化并汇总一个数据流，然后推送给Elasticsearch，这一套工具在外部就可以工作，不需要对原来的业务代码做过多的更改，这便是它最大的优点，除此之外maxwell还具有开箱即用，简单方便的优点。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409192038996.png" type="image/png"/>
+    </item>
     <item>
       <title>Docker部署Elastic Stack8.x实践</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/docker/docker_install_elk.html</link>
