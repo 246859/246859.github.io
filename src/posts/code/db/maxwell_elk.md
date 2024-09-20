@@ -334,3 +334,5 @@ $ docker exec -it maxwell \
 如果你是同步存的话，因为Mysql本身的操作时间也不低，那么性能势必会降低不少。假如说是异步存的话，你可能会将其放到消息队列中，然后再定时消费，但你需要自己维护一套逻辑，如果是系统设计之初就决定要这么做了，那也不失为一个可行的方案。
 
 但软件工程从来都不是尽善尽美的，没有人能考虑到所有的情况，如果是在项目后期业务增长遇到了数据库瓶颈才加入的Elasticsearch，前面这两种方式都需要对原有的代码进行改动，这会增加不少工作量。而通过Maxwell这类工具，直接从数据库层面就可以观测到数据的变化并汇总一个数据流，然后推送给Elasticsearch，这一套工具在外部就可以工作，不需要对原来的业务代码做过多的更改，这便是它最大的优点，除此之外maxwell还具有开箱即用，简单方便的优点。
+
+如果你想了解更多有关CDC（Change Data Capture 数据捕获）工具，可以前往[wushujames/mysql-cdc-projects Wiki (github.com)](https://github.com/wushujames/mysql-cdc-projects/wiki)。
