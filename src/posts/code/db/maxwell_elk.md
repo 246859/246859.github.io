@@ -1,7 +1,7 @@
 ---
 date: 2024-09-15
 article: true
-star: true
+star: false
 sticky: false
 category:
   - db
@@ -247,23 +247,27 @@ input {
 
 filter {
   grok {
-    # 过滤类型，我们只需要update和insert
+    # 过滤类型，我们只需要insert的数据
     match => {
-       "type" => "(?<type>update|insert)"
+       "type" => "(?insert)"
     }
+    tag_on_failure => ["_grokparsefailure"]
   }
 }
 
 output {
-  elasticsearch {
-    hosts => ["https://localhost:9200"]
-    index => "%{database}-%{table}"
-    user => "elastic"
-    password => "TETJ8IY+ifbt8SLc+RRQ"
-    ssl_enabled => true
-    ssl_certificate_verification => true
-    ssl_certificate_authorities => "/usr/share/logstash/config/certs/http_ca.crt"
-    ca_trusted_fingerprint => "C0E9867C7D446BFF72FE46E7E9FE3455E970A8ADB0D3DF0E1472D55DB2612CD5"
+  # 匹配失败的数据就不要了
+  if "_grokparsefailure" not in [tags] {
+      elasticsearch {
+          hosts => ["https://localhost:9200"]
+          index => "%{database}-%{table}"
+          user => "elastic"
+          password => "TETJ8IY+ifbt8SLc+RRQ"
+          ssl_enabled => true
+          ssl_certificate_verification => true
+          ssl_certificate_authorities => "/usr/share/logstash/config/certs/http_ca.crt"
+          ca_trusted_fingerprint => "C0E9867C7D446BFF72FE46E7E9FE3455E970A8ADB0D3DF0E1472D55DB2612CD5"
+      }
   }
 }
 ```
