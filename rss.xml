@@ -6,13 +6,13 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 20 Sep 2024 13:56:56 GMT</pubDate>
-    <lastBuildDate>Fri, 20 Sep 2024 13:56:56 GMT</lastBuildDate>
+    <pubDate>Mon, 23 Sep 2024 05:42:33 GMT</pubDate>
+    <lastBuildDate>Mon, 23 Sep 2024 05:42:33 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>go</category>
     <category>db</category>
     <category>docker</category>
-    <category>go</category>
     <category>linux</category>
     <category>windows</category>
     <category>技术日志</category>
@@ -26,6 +26,183 @@
     <category>设计模式</category>
     <category>rust</category>
     <category>游戏杂谈</category>
+    <item>
+      <title>Consul - 服务注册与发现</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/go/consul.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/go/consul.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">Consul - 服务注册与发现</source>
+      <description>Consul - 服务注册与发现</description>
+      <category>go</category>
+      <pubDate>Fri, 20 Sep 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> Consul - 服务注册与发现</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409231333159.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<blockquote>
+<p>consul是一个能够让团队在服务与跨预置和多云环境中安全管理网络连接的解决方案，它提供了服务发现，服务网格，流量治理，网络基础设施自动更新等一系列功能。</p>
+</blockquote>
+<p>官方文档：<a href="https://www.consul.io/" target="_blank" rel="noopener noreferrer">Consul by HashiCorp</a></p>
+<p>开源地址：<a href="https://github.com/hashicorp/consul" target="_blank" rel="noopener noreferrer">hashicorp/consul</a></p>
+<p>Consul是HashiCorp公司开源的一款服务发现与注册工具，采用Raft选举算法，工具本身使用Go语言进行开发，因此部署起来十分的轻便。Consul总共有以下特点：</p>
+<ul>
+<li>服务发现</li>
+<li>服务注册</li>
+<li>健康检查</li>
+<li>键值存储</li>
+<li>多数据中心</li>
+</ul>
+<p>实际上consul能做的事情不止服务发现，还可以做分布式配置中心，同类型的开源工具也有很多，比如zookeeper，nacos，这里就不再做过多的介绍。</p>
+<h2> 安装</h2>
+<p>对于Ubuntu而言的话，执行下面的命令使用apt安装即可</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>或者也可以在官网下载<a href="https://developer.hashicorp.com/consul/downloads" target="_blank" rel="noopener noreferrer">Install Consul</a>
+对应的安装包，由于consul是由go开发的，安装包本身也就只有一个二进制可执行文件，安装起来也相当的方便，安装成功后，执行如下命令查看版本。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>正常输出就没有问题</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2> 快速开始</h2>
+<p>下面介绍如何快速搭建一个consul单节点，一般单节点是在开发期间测试用的，如果单节点使用起来没有问题，大概率多节点集群也不会由问题。单节点搭建起来十分的简单，只需要一行命令即可</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>一般会有如下输出</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>简单讲解一下释义</p>
+<ul>
+<li>
+<p><code>agent</code>是子命令，是consul的核心命令，<code>consul agent</code>就是运行一个新的consul代理，每一个node都是一个代理。</p>
+</li>
+<li>
+<p><code>dev</code>，是agent的运行模式，总共有三种<code>dev</code>，<code>client</code>，<code>server</code></p>
+</li>
+<li>
+<p><code>bind</code>，局域网通信地址，端口默认8301，一般此值为服务器的内网地址</p>
+</li>
+<li>
+<p><code>advertise</code>，广域网通信地址，端口默认8302，一般此值为服务器的外网地址</p>
+</li>
+<li>
+<p><code>data-dir</code>，数据存放目录</p>
+</li>
+<li>
+<p><code>config-dir</code>，配置存放目录，consul会读取目录下所有的json文件</p>
+</li>
+<li>
+<p><code>bootstrap</code>，标注当前server进入引导模式，在raft选举时会给自己投票，集群中处于该模式的server不能超过一个</p>
+</li>
+<li>
+<p><code>bootstrap-expect</code>，即集群中期望的server数量，在没有达到指定数量之前，集群不会开始选举投票，不能与<code>bootstrap</code>同时使用。</p>
+</li>
+<li>
+<p><code>retry-join</code>，agent启动后，会不断尝试加入指定的节点，还支持以下的一些服务商发现方法</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div></li>
+<li>
+<p><code>ui</code>，运行Web后台</p>
+</li>
+<li>
+<p><code>node</code>，执行节点名称，必须在集群中保持唯一。</p>
+</li>
+</ul>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>关于更多的agent参数释义，前往<a href="https://developer.hashicorp.com/consul/docs/agent/config/cli-flags#usage" target="_blank" rel="noopener noreferrer">Agents - CLI Reference | Consul | HashiCorp Developer</a>
+，需要注意的是有些参数只有企业版能用。</p>
+</div>
+<p>当成功运行后，访问<code>127.0.0.1:8500</code>，就可以浏览Web界面。</p>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202308251740238.png">
+<p>dev01的图标是一个星星，就说明它是leader节点。</p>
+<p>退出时，为了能其他节点感知到当前节点的退出，不建议强制杀死进程，可以使用命令</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>或者</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>也可以<code>ctrl+c</code>，让consul agent 优雅退出。</p>
+<h2> 概念</h2>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409231335514.svg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>这是一张consul集群的示意图，图中分为了两部分，控制面和数据面。consul只负责控制面，分为服务集群和客户端，服务集群中又分为追随者和领导者，总体而言，图中consul集群就构成了一个数据中心。下面对一些术语进行讲解</p>
+<ul>
+<li>Agent（代理）：或者称为节点更合适，每一个agent都是一个长时间运行的守护进程，它们对外暴露HTTP和DNS接口，负责健康检查和服务同步。</li>
+<li>Server（服务代理）：作为一个consul server，它的职责主要有参与Raft选举，维护集群状态，响应查询，与其他数据中心交换数据，以及向领导者和其他数据中心转发查询。</li>
+<li>
+<h2> Client（客户代理）：client相对server来说是无状态的，它不参与Raft选举，所做的事情仅仅只是将所有的请求转发给server，它唯一参与的与后台有关的事情就是局域网流言转发（LAN
+gossip pool）。</h2>
+Leader（领导者）：leader是所有server的领导，而且领导只能有一个，leader是通过Raft选举算法进行选举的，每一个leader有自己的任期，在任期内，其他的server收到了不管什么请求都要告诉leader，所以leader的数据是最及时最新的。</li>
+<li>Gossi（流言）：Consul是基于Serf（该公司其下的另一个产品）而构建的，它使用gossip协议，该协议专用于节点间的随机通信，类似UDP，consul使用此协议来在服务集群间进行互相通知。</li>
+<li>Data Center（数据中心）：一个局域网内的consul集群被称为一个数据中心，consul支持多数据中心，多数据中心的沟通方式就是WAN
+gossip。</li>
+</ul>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>更多词汇和术语可以前往<a href="https://developer.hashicorp.com/consul/docs/install/glossary#consul-vocabulary" target="_blank" rel="noopener noreferrer">Glossary | Consul | HashiCorp Developer</a>
+进行了解。</p>
+</div>
+<p>在consul集群中，server的数量应该严格控制，因为它们直接参与到LAN gossip和WAN
+gossip，raft选举，并且要存储数据，server越多，通信成本越高。而client的数量多一点没什么问题，它只负责转发，不参与选举，占用资源很低，在图中的集群中，各个服务通过client将自身注册到server中，如果有server挂了的话，client会自行寻找其他可用的server。</p>
+<h2> 集群搭建示例</h2>
+<p>下面搭建一个简单的consul多节点集群示例，先准备四台虚拟机</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409231336088.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>四台虚拟机中，三个server，一个client，官方建议server的数量最好是奇数，并且最好大于等于三个。这里将vm00-vm02作为server，vm03作为client，</p>
+<p>对于server而言，运行如下命令，创建server agent</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>对于client而言，运行如下命令，创建client agent</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>执行的命令分别如下</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>一些参数释义</p>
+<ul>
+<li><code>client</code>，<code>0.0.0.0</code>即放行所有来源的请求，如果只有client参数，没有server参数，代表着agent将以client模式运行。</li>
+</ul>
+<p>所有的agent运行好后，其中<code>retry-join</code>的作用等于自动执行join命令，失败后会不断尝试，默认重试时间30s</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>join完成后，各个节点都知晓了对方的存在，由于vm00指定了bootstrap模式，所以它就是默认的leader，如果没有指定bootstrap模式，所有节点在join时指定的节点为默认leader，
+<strong>在leader没有选举出来之前，集群无法正常工作，访问web界面会返回500，一些命令也无法正常工作</strong>
+。如果集群中有节点制定了bootstrap模式，那么集群中其他节点就不应该再有其他节点指定bootstrap模式，同时其他节点也不应该再使用<code>bootstrap-expect</code>
+参数，如果使用了会自动禁用。</p>
+<p>这时在leader节点上（实际上这时无论哪个节点都可以查看）运行查看data center的成员信息，运行如下命令</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul>
+<li>Node，即节点名称</li>
+<li>Address，通信地址</li>
+<li>Status，<code>alive</code>表示存活，<code>left</code>表示下线</li>
+<li>Type，agent种类，server和client两种模式</li>
+<li>Build，该节点使用的consul版本，consul可以在一定范围内兼容不同版本的节点进行工作</li>
+<li>Protocol，指的是使用的Raft协议版本，这个协议应当所有节点一致</li>
+<li>DC，Data Center，数据中心，输出中的所有节点都属于dc1数据中心</li>
+<li>Partition，节点隶属的分区，属于企业版功能，每个节点只能与同一分区的节点进行通信</li>
+<li>Segment，节点隶属的网段，属于企业版功能</li>
+</ul>
+<img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202308251814336.png">
+<p>同样的，如果想要一个节点退出，应该使用<code>consul leave</code>让节点优雅退出，并通知其他节点自己将要退出，对于多节点的情况下，节点的优雅退出尤为重要，因为这关系到数据的一致性。</p>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>虚拟机在演示的时候关闭了所有的防火墙，在实际生产环境中为了安全考虑应该开启，为此应该关注下consul使用到的所有端口：<a href="https://developer.hashicorp.com/consul/docs/install/ports" target="_blank" rel="noopener noreferrer">Required Ports | Consul | HashiCorp Developer</a>。</p>
+</div>
+<p>接下来简单测试一下数据一致性，在vm00虚拟机中添加如下数据</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>保存后，通过HTTP API访问其他节点会发现数据同样存在（其中的value是base64编码）</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>事实上，consul提供的服务发现与注册功能，通过gossip协议广播给其他节点，并且当任意一个节点加入当前数据中心时，所有的节点都会感知到此变化。</p>
+<h2> 多数据中心搭建示例</h2>
+<p>准备五台虚拟机，vm00-vm02是上一个示例的集群，属于dc1数据中心，不去动它，vm03-vm04属于dc2数据中心，数据中心在agent启动时，默认为dc1。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409231336782.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>这里为了演示，只搭建server，省掉了client。</p>
+</div>
+<p>首先分别启动vm03，将其作为默认的leader</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>启动启动vm04，让其自动join到vm03节点</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>此时分别在vm00和vm03查看members</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到DC字段不同，因为这里是虚拟机演示，所以都是在同一个网段中，现实中两个数据中心可能是异地的服务器集群。接下来让dc1的任意一个节点join到dc2的任意一个节点，这里让vm01
+join vm03</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>join成功后，执行命令查看广域网members</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>只要dc1的随便一个节点join到dc2的任意一个节点，两个数据中心的所有节点都会感知到此变化，查看members的时候也可以看到两个数据中心的节点。</p>
+<p>接下来尝试在vm00节点添加一个KV数据</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>在vm01节点尝试读取数据，可以看到同一数据中心的数据是同步的</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>然后再去不同数据中心的vm03尝试读取数据，会发现不同数据中心的数据是不同步的。</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>如果想要多数据中心数据同步的话，可以了解<a href="https://github.com/hashicorp/consul-replicate" target="_blank" rel="noopener noreferrer">hashicorp/consul-replicate: Consul cross-DC KV replication daemon</a>。</p>
+<h2> 服务注册与发现</h2>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409231336023.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>consul服务注册的方式有两种，配置文件注册和API注册。为了方便进行测试，这里事先准备一个Hello
+World服务（gRPC文章中的示例），部署两份，分别在不同的位置。配置文件注册的方式可以前往<a href="https://developer.hashicorp.com/consul/tutorials/developer-discovery/service-registration-external-services#start-the-consul-agent" target="_blank" rel="noopener noreferrer">Register external services with Consul service discovery | Consul | HashiCorp Developer</a>
+了解，这里只介绍通过HTTP API进行注册。</p>
+<div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>对于本地服务（和consul client在一块）而言，可以直接使用agent service注册，否则的话应该使用catalog register来进行注册。</p>
+</div>
+<p>consul提供了HTTP
+API的SDK，其他语言的SDK前往<a href="https://developer.hashicorp.com/consul/api-docs/libraries-and-sdks" target="_blank" rel="noopener noreferrer">Libraries and SDKs - HTTP API | Consul | HashiCorp Developer</a>
+了解。这里下载go的依赖</p>
+<div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在服务启动时向consul主动注册服务，在服务关闭时，向consul注销服务，下面是一个示例。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>客户端代码使用consul自定义解析器，来向注册中心查询对应的服务，解析成真实地址。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>客户端在启动时注册解析器</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>先启动服务端，再启动客户端，服务端是有两个的，提供同一个服务，只是地址不一样，客户都的负载均衡策略是轮询，从服务端的日志间隔时间就能看出来策略生效了。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>以上就是一个简单的使用consul结合gRPC实现服务注册与发现的简单案例。</p>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409231333159.png" type="image/png"/>
+    </item>
     <item>
       <title>Maxwell同步MySQL数据到ELK</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/db/maxwell_elk.html</link>
@@ -75,7 +252,7 @@
 <div class="language-json line-numbers-mode" data-ext="json"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>目前为止Maxwell和Redis一切工作正常，接下来将需要将Redis中的消息推送到ELK中</p>
 <h2> 推送到ELK</h2>
 <p>接下来我们需要配置Logstash的输入源，管道配置文件如下所示，关于Redis Input的相关信息可以在<a href="https://www.elastic.co/guide/en/logstash/8.15/plugins-inputs-redis.html" target="_blank" rel="noopener noreferrer">Plugins Inputs Redis</a>中了解更多。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>重启logstash</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>重启logstash</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>登陆Kibana，查看索引情况，可以看到四张表的数据都被同步过来了。</p>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202409201520656.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
 <p>查看servers索引中的其中一个文档，里面的<code>data</code>字段就是mysql中的一行数据，<code>type</code>表示的是操作类型</p>
