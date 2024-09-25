@@ -101,4 +101,9 @@ export const zhNavbar = navbar([
         icon: "time",
         link: "/timeline",
     },
+    {
+        text: "软件资源",
+        icon: "tool",
+        link: "/dl",
+    },
 ]);
