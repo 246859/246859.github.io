@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 25 Nov 2024 12:26:34 GMT</pubDate>
-    <lastBuildDate>Mon, 25 Nov 2024 12:26:34 GMT</lastBuildDate>
+    <pubDate>Tue, 24 Dec 2024 12:50:37 GMT</pubDate>
+    <lastBuildDate>Tue, 24 Dec 2024 12:50:37 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>git</category>
@@ -871,13 +871,28 @@ API的SDK，其他语言的SDK前往<a href="https://developer.hashicorp.com/con
 <li>网络版（netinst）：只包含操作系统运行所需要的最基本工具，其他软件需要在安装时联网下载，大小600MB左右。</li>
 <li>DVD版（dvd）：内置了大部分系统工具和软件，支持离线安装，大小为3.5GB左右。</li>
 </ul>
-<p>网络版在安装过程中的软件下载阶段默认使用的是官方的安全源，对于国内用户而言会极其缓慢，除非临时修改<code>sources.list</code>为国内源，而且只能手敲，关于这个问题你可以在网络上找到很多类似的回答，足以见得有多麻烦。</p>
-<p>所以我的建议是使用DVD版，因为它支持离线安装，可以将操作系统完全安装成功后再去修改国内源，这种做法较为方便。</p>
+<p>网络版在安装过程中的软件下载阶段默认使用的是官方的安全源，对于国内用户而言会极其缓慢，除非临时修改<code>sources.list</code>为国内源，而且只能纯手敲，关于这个问题你可以在网络上找到很多类似的回答，足以见得有多麻烦。</p>
+<p>所以我的建议是使用DVD版，因为它支持离线安装，可以将操作系统完全安装成功后再去修改国内源，这种做法更为方便。</p>
 <p><strong>下载</strong></p>
-<p>中科大镜像站提供的国内下载链接</p>
-<p>网络版：<a href="https://iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-cd/debian-12.6.0-amd64-netinst.iso" target="_blank" rel="noopener noreferrer">https://iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-cd/debian-12.6.0-amd64-netinst.iso</a></p>
-<p>DVD版：<a href="https://iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/debian-12.6.0-amd64-DVD-1.iso" target="_blank" rel="noopener noreferrer">iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/debian-12.6.0-amd64-DVD-1.iso</a></p>
-<p>后续安装过程我会使用DVD版来进行讲解。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202412242035564.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>下方是下载链接，点进去后直接下载对应的ISO文件即可，本文用的是<code>amd64</code>，主流的指令集Debian基本上都支持，把<code>amd64</code>替换掉即可。官方的链接需要科学上网，国内用户使用中科大的即可。</p>
+<ul>
+<li>
+<p>网络版</p>
+<ul>
+<li>Debian：<a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/" target="_blank" rel="noopener noreferrer">https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/</a></li>
+<li>中科大：<a href="https://mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-cd/" target="_blank" rel="noopener noreferrer">https://mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-cd/</a></li>
+</ul>
+</li>
+<li>
+<p>DVD版</p>
+<ul>
+<li>Debian：<a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/" target="_blank" rel="noopener noreferrer">https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/</a></li>
+<li>中科大：<a href="https://mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/" target="_blank" rel="noopener noreferrer">https://mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/</a></li>
+</ul>
+</li>
+</ul>
+<p>后面的内容统一使用DVD版进行讲解。</p>
 <h3> 创建</h3>
 <p>选择创建新的虚拟机，使用自定义创建</p>
 <img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202407221520993.png" style="zoom: 67%;">
