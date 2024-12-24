@@ -14,10 +14,3 @@ clash在23年11月删库跑路了，不过软件我还保留着，这个库也�
 * [clash-windows.zip](https://github.com/246859/246859.github.io/releases/download/dl/clash-linux.zip)
 
 * [clash-linux.zip](https://github.com/246859/246859.github.io/releases/download/dl/clash-linux.zip)
-
-## gnu
-
-一些GNU软件
-
-* [mingw64](dl/gnu/mingw64.zip)
-
