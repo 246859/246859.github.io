@@ -17,7 +17,7 @@ projects:
   - icon: /achievement.svg
     name: 成就系统
     desc: 一款基岩版的我的世界成就插件
-    link: https://float1024.gitee.io/achievementdocs/
+    link: https://246859.github.io/AchievementDocs/
 
   - icon: /golang.png
     name: Go学习文档站
@@ -44,8 +44,8 @@ projects:
     desc: 树深不见鹿， 溪午不闻钟。
     link: https://deep-learn.top/
     
-  - icon: /wendy.png
-    name: Wendy Panel
+  - icon: https://raw.githubusercontent.com/dstgo/docs/0ad76ead8e8f7f5f5def51176a20cc1952608dfd/docs/src/public/wilson.png
+    name: Wilson panel
     desc: 分布式饥荒管理面板
-    link: https://github.com/dstgo/panel
+    link: https://github.com/dstgo/wilson
 ---
