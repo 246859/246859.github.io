@@ -54,19 +54,27 @@ Vmware官网：[下载 VMware Workstation Pro | CN](https://www.vmware.com/conte
 - 网络版（netinst）：只包含操作系统运行所需要的最基本工具，其他软件需要在安装时联网下载，大小600MB左右。
 - DVD版（dvd）：内置了大部分系统工具和软件，支持离线安装，大小为3.5GB左右。
 
-网络版在安装过程中的软件下载阶段默认使用的是官方的安全源，对于国内用户而言会极其缓慢，除非临时修改`sources.list`为国内源，而且只能手敲，关于这个问题你可以在网络上找到很多类似的回答，足以见得有多麻烦。
+网络版在安装过程中的软件下载阶段默认使用的是官方的安全源，对于国内用户而言会极其缓慢，除非临时修改`sources.list`为国内源，而且只能纯手敲，关于这个问题你可以在网络上找到很多类似的回答，足以见得有多麻烦。
 
-所以我的建议是使用DVD版，因为它支持离线安装，可以将操作系统完全安装成功后再去修改国内源，这种做法较为方便。
+所以我的建议是使用DVD版，因为它支持离线安装，可以将操作系统完全安装成功后再去修改国内源，这种做法更为方便。
 
 **下载**
 
-中科大镜像站提供的国内下载链接
+![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202412242035564.png)
 
-网络版：https://iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-cd/debian-12.6.0-amd64-netinst.iso
+下方是下载链接，点进去后直接下载对应的ISO文件即可，本文用的是`amd64`，主流的指令集Debian基本上都支持，把`amd64`替换掉即可。官方的链接需要科学上网，国内用户使用中科大的即可。
 
-DVD版：[iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/debian-12.6.0-amd64-DVD-1.iso](https://iso.mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/debian-12.6.0-amd64-DVD-1.iso)
+- 网络版
+  - Debian：https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/
+  - 中科大：https://mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-cd/
 
-后续安装过程我会使用DVD版来进行讲解。
+- DVD版
+  - Debian：https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/
+  - 中科大：https://mirrors.ustc.edu.cn/debian-cd/current/amd64/iso-dvd/
+
+后面的内容统一使用DVD版进行讲解。
+
+
 
 
 
