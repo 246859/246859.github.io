@@ -6,8 +6,8 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 24 Dec 2024 12:50:37 GMT</pubDate>
-    <lastBuildDate>Tue, 24 Dec 2024 12:50:37 GMT</lastBuildDate>
+    <pubDate>Wed, 01 Jan 2025 10:30:13 GMT</pubDate>
+    <lastBuildDate>Wed, 01 Jan 2025 10:30:13 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <category>git</category>
@@ -2777,7 +2777,11 @@ API的SDK，其他语言的SDK前往<a href="https://developer.hashicorp.com/con
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 准备</h3>
 <p>创建本地用于挂载数据的文件夹</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>创建mysql配置文件<code>~/db/mysql/conf/my.cnf</code></p>
-<div class="language-ini line-numbers-mode" data-ext="ini"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3> 容器</h3>
+<div class="language-ini line-numbers-mode" data-ext="ini"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="hint-container tip">
+<p class="hint-container-title">提示</p>
+<p>如果<code>my.cnf</code>配置文件是world-writable，即所有人都可写，mysql会认为其不安全然后忽略掉它</p>
+</div>
+<h3> 容器</h3>
 <p>运行如下命令，创建容器</p>
 <div class="language-bash line-numbers-mode" data-ext="sh"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul>
 <li><code>MYSQL_ROOT_PASSWORD</code>，root用户的默认密码，不指定的话会在输出中显示默认密码</li>
