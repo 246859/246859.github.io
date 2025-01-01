@@ -82,6 +82,9 @@ default-time_zone = '+8:00'
 log-error=/etc/mysql/log/error.log
 ```
 
+::: tip
+如果`my.cnf`配置文件是world-writable，即所有人都可写，mysql会认为其不安全然后忽略掉它
+:::
 
 
 ### 容器
