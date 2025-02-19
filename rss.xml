@@ -6,10 +6,12 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 01 Jan 2025 10:30:13 GMT</pubDate>
-    <lastBuildDate>Wed, 01 Jan 2025 10:30:13 GMT</lastBuildDate>
+    <pubDate>Wed, 19 Feb 2025 03:36:17 GMT</pubDate>
+    <lastBuildDate>Wed, 19 Feb 2025 03:36:17 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>生活随笔</category>
+    <category>游戏杂谈</category>
     <category>git</category>
     <category>技术日志</category>
     <category>go</category>
@@ -18,14 +20,86 @@
     <category>linux</category>
     <category>windows</category>
     <category>python</category>
-    <category>生活随笔</category>
     <category>问题记录</category>
     <category>二叉树</category>
     <category>算法</category>
     <category>每日发现</category>
     <category>设计模式</category>
     <category>rust</category>
-    <category>游戏杂谈</category>
+    <item>
+      <title>云南抚仙湖</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/life/2024_08_14.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/life/2024_08_14.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">云南抚仙湖</source>
+      <description>云南抚仙湖 暑假去云南抚仙湖玩了一圈，相比于大理洱海，没有那么重的商业化气息</description>
+      <category>生活随笔</category>
+      <pubDate>Wed, 14 Aug 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 云南抚仙湖</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191120711.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>暑假去云南抚仙湖玩了一圈，相比于大理洱海，没有那么重的商业化气息</p>
+<!-- more -->
+<hr>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191121569.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191126204.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191127172.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191127992.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191120711.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>年末团建</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/life/2025_01_01.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/life/2025_01_01.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">年末团建</source>
+      <description>年末团建 公司普陀山跨年团建的照片</description>
+      <category>生活随笔</category>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 年末团建</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191110172.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>公司普陀山跨年团建的照片</p>
+<!-- more -->
+<hr>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191113881.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191114216.jpg" alt="长生庵抄佛经" tabindex="0" loading="lazy"><figcaption>长生庵抄佛经</figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191115135.jpeg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191110172.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>厦门春节</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/life/2025_02_01.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/life/2025_02_01.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">厦门春节</source>
+      <description>厦门春节 今年在厦门过年</description>
+      <category>生活随笔</category>
+      <pubDate>Sat, 01 Feb 2025 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 厦门春节</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191128323.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>今年在厦门过年</p>
+<!-- more -->
+<hr>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191129744.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191129450.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191129177.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191128323.jpg" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>天国拯救2</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/kingdom_come_2.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/kingdom_come_2.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">天国拯救2</source>
+      <description>天国拯救2 一代故事的延续，亨利故事的结束</description>
+      <category>游戏杂谈</category>
+      <pubDate>Mon, 05 Feb 2024 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 天国拯救2</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191057489.jpg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>一代故事的延续，亨利故事的结束</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202502191057489.jpg" type="image/jpeg"/>
+    </item>
     <item>
       <title>Git多账号配置</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/git/5.multiple_account.html</link>
@@ -1477,11 +1551,12 @@ API的SDK，其他语言的SDK前往<a href="https://developer.hashicorp.com/con
       <link>https://246859.github.io/my-blog-giscus/posts/life/2024_06_03.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/life/2024_06_03.html</guid>
       <source url="https://246859.github.io/my-blog-giscus/rss.xml">生病了</source>
-      <description>生病了</description>
+      <description>生病了 生个病没法去实习了，太G特G</description>
       <category>生活随笔</category>
       <pubDate>Thu, 06 Jun 2024 00:00:00 GMT</pubDate>
       <content:encoded><![CDATA[<h1> 生病了</h1>
 <img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202406061431627.jpg" style="zoom: 80%;">
+<p>生个病没法去实习了，太G特G</p>
 <!-- more -->
 <hr>
 <p>在5月末的时候，背部的左下方靠腰的地方长了几个红色的小痘痘，刚开始没怎么在意，只是觉得有点痒，直到6月2号骑完车回来洗澡的时候仔细看了下，发现背后已经长了一大片红斑，大概有成年人一个手掌那么大，而且还在往腰部的方向逐渐蔓延，摸起来有颗粒感，晚上睡觉的时候又痒又痛，这种痛感是那种刺骨的感觉，整的我难以入睡，当晚就觉得不对劲，第二天起来一早就直接去学校最近的一个诊所查看情况。</p>
@@ -1873,211 +1948,6 @@ API的SDK，其他语言的SDK前往<a href="https://developer.hashicorp.com/con
 </div>
 ]]></content:encoded>
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312161653801.png" type="image/png"/>
-    </item>
-    <item>
-      <title>经典排序算法</title>
-      <link>https://246859.github.io/my-blog-giscus/posts/code/alg/sort.html</link>
-      <guid>https://246859.github.io/my-blog-giscus/posts/code/alg/sort.html</guid>
-      <source url="https://246859.github.io/my-blog-giscus/rss.xml">经典排序算法</source>
-      <description>经典排序算法</description>
-      <category>算法</category>
-      <pubDate>Sun, 23 Oct 2022 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1> 经典排序算法</h1>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312081421944.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<!-- more -->
-<hr>
-<h2> 冒泡排序</h2>
-<p>冒泡排序是最简单的一种排序，也是最暴力的排序方法，对于大多数初学者而言，它是很多人接触的第一个排序方法。大致实现思路如下：从下标0开始，不断将两个数字相比较，如果前一个数大于后一个数字，那么就交换位置，直至末尾。外层循环每一轮结束后，就能确定一个值是第<code>i+1</code>大的元素，于是后续的元素就不再去交换，所以内层循环的终止条件是<code>len(slice)-(i+1)</code>。</p>
-<p>下面是一个冒泡排序的泛型实现。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n^2）</strong></p>
-<p>不管情况好坏，它需要交换总共 (n-1)+(n-2)+(n-3)+...+1 次 ，对其进行数列求和为 (n^2-n)/2 ，忽略低阶项则为O(n^2)，即便整个切片已经是完全有序的。</p>
-<p><strong>空间复杂度：O(1）</strong></p>
-<p>算法进行过程中没用到任何的额外空间，所以为O(1)</p>
-<p><strong>稳定性：是</strong></p>
-<p>两个元素相等时不会进行交换，就不会发生相对位置的改变。看一个例子</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第一轮冒泡，移动第二个3</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第二轮冒泡，移动第一个3</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>可以看到相对位置没有发生变化。</p>
-<p><strong>性能测试</strong></p>
-<p>对其进行基准测试，分别使用100，1000，1w，10w个随机整数进行排序，测试数据如下</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>随着数据量的增多，冒泡排序所耗费的时间差不多是在以平方的级别在增长，到了10w级别的时候，要花费整整18秒才能完成排序，值得注意的是整个过程中没有发生任何的内存分配。百万数据量耗时太久了，就懒得测了。</p>
-<p><strong>优化</strong></p>
-<p>第一个优化点是原版冒泡即便在数据完全有序的情况下依然会去进行比较，所以当一趟循环完后如果发现数据是有序的应该可以直接退出，这是减少外层循环的次数。由于冒泡排序每轮会冒泡一个有序的数据到右边去，所以每轮循环后都会缩小冒泡的范围，假设数据右边已经是有序的了，那么这种操作就可以提前，而不需要等到指定循环次数之后才缩小范围，比如下面这种数据</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这个范围的边界实际上就是上一轮循环最后一次发生交换的下标，这是减少了内循环次数。这里提一嘴使用位运算也可以实现数字交换，算是第三个优化点，但仅限于整数类型。优化后的代码如下</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>优化只能提高冒泡的平均时间效率，在最差情况下，也就是数据完全逆序/升序的时候，对其进行升序/逆序排序，渐进时间复杂度依旧是O(n^2)。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>提升并不是特别明显，因为数据是完全随机的，可能很多生成的数据并没有走到优化点上，这也变相证明了冒泡排序不太适合实际使用。</p>
-<h2> 选择排序</h2>
-<p>选择排序的思路非常的清晰和容易实现，将数组分为两部分，一部分有序，一部分无序，首先在数组的未排序部分找出其中的最大或最小值，也就是然后将最大值或最小值其与数组的中的第i个元素交换位置。第一个交换的一定是第一大或第一小的元素，第二个就是第二大或第二小的元素，这样一来就确认了有序的部分，如此在未排序的部分循环往复，直到整个数组有序。比如</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>此时整个数组都是无序的，找出其最小值-1，与第一个元素交换位置</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>此时只剩[1,4,2]是未排序部分，继续找最小值，得到1，那么它就是第二小的元素，就将其与第二个元素交换位置，由于它本身就在第二个位置上所以没变化。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>继续按照这个流程，就能将数据最终变得有序。具体代码实现如下</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n^2)</strong></p>
-<p>不管在什么情况，在选择排序的过程中，它都会在每轮循环后的未排序部分去比较寻找最大值，所以比较次数为(n-1)+(n-2)+(n-3)....+1差不多就是(n<sup>2+n)/2，所以其时间复杂度为O(n</sup>2)。</p>
-<p><strong>空间复杂度：O(1)</strong></p>
-<p>排序过程中没有用到任何的额外空间来辅助，所以时间复杂度为O(1)。</p>
-<p><strong>稳定性：否</strong></p>
-<p>在交换的过程中它们的位置会发生改变，但也不会被调整回来，所以是不稳定的。看一个例子</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第一轮交换第一个6会和0交换位置，就变成了</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>本来是在第二个6前面的现在到后面来了，相对位置发生改变了，即便整个数组完成排序后也不会再被调整。</p>
-<p><strong>性能测试</strong></p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是选择排序在10w数据量时选择排序花费的时间是冒泡的一半左右，这是因为冒泡每轮循环交换的次数比较多，而选择排序每轮循环只交换一次，总体上从时间来说是优于冒泡排序的。</p>
-<p><strong>优化</strong></p>
-<p>原版选择排序只会在切片的左边构建有序部分，在右边无序的部分去寻找最大或最小值，既然反正都是在无序部分寻找最大/最小值，那就可以在切片左右两边都构建有序区，假设是升序排序，左边是最小，右边是最大，中间就是无序区，这样一来就可以减少差不多一半的比较次数。优化后的代码如下</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这样一来，这样一来只需要看一边的比较次数就够了，不严谨的来说就是(n/2-1)+(n/2-2)+(n/2-3)...，最后时间复杂度依旧是O(n^2)，不过优化的时间效率上会有所提升。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过数据对比可以看到，在时间效率上大概提升了接近10-20%左右。</p>
-<h2> 插入排序</h2>
-<p>插入排序也是一种比较简单的排序方法，其基本思路为：假设0 ...i的元素已经有序，使用<code>s[i+1]</code>逆向与前i+1个元素进行逐个比较，如果在比较过程中第j个元素比第i+1个元素小/大，那么将其后移，如此循环往复，直到找到第一个大于/小于<code>s[i+1]</code>下标元素的元素时或者下标为0时，考虑到比<code>s[i]</code>小/大的元素都已经后移了，所以直接<code>s[i]</code>的值覆盖到<code>s[j+1]</code>上。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n^2)</strong></p>
-<p>如果是要升序排列，在最好情况下，要排序的切片已经是完全升序的了，那么只需要进行n-1次比较操作。最坏情况就是完全降序，那么就需要n+(n-1)+(n-2)+......+1次比较，总共就是(n^2+n)/2次。</p>
-<p><strong>空间复杂度：O(1)</strong></p>
-<p>整个过程中未用到额外的辅助空间</p>
-<p><strong>稳定性：是</strong></p>
-<p>遇到相等元素时便插入到该元素后面，不会出现跑到它前面的情况。</p>
-<p><strong>性能测试</strong></p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>优化</strong></p>
-<p>插入排序的优化方案很容易想到，假设是升序排列，在确保前n个元素已经是有序的情况下，我们需要去一个个遍历找到第一个小于<code>s[n+1]</code>的元素，既然它是有序的，那就可以使用二分查找来进行操作，然后再移动元素。移动次数没有减少，但比较次数减少了相当的多。优化后的代码如下</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>看看优化后的性能</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到使用了二分的插入排序性能整整比原版提升了足足有70-80%左右，这已经是非常巨大的提升了。在最好的情况下，如果切片本身就是全部有序的话，就不需要移动元素，那么就只有查找会消耗时间，这样一来它的时间复杂度可以接近O(nlogn)。在最差的情况，每次都需要移动i-1个元素，那么就是(log(n-1)+n-1)+(log(n-2)+n-2)+(log(n-3)+n-3)....，当n足够大时，logn产生的影响已经微不足道了，虽然没有经过严格的计算，但简单估算下它的时间复杂度依旧不会小于O(n^2)。</p>
-<p>不过值得高兴的是，到目前为止总算有一个方法能够有突破O(n^2)的可能性。</p>
-<h2> 希尔排序</h2>
-<p>希尔排序是插入排序的一个更加高效的优化版本，也称<strong>递减增量排序</strong>。原版插入排序在数据本身是有序的情况下效率会非常高可以达到O(n)，希尔排序的改进思路也是基于此，它在移动和比较时，不再是一个一个移动，而是有了间隔称之为<strong>步长</strong>。比如下面这个序列</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>假设初始步长为3，那么就将数据划分为了三份</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>分别对每一份进行插入排序后得到下面的序列，将其拼接再一起，然后再以步长为2进行划分</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时再拼接回来</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>可以发现整体已经接近基本有序的状态了，在这种情况下，步长再减为1就是原版插入排序了，在数据大多数有序的情况下，插入排序的时间复杂度可以接近O(n)。希尔排序的关键就在于，如何选择这个步长序列，步长序列的不同会导致希尔排序的时间复杂度也不同，在某些情况下它可能根本不会起作用。比如下面这个数据，步长的选择是每次折半，会根本发现不会起到任何优化的作用，反而还不如直接进行插入排序，因为无意义的步长划分导致它甚至比原始的插入排序还增加了额外的耗时，要更加的低效率。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最简单的步长序列就是每次对半分，这也是希尔本人提出的，这种也最容易实现，当然也最容易出现上面那个问题。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>当最坏情况下，也是上面那个例子的情况下，划分步长没有任何的意义，这就退化成了原始的插入排序，其最差时间复杂度依旧是O(n^2)。为了避免这种情况，就需要仔细斟酌步长序列的选择，最基本的原则就是序列之间的元素得互为质数，如果可以互为因子的话就可能会出现对已经排过序的集合再一次排序这种情况，导致无意义的消耗。</p>
-<p>希尔排序首次提出是在上世纪六十年代，现如今已经有了非常多的序列可选，下面介绍比较常见的两个：</p>
-<ul>
-<li>Hibbard序列，最差时间复杂度O(n(3/2))</li>
-<li>Sedgewick序列，最差时间复杂度O(n(4/3))，目前最优序列？</li>
-</ul>
-<p>还有其它非常多的序列，前往：<a href="https://en.wikipedia.org/wiki/Shellsort#Gap_sequences" target="_blank" rel="noopener noreferrer">Shellsort - Wikipedia</a>了解更多（注意必须是英文维基，中文根本没有这么详细的介绍）。Hibbard实现代码如下，步长序列采用打表的方式记录，不需要每次都来计算步长序列。步长序列本身计算非常简单，难的是求证过程，笔者受限于数学水平，无法在此做出解答。由于序列的增长本身就是次方级别，当增长到数值溢出时的上一个步长就是最大步长了，这样就可以得到一个对于任意长度的切片都适用的步长序列。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312091801009.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>对于Sedgewick序列，则有如下两个公式</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312091728295.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>第二个公式要分奇偶情况，这里选择第一个公式，依旧选择打表实现。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>性能测试</strong></p>
-<p>下面是一个简单的性能测试对比</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是Sedgewick步长序列在时间效率上有着较为明显的提升，Hibbard则不太明显。</p>
-<h2> 堆排序</h2>
-<p>堆排序是利用堆这个数据结构对数据进行排序，堆的特点是可以在构建完毕后以O(1)的时间找到最大或最小值。堆有很多种实现，最简单也是最常见的实现就是二项堆，其类似一个完全二叉树，不过是以数组形式呈现的，这时下标呈现一个规律，对于一个下标i的元素</p>
-<ul>
-<li>其父节点的下标：<code>i/2-1</code></li>
-<li>其左子节点的下标：<code>i*2+1</code></li>
-<li>其右子节点的下标：<code>i*2+2</code></li>
-</ul>
-<p>如果是升序排序，就构建大顶堆，反之构建小顶堆。</p>
-<p>这里以升序为例，父节点与子节点进行比较，如果比子节点小就交换双方位置，交换后继续向下比较，直到遇到第一个比父节点更小的子节点，或者没有子节点了才停止，这个过程被称为下沉。对于一个切片而言，它的最后一个子树的根节点位置位于<code>len(s)/2 -1</code>，逆序遍历每一个子树根节点，对其进行下沉操作。在构建完毕后，此时堆顶的元素一定的最大的那一个，将其与切片中最后一个元素交换，然后再次对堆顶元素进行下沉操作，此时下沉范围不包括最后一个元素，因为已经确定了它是最大值。第二次下沉可以确认堆顶的元素是第二大的，将其与在切片的倒数第二下标的元素交换，然后下沉范围减一，继续第三次下沉，如此循环往复，每次下沉都能找到第k大的元素，最终整个切片都会有序。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(nlogn)</strong></p>
-<p>堆排序总共分为两步，第一步构建堆，由于是自底向上构建，如果一个高度为h的子树已经是堆了，那么高度为h+1的子树进行调整的话最多也只需要h步，构建堆的过程的时间复杂度可以是O(n)，详细证明过程可以看：<a href="https://en.wikipedia.org/wiki/Binary_heap#Building_a_heap" target="_blank" rel="noopener noreferrer">Build Binary heap - Wikipedia</a>。在下沉的过程中，对于一个高度为h的完全二叉树而言，最多需要比较h-1次，而高度h就等于log2(n+1)，总共下沉n-1次，其时间复杂度就近似为O(nlogn)，并且不管在任何情况都是O(nlogn)，不会受到数据的影响。</p>
-<p><strong>空间复杂度：O(1)</strong></p>
-<p>过程中没有用到任何的额外辅助空间</p>
-<p><strong>稳定性：否</strong></p>
-<p>在排序过程中，需要不断的将堆顶元素放交换到数组末尾，这一过程会破掉坏相等元素的相对位置。</p>
-<p><strong>性能测试</strong></p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是，在10w数据量的情况下，堆排序只需要1秒多一点。</p>
-<h2> 归并排序</h2>
-<p>归并排序是分治思想的一个体现，1945年由约翰.冯.诺依曼首次提出。它的思路理解起来非常简单，看一个例子，现有如下数据</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先是分隔操作，将其分成两份</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在两份的基础之上对半分</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>此时已经没法再分了，可以直接调整每一份内的顺序，由于只有两个数，只需要简单交换下，现在每一小份的数据内部都是有序的</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>接下来就是合并操作，先将其合并为2份，在合并的过程中，可以创建一个临时数组来保存结果，比如合并 <code>0 6 || 2 10</code>，第一步0比2小，所以先写入0</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第二步，6比2大，所以写入2</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第三步6比10小，所以写入6，最后写入10。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>由于每小份内部都是有序的，在合并的时候只需要依次比较元素就可以得到更大的有序的部分，合并成两份数据如下</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最终延续之前的操作，将其合并为一份，就可以得到排序后的数组。这个过程就是分治的过程，一整个数组不好排序，就将其分为更小的数组，直到不能再分，排序好后再不断合并为更大的有序数组，直到完成排序。这种方式天然适合递归来实现，当然也可以使用迭代来实现，只不过后者要自行模拟栈的行为，较为麻烦。</p>
-
-<p>递归的优点就是简单易懂，如果数据过大，可能会爆栈，而迭代的优点就是可以避免递归栈空间的开销，是真正意义上的O(n)空间，建议使用迭代法。</p>
-<p><strong>时间复杂度：O(nlogn)</strong></p>
-<p>拿迭代法举例分析，最外层循环每次都会乘2，可以确定是log2^n次，内层循环每次移动一个步长，然后在遍历步长范围内的元素，内循环总的遍历次数就是n次，内外总的时间复杂度就是O(nlogn)。归并排序和堆排序一样，不受数据的影响，始终都是O(nlogn)。</p>
-<p><strong>空间复杂度：O(n)</strong></p>
-<p>用到了一个临时数组来保存每一轮合并结果</p>
-<p><strong>稳定性：是</strong></p>
-<p><strong>性能测试</strong></p>
-<p>下面是迭代和递归法两个一起测试的结果</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>从时间效率上来看，迭代法总体是要优于递归法的，大概提升了10%-25%左右的时间效率。</p>
-<h2> 快速排序</h2>
-<p>快速排序，又称分区交换排序，也用到了分治的思想，由英国计算机科学家东尼.霍尔在1959年提出。它的平均时间复杂度是O(nlogn)，最差是O(n^2)，尽管如此，在对随机数据的排序效果上，尤其是大量的随机数据，其时间效率的表现比归并排序和堆排序更好一些。</p>
-<p>下面介绍一下快排的实现思路：假设有如下数据且是升序排序，总共有10个数字，快排的思路中也需要分治，不过它的方法不会像归并排序一样直接对半分，而是会选取一个基准值，将数组划分成两部分，左半边的部分都比这个基准值小，右半边的部分都比这个基准值大，具体的划分思路如下。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这里为了简单演示，选择5作为基准值，然后有左右两端两个指针指向最左和最右，左指针从左往右扫描，遇到比基准值大的元素停下来，右指针从右往左扫描，遇到比基准值小的元素停下来，下面用<code>i</code>表示左指针，<code>j</code>表示右指针。右边先开始扫描，遇到比基准值小的元素就停下，j停在了0所在的位置。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>将j所指向的元素的值赋给i所指向的元素</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后左边开始扫描，遇到比基准值大的元素就停下，然后将i所指向元素的值赋给j所指向的元素</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>再然后j继续从右边开始扫描，遇到2停下，将其赋值给i所指向的元素，如此循环往复，直到两指针相遇</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>相遇过后，此时i和j的位置，就是基准值在这个数组中排序后对应的位置，将基准值赋值到相遇位置上的元素</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时可以发现，基准值5右边的所有数字都大于5，左边的数字全都小于5 ，说明在升序排序的情况下，数字5的下标就位于下标3，至此数字5的位置确定了，每一轮扫描都可以确定一个数字在数组中排序后的位置，接下来就是将数组分为两部分，0-2和4-9，再次对子数组进行相同的操作，直到不可再分。</p>
-<p>另一点需要注意的是，如果基准值的选取默认选择在最左边的元素，那么在扫描的时候就需要右边先开始。如果从左边开始，那么左指针i扫描结束后会覆盖j所指向的值，但此处j指向的是最右边的值，把它覆盖过后这个值就丢失了。看下面一个例子，当第一次左指针i扫描完成后两个指针分别指向7和10</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时i会将7赋值给j所指向的元素，也就是将10覆盖为7</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后问题就出现了，10这个数字就不见了，当从右边先开始时，j所覆盖的第一个元素一定是最左边的基准值，因为基准值是单独记录的，所以不存在丢失的问题。同理，基准值取最右边的元素时，就需要左指针先动。考虑一种情况，如果基准值恰好是所有数字中最小的，就像下面的数据一样。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>由于总是右指针先开始，且基准值已经是最小的了，右指针会移动到1与左指针相遇然后停下，然后子数组被分成了[0,-1]和[1,5]，只产生了一个有效的子数组，后面的每一次递归都是这种情况，第一层递归比较n-1次，第二层递归比较n-2次，第三层比较n-3次，总共会产生n-1次而不是log2<sup>n次递归调用，这样一来它的时间复杂度实际上就变成了O(n</sup>2)。</p>
-<p>上面介绍的这个分区方法叫霍尔分区法，在其它教材比如《算法导论》以及英文wiki中介绍的一般是洛穆托分区法，它的代码实现更简单，比较适合用作教学。它的思路可以参考下面这个例子，选取基准值取最右边的元素5，然后有ij两个分别指针指向<code>-1</code>，<code>0</code>，它们的移动方向都是从左到右，并非左右双向指针。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>j先开始扫描，遇到比基准值小的元素停下来，然后i向后移动一位，再交换ij所指向的元素，如此循环往复，直到j移动到最右边</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>扫描结束后，i此时指向的是最后一个小于基准值的数字，所以将i向后移动一位指向8</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后i，j指向的元素互换</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时基准值就被放到了正确的位置上来了，洛穆托分区法跟冒泡很相似，只不过它不会像冒泡一样逐个交换，而是跳跃式的，在最坏情况下，洛穆托分区法的时间复杂度也是O(n^2)。假设升序排序且洛穆托分区法基准值取的是左边，那么两个指针就要从右往左移，比较规则也要从小于换成大于。</p>
-<p><strong>代码实现</strong></p>
-
-<p><strong>时间复杂度：O(nlogn)</strong></p>
-<p>每一趟扫描的时间复杂度是O(n)，总共扫描log2^n次，所以总的时间复杂度是O(nlogn)。</p>
-<p><strong>空间复杂度：O(logn)</strong></p>
-<p>它在代码方面确实没有额外的空间，但在有些书籍中会将递归的栈空间也算入空间复杂度中，也就是O(logn)，在上面介绍的最坏的情况下，它的空间复杂度可以达到O(n)。</p>
-<p><strong>性能测试</strong></p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>两种分区法并没有特别明显的性能差距，但理论上来讲，洛穆托分区法的交换次数是是霍尔分区法的三倍（证明过程可以前往<a href="https://cs.stackexchange.com/questions/11458/quicksort-partitioning-hoare-vs-lomuto" target="_blank" rel="noopener noreferrer">hoare vs lomuto</a>了解细节）。</p>
-<p><strong>优化</strong></p>
-<p>上面的快排实现中，在10w数据量的情况下要88ms，同样情况下堆排序和归并排序只需要其十分之一的耗时，显然如此简单的快排实现是不足以应用到实际使用中的，必须对其进行优化。</p>
-<p><strong>优化点1</strong></p>
-<p>基准值如果是数组中的中位数，就可以做到较为均匀的划分子数组，避免出现取到最小最大值作为基准值的情况，但是取中位数是需要耗费额外的性能，常见的做法是将数组中左右端点和中间位置的三值间的中值作为基准值。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>还有另一个方法就是随机选取。</p>
-<p><strong>优化点2</strong></p>
-<p>对于小数组而言，没有必要再用快排继续进行分区递归了，可以使用其它更为简单排序算法来代替，例如C++STL中的排序会在长度小于16时采用插入排序，因为插入排序对于小规模数据比冒泡和选择都更快，并且实现也很简单，转换的临界点也一般在5-16之间。</p>
-<p><strong>优化点3</strong></p>
-<p>如果含有大量的重复元素，时间复杂度仍然可能会恶化成平方级别。优化方法是使用三路快排，其思想是在单趟排序时将数组划分为三个部分，左边是小于基准值的部分，中间是等于基准值的部分，右边是大于基准值的部分，在后续的排序中，我们只需要处理小于和大于的部分，中间的可以完全不用管，三路快排对于处理有大量重复元素的数组很有效。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code>[l, lt-1]</code>表示小于基准值的范围，<code>[gt, r]</code>表示大于基准值的范围，<code>[lt, i]</code>就是等于基准值的范围。举一个例子，如下图</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261511519.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>我们的任务是将小于基准值的移动到数组左边，大于基准值的移动到右边，所以<code>i</code>不断遍历数组。当<code>i</code>指向的元素小于基准值时，右移<code>lt</code>一位</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261516880.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>此时<code>i</code>指向元素2，等于基准值于是跳过</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261517300.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>现在<code>i</code>指向的值是3，大于基准值，<code>gt</code>指针左移并和<code>i</code>所指的元素进行交换。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261519972.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>但交换后的值仍然大于基准值于是继续移动<code>gt</code>指针然后再交换。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261521618.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>此时的<code>i</code>指向了2，与基准值相同则继续移动，直到等于<code>gt</code>。最后再将基准值归位，即<code>lt</code>与<code>pivot</code>交换位置。</p>
-<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261524093.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
-<p>至此，区间的划分已经完毕，接下来在进行递归时我们只需要关注左右两个区间即可，中间的就可以忽略掉，这样就起到了优化大量重复元素d</p>
-<h2> 计数排序</h2>
-<p>计数排序是一种线性时间的排序算法，并且是非比较排序，虽然它可以达到线性时间复杂度，但对使用的数据有一定的要求：数据之间的差值不能有太大，并且会使用额外的辅助空间。它的实现思路如下，首先统计数据中的最小最大值，然后使用一个长度为<code>max-min+1</code>的数组来记录每一个数据的个数，对于计数数组，下标i就等于数据的值，这样一来通过计数数组，天然的就能将其排序，然后反向遍历计数数组根据数量填充原数组。由于数据的限制，该排序方法不太好通过泛型来实现。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n+k)</strong></p>
-<p>寻找最大最小值时花费O(n)，k是最大值和最小值的差值，在计数后写入原数组时，至少会循环k次，所以时间复杂度O(n+k)。当k值远大于O(nlogn)时，说明就不适合使用计数排序来对数据进行排序。</p>
-<p><strong>空间复杂度：O(k)</strong></p>
-<p>这里用到了<code>counts</code>数组来存放数量信息，花费空间O(k)。我看到网上很多其它实现都会用一个临时数组来存储结果再复制到目标数组中去，这样一来空间复杂度就变成了O(n+k)，不太明白这样做的意义是什么。</p>
-<p><strong>稳定性：是</strong></p>
-<p>正序读，逆序写保证了相等数据的相对位置。</p>
-<p><strong>性能测试</strong></p>
-<p>计数排序是用在特定场景的排序方法，不适合随机数据排序，下面的测试用例中的生成数据中的最大差值在1w以内。</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是即便是数据量来到了10w级别，也没有出现较大的增幅。</p>
-<h2> 基数排序</h2>
-<p>基数排序同计数排序一样，是非比较排序，同样只适用于特殊场景，不适合普遍的随机数据排序。它的排序思路是根据数据的位数来决定，可以从高位到低位，也可以从低位到高位。这里以以低位到高位举例，比较好理解。现有如下数据，低位数据自动补零方便理解。</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先将其按照个位的大小排序，得到下面的序列</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在其基础之上根据十位排序得到下面的序列</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在其基础知识根据百位排序</p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最终得到有序的数组，基数排序的思路非常简单明了容易理解，代码实现如下</p>
-<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是在过程中，每一轮的排序方式其实就是计数排序变种，每一个位上的差值最大也就只有9，所以count数组长度也就是固定的10。计数分配好后，因为在这里分配的下标不代表实际的值，所以要累加每一个计数的值，这样就能得到它们排序后的位置。后面就是将其写入临时数组，再复制到原数组中。</p>
-<p><strong>时间复杂度：O(kn)</strong></p>
-<p>k的最大值的位数，也决定了外层循环的次数，每一次外循环花费的时间是O(n)，总共就是O(nk)。</p>
-<p><strong>空间复杂度：O(n+k)</strong></p>
-<p>用到了一个长度为n的临时数组用于存放每轮排序结果，和一个计数数组。</p>
-<p><strong>稳定性：是</strong></p>
-<p>跟计数一样，正序读，逆序写保证了相等数据的相对位置。</p>
-<p><strong>性能测试</strong></p>
-<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这里生成的随机数据只包含正整数，10w数据量的情况下只需要7ms，指的是注意的是，基数的选择不止是10进制还可以是十六进制，八进制，二机制，每个进制的基数范围不同。那么为什么它的性能相当优秀但使用没有快排广泛，思考下总共有几点：</p>
-<ol>
-<li>不太好抽象，适用面窄，比如这个基数排序的例子我都是用int来写的，很难用泛型实现，如果是结构体类型，那么它的特征值可能是浮点数，字符串，或者是负数，甚至是复数，这些类型很对基数进行分解，也就谈不上排序。</li>
-<li>第二点就是额外的O(n)空间。</li>
-</ol>
-<h2> 桶排序</h2>
-]]></content:encoded>
-      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312081421944.png" type="image/png"/>
     </item>
     <item>
       <title>Flutter在windows桌面软件开发</title>
@@ -2602,6 +2472,211 @@ API的SDK，其他语言的SDK前往<a href="https://developer.hashicorp.com/con
       <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202304061406979.png" type="image/png"/>
     </item>
     <item>
+      <title>经典排序算法</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/code/alg/sort.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/code/alg/sort.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">经典排序算法</source>
+      <description>经典排序算法</description>
+      <category>算法</category>
+      <pubDate>Sun, 23 Oct 2022 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 经典排序算法</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312081421944.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<!-- more -->
+<hr>
+<h2> 冒泡排序</h2>
+<p>冒泡排序是最简单的一种排序，也是最暴力的排序方法，对于大多数初学者而言，它是很多人接触的第一个排序方法。大致实现思路如下：从下标0开始，不断将两个数字相比较，如果前一个数大于后一个数字，那么就交换位置，直至末尾。外层循环每一轮结束后，就能确定一个值是第<code>i+1</code>大的元素，于是后续的元素就不再去交换，所以内层循环的终止条件是<code>len(slice)-(i+1)</code>。</p>
+<p>下面是一个冒泡排序的泛型实现。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n^2）</strong></p>
+<p>不管情况好坏，它需要交换总共 (n-1)+(n-2)+(n-3)+...+1 次 ，对其进行数列求和为 (n^2-n)/2 ，忽略低阶项则为O(n^2)，即便整个切片已经是完全有序的。</p>
+<p><strong>空间复杂度：O(1）</strong></p>
+<p>算法进行过程中没用到任何的额外空间，所以为O(1)</p>
+<p><strong>稳定性：是</strong></p>
+<p>两个元素相等时不会进行交换，就不会发生相对位置的改变。看一个例子</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第一轮冒泡，移动第二个3</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第二轮冒泡，移动第一个3</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>可以看到相对位置没有发生变化。</p>
+<p><strong>性能测试</strong></p>
+<p>对其进行基准测试，分别使用100，1000，1w，10w个随机整数进行排序，测试数据如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>随着数据量的增多，冒泡排序所耗费的时间差不多是在以平方的级别在增长，到了10w级别的时候，要花费整整18秒才能完成排序，值得注意的是整个过程中没有发生任何的内存分配。百万数据量耗时太久了，就懒得测了。</p>
+<p><strong>优化</strong></p>
+<p>第一个优化点是原版冒泡即便在数据完全有序的情况下依然会去进行比较，所以当一趟循环完后如果发现数据是有序的应该可以直接退出，这是减少外层循环的次数。由于冒泡排序每轮会冒泡一个有序的数据到右边去，所以每轮循环后都会缩小冒泡的范围，假设数据右边已经是有序的了，那么这种操作就可以提前，而不需要等到指定循环次数之后才缩小范围，比如下面这种数据</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这个范围的边界实际上就是上一轮循环最后一次发生交换的下标，这是减少了内循环次数。这里提一嘴使用位运算也可以实现数字交换，算是第三个优化点，但仅限于整数类型。优化后的代码如下</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>优化只能提高冒泡的平均时间效率，在最差情况下，也就是数据完全逆序/升序的时候，对其进行升序/逆序排序，渐进时间复杂度依旧是O(n^2)。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>提升并不是特别明显，因为数据是完全随机的，可能很多生成的数据并没有走到优化点上，这也变相证明了冒泡排序不太适合实际使用。</p>
+<h2> 选择排序</h2>
+<p>选择排序的思路非常的清晰和容易实现，将数组分为两部分，一部分有序，一部分无序，首先在数组的未排序部分找出其中的最大或最小值，也就是然后将最大值或最小值其与数组的中的第i个元素交换位置。第一个交换的一定是第一大或第一小的元素，第二个就是第二大或第二小的元素，这样一来就确认了有序的部分，如此在未排序的部分循环往复，直到整个数组有序。比如</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>此时整个数组都是无序的，找出其最小值-1，与第一个元素交换位置</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>此时只剩[1,4,2]是未排序部分，继续找最小值，得到1，那么它就是第二小的元素，就将其与第二个元素交换位置，由于它本身就在第二个位置上所以没变化。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>继续按照这个流程，就能将数据最终变得有序。具体代码实现如下</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n^2)</strong></p>
+<p>不管在什么情况，在选择排序的过程中，它都会在每轮循环后的未排序部分去比较寻找最大值，所以比较次数为(n-1)+(n-2)+(n-3)....+1差不多就是(n<sup>2+n)/2，所以其时间复杂度为O(n</sup>2)。</p>
+<p><strong>空间复杂度：O(1)</strong></p>
+<p>排序过程中没有用到任何的额外空间来辅助，所以时间复杂度为O(1)。</p>
+<p><strong>稳定性：否</strong></p>
+<p>在交换的过程中它们的位置会发生改变，但也不会被调整回来，所以是不稳定的。看一个例子</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第一轮交换第一个6会和0交换位置，就变成了</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>本来是在第二个6前面的现在到后面来了，相对位置发生改变了，即便整个数组完成排序后也不会再被调整。</p>
+<p><strong>性能测试</strong></p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是选择排序在10w数据量时选择排序花费的时间是冒泡的一半左右，这是因为冒泡每轮循环交换的次数比较多，而选择排序每轮循环只交换一次，总体上从时间来说是优于冒泡排序的。</p>
+<p><strong>优化</strong></p>
+<p>原版选择排序只会在切片的左边构建有序部分，在右边无序的部分去寻找最大或最小值，既然反正都是在无序部分寻找最大/最小值，那就可以在切片左右两边都构建有序区，假设是升序排序，左边是最小，右边是最大，中间就是无序区，这样一来就可以减少差不多一半的比较次数。优化后的代码如下</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这样一来，这样一来只需要看一边的比较次数就够了，不严谨的来说就是(n/2-1)+(n/2-2)+(n/2-3)...，最后时间复杂度依旧是O(n^2)，不过优化的时间效率上会有所提升。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>通过数据对比可以看到，在时间效率上大概提升了接近10-20%左右。</p>
+<h2> 插入排序</h2>
+<p>插入排序也是一种比较简单的排序方法，其基本思路为：假设0 ...i的元素已经有序，使用<code>s[i+1]</code>逆向与前i+1个元素进行逐个比较，如果在比较过程中第j个元素比第i+1个元素小/大，那么将其后移，如此循环往复，直到找到第一个大于/小于<code>s[i+1]</code>下标元素的元素时或者下标为0时，考虑到比<code>s[i]</code>小/大的元素都已经后移了，所以直接<code>s[i]</code>的值覆盖到<code>s[j+1]</code>上。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n^2)</strong></p>
+<p>如果是要升序排列，在最好情况下，要排序的切片已经是完全升序的了，那么只需要进行n-1次比较操作。最坏情况就是完全降序，那么就需要n+(n-1)+(n-2)+......+1次比较，总共就是(n^2+n)/2次。</p>
+<p><strong>空间复杂度：O(1)</strong></p>
+<p>整个过程中未用到额外的辅助空间</p>
+<p><strong>稳定性：是</strong></p>
+<p>遇到相等元素时便插入到该元素后面，不会出现跑到它前面的情况。</p>
+<p><strong>性能测试</strong></p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>优化</strong></p>
+<p>插入排序的优化方案很容易想到，假设是升序排列，在确保前n个元素已经是有序的情况下，我们需要去一个个遍历找到第一个小于<code>s[n+1]</code>的元素，既然它是有序的，那就可以使用二分查找来进行操作，然后再移动元素。移动次数没有减少，但比较次数减少了相当的多。优化后的代码如下</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>看看优化后的性能</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到使用了二分的插入排序性能整整比原版提升了足足有70-80%左右，这已经是非常巨大的提升了。在最好的情况下，如果切片本身就是全部有序的话，就不需要移动元素，那么就只有查找会消耗时间，这样一来它的时间复杂度可以接近O(nlogn)。在最差的情况，每次都需要移动i-1个元素，那么就是(log(n-1)+n-1)+(log(n-2)+n-2)+(log(n-3)+n-3)....，当n足够大时，logn产生的影响已经微不足道了，虽然没有经过严格的计算，但简单估算下它的时间复杂度依旧不会小于O(n^2)。</p>
+<p>不过值得高兴的是，到目前为止总算有一个方法能够有突破O(n^2)的可能性。</p>
+<h2> 希尔排序</h2>
+<p>希尔排序是插入排序的一个更加高效的优化版本，也称<strong>递减增量排序</strong>。原版插入排序在数据本身是有序的情况下效率会非常高可以达到O(n)，希尔排序的改进思路也是基于此，它在移动和比较时，不再是一个一个移动，而是有了间隔称之为<strong>步长</strong>。比如下面这个序列</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>假设初始步长为3，那么就将数据划分为了三份</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>分别对每一份进行插入排序后得到下面的序列，将其拼接再一起，然后再以步长为2进行划分</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时再拼接回来</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>可以发现整体已经接近基本有序的状态了，在这种情况下，步长再减为1就是原版插入排序了，在数据大多数有序的情况下，插入排序的时间复杂度可以接近O(n)。希尔排序的关键就在于，如何选择这个步长序列，步长序列的不同会导致希尔排序的时间复杂度也不同，在某些情况下它可能根本不会起作用。比如下面这个数据，步长的选择是每次折半，会根本发现不会起到任何优化的作用，反而还不如直接进行插入排序，因为无意义的步长划分导致它甚至比原始的插入排序还增加了额外的耗时，要更加的低效率。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>最简单的步长序列就是每次对半分，这也是希尔本人提出的，这种也最容易实现，当然也最容易出现上面那个问题。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>当最坏情况下，也是上面那个例子的情况下，划分步长没有任何的意义，这就退化成了原始的插入排序，其最差时间复杂度依旧是O(n^2)。为了避免这种情况，就需要仔细斟酌步长序列的选择，最基本的原则就是序列之间的元素得互为质数，如果可以互为因子的话就可能会出现对已经排过序的集合再一次排序这种情况，导致无意义的消耗。</p>
+<p>希尔排序首次提出是在上世纪六十年代，现如今已经有了非常多的序列可选，下面介绍比较常见的两个：</p>
+<ul>
+<li>Hibbard序列，最差时间复杂度O(n(3/2))</li>
+<li>Sedgewick序列，最差时间复杂度O(n(4/3))，目前最优序列？</li>
+</ul>
+<p>还有其它非常多的序列，前往：<a href="https://en.wikipedia.org/wiki/Shellsort#Gap_sequences" target="_blank" rel="noopener noreferrer">Shellsort - Wikipedia</a>了解更多（注意必须是英文维基，中文根本没有这么详细的介绍）。Hibbard实现代码如下，步长序列采用打表的方式记录，不需要每次都来计算步长序列。步长序列本身计算非常简单，难的是求证过程，笔者受限于数学水平，无法在此做出解答。由于序列的增长本身就是次方级别，当增长到数值溢出时的上一个步长就是最大步长了，这样就可以得到一个对于任意长度的切片都适用的步长序列。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312091801009.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>对于Sedgewick序列，则有如下两个公式</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312091728295.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>第二个公式要分奇偶情况，这里选择第一个公式，依旧选择打表实现。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>性能测试</strong></p>
+<p>下面是一个简单的性能测试对比</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是Sedgewick步长序列在时间效率上有着较为明显的提升，Hibbard则不太明显。</p>
+<h2> 堆排序</h2>
+<p>堆排序是利用堆这个数据结构对数据进行排序，堆的特点是可以在构建完毕后以O(1)的时间找到最大或最小值。堆有很多种实现，最简单也是最常见的实现就是二项堆，其类似一个完全二叉树，不过是以数组形式呈现的，这时下标呈现一个规律，对于一个下标i的元素</p>
+<ul>
+<li>其父节点的下标：<code>i/2-1</code></li>
+<li>其左子节点的下标：<code>i*2+1</code></li>
+<li>其右子节点的下标：<code>i*2+2</code></li>
+</ul>
+<p>如果是升序排序，就构建大顶堆，反之构建小顶堆。</p>
+<p>这里以升序为例，父节点与子节点进行比较，如果比子节点小就交换双方位置，交换后继续向下比较，直到遇到第一个比父节点更小的子节点，或者没有子节点了才停止，这个过程被称为下沉。对于一个切片而言，它的最后一个子树的根节点位置位于<code>len(s)/2 -1</code>，逆序遍历每一个子树根节点，对其进行下沉操作。在构建完毕后，此时堆顶的元素一定的最大的那一个，将其与切片中最后一个元素交换，然后再次对堆顶元素进行下沉操作，此时下沉范围不包括最后一个元素，因为已经确定了它是最大值。第二次下沉可以确认堆顶的元素是第二大的，将其与在切片的倒数第二下标的元素交换，然后下沉范围减一，继续第三次下沉，如此循环往复，每次下沉都能找到第k大的元素，最终整个切片都会有序。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(nlogn)</strong></p>
+<p>堆排序总共分为两步，第一步构建堆，由于是自底向上构建，如果一个高度为h的子树已经是堆了，那么高度为h+1的子树进行调整的话最多也只需要h步，构建堆的过程的时间复杂度可以是O(n)，详细证明过程可以看：<a href="https://en.wikipedia.org/wiki/Binary_heap#Building_a_heap" target="_blank" rel="noopener noreferrer">Build Binary heap - Wikipedia</a>。在下沉的过程中，对于一个高度为h的完全二叉树而言，最多需要比较h-1次，而高度h就等于log2(n+1)，总共下沉n-1次，其时间复杂度就近似为O(nlogn)，并且不管在任何情况都是O(nlogn)，不会受到数据的影响。</p>
+<p><strong>空间复杂度：O(1)</strong></p>
+<p>过程中没有用到任何的额外辅助空间</p>
+<p><strong>稳定性：否</strong></p>
+<p>在排序过程中，需要不断的将堆顶元素放交换到数组末尾，这一过程会破掉坏相等元素的相对位置。</p>
+<p><strong>性能测试</strong></p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是，在10w数据量的情况下，堆排序只需要1秒多一点。</p>
+<h2> 归并排序</h2>
+<p>归并排序是分治思想的一个体现，1945年由约翰.冯.诺依曼首次提出。它的思路理解起来非常简单，看一个例子，现有如下数据</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先是分隔操作，将其分成两份</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在两份的基础之上对半分</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>此时已经没法再分了，可以直接调整每一份内的顺序，由于只有两个数，只需要简单交换下，现在每一小份的数据内部都是有序的</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>接下来就是合并操作，先将其合并为2份，在合并的过程中，可以创建一个临时数组来保存结果，比如合并 <code>0 6 || 2 10</code>，第一步0比2小，所以先写入0</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第二步，6比2大，所以写入2</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>第三步6比10小，所以写入6，最后写入10。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>由于每小份内部都是有序的，在合并的时候只需要依次比较元素就可以得到更大的有序的部分，合并成两份数据如下</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最终延续之前的操作，将其合并为一份，就可以得到排序后的数组。这个过程就是分治的过程，一整个数组不好排序，就将其分为更小的数组，直到不能再分，排序好后再不断合并为更大的有序数组，直到完成排序。这种方式天然适合递归来实现，当然也可以使用迭代来实现，只不过后者要自行模拟栈的行为，较为麻烦。</p>
+
+<p>递归的优点就是简单易懂，如果数据过大，可能会爆栈，而迭代的优点就是可以避免递归栈空间的开销，是真正意义上的O(n)空间，建议使用迭代法。</p>
+<p><strong>时间复杂度：O(nlogn)</strong></p>
+<p>拿迭代法举例分析，最外层循环每次都会乘2，可以确定是log2^n次，内层循环每次移动一个步长，然后在遍历步长范围内的元素，内循环总的遍历次数就是n次，内外总的时间复杂度就是O(nlogn)。归并排序和堆排序一样，不受数据的影响，始终都是O(nlogn)。</p>
+<p><strong>空间复杂度：O(n)</strong></p>
+<p>用到了一个临时数组来保存每一轮合并结果</p>
+<p><strong>稳定性：是</strong></p>
+<p><strong>性能测试</strong></p>
+<p>下面是迭代和递归法两个一起测试的结果</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>从时间效率上来看，迭代法总体是要优于递归法的，大概提升了10%-25%左右的时间效率。</p>
+<h2> 快速排序</h2>
+<p>快速排序，又称分区交换排序，也用到了分治的思想，由英国计算机科学家东尼.霍尔在1959年提出。它的平均时间复杂度是O(nlogn)，最差是O(n^2)，尽管如此，在对随机数据的排序效果上，尤其是大量的随机数据，其时间效率的表现比归并排序和堆排序更好一些。</p>
+<p>下面介绍一下快排的实现思路：假设有如下数据且是升序排序，总共有10个数字，快排的思路中也需要分治，不过它的方法不会像归并排序一样直接对半分，而是会选取一个基准值，将数组划分成两部分，左半边的部分都比这个基准值小，右半边的部分都比这个基准值大，具体的划分思路如下。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这里为了简单演示，选择5作为基准值，然后有左右两端两个指针指向最左和最右，左指针从左往右扫描，遇到比基准值大的元素停下来，右指针从右往左扫描，遇到比基准值小的元素停下来，下面用<code>i</code>表示左指针，<code>j</code>表示右指针。右边先开始扫描，遇到比基准值小的元素就停下，j停在了0所在的位置。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>将j所指向的元素的值赋给i所指向的元素</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后左边开始扫描，遇到比基准值大的元素就停下，然后将i所指向元素的值赋给j所指向的元素</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>再然后j继续从右边开始扫描，遇到2停下，将其赋值给i所指向的元素，如此循环往复，直到两指针相遇</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>相遇过后，此时i和j的位置，就是基准值在这个数组中排序后对应的位置，将基准值赋值到相遇位置上的元素</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时可以发现，基准值5右边的所有数字都大于5，左边的数字全都小于5 ，说明在升序排序的情况下，数字5的下标就位于下标3，至此数字5的位置确定了，每一轮扫描都可以确定一个数字在数组中排序后的位置，接下来就是将数组分为两部分，0-2和4-9，再次对子数组进行相同的操作，直到不可再分。</p>
+<p>另一点需要注意的是，如果基准值的选取默认选择在最左边的元素，那么在扫描的时候就需要右边先开始。如果从左边开始，那么左指针i扫描结束后会覆盖j所指向的值，但此处j指向的是最右边的值，把它覆盖过后这个值就丢失了。看下面一个例子，当第一次左指针i扫描完成后两个指针分别指向7和10</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时i会将7赋值给j所指向的元素，也就是将10覆盖为7</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后问题就出现了，10这个数字就不见了，当从右边先开始时，j所覆盖的第一个元素一定是最左边的基准值，因为基准值是单独记录的，所以不存在丢失的问题。同理，基准值取最右边的元素时，就需要左指针先动。考虑一种情况，如果基准值恰好是所有数字中最小的，就像下面的数据一样。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>由于总是右指针先开始，且基准值已经是最小的了，右指针会移动到1与左指针相遇然后停下，然后子数组被分成了[0,-1]和[1,5]，只产生了一个有效的子数组，后面的每一次递归都是这种情况，第一层递归比较n-1次，第二层递归比较n-2次，第三层比较n-3次，总共会产生n-1次而不是log2<sup>n次递归调用，这样一来它的时间复杂度实际上就变成了O(n</sup>2)。</p>
+<p>上面介绍的这个分区方法叫霍尔分区法，在其它教材比如《算法导论》以及英文wiki中介绍的一般是洛穆托分区法，它的代码实现更简单，比较适合用作教学。它的思路可以参考下面这个例子，选取基准值取最右边的元素5，然后有ij两个分别指针指向<code>-1</code>，<code>0</code>，它们的移动方向都是从左到右，并非左右双向指针。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>j先开始扫描，遇到比基准值小的元素停下来，然后i向后移动一位，再交换ij所指向的元素，如此循环往复，直到j移动到最右边</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>扫描结束后，i此时指向的是最后一个小于基准值的数字，所以将i向后移动一位指向8</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>然后i，j指向的元素互换</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>此时基准值就被放到了正确的位置上来了，洛穆托分区法跟冒泡很相似，只不过它不会像冒泡一样逐个交换，而是跳跃式的，在最坏情况下，洛穆托分区法的时间复杂度也是O(n^2)。假设升序排序且洛穆托分区法基准值取的是左边，那么两个指针就要从右往左移，比较规则也要从小于换成大于。</p>
+<p><strong>代码实现</strong></p>
+
+<p><strong>时间复杂度：O(nlogn)</strong></p>
+<p>每一趟扫描的时间复杂度是O(n)，总共扫描log2^n次，所以总的时间复杂度是O(nlogn)。</p>
+<p><strong>空间复杂度：O(logn)</strong></p>
+<p>它在代码方面确实没有额外的空间，但在有些书籍中会将递归的栈空间也算入空间复杂度中，也就是O(logn)，在上面介绍的最坏的情况下，它的空间复杂度可以达到O(n)。</p>
+<p><strong>性能测试</strong></p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>两种分区法并没有特别明显的性能差距，但理论上来讲，洛穆托分区法的交换次数是是霍尔分区法的三倍（证明过程可以前往<a href="https://cs.stackexchange.com/questions/11458/quicksort-partitioning-hoare-vs-lomuto" target="_blank" rel="noopener noreferrer">hoare vs lomuto</a>了解细节）。</p>
+<p><strong>优化</strong></p>
+<p>上面的快排实现中，在10w数据量的情况下要88ms，同样情况下堆排序和归并排序只需要其十分之一的耗时，显然如此简单的快排实现是不足以应用到实际使用中的，必须对其进行优化。</p>
+<p><strong>优化点1</strong></p>
+<p>基准值如果是数组中的中位数，就可以做到较为均匀的划分子数组，避免出现取到最小最大值作为基准值的情况，但是取中位数是需要耗费额外的性能，常见的做法是将数组中左右端点和中间位置的三值间的中值作为基准值。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>还有另一个方法就是随机选取。</p>
+<p><strong>优化点2</strong></p>
+<p>对于小数组而言，没有必要再用快排继续进行分区递归了，可以使用其它更为简单排序算法来代替，例如C++STL中的排序会在长度小于16时采用插入排序，因为插入排序对于小规模数据比冒泡和选择都更快，并且实现也很简单，转换的临界点也一般在5-16之间。</p>
+<p><strong>优化点3</strong></p>
+<p>如果含有大量的重复元素，时间复杂度仍然可能会恶化成平方级别。优化方法是使用三路快排，其思想是在单趟排序时将数组划分为三个部分，左边是小于基准值的部分，中间是等于基准值的部分，右边是大于基准值的部分，在后续的排序中，我们只需要处理小于和大于的部分，中间的可以完全不用管，三路快排对于处理有大量重复元素的数组很有效。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code>[l, lt-1]</code>表示小于基准值的范围，<code>[gt, r]</code>表示大于基准值的范围，<code>[lt, i]</code>就是等于基准值的范围。举一个例子，如下图</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261511519.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>我们的任务是将小于基准值的移动到数组左边，大于基准值的移动到右边，所以<code>i</code>不断遍历数组。当<code>i</code>指向的元素小于基准值时，右移<code>lt</code>一位</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261516880.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>此时<code>i</code>指向元素2，等于基准值于是跳过</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261517300.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>现在<code>i</code>指向的值是3，大于基准值，<code>gt</code>指针左移并和<code>i</code>所指的元素进行交换。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261519972.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>但交换后的值仍然大于基准值于是继续移动<code>gt</code>指针然后再交换。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261521618.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>此时的<code>i</code>指向了2，与基准值相同则继续移动，直到等于<code>gt</code>。最后再将基准值归位，即<code>lt</code>与<code>pivot</code>交换位置。</p>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202401261524093.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>至此，区间的划分已经完毕，接下来在进行递归时我们只需要关注左右两个区间即可，中间的就可以忽略掉，这样就起到了优化大量重复元素d</p>
+<h2> 计数排序</h2>
+<p>计数排序是一种线性时间的排序算法，并且是非比较排序，虽然它可以达到线性时间复杂度，但对使用的数据有一定的要求：数据之间的差值不能有太大，并且会使用额外的辅助空间。它的实现思路如下，首先统计数据中的最小最大值，然后使用一个长度为<code>max-min+1</code>的数组来记录每一个数据的个数，对于计数数组，下标i就等于数据的值，这样一来通过计数数组，天然的就能将其排序，然后反向遍历计数数组根据数量填充原数组。由于数据的限制，该排序方法不太好通过泛型来实现。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>时间复杂度：O(n+k)</strong></p>
+<p>寻找最大最小值时花费O(n)，k是最大值和最小值的差值，在计数后写入原数组时，至少会循环k次，所以时间复杂度O(n+k)。当k值远大于O(nlogn)时，说明就不适合使用计数排序来对数据进行排序。</p>
+<p><strong>空间复杂度：O(k)</strong></p>
+<p>这里用到了<code>counts</code>数组来存放数量信息，花费空间O(k)。我看到网上很多其它实现都会用一个临时数组来存储结果再复制到目标数组中去，这样一来空间复杂度就变成了O(n+k)，不太明白这样做的意义是什么。</p>
+<p><strong>稳定性：是</strong></p>
+<p>正序读，逆序写保证了相等数据的相对位置。</p>
+<p><strong>性能测试</strong></p>
+<p>计数排序是用在特定场景的排序方法，不适合随机数据排序，下面的测试用例中的生成数据中的最大差值在1w以内。</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是即便是数据量来到了10w级别，也没有出现较大的增幅。</p>
+<h2> 基数排序</h2>
+<p>基数排序同计数排序一样，是非比较排序，同样只适用于特殊场景，不适合普遍的随机数据排序。它的排序思路是根据数据的位数来决定，可以从高位到低位，也可以从低位到高位。这里以以低位到高位举例，比较好理解。现有如下数据，低位数据自动补零方便理解。</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>首先将其按照个位的大小排序，得到下面的序列</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在其基础之上根据十位排序得到下面的序列</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>在其基础知识根据百位排序</p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>最终得到有序的数组，基数排序的思路非常简单明了容易理解，代码实现如下</p>
+<div class="language-go line-numbers-mode" data-ext="go"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>可以看到的是在过程中，每一轮的排序方式其实就是计数排序变种，每一个位上的差值最大也就只有9，所以count数组长度也就是固定的10。计数分配好后，因为在这里分配的下标不代表实际的值，所以要累加每一个计数的值，这样就能得到它们排序后的位置。后面就是将其写入临时数组，再复制到原数组中。</p>
+<p><strong>时间复杂度：O(kn)</strong></p>
+<p>k的最大值的位数，也决定了外层循环的次数，每一次外循环花费的时间是O(n)，总共就是O(nk)。</p>
+<p><strong>空间复杂度：O(n+k)</strong></p>
+<p>用到了一个长度为n的临时数组用于存放每轮排序结果，和一个计数数组。</p>
+<p><strong>稳定性：是</strong></p>
+<p>跟计数一样，正序读，逆序写保证了相等数据的相对位置。</p>
+<p><strong>性能测试</strong></p>
+<div class="language-text line-numbers-mode" data-ext="text"><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这里生成的随机数据只包含正整数，10w数据量的情况下只需要7ms，指的是注意的是，基数的选择不止是10进制还可以是十六进制，八进制，二机制，每个进制的基数范围不同。那么为什么它的性能相当优秀但使用没有快排广泛，思考下总共有几点：</p>
+<ol>
+<li>不太好抽象，适用面窄，比如这个基数排序的例子我都是用int来写的，很难用泛型实现，如果是结构体类型，那么它的特征值可能是浮点数，字符串，或者是负数，甚至是复数，这些类型很对基数进行分解，也就谈不上排序。</li>
+<li>第二点就是额外的O(n)空间。</li>
+</ol>
+<h2> 桶排序</h2>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312081421944.png" type="image/png"/>
+    </item>
+    <item>
       <title>存储模型 --- Bitcask</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/db/bitcask.html</link>
       <guid>https://246859.github.io/my-blog-giscus/posts/code/db/bitcask.html</guid>
@@ -2946,7 +3021,7 @@ API的SDK，其他语言的SDK前往<a href="https://developer.hashicorp.com/con
 <p>首先就是如何在磁盘上存放数据，既然采用了Bitcask作为存储模型，那么最简单直接的方法就是一条一条record存，一条一条record读，这样做最简单，也最容易实现。但是！非常重要的一点就是，前面已经提到过Bitcask不适合存大块数据，在几MB以上数据就可以被称为大块数据了，Bitcask原有的Record是由几个部分组成</p>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312022243634.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
 <p>header部分主要是record的元数据，包括crc，时间戳，key的长度，value的长度，读取一条record，需要两次IO，第一次读header，确认数据的长度，第二次确认数据长度过后才能去读取数据。实际上存放的数据都不是特别大，平均可能只有KB级别，甚至不到KB，对于这样小的数据，读取一条record还要进行两次IO，十分的浪费性能。</p>
-<p>那么可以这样考虑，一次读取固定大小的文件内容到内存中，称之为Block，然后在内存中从Block读取数据，如果数据的足够小，刚好能在Block中，那么查询就只需要一次IO，后续虽然也是要先读数据长度再读实际数据，但由于是在内存中读取，要比磁盘读取快得多，这种能被Block容纳的数据称之为Chunk。而这个规则也就是应用在LevelDB的Wal文件中，而LevelDB默认的BlockSize就是32KB，每一次IO固定读32KB，这个值太大了会耗费内存，太小了会频繁IO，具体可以去这个文章<a href="/post/db/wal_in_leveldb.html" target="blank">Wal-LevelDB中的预写日志</a>了解。</p>
+<p>那么可以这样考虑，一次读取固定大小的文件内容到内存中，称之为Block，然后在内存中从Block读取数据，如果数据的足够小，刚好能在Block中，那么查询就只需要一次IO，后续虽然也是要先读数据长度再读实际数据，但由于是在内存中读取，要比磁盘读取快得多，这种能被Block容纳的数据称之为Chunk。而这个规则也就是应用在LevelDB的Wal文件中，而LevelDB默认的BlockSize就是32KB，每一次IO固定读32KB，这个值太大了会耗费内存，太小了会频繁IO。</p>
 <figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312031426113.png" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
 <p>一个chunk由header和data组成，header最大为7个字节，所以data数据长度范围在[0, 32KB-7B]，这里将crc校验从record抽离出来，放到了chunk中，这样在读写数据的时候就不需要再去做额外的校验。所以数据库实际操作的record是存放在data这部分中，对于一条记录而言，它的头部由以下几个部分组成</p>
 <ul>
