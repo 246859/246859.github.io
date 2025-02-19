@@ -47,7 +47,7 @@ tag:
 
 header部分主要是record的元数据，包括crc，时间戳，key的长度，value的长度，读取一条record，需要两次IO，第一次读header，确认数据的长度，第二次确认数据长度过后才能去读取数据。实际上存放的数据都不是特别大，平均可能只有KB级别，甚至不到KB，对于这样小的数据，读取一条record还要进行两次IO，十分的浪费性能。
 
-那么可以这样考虑，一次读取固定大小的文件内容到内存中，称之为Block，然后在内存中从Block读取数据，如果数据的足够小，刚好能在Block中，那么查询就只需要一次IO，后续虽然也是要先读数据长度再读实际数据，但由于是在内存中读取，要比磁盘读取快得多，这种能被Block容纳的数据称之为Chunk。而这个规则也就是应用在LevelDB的Wal文件中，而LevelDB默认的BlockSize就是32KB，每一次IO固定读32KB，这个值太大了会耗费内存，太小了会频繁IO，具体可以去这个文章[Wal-LevelDB中的预写日志](/post/db/wal_in_leveldb.md)了解。
+那么可以这样考虑，一次读取固定大小的文件内容到内存中，称之为Block，然后在内存中从Block读取数据，如果数据的足够小，刚好能在Block中，那么查询就只需要一次IO，后续虽然也是要先读数据长度再读实际数据，但由于是在内存中读取，要比磁盘读取快得多，这种能被Block容纳的数据称之为Chunk。而这个规则也就是应用在LevelDB的Wal文件中，而LevelDB默认的BlockSize就是32KB，每一次IO固定读32KB，这个值太大了会耗费内存，太小了会频繁IO。
 
 ![](https://public-1308755698.cos.ap-chongqing.myqcloud.com//img/202312031426113.png)
 
