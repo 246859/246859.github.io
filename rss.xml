@@ -6,13 +6,13 @@
     <link>https://246859.github.io/my-blog-giscus/</link>
     <description>寒江蓑笠翁的个人博客</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 02 Apr 2025 12:34:43 GMT</pubDate>
-    <lastBuildDate>Wed, 02 Apr 2025 12:34:43 GMT</lastBuildDate>
+    <pubDate>Wed, 02 Apr 2025 12:44:11 GMT</pubDate>
+    <lastBuildDate>Wed, 02 Apr 2025 12:44:11 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <category>游戏杂谈</category>
     <category>git</category>
     <category>生活随笔</category>
-    <category>游戏杂谈</category>
     <category>技术日志</category>
     <category>go</category>
     <category>db</category>
@@ -26,6 +26,22 @@
     <category>每日发现</category>
     <category>设计模式</category>
     <category>rust</category>
+    <item>
+      <title>无限机兵</title>
+      <link>https://246859.github.io/my-blog-giscus/posts/game/ai_limit.html</link>
+      <guid>https://246859.github.io/my-blog-giscus/posts/game/ai_limit.html</guid>
+      <source url="https://246859.github.io/my-blog-giscus/rss.xml">无限机兵</source>
+      <description>无限机兵 国产类魂佳作，我愿称之为类魂守门员</description>
+      <category>游戏杂谈</category>
+      <pubDate>Wed, 02 Apr 2025 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h1> 无限机兵</h1>
+<figure><img src="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202504022040224.jpeg" alt="" tabindex="0" loading="lazy"><figcaption></figcaption></figure>
+<p>国产类魂佳作，我愿称之为类魂守门员</p>
+<!-- more -->
+<hr>
+]]></content:encoded>
+      <enclosure url="https://public-1308755698.cos.ap-chongqing.myqcloud.com//upload/202504022040224.jpeg" type="image/jpeg"/>
+    </item>
     <item>
       <title>Git update-index 忽略本地修改</title>
       <link>https://246859.github.io/my-blog-giscus/posts/code/git/6.local_ignore.html</link>
